@@ -100,12 +100,12 @@
 <h2><strong>决策树简介</strong></h2>
 <p>决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
 <p>决策树通常是重复的将训练集解释变量分割成子集的过程, 如下图所示。决策树的节点用方块表示, 用来测试解释变量。每个节点向下的边表示不同决策产生结果。训练集的样本由决策结果分成不同的子集。例如, 一个节点测试解释变量的值是否超过的限定值。如果没有超过, 则进入该节点的右侧子节点; 如果超过, 则进入左侧子节点。子节点的运行原理和前面的一样, 直到终止条件(stopping criterion)满足才停止。在分类任务中, 包含在叶子节点中的样本响应变量的值的平均值作为响应变量的估计值。决策树建立之后, 做决策的过程就是把测试样本放进决策树沿着边不断前进, 直到一个叶子被触及才停止前进。</p>
-<p><img src="http://i.imgur.com/8ogbkzR.jpg" width="600" height="500" align="center"/></p>
+<p><center><img src="http://i.imgur.com/8ogbkzR.jpg" width="600" height="700"/></center></p>
 <h2><strong>训练决策树</strong></h2>
 <p>我们用Ross Quinlan发明的ID3(Iterative Dichotomiser 3,迭代二叉树3代)算法创建决策树,  ID3是最早用于决策树的算法之一。假设你有一些猫和狗的分类数据。但是不允许直接观察, 你只能通过动物特征的描述去做决策。对每个动物, 你都会获得关于“是否喜欢玩球(play fetch)”和“是否经常发脾气”, 以及它最喜欢的食物三个问题的答案。</p>
 <p>要正确分出新动物的种类, 决策树需要对每条边的解释变量进行检查。每条边的下一个节点由测试结果决定。例如, 第一关节点可能问“是否喜欢玩球”, 如果回答“YES”, 则进入左节点, 否则,  如果回答“NO”, 则进入右节点。以此类推, 最后一条边会指向一个叶子节点, 那就是答案。下表是14个节点的训练数据:
-<center><img alt="" src="http://i.imgur.com/nsKyO6Q.jpg"></center>
-<center><img alt="" src="http://i.imgur.com/hdDZuPL.jpg"></center></p>
+<center><img src="http://i.imgur.com/nsKyO6Q.jpg" width="800" height="180"/></center>
+<center><img src="http://i.imgur.com/hdDZuPL.jpg" width="800" height="680"/></center></p>
 <p>从数据中我们发现, 猫比狗更容易发脾气。大多数狗玩球, 而猫不爱玩。狗更喜欢狗粮和培根, 而猫喜欢猫粮和培根。解释变量是否喜欢玩球和是否经常发脾气可以转换成二元特征值。解释变量最喜欢的食物可以转换成一个具有三个可能值的分类变量, 可以用onehot编码[1,0,0], [0,1,0], [0,0,1]表示, 具体方法在第三章已经介绍过。通过上面的分析, 我们可以构建模型的规则。例如,一个动物如果经常发脾气且喜欢吃猫粮那就是猫, 如果喜欢玩球且爱吃培根就是狗。在这么小的训练集里, 想手工逐条构建规则也是非常麻烦的事情。因此, 下面我们来构建决策树。</p>
 <ul>
 <li><strong>熵</strong></li>
@@ -123,35 +123,34 @@
 <p>下面让我们计算动物分类的熵。如果训练集数据中猫和狗数量是相等的,而且我们不知道动物的任何其他信息, 那么决策的熵是1。这就像普通硬币的结果一样, 非猫即狗, 两种可能概率一样。但是, 我们的训练数据里面, 6条狗8只猫。如果我们不考虑其他信息,那么决策的熵就是: </p>
 <p><center><img alt="" src="http://i.imgur.com/B0znUWi.png"></center></p>
 <p>由于猫更多, 所以不确定性要小一些。现在让我们找出对分类最有用的解释变量, 也就是找出对熵降幅最大的解释变量。我们可以测试是否喜欢玩球这个解释变量, 把测试分成两支, 喜欢玩和不喜欢玩, 其结果如下图所示:</p>
-<p><center><img alt="" src="http://i.imgur.com/mmYPjYG.jpg"></center></p>
+<p><center><img src="http://i.imgur.com/mmYPjYG.jpg" width="600" height="500"/></center></p>
 <p>决策树通常都是用流程图显示决策过程的。最上面的方框是根节点, 包括所有要测试的解释变量。在根节点里我们还没有开始测试, 所以变量的熵设为0.985228136。前面我们介绍过, 将解释变量是否喜欢玩球转换成二元变量, 左子节点用0表示,右子节点用1表示。左子节点包括7只猫和2条狗都是不喜欢玩球的数据。计算这时解释变量的熵:</p>
 <p><center><img alt="" src="http://i.imgur.com/IDjMZbW.png"></center></p>
 <p>右子节点包括1只猫和4条狗都是喜欢玩球的数据。计算这时解释变量的熵: </p>
 <p><center><img alt="" src="http://i.imgur.com/WBR43qo.png"></center></p>
 <p>同理, 我们也可以测试解释变量是否经常发脾气。经常发脾气为左子节点, 用0表示, 经常发脾气为右子节点,用1表示。 </p>
-<p><center><img alt="" src="http://i.imgur.com/kdNkShQ.jpg"></center></p>
+<p><center><img src="http://i.imgur.com/kdNkShQ.jpg" width="600" height="500"/></center></p>
 <p>也可以对解释变量最喜欢的食物。对每一种食物都可以按照前面的思路进行测试:</p>
-<p><center><img alt="" src="http://i.imgur.com/CM41xZL.jpg"></center></p>
+<p><center><img src="http://i.imgur.com/CM41xZL.jpg" width="600" height="500"/></center></p>
 <ul>
 <li><strong>信息增益</strong></li>
 </ul>
 <p>对解释变量最喜欢的食物的值是猫粮进行测试的结果是, 右节点喜欢猫粮的动物中6只猫没有狗, 其熵为0, 而做节点2只猫6条狗, 其熵为0.8113比特。我们如何评估哪一个变量最大程度的降低了分类的不确定性? 子集熵的均值看起来像是一个合理的度量指标。本例中,猫粮测试这个子集熵的均值最小。直观上看, 这条测试也更有效, 因为我们可以用它识别出几乎是一半样本。但是, 实际上这么做可能做导致决策局部最优值。例如, 假设有一个子集的结果是两条狗没有猫, 另一个子集的结果是4条狗8只猫。第一个子集的熵是0, 而第二个子集的熵0.918。那么平均熵是0.459, 但是第二个子集包含了绝大多数样本, 而其熵接近1比特。</p>
 <p>这就好像在猜猜看游戏中过早的问了太具体的问题, 而我们的问题并没有消除许多可能性。因此, 我们要用一种方法来合理度量熵的降幅, 这个方法称为信息增益(information gain)。信息增益是父节点熵, 用H(T) 表示与其子节点熵的加权均值的差, 计算公式如下:</p>
 <p><center><img alt="" src="http://i.imgur.com/ESHwk8E.png"></center>
-<center><img alt="" src="http://i.imgur.com/Dp71Eys.jpg"></center></p>
-<p>下表就是本例信息增益的计算结果。可
-以看出,猫粮测试是最佳选择,因为其信息增益最大。</p>
-<p><center><img alt="" src="http://i.imgur.com/YfJBS9D.jpg"></center></p>
+<center><img src="http://i.imgur.com/Dp71Eys.jpg" width="800" height="50"/></center></p>
+<p>下表就是本例信息增益的计算结果。可以看出,猫粮测试是最佳选择,因为其信息增益最大。</p>
+<p><center><img src="http://i.imgur.com/YfJBS9D.jpg" width="800" height="350"/></center></p>
 <p>现在让我们增加其他的节点到决策树中。一个子节点只包含猫, 另一个子节点还有2只猫和6条狗, 我们测试这个节点。同理, 按照信息增益方法计算可以得到下表数据:</p>
-<p><center><img alt="" src="http://i.imgur.com/gpLgNTj.jpg"></center></p>
+<p><center><img src="http://i.imgur.com/gpLgNTj.jpg" width="800" height="280"/></center></p>
 <p>所有的测试都会出现熵为0的情况, 但是从表中可以看出, 解释变量是否喜欢玩球和是否经常发脾气的信息增益相等且都是最大的。ID3算法会随机选择一个节点继续测试。我们选择是否经常发脾气这个解释变量。它的右节点的8个动物分成左节点是4条狗, 右节点是两只猫两只狗。如下图所示: </p>
-<p><center><img alt="" src="http://i.imgur.com/xEAeJVJ.jpg"></center></p>
+<p><center><img src="http://i.imgur.com/xEAeJVJ.jpg" width="800" height="380"/></center></p>
 <p>现在我们对剩下的解释变量进行信息增益计算,包括是否喜欢玩球?, 最喜欢的食物 =狗粮, 最喜欢的食物 =培根,这些解释变量测试的结果都是一个节点是一只猫或一条狗, 另一个节点是剩下的动物。其信息增益计算结果如下表所示:</p>
 <p><center><img alt="" src="http://i.imgur.com/aexmu9j.jpg"></center></p>
 <p>我们随机选择是否喜欢玩球? 这个解释变量来生成后面的节点,左节点包含一条狗, 右节点包含两只猫和一条狗。其他两个解释变量,最喜欢的食物 =狗粮和最喜欢的食物 =培根产生同样的结果, 左节点包含一条狗,右节点包含两只猫。然后, 我们随机选择最喜欢的食物 =狗粮进行测试,最终胜出决策树如下图所示:</p>
-<p><center><img alt="" src="http://i.imgur.com/NbLfjzk.jpg"></center></p>
+<p><center><img src="http://i.imgur.com/NbLfjzk.jpg" width="800" height="580"/></center></p>
 <p>让我们用下表的测试集数据对决策树进行测试： </p>
-<p><center><img alt="" src="http://i.imgur.com/c3mG4Vs.jpg"></center></p>
+<p><center><img src="http://i.imgur.com/c3mG4Vs.jpg" width="800" height="280"/></center></p>
 <p>让我们来找第一个动物的类型, 它喜欢玩球, 不经常发脾气, 喜欢培根。沿着决策树往下走, 根节点测试不喜欢猫粮, 因此进入左节点。又不经常发脾气, 依然进入左节点, 现在的叶子节点只有狗, 因此这个动物种类是狗。其他动物也按照同样的方法去查找, 第三个动物是一只猫, 根节点测试不喜欢猫粮, 进入左节点, 然后经常发脾气, 进入右节点, 不喜欢玩球, 进入左节点, 喜欢狗粮, 进入右节点, 因此该动物是猫。</p>
 <p>这样我们就用ID3算法实现了一个决策树。还有很多算法也可以实现决策树, C4.5算法是ID3的改进版, 可以用来处理连续的解释变量并考虑特征值丢失。C4.5算法可以修剪(prune)决策树, 修剪是通过更少的叶节点来替换分支, 以缩小决策树的规模。scikit-learn的决策树实现算法是CART(Classification and Regression Trees, 分类与回归树)算法, CART也是一种支持修剪的学习算法。</p>
 <ul>
