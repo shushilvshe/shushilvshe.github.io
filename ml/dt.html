@@ -100,64 +100,64 @@
 <h2><strong>决策树简介</strong></h2>
 <p>决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
 <p>决策树通常是重复的将训练集解释变量分割成子集的过程, 如下图所示。决策树的节点用方块表示, 用来测试解释变量。每个节点向下的边表示不同决策产生结果。训练集的样本由决策结果分成不同的子集。例如, 一个节点测试解释变量的值是否超过的限定值。如果没有超过, 则进入该节点的右侧子节点; 如果超过, 则进入左侧子节点。子节点的运行原理和前面的一样, 直到终止条件(stopping criterion)满足才停止。在分类任务中, 包含在叶子节点中的样本响应变量的值的平均值作为响应变量的估计值。决策树建立之后, 做决策的过程就是把测试样本放进决策树沿着边不断前进, 直到一个叶子被触及才停止前进。</p>
-<p><center><img src="http://i.imgur.com/8ogbkzR.jpg" width="600" height="700"/></center></p>
+<p><center><img src="http://i.imgur.com/8ogbkzR.jpg" width="800" /></center></p>
 <h2><strong>训练决策树</strong></h2>
 <p>我们用Ross Quinlan发明的ID3(Iterative Dichotomiser 3,迭代二叉树3代)算法创建决策树,  ID3是最早用于决策树的算法之一。假设你有一些猫和狗的分类数据。但是不允许直接观察, 你只能通过动物特征的描述去做决策。对每个动物, 你都会获得关于“是否喜欢玩球(play fetch)”和“是否经常发脾气”, 以及它最喜欢的食物三个问题的答案。</p>
 <p>要正确分出新动物的种类, 决策树需要对每条边的解释变量进行检查。每条边的下一个节点由测试结果决定。例如, 第一关节点可能问“是否喜欢玩球”, 如果回答“YES”, 则进入左节点, 否则,  如果回答“NO”, 则进入右节点。以此类推, 最后一条边会指向一个叶子节点, 那就是答案。下表是14个节点的训练数据:
-<center><img src="http://i.imgur.com/nsKyO6Q.jpg" width="800" height="180"/></center>
-<center><img src="http://i.imgur.com/hdDZuPL.jpg" width="800" height="680"/></center></p>
+<center><img src="http://i.imgur.com/nsKyO6Q.jpg" width="800" /></center>
+<center><img src="http://i.imgur.com/hdDZuPL.jpg" width="800" /></center></p>
 <p>从数据中我们发现, 猫比狗更容易发脾气。大多数狗玩球, 而猫不爱玩。狗更喜欢狗粮和培根, 而猫喜欢猫粮和培根。解释变量是否喜欢玩球和是否经常发脾气可以转换成二元特征值。解释变量最喜欢的食物可以转换成一个具有三个可能值的分类变量, 可以用onehot编码[1,0,0], [0,1,0], [0,0,1]表示, 具体方法在第三章已经介绍过。通过上面的分析, 我们可以构建模型的规则。例如,一个动物如果经常发脾气且喜欢吃猫粮那就是猫, 如果喜欢玩球且爱吃培根就是狗。在这么小的训练集里, 想手工逐条构建规则也是非常麻烦的事情。因此, 下面我们来构建决策树。</p>
 <ul>
 <li><strong>熵</strong></li>
 </ul>
 <p>和猜猜看一样,决策树也是通过对解释变量序列的逐条测试获取响应变量结果的。那么,哪个解释变量应该先测试?直觉观察会发现,解释变量集合包含所有猫或者所有狗的测试,比既包含猫又包含狗的解释变量集合的测试要好。如果子集成员种类不同,我们还是不能确定种类。我们还需要避免创建那种测试,把单独的一只猫或一条狗分离出去,这种做法类似于猜猜看问题中前几轮就问非常具体的问题。更一般的情形是,这些测试极少可以分出一个样本的种类,也不能降低分类不确定性。能够降低分类不确定性的测试通常都是最好的测试。我们通常用熵(entropy)来度量信息的不确定性。以比特(bits)为计量单位,熵量化了一个变量的不确定性。熵计算公式如下所示:</p>
-<p><center><img alt="" src="http://i.imgur.com/BnkCVr2.png"></center></p>
+<p><center><img src="http://i.imgur.com/BnkCVr2.jpg" width="800"/></center></p>
 <p>其中, n是样本的数量, P(xi)是第i个样本的概率。 b一般取2, e或10 。因为对数函数中真数小于1则对数值为0, 因此, 公式前面加符号使熵为正数。</p>
 <p>例如,  一个硬币投掷一次事件发生后一般有两种可能: 正面或反面。正面朝上的概率是0.5, 反面朝上的概率也是0.5。那么一个硬币投掷一次的结果这个变量的熵:</p>
-<p><center><img alt="" src="http://i.imgur.com/28i7lfL.png"></center></p>
+<p><center><img src="http://i.imgur.com/28i7lfL.jpg" width="800"/></center></p>
 <p>也就是说, 两个等概率的可能值, 正面和反面, 只需要一个比特。如果是两个硬币投掷一次事件发生后一般有四种可能: 正面正面, 正面反面, 反面反面, 反面正面, 每种可能的概率是0.25。其熵为: </p>
-<p><center><img alt="" src="http://i.imgur.com/dfpz5rT.png"></center></p>
+<p><center><img src="http://i.imgur.com/dfpz5rT.jpg" width="800" /></center></p>
 <p>如果硬币的两面相同, 那么表示其可能值的变量熵为0比特, 也就是说, 结果是确定的, 变量再也不会产生新信息量了。熵还可以用小数值表示。比如, 一个不正常的硬币, 其正反面的材质不同, 一边重一边轻。导致其投掷后正面朝上的概率0.8, 反面朝上概率0.2。那么其熵为:</p>
-<p><center><img alt="" src="http://i.imgur.com/dcOqbsD.png"></center></p>
+<p><center><img src="http://i.imgur.com/dcOqbsD.jpg" width="800" /></center></p>
 <p>一个不正常的硬币投掷后其结果的熵是一个小数。虽然两种结果都有可能, 但是因为其中一种可能性更大, 所有不确定性减小了。</p>
 <p>下面让我们计算动物分类的熵。如果训练集数据中猫和狗数量是相等的,而且我们不知道动物的任何其他信息, 那么决策的熵是1。这就像普通硬币的结果一样, 非猫即狗, 两种可能概率一样。但是, 我们的训练数据里面, 6条狗8只猫。如果我们不考虑其他信息,那么决策的熵就是: </p>
-<p><center><img alt="" src="http://i.imgur.com/B0znUWi.png"></center></p>
+<p><center><img src="http://i.imgur.com/B0znUWi.jpg" width="800" /></center></p>
 <p>由于猫更多, 所以不确定性要小一些。现在让我们找出对分类最有用的解释变量, 也就是找出对熵降幅最大的解释变量。我们可以测试是否喜欢玩球这个解释变量, 把测试分成两支, 喜欢玩和不喜欢玩, 其结果如下图所示:</p>
-<p><center><img src="http://i.imgur.com/mmYPjYG.jpg" width="600" height="500"/></center></p>
+<p><center><img src="http://i.imgur.com/mmYPjYG.jpg" width="800" /></center></p>
 <p>决策树通常都是用流程图显示决策过程的。最上面的方框是根节点, 包括所有要测试的解释变量。在根节点里我们还没有开始测试, 所以变量的熵设为0.985228136。前面我们介绍过, 将解释变量是否喜欢玩球转换成二元变量, 左子节点用0表示,右子节点用1表示。左子节点包括7只猫和2条狗都是不喜欢玩球的数据。计算这时解释变量的熵:</p>
-<p><center><img alt="" src="http://i.imgur.com/IDjMZbW.png"></center></p>
+<p><center><img src="http://i.imgur.com/IDjMZbW.jpg" width="800" /></center></p>
 <p>右子节点包括1只猫和4条狗都是喜欢玩球的数据。计算这时解释变量的熵: </p>
-<p><center><img alt="" src="http://i.imgur.com/WBR43qo.png"></center></p>
+<p><center><img src="http://i.imgur.com/WBR43qo.jpg" width="800" /></center></p>
 <p>同理, 我们也可以测试解释变量是否经常发脾气。经常发脾气为左子节点, 用0表示, 经常发脾气为右子节点,用1表示。 </p>
-<p><center><img src="http://i.imgur.com/kdNkShQ.jpg" width="600" height="500"/></center></p>
+<p><center><img src="http://i.imgur.com/kdNkShQ.jpg" width="800" /></center></p>
 <p>也可以对解释变量最喜欢的食物。对每一种食物都可以按照前面的思路进行测试:</p>
-<p><center><img src="http://i.imgur.com/CM41xZL.jpg" width="600" height="500"/></center></p>
+<p><center><img src="http://i.imgur.com/CM41xZL.jpg" width="800" /></center></p>
 <ul>
 <li><strong>信息增益</strong></li>
 </ul>
 <p>对解释变量最喜欢的食物的值是猫粮进行测试的结果是, 右节点喜欢猫粮的动物中6只猫没有狗, 其熵为0, 而做节点2只猫6条狗, 其熵为0.8113比特。我们如何评估哪一个变量最大程度的降低了分类的不确定性? 子集熵的均值看起来像是一个合理的度量指标。本例中,猫粮测试这个子集熵的均值最小。直观上看, 这条测试也更有效, 因为我们可以用它识别出几乎是一半样本。但是, 实际上这么做可能做导致决策局部最优值。例如, 假设有一个子集的结果是两条狗没有猫, 另一个子集的结果是4条狗8只猫。第一个子集的熵是0, 而第二个子集的熵0.918。那么平均熵是0.459, 但是第二个子集包含了绝大多数样本, 而其熵接近1比特。</p>
 <p>这就好像在猜猜看游戏中过早的问了太具体的问题, 而我们的问题并没有消除许多可能性。因此, 我们要用一种方法来合理度量熵的降幅, 这个方法称为信息增益(information gain)。信息增益是父节点熵, 用H(T) 表示与其子节点熵的加权均值的差, 计算公式如下:</p>
 <p><center><img alt="" src="http://i.imgur.com/ESHwk8E.png"></center>
-<center><img src="http://i.imgur.com/Dp71Eys.jpg" width="800" height="50"/></center></p>
+<center><img src="http://i.imgur.com/Dp71Eys.jpg" width="800" /></center></p>
 <p>下表就是本例信息增益的计算结果。可以看出,猫粮测试是最佳选择,因为其信息增益最大。</p>
-<p><center><img src="http://i.imgur.com/YfJBS9D.jpg" width="800" height="350"/></center></p>
+<p><center><img src="http://i.imgur.com/YfJBS9D.jpg" width="800" /></center></p>
 <p>现在让我们增加其他的节点到决策树中。一个子节点只包含猫, 另一个子节点还有2只猫和6条狗, 我们测试这个节点。同理, 按照信息增益方法计算可以得到下表数据:</p>
-<p><center><img src="http://i.imgur.com/gpLgNTj.jpg" width="800" height="280"/></center></p>
+<p><center><img src="http://i.imgur.com/gpLgNTj.jpg" width="800" /></center></p>
 <p>所有的测试都会出现熵为0的情况, 但是从表中可以看出, 解释变量是否喜欢玩球和是否经常发脾气的信息增益相等且都是最大的。ID3算法会随机选择一个节点继续测试。我们选择是否经常发脾气这个解释变量。它的右节点的8个动物分成左节点是4条狗, 右节点是两只猫两只狗。如下图所示: </p>
-<p><center><img src="http://i.imgur.com/xEAeJVJ.jpg" width="800" height="380"/></center></p>
+<p><center><img src="http://i.imgur.com/xEAeJVJ.jpg" width="800" /></center></p>
 <p>现在我们对剩下的解释变量进行信息增益计算,包括是否喜欢玩球?, 最喜欢的食物 =狗粮, 最喜欢的食物 =培根,这些解释变量测试的结果都是一个节点是一只猫或一条狗, 另一个节点是剩下的动物。其信息增益计算结果如下表所示:</p>
 <p><center><img alt="" src="http://i.imgur.com/aexmu9j.jpg"></center></p>
 <p>我们随机选择是否喜欢玩球? 这个解释变量来生成后面的节点,左节点包含一条狗, 右节点包含两只猫和一条狗。其他两个解释变量,最喜欢的食物 =狗粮和最喜欢的食物 =培根产生同样的结果, 左节点包含一条狗,右节点包含两只猫。然后, 我们随机选择最喜欢的食物 =狗粮进行测试,最终胜出决策树如下图所示:</p>
-<p><center><img src="http://i.imgur.com/NbLfjzk.jpg" width="800" height="580"/></center></p>
+<p><center><img src="http://i.imgur.com/NbLfjzk.jpg" width="800" /></center></p>
 <p>让我们用下表的测试集数据对决策树进行测试： </p>
-<p><center><img src="http://i.imgur.com/c3mG4Vs.jpg" width="800" height="280"/></center></p>
+<p><center><img src="http://i.imgur.com/c3mG4Vs.jpg" width="800" /></center></p>
 <p>让我们来找第一个动物的类型, 它喜欢玩球, 不经常发脾气, 喜欢培根。沿着决策树往下走, 根节点测试不喜欢猫粮, 因此进入左节点。又不经常发脾气, 依然进入左节点, 现在的叶子节点只有狗, 因此这个动物种类是狗。其他动物也按照同样的方法去查找, 第三个动物是一只猫, 根节点测试不喜欢猫粮, 进入左节点, 然后经常发脾气, 进入右节点, 不喜欢玩球, 进入左节点, 喜欢狗粮, 进入右节点, 因此该动物是猫。</p>
 <p>这样我们就用ID3算法实现了一个决策树。还有很多算法也可以实现决策树, C4.5算法是ID3的改进版, 可以用来处理连续的解释变量并考虑特征值丢失。C4.5算法可以修剪(prune)决策树, 修剪是通过更少的叶节点来替换分支, 以缩小决策树的规模。scikit-learn的决策树实现算法是CART(Classification and Regression Trees, 分类与回归树)算法, CART也是一种支持修剪的学习算法。</p>
 <ul>
 <li><strong>基尼不纯度</strong></li>
 </ul>
 <p>前面我们用最大信息增益建立决策树。还有一个启发式方法是基尼不纯度(Gini impurity), 度量一个集合中每种类型的比例。基尼不纯度格式如下:</p>
-<p><center><img alt="" src="http://i.imgur.com/oTShCru.png"></center></p>
+<p><center><img src="http://i.imgur.com/oTShCru.jpg" width="800" /></center></p>
 <p>其中, j是类型的数量, t是节点样本的子集, P(i|t)是从节点子集中选择一个类型i 的概率。</p>
 <ul>
 <li>显然基尼不纯度越小，纯度越高，集合的有序程度越高，分类的效果越好；</li>
@@ -165,7 +165,7 @@
 <li>基尼不纯度最高（纯度最低）时，f1=f2=…=fm=1/m，</li>
 </ul>
 <p>可以看出, 如果集合中只有一类, 那么基尼不纯度值为0。和熵一样, 当每个类型概率相同时, 基尼不纯度最大。此时, 基尼不纯度的最大值有类型的数量决定: </p>
-<p><center><img alt="" src="http://i.imgur.com/CFCLH8f.png"></center></p>
+<p><center><img src="http://i.imgur.com/CFCLH8f.jpg" width="800" /></center></p>
 <p>我们的例子有两种类型, 所有基尼不纯度的最大值是0.5。scikit-learn研究决策树的算法, 既支持信息增益, 也支持基尼不纯度。到底用哪种方法并没有规定, 实际上, 它们产生的结果类似。一般的决策树都是两个都用, 比较一下结果, 哪个好用哪个。</p>
 <h2><strong>决策树的优劣势</strong></h2>
 <p>和前面几章介绍过的模型相比,决策树的用法更简单。首先,决策树对数据没有零均值,均方差的要求。而且可以容忍解释变量值的缺失,虽然现在的scikit-learn还没实现这一特点。决策树在训练的时候可以忽略与任务无关的解释变量。</p>
