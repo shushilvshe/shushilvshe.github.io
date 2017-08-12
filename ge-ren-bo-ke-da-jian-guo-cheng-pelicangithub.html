@@ -96,7 +96,8 @@
 
 
   <div>
-    <h2>前言</h2>
+    <h3>前言</h3>
+<hr>
 <p>当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫，有一次只是加了一个图片管理的插件，导致内存爆满，正常的VPS服务都无法使用了，遂只能移情别恋了；告别了动态语言博客系统，一个简洁带有原始风味的静态博客系统进入我的视野——hexo，不过不太喜欢hexo的这种组织风格（PS：也许是我还没研究透彻），最终，我将目光锁定在基于python语言的Pelican博客系统上，原因如下：
 <br>
 <br></p>
@@ -107,12 +108,10 @@
 <li><strong>页面可托管到github上，有版本管理，且可写个脚本一键生成静态页面并部署，简单快捷</strong></li>
 <li><strong>网站组织结构可根据自己组要自定义，自由度高</strong></li>
 </ul>
-<p><br></p>
 <blockquote>
 <p>Pelican是一个用Python语言编写的静态网站生成器，支持使用 <code>restructuredText</code> 和 <code>Markdown</code> 写文章，配置灵活，扩展性强，有许多优秀的主题和插件可供使用。<br>Pelican 的Github地址是：<code>https://github.com/getpelican/pelican</code>;<br>pelican官网：<code>http://blog.getpelican.com/</code>;<br>pelican文档：<code>http://docs.getpelican.com/en/stable/</code></p>
 </blockquote>
 <h3>所需工具一览</h3>
-<hr>
 <ul>
 <li>MarkdownPad2（md工具）</li>
 <li>Pelican（基于Python语言的静态博客框架）</li>
@@ -124,6 +123,7 @@
 </ul>
 <p>我现在的整个操作流程是酱紫滴： 在本地用markdown写博客，之后把md文件同步到云服务器上，在服务器上生成静态页面并提交到github上完成部署，这样有个好处就是可以在家写生活，在公司写工作，两个地方写完之后提交到同一个生成部署环境中即可，不用都部署pelican环境了，适用于经常变换电脑的宝宝们。当然如果用的电脑只有一个的话，完全可以把生成部署环境搭建到本地，本地编辑完，生成再部署即可，这样更简单。</p>
 <h3>1.准备VPS（或云服务器）(可选)</h3>
+<hr>
 <p>打开 <strong><a href="https://bandwagonhost.com/cart.php?a=confproduct&amp;i=0">搬瓦工的购买页面（需翻墙）</a></strong></p>
 <p>国内可从 <strong><a href="http://banwagong.cn/">搬瓦工</a></strong> 购买， 也比较靠谱（我的优惠码是从这儿搞的）</p>
 <p>选择最低配的年付 $19.99 的电信联通直连的套餐即可，速度还阔以，有一点不太好就是只有一个DC，不能切换机房
@@ -141,6 +141,7 @@
 <p>还差最后一步就阔以科学上网了，按如下步骤在本地下载一个shadowsocks，按照图片所示内容填写即可，支持多客户端同时科学上网，棒棒哒✌
 <center><img src="http://i.imgur.com/ik9RFOM.png" width="1024"/></center></p>
 <h3>2.github pages绑定独立域名（可选）</h3>
+<hr>
 <blockquote>
 <p>拥有一个属于自己的域名感觉逼格很高，无所谓的可以跳过，直接用github的二级域名即可</p>
 </blockquote>
@@ -170,6 +171,7 @@
 </li>
 </ul>
 <h3>3.搭建Pelican环境</h3>
+<hr>
 <ul>
 <li>
 <p><strong>安装git</strong></p>
