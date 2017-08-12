@@ -97,7 +97,8 @@
 
   <div>
     <h2>前言</h2>
-<p>当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫，有一次只是加了一个图片管理的插件，导致内存爆满，正常的VPS服务都无法使用了，遂只能移情别恋了；告别了动态语言博客系统，一个简洁带有原始风味的静态博客系统进入我的视野——hexo，不过不太喜欢hexo的这种组织风格（PS：也许是我还没研究透彻），最终，我将目光锁定在基于python语言的Pelican博客系统上，原因如下：</p>
+<p>当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫，有一次只是加了一个图片管理的插件，导致内存爆满，正常的VPS服务都无法使用了，遂只能移情别恋了；告别了动态语言博客系统，一个简洁带有原始风味的静态博客系统进入我的视野——hexo，不过不太喜欢hexo的这种组织风格（PS：也许是我还没研究透彻），最终，我将目光锁定在基于python语言的Pelican博客系统上，原因如下：
+<br></p>
 <ul>
 <li><strong>对Markdown语法支持比较好，方便编程习惯写博客</strong></li>
 <li><strong>正在用python研究ML，python版的博客系统正合适</strong></li>
@@ -120,23 +121,26 @@
 </ul>
 <p>我现在的整个操作流程是酱紫滴： 在本地用markdown写博客，之后把md文件同步到云服务器上，在服务器上生成静态页面并提交到github上完成部署，这样有个好处就是可以在家写生活，在公司写工作，两个地方写完之后提交到同一个生成部署环境中即可，不用都部署pelican环境了，适用于经常变换电脑的宝宝们。当然如果用的电脑只有一个的话，完全可以把生成部署环境搭建到本地，本地编辑完，生成再部署即可，这样更简单。</p>
 <h3>1.准备VPS（或云服务器）(可选)</h3>
-<p>打开 搬瓦工的购买页面 <code>https://bandwagonhost.com/cart.php?a=confproduct&amp;i=0</code>  (需要翻~~~墙~~~)</p>
-<p>国内有家 <strong><a href="http://banwagong.cn/">搬瓦工</a></strong> 也比较靠谱（我的优惠码是从这儿搞的）</p>
+<p>打开 <strong><a href="https://bandwagonhost.com/cart.php?a=confproduct&amp;i=0">搬瓦工的购买页面（需翻墙）</a></strong></p>
+<p>国内可从 <strong><a href="http://banwagong.cn/">搬瓦工</a></strong> 购买， 也比较靠谱（我的优惠码是从这儿搞的）</p>
 <p>选择最低配的年付 $19.99 的电信联通直连的套餐即可，速度还阔以，有一点不太好就是只有一个DC，不能切换机房
-<center><img src="http://i.imgur.com/qEU5ceE.png" width="800" height="600"/></center></p>
+<center><img src="http://i.imgur.com/qEU5ceE.png" width="1024" /></center></p>
 <p>可以从 <a href="http://banwagong.cn/">国内搬瓦工</a> 获取优惠码，有5%的折扣
-<center><img src="http://i.imgur.com/kclcLuk.png" width="800" height="600"/></center></p>
+<center><img src="http://i.imgur.com/kclcLuk.png" width="1024"/></center></p>
 <p>国内可以选择支付宝付款
-<center><img src="http://i.imgur.com/7EmSKT7.png" width="800" height="200"/></center></p>
+<center><img src="http://i.imgur.com/7EmSKT7.png" width="1024"/></center></p>
 <p>开通完毕一般是即时生效的，这时候我们就可以打开网站的管理界面了<a href="https://kiwivm.64clouds.com/main.php">KiwiVM</a>, </p>
 <ul>
 <li>第一步，选择一下自己喜欢的系统重装一下,左侧列表 <strong><code>Install New OS</code></strong>（PS： 由于VPS只能装到centos 6的系统上，所以，没得选）</li>
 <li>第二步，安装 VPS 服务 ，左侧列表 <strong><code>Shadowsocks Server</code></strong>
-<center><img src="http://i.imgur.com/ONL5i59.png" width="800" height="600"/></center></li>
+<center><img src="http://i.imgur.com/ONL5i59.png" width="1024"/></center></li>
 </ul>
 <p>还差最后一步就阔以科学上网了，按如下步骤在本地下载一个shadowsocks，按照图片所示内容填写即可，支持多客户端同时科学上网，棒棒哒✌
-<center><img src="http://i.imgur.com/ik9RFOM.png" width="800" height="600"/></center></p>
-<h3>2.准备域名并改github pages域名为独立域名(可选，拥有一个属于自己的域名感觉逼格很高，无所谓的可以跳过，直接用github的二级域名即可)</h3>
+<center><img src="http://i.imgur.com/ik9RFOM.png" width="1024"/></center></p>
+<h3>2.github pages绑定独立域名（可选）</h3>
+<blockquote>
+<p>拥有一个属于自己的域名感觉逼格很高，无所谓的可以跳过，直接用github的二级域名即可</p>
+</blockquote>
 <ul>
 <li>
 <p><strong>购买域名</strong></p>
@@ -145,25 +149,21 @@
 <p>Namesilo商家的优势在于域名价格比较稳定，其次就是赠送隐私保护。这域名隐私保护还是比较重要的，可以防止个人信息被恶意邮件或者泄露身份.</p>
 </blockquote>
 <p>打开网址 <code>https://www.namesilo.com/</code> 注册后输入自己想要的域名
-<center><img src="http://i.imgur.com/hyIGOLR.png" width="800" height="700"/></center></p>
+<center><img src="http://i.imgur.com/hyIGOLR.png" width="1024"/></center></p>
 <p>点击查询后会显示不同域名后缀价格,选择一个购买就行。
-<center><img src="http://i.imgur.com/cbJ0Vhj.png" width="1024" height="200"/></center></p>
+<center><img src="http://i.imgur.com/cbJ0Vhj.png" width="1024"/></center></p>
 <p>域名管理界面
-<center><img src="http://i.imgur.com/0FTrv18.png" width="1024" height="300"/></center></p>
+<center><img src="http://i.imgur.com/0FTrv18.png" width="1024"/></center></p>
 </li>
 <li>
 <p><strong>将GitHub Pages修改为自定义域名</strong></p>
 <p>（注册github帐号以及添加仓库等操作略。。。）</p>
 <p>在仓库的配置页面找到 <strong><code>GitHub Pages</code></strong> 配置项，在 <code>Custom domain</code> 中填入刚才注册的域名，点击保存即可。</p>
-<p><center><img src="http://i.imgur.com/aI4JsIU.png" width="800" height="600"/></center>
+<p><center><img src="http://i.imgur.com/aI4JsIU.png" width="1024"/></center>
 这时候，会在仓库根目录下生成一个CNAME文件，接下来还需要做的就是去刚Namesilo中配置下ip和域名的映射记录即可。在Namesilo的域名管理界面，找到Github的配置模版  点击 <strong><code>Apply Template</code></strong> , 然后点击 <code>Accecpt</code>， 配置好对应 github页面的地址即可， 如图：</p>
-<p><center><img src="http://i.imgur.com/4XW9xJZ.png" width="800" height="500"/></center></p>
+<p><center><img src="http://i.imgur.com/4XW9xJZ.png" width="1024"/></center></p>
 </li>
 </ul>
-<p><a href="http://namesilopro.com/77.html">Namesilo VS Godaddy域名注册的对比优势</a></p>
-<blockquote>
-<p>关于域名用国内外的差别</p>
-</blockquote>
 <h3>3.搭建Pelican环境</h3>
 <ul>
 <li>
@@ -386,10 +386,13 @@ python -m http.server
 <h2>附录</h2>
 <ul>
 <li>
-<p>pelican文档： <code>http://docs.getpelican.com/en/stable/</code></p>
+<p><a href="http://docs.getpelican.com/en/stable/">pelican文档（官网）</a></p>
 </li>
 <li>
-<p>github pages 发布： <code>https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/</code></p>
+<p><a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/">github pages 页面发布配置（官网）</a></p>
+</li>
+<li>
+<p><a href="http://namesilopro.com/77.html">Namesilo VS Godaddy域名注册的对比优势</a></p>
 </li>
 </ul>
   </div>
