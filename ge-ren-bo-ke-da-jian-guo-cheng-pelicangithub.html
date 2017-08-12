@@ -98,6 +98,7 @@
   <div>
     <h2>前言</h2>
 <p>当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫，有一次只是加了一个图片管理的插件，导致内存爆满，正常的VPS服务都无法使用了，遂只能移情别恋了；告别了动态语言博客系统，一个简洁带有原始风味的静态博客系统进入我的视野——hexo，不过不太喜欢hexo的这种组织风格（PS：也许是我还没研究透彻），最终，我将目光锁定在基于python语言的Pelican博客系统上，原因如下：
+<br>
 <br></p>
 <ul>
 <li><strong>对Markdown语法支持比较好，方便编程习惯写博客</strong></li>
@@ -106,10 +107,12 @@
 <li><strong>页面可托管到github上，有版本管理，且可写个脚本一键生成静态页面并部署，简单快捷</strong></li>
 <li><strong>网站组织结构可根据自己组要自定义，自由度高</strong></li>
 </ul>
+<p><br></p>
 <blockquote>
 <p>Pelican是一个用Python语言编写的静态网站生成器，支持使用 <code>restructuredText</code> 和 <code>Markdown</code> 写文章，配置灵活，扩展性强，有许多优秀的主题和插件可供使用。<br>Pelican 的Github地址是：<code>https://github.com/getpelican/pelican</code>;<br>pelican官网：<code>http://blog.getpelican.com/</code>;<br>pelican文档：<code>http://docs.getpelican.com/en/stable/</code></p>
 </blockquote>
-<h2>所需工具一览</h2>
+<h3>所需工具一览</h3>
+<hr>
 <ul>
 <li>MarkdownPad2（md工具）</li>
 <li>Pelican（基于Python语言的静态博客框架）</li>
@@ -156,12 +159,14 @@
 <center><img src="http://i.imgur.com/0FTrv18.png" width="1024"/></center></p>
 </li>
 <li>
-<p><strong>将GitHub Pages修改为自定义域名</strong></p>
+<p><strong>绑定域名</strong></p>
 <p>（注册github帐号以及添加仓库等操作略。。。）</p>
 <p>在仓库的配置页面找到 <strong><code>GitHub Pages</code></strong> 配置项，在 <code>Custom domain</code> 中填入刚才注册的域名，点击保存即可。</p>
 <p><center><img src="http://i.imgur.com/aI4JsIU.png" width="1024"/></center>
 这时候，会在仓库根目录下生成一个CNAME文件，接下来还需要做的就是去刚Namesilo中配置下ip和域名的映射记录即可。在Namesilo的域名管理界面，找到Github的配置模版  点击 <strong><code>Apply Template</code></strong> , 然后点击 <code>Accecpt</code>， 配置好对应 github页面的地址即可， 如图：</p>
 <p><center><img src="http://i.imgur.com/4XW9xJZ.png" width="1024"/></center></p>
+<p>配置好的界面：
+<center><img src="http://i.imgur.com/Ni8l5As.png" width="1024"/></center></p>
 </li>
 </ul>
 <h3>3.搭建Pelican环境</h3>
@@ -371,7 +376,7 @@ python -m http.server
 <blockquote>
 <p>git的初始化操作略去</p>
 </blockquote>
-<p>将 <code>output</code> 设置成 git根目录， 然后执行： </p>
+<p>将 <code>output</code> 设置成 git 根目录， 然后执行： </p>
 <div class="highlight"><pre><span></span>    cd ./output
     git add .
     git commit -m $1
