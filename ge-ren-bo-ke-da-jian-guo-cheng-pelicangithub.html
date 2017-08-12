@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫。。。。。。" />
+<meta name="keywords" content="Pelican, python, 博客搭建">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="个人博客搭建过程(Pelican+Github)"/>
+<meta property="og:description" content="当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫。。。。。。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-08-12 18:44:57+08:00"/>
+<meta property="article:modified_time" content="2017-08-12 18:45:02+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="data"/>
+<meta property="article:tag" content="Pelican"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="博客搭建"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
+
+  <title>shushilvshe's Blog &ndash; 个人博客搭建过程(Pelican+Github)</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
+
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
+
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+      <a href="/category/data.html">Data</a>
+      <a href="/">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/">Photo</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub">个人博客搭建过程(Pelican+Github)</h1>
+    <p>
+          Posted on 2017-08-12(星期六) 18:44 in <a href="http://www.shushilvshe.com/category/data.html">data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>前言</h2>
+<p>当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫，有一次只是加了一个图片管理的插件，导致内存爆满，正常的VPS服务都无法使用了，遂只能移情别恋了；告别了动态语言博客系统，一个简洁带有原始风味的静态博客系统进入我的视野——hexo，不过不太喜欢hexo的这种组织风格（PS：也许是我还没研究透彻），最终，我将目光锁定在基于python语言的Pelican博客系统上，原因如下：</p>
+<ul>
+<li><strong>对Markdown语法支持比较好，方便编程习惯写博客</strong></li>
+<li><strong>正在用python研究ML，python版的博客系统正合适</strong></li>
+<li><strong>易安装，主题、插件丰富，文档比较完善，社区比较活跃</strong></li>
+<li><strong>页面可托管到github上，有版本管理，且可写个脚本一键生成静态页面并部署，简单快捷</strong></li>
+<li><strong>网站组织结构可根据自己组要自定义，自由度高</strong></li>
+</ul>
+<blockquote>
+<p>Pelican是一个用Python语言编写的静态网站生成器，支持使用 <code>restructuredText</code> 和 <code>Markdown</code> 写文章，配置灵活，扩展性强，有许多优秀的主题和插件可供使用。<br>Pelican 的Github地址是：<code>https://github.com/getpelican/pelican</code>;<br>pelican官网：<code>http://blog.getpelican.com/</code>;<br>pelican文档：<code>http://docs.getpelican.com/en/stable/</code></p>
+</blockquote>
+<h2>所需工具一览</h2>
+<ul>
+<li>MarkdownPad2（md工具）</li>
+<li>Pelican（基于Python语言的静态博客框架）</li>
+<li>Github(静态网页托管)</li>
+<li>Namesilo(<code>https://www.namesilo.com/</code>) 域名（<a href="http://52namesilo.com/">优惠码</a>）</li>
+<li>BandwagonHost(搬瓦工——VPS) <code>https://bandwagonhost.com/</code> （【<a href="https://bandwagonhost.com/cart.php?a=confproduct&amp;i=0">购买页面（需翻墙）</a>】  【<a href="http://banwagong.cn/">国内</a>】）</li>
+<li>SecureCRT（ssh工具）</li>
+<li>shell脚本</li>
+</ul>
+<p>我现在的整个操作流程是酱紫滴： 在本地用markdown写博客，之后把md文件同步到云服务器上，在服务器上生成静态页面并提交到github上完成部署，这样有个好处就是可以在家写生活，在公司写工作，两个地方写完之后提交到同一个生成部署环境中即可，不用都部署pelican环境了，适用于经常变换电脑的宝宝们。当然如果用的电脑只有一个的话，完全可以把生成部署环境搭建到本地，本地编辑完，生成再部署即可，这样更简单。</p>
+<h3>1.准备VPS（或云服务器）(可选)</h3>
+<p>打开 搬瓦工的购买页面 <code>https://bandwagonhost.com/cart.php?a=confproduct&amp;i=0</code>  (需要翻~~~墙~~~)</p>
+<p>国内有家 <strong><a href="http://banwagong.cn/">搬瓦工</a></strong> 也比较靠谱（我的优惠码是从这儿搞的）</p>
+<p>选择最低配的年付 $19.99 的电信联通直连的套餐即可，速度还阔以，有一点不太好就是只有一个DC，不能切换机房
+<center><img src="http://i.imgur.com/qEU5ceE.png" width="800" height="600"/></center></p>
+<p>可以从 <a href="http://banwagong.cn/">国内搬瓦工</a> 获取优惠码，有5%的折扣
+<center><img src="http://i.imgur.com/kclcLuk.png" width="800" height="600"/></center></p>
+<p>国内可以选择支付宝付款
+<center><img src="http://i.imgur.com/7EmSKT7.png" width="800" height="200"/></center></p>
+<p>开通完毕一般是即时生效的，这时候我们就可以打开网站的管理界面了<a href="https://kiwivm.64clouds.com/main.php">KiwiVM</a>, </p>
+<ul>
+<li>第一步，选择一下自己喜欢的系统重装一下,左侧列表 <strong><code>Install New OS</code></strong>（PS： 由于VPS只能装到centos 6的系统上，所以，没得选）</li>
+<li>第二步，安装 VPS 服务 ，左侧列表 <strong><code>Shadowsocks Server</code></strong>
+<center><img src="http://i.imgur.com/ONL5i59.png" width="800" height="600"/></center></li>
+</ul>
+<p>还差最后一步就阔以科学上网了，按如下步骤在本地下载一个shadowsocks，按照图片所示内容填写即可，支持多客户端同时科学上网，棒棒哒✌
+<center><img src="http://i.imgur.com/ik9RFOM.png" width="800" height="600"/></center></p>
+<h3>2.准备域名并改github pages域名为独立域名(可选，拥有一个属于自己的域名感觉逼格很高，无所谓的可以跳过，直接用github的二级域名即可)</h3>
+<ul>
+<li>
+<p><strong>购买域名</strong></p>
+<p>我选用的是namesilo域名服务商，选择namesilo的原因很简单：</p>
+<blockquote>
+<p>Namesilo商家的优势在于域名价格比较稳定，其次就是赠送隐私保护。这域名隐私保护还是比较重要的，可以防止个人信息被恶意邮件或者泄露身份.</p>
+</blockquote>
+<p>打开网址 <code>https://www.namesilo.com/</code> 注册后输入自己想要的域名
+<center><img src="http://i.imgur.com/hyIGOLR.png" width="800" height="700"/></center></p>
+<p>点击查询后会显示不同域名后缀价格,选择一个购买就行。
+<center><img src="http://i.imgur.com/cbJ0Vhj.png" width="1024" height="200"/></center></p>
+<p>域名管理界面
+<center><img src="http://i.imgur.com/0FTrv18.png" width="1024" height="300"/></center></p>
+</li>
+<li>
+<p><strong>将GitHub Pages修改为自定义域名</strong></p>
+<p>（注册github帐号以及添加仓库等操作略。。。）</p>
+<p>在仓库的配置页面找到 <strong><code>GitHub Pages</code></strong> 配置项，在 <code>Custom domain</code> 中填入刚才注册的域名，点击保存即可。</p>
+<p><center><img src="http://i.imgur.com/aI4JsIU.png" width="800" height="600"/></center>
+这时候，会在仓库根目录下生成一个CNAME文件，接下来还需要做的就是去刚Namesilo中配置下ip和域名的映射记录即可。在Namesilo的域名管理界面，找到Github的配置模版  点击 <strong><code>Apply Template</code></strong> , 然后点击 <code>Accecpt</code>， 配置好对应 github页面的地址即可， 如图：</p>
+<p><center><img src="http://i.imgur.com/4XW9xJZ.png" width="800" height="500"/></center></p>
+</li>
+</ul>
+<p><a href="http://namesilopro.com/77.html">Namesilo VS Godaddy域名注册的对比优势</a></p>
+<blockquote>
+<p>关于域名用国内外的差别</p>
+</blockquote>
+<h3>3.搭建Pelican环境</h3>
+<ul>
+<li>
+<p><strong>安装git</strong></p>
+<div class="highlight"><pre><span></span>yum install git
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>安装pip</strong></p>
+<div class="highlight"><pre><span></span>$ wget https://bootstrap.pypa.io/get-pip.py
+$ python get-pip.py
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>使用virtualenv工具创建python3独立环境（TODO： 当时想直接升级2.6.6到python3版本，遇到一些升级完pip不能用的问题）</strong></p>
+<blockquote>
+<p>因为vps只能安装在centos 6.4的版本上，而6.4版本上的python是2.6.6的，版本比较老，为了不干扰系统对原python环境的依赖，故需要装一个python 3.0的独立python环境。而virtualenv包则为我们建立不同的python环境，以避免包的依赖、版本和间接权限问题。</p>
+</blockquote>
+<ul>
+<li>
+<p>安装python3.4</p>
+<div class="highlight"><pre><span></span>wget https://www.python.org/ftp/python/3.4.3/Python-3.4.3.tgz
+tar zxvf Python-3.4.3.tgz 
+cd Python-3.4.3 
+./configure --prefix=/usr/local 
+make &amp;&amp; make install
+</pre></div>
+
+
+<p>运行以上命令后，你可以在目录/usr/local/bin/python3.4 看到新编译的环境。</p>
+</li>
+<li>
+<p>安装virtualenv</p>
+<div class="highlight"><pre><span></span>pip install virtualenv
+</pre></div>
+
+
+</li>
+<li>
+<p>创建虚拟环境</p>
+<div class="highlight"><pre><span></span>virtualenv -p /usr/local/bin/python3.4 py34env
+</pre></div>
+
+
+<p>执行上述命令后，会在当前目录创建py34env文件夹，该文件夹即为我们创建的虚拟环境。</p>
+</li>
+<li>
+<p>激活虚拟环境</p>
+<div class="highlight"><pre><span></span>[root@shushilvshe opt]# source py34env/bin/activate
+(py34env) [root@shushilvshe opt]# which python
+/opt/py34env/bin/python
+(py34env) [root@shushilvshe opt]#
+</pre></div>
+
+
+</li>
+<li>
+<p>退出虚拟环境</p>
+<div class="highlight"><pre><span></span>(py34env) [root@shushilvshe opt]# deactivate
+[root@shushilvshe opt]#
+</pre></div>
+
+
+</li>
+<li>
+<p>关于virtualenv的一些说明：</p>
+<p>virtualenv拷贝了Python可执行文件的副本，并创建一些有用的脚本和安装了项目需要的软件包，你可以在项目的整个生命周期中安装/升级/删除这些包。 它也修改了一些搜索路径，例如PYTHONPATH，以确保：</p>
+<ul>
+<li>当安装包时，它们被安装在当前活动的virtualenv里，而不是系统范围内的Python路径。</li>
+<li>当import代码时，virtualenv将优先采取本环境中安装的包，而不是系统Python目录中安装的包。</li>
+</ul>
+<p>还有一点比较重要，在默认情况下，所有安装在系统范围内的包对于virtualenv是可见的。 这意味着如果你将simplejson安装在您的系统Python目录中，它会自动提供给所有的virtualenvs使用。 这种行为可以被更改，在创建virtualenv时增加 --no-site-packages 选项的virtualenv就不会读取系统包，如下：</p>
+<div class="highlight"><pre><span></span>virtualenv nowamagic_venv --no-site-packages
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p><strong>安装pelican</strong></p>
+<div class="highlight"><pre><span></span>pip install pelican
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>安装markdown</strong></p>
+<div class="highlight"><pre><span></span>pip install Markdown
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>配置pelican基本环境</strong></p>
+<ul>
+<li>
+<p>创建博客站点</p>
+<div class="highlight"><pre><span></span>mkdir blog //名称可根据自己喜欢定
+cd blog
+pelican-quickstart
+</pre></div>
+
+
+<p><code>pelican-quickstart</code> 命令执行后，会提示输入博客的配置项，除了少数几个必填以外，其它都可以选择默认，而且都可以在pelicanconf.py文件中进行更改，所以你可以随意选择。命令成功执行后，会出现pelican的框架，如下所示：</p>
+<div class="highlight"><pre><span></span>blog/
+├── content                # 存放输入的markdown或RST源文件
+│   └── (pages)            # 存放手工创建的静态页面，可选
+│   └── (posts)            # 存放手工创建的文章，可选
+├── output                 # 存放最终生成的静态博客
+├── develop_server.sh      # 测试服务器
+├── Makefile               # 管理博客的Makefile
+├── pelicanconf.py         # 配置文件
+└── publishconf.py         # 发布文件，可删除
+</pre></div>
+
+
+</li>
+<li>
+<p>选择博客主题</p>
+<p>回到blog目录下，按如下步骤下载pelican官方主题，从里面挑选出自己喜欢的主题吧，大多数主题预览界面你可以打开这个网页进行查看。不过如今pelican又新出了很多主题，所以你需看看pelican主题开源库。</p>
+<p>clone主题到本地：</p>
+<div class="highlight"><pre><span></span>git clone https://github.com/getpelican/pelican-themes.git
+</pre></div>
+
+
+<p>打开 <code>pelicanconf.py</code> 配置文件，更改或添加THEME为自己喜欢的主题，更多的配置含义请关注官方文档。</p>
+<div class="highlight"><pre><span></span>THEME = &#39;pelican-themes/Flex&#39;
+</pre></div>
+
+
+<blockquote>
+<p>注意有的主题clone完后是没有内容的， 需要到该主题的目录下clone一份</p>
+</blockquote>
+</li>
+<li>
+<p>添加评论系统</p>
+<p>开启个人博客的原因在于分享知识，分享就需要交流，评论模块当然少不了。在Disqus上申请帐号，按照流程Disqus会分配给你站点的Shortname，记牢Shortname，如果忘了请进入admin/settings中查看。然后同理，在pelicanconf.py添加</p>
+<div class="highlight"><pre><span></span>DISQUS_SITENAME = Shortname
+</pre></div>
+
+
+</li>
+<li>
+<p>写文章</p>
+<p>完成上述博客主体搭建后，使用markdownpad2创建一个.md文件，保存于content文件夹中（或自己加入posts文件夹）。</p>
+<p>Metadata syntax for Markdown posts should follow this pattern:</p>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">My</span> <span class="kd">super</span> <span class="n">title</span>
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2017</span><span class="sr">/8/</span><span class="mi">11</span> <span class="mi">23</span><span class="o">:</span><span class="mi">28</span><span class="o">:</span><span class="mi">51</span> 
+<span class="n">Modified</span><span class="o">:</span> <span class="mi">2017</span><span class="sr">/8/</span><span class="mi">11</span> <span class="mi">23</span><span class="o">:</span><span class="mi">28</span><span class="o">:</span><span class="mi">54</span> 
+<span class="n">Category</span><span class="o">:</span> <span class="n">Python</span>
+<span class="n">Tags</span><span class="o">:</span> <span class="n">pelican</span><span class="o">,</span> <span class="n">publishing</span>
+<span class="n">Slug</span><span class="o">:</span> <span class="n">my</span><span class="o">-</span><span class="kd">super</span><span class="o">-</span><span class="n">post</span>
+<span class="n">Authors</span><span class="o">:</span> <span class="n">Alexis</span> <span class="n">Metaireau</span><span class="o">,</span> <span class="n">Conan</span> <span class="n">Doyle</span>
+<span class="n">Summary</span><span class="o">:</span> <span class="n">Short</span> <span class="n">version</span> <span class="k">for</span> <span class="n">index</span> <span class="n">and</span> <span class="n">feeds</span>
+
+<span class="n">This</span> <span class="k">is</span> <span class="n">the</span> <span class="n">content</span> <span class="n">of</span> <span class="n">my</span> <span class="kd">super</span> <span class="n">blog</span> <span class="n">post</span><span class="o">.</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>生成站点页面</p>
+<p>有三种方法可以发布站点：</p>
+<ul>
+<li><strong>pelican命令</strong></li>
+<li><strong>fabric</strong></li>
+<li><strong>make</strong></li>
+</ul>
+<p>以pelican为例，其他两个可参考文档。</p>
+<div class="highlight"><pre><span></span>pelican /path/to/your/content/ [-s path/to/your/settings.py]
+</pre></div>
+
+
+<p>通过pelican命令可以将content目录下的md文件生成静态HTML，生成的规则是依据 <code>publishconf.py</code> 配置文件，并输出到 <code>output/</code> 文件夹下，这是比较常用的命令，pelican其他的命令可以通过如下命令进行查看。</p>
+<div class="highlight"><pre><span></span>pelican --help
+</pre></div>
+
+
+</li>
+<li>
+<p>预览生成的页面</p>
+<p>For Python 2, run:</p>
+<div class="highlight"><pre><span></span>cd output
+python -m SimpleHTTPServer
+</pre></div>
+
+
+<p>For Python 3, run:</p>
+<div class="highlight"><pre><span></span>cd output
+python -m http.server
+</pre></div>
+
+
+<p>在 http://localhost:8000/ 预览效果.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>托管到github(或部署到云服务器的apache|nginx)</strong></p>
+<blockquote>
+<p>git的初始化操作略去</p>
+</blockquote>
+<p>将 <code>output</code> 设置成 git根目录， 然后执行： </p>
+<div class="highlight"><pre><span></span>    cd ./output
+    git add .
+    git commit -m $1
+    git pull origin master
+    git push origin master
+</pre></div>
+
+
+<p>执行操作之后，没有什么报错的话， 打开你的专属网站， 你就会发现， 她就在上面。。。 整篇完！！！</p>
+</li>
+</ul>
+<h2>附录</h2>
+<ul>
+<li>
+<p>pelican文档： <code>http://docs.getpelican.com/en/stable/</code></p>
+</li>
+<li>
+<p>github pages 发布： <code>https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/</code></p>
+</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/pelican.html">Pelican</a>
+      <a href="http://www.shushilvshe.com/tag/python.html">python</a>
+      <a href="http://www.shushilvshe.com/tag/bo-ke-da-jian.html">博客搭建</a>
+    </p>
+  </div>
+
+
+
+    <div class="addthis_relatedposts_inline">
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/baya.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
