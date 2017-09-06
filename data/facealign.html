@@ -111,74 +111,79 @@
 <li>总的图片高度根据计算出的脸长和margin值相加得来；</li>
 <li>根据左眼坐标和图片高度计算最后截图需要的四个边界值，得到最后需要图，最后进行缩放完成。</li>
 </ul>
-<p>算法实现：</p>
-<div class="highlight"><pre><span></span>def alignFace(self, image, boundingBoxes, positions, cropSize=160, angleThreshold=5):
-    &#39;&#39;&#39;
-image 原始图像
-boundingBoxes 脸部轮廓边框
-positions 五官坐标
-cropSize：最后保留的图像的大小 
-angleThreshold: 旋转头像倾斜角度阈值
-    &#39;&#39;&#39;
-    aligneds=[]
-    if len(positions.shape) &lt; 2:
-        return aligneds
-    for i in range(positions.shape[1]):
-        eyeLeft, eyeRight=(positions[0,i], positions[5,i]), (positions[1,i], positions[6,i])
-        nosePoint = (positions[2,i], positions[7,i])
-        eye_direction = (eyeRight[0]- eyeLeft[0], eyeRight[1]- eyeLeft[1])  
-        eyeDist = self.__distance(eyeLeft, eyeRight)
-        leftEyeNoseDist = self.__distance(eyeLeft, nosePoint)
-        rightEyeNoseDist = self.__distance(nosePoint, eyeRight)
-        slope = math.fabs(eye_direction[1]/eye_direction[0])
-        rate = math.fabs(eye_direction[0]/eyeDist)
+<p><strong>算法实现：</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">facenet</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
-        #图片倾斜度超过阈值时旋转
-        if slope &gt;= math.tan(angleThreshold*math.pi/180):
-            #根据boundingBox和斜度截取小图
-            boxWidth,boxHeight = (boundingBoxes[i,2]-boundingBoxes[i,0]),(boundingBoxes[i,3]-boundingBoxes[i,1])
-            left,upper = (boundingBoxes[i,0]-boxWidth/4/rate),(boundingBoxes[i,1]-boxHeight/4/rate)
-            right,lower = (boundingBoxes[i,2]+boxWidth/4/rate),(boundingBoxes[i,3]+boxHeight/4/rate)
-            img = Image.fromarray(image).crop((left, upper, right, lower))
-            img.save(&#39;D:/test_data/face/crop&#39; +str(i)+ &#39;.jpg&#39;)
+<span class="k">def</span> <span class="nf">alignFace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">boundingBoxes</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">cropSize</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">angleThreshold</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">image 原始图像</span>
+<span class="sd">boundingBoxes 脸部轮廓边框</span>
+<span class="sd">positions 五官坐标</span>
+<span class="sd">cropSize：最后保留的图像的大小 </span>
+<span class="sd">angleThreshold: 旋转头像倾斜角度阈值</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">aligneds</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">aligneds</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">eyeLeft</span><span class="p">,</span> <span class="n">eyeRight</span><span class="o">=</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="n">positions</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="n">i</span><span class="p">]),</span> <span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="n">positions</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">nosePoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="n">positions</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">eye_direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">eyeRight</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span> <span class="n">eyeLeft</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">eyeRight</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span> <span class="n">eyeLeft</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  
+        <span class="n">eyeDist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__distance</span><span class="p">(</span><span class="n">eyeLeft</span><span class="p">,</span> <span class="n">eyeRight</span><span class="p">)</span>
+        <span class="n">leftEyeNoseDist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__distance</span><span class="p">(</span><span class="n">eyeLeft</span><span class="p">,</span> <span class="n">nosePoint</span><span class="p">)</span>
+        <span class="n">rightEyeNoseDist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__distance</span><span class="p">(</span><span class="n">nosePoint</span><span class="p">,</span> <span class="n">eyeRight</span><span class="p">)</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">eye_direction</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">eye_direction</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">rate</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">eye_direction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">eyeDist</span><span class="p">)</span>
 
-            #以鼻子为中心旋转截图
-            nosePoint = ((nosePoint[0]-left), (nosePoint[1]-upper))
-            rotation = -math.atan2(float(eye_direction[1]),float(eye_direction[0]))
-            img = self.__scaleRotateTranslate(img, center=nosePoint, angle=rotation) 
-            img.save(&#39;D:/test_data/face/rotate&#39; +str(i)+ &#39;.jpg&#39;)
+        <span class="c1">#图片倾斜度超过阈值时旋转</span>
+        <span class="k">if</span> <span class="n">slope</span> <span class="o">&gt;=</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">angleThreshold</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">):</span>
+            <span class="c1">#根据boundingBox和斜度截取小图</span>
+            <span class="n">boxWidth</span><span class="p">,</span><span class="n">boxHeight</span> <span class="o">=</span> <span class="p">(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]),(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">left</span><span class="p">,</span><span class="n">upper</span> <span class="o">=</span> <span class="p">(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">boxWidth</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">rate</span><span class="p">),(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">boxHeight</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">rate</span><span class="p">)</span>
+            <span class="n">right</span><span class="p">,</span><span class="n">lower</span> <span class="o">=</span> <span class="p">(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">boxWidth</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">rate</span><span class="p">),(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">boxHeight</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">rate</span><span class="p">)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="n">left</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">lower</span><span class="p">))</span>
+            <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;D:/test_data/face/crop&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">)</span>
 
-            #计算旋转之后左眼坐标
-            cosLeftEye = math.fabs((math.pow(eyeDist,2)+math.pow(leftEyeNoseDist,2)-math.pow(rightEyeNoseDist,2))/(2*eyeDist*leftEyeNoseDist))
-            rotatedLfEye = ((nosePoint[0]-leftEyeNoseDist*cosLeftEye), (nosePoint[1]-math.sqrt(math.pow(leftEyeNoseDist,2)-math.pow(leftEyeNoseDist*cosLeftEye,2))))
+            <span class="c1">#以鼻子为中心旋转截图</span>
+            <span class="n">nosePoint</span> <span class="o">=</span> <span class="p">((</span><span class="n">nosePoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">left</span><span class="p">),</span> <span class="p">(</span><span class="n">nosePoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">upper</span><span class="p">))</span>
+            <span class="n">rotation</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">eye_direction</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">float</span><span class="p">(</span><span class="n">eye_direction</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scaleRotateTranslate</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">nosePoint</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">rotation</span><span class="p">)</span> 
+            <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;D:/test_data/face/rotate&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">)</span>
 
-            #截取正面脸部图像
-            faceLen = (int(math.fabs(boundingBoxes[i,1]-boundingBoxes[i,3])))/rate
-            margin = ((boxWidth+boxHeight)//60)*math.pow(rate,3)
-            finalLen = faceLen+2*margin
-            upEyeHeight = self.__getUpEyeHeight(eyeLeft, eyeRight, eyeDist, boundingBoxes[i,1])
-            left,upper = (rotatedLfEye[0]+eyeDist/2-finalLen/2), (rotatedLfEye[1]-upEyeHeight-margin)
-            right,lower = left+finalLen, upper+finalLen
-            img = img.crop((left, upper, right, lower))  
-            img = img.resize((cropSize, cropSize), Image.ANTIALIAS)
-            img.save(&#39;D:/test_data/face/duoren&#39; +str(i)+ &#39;.jpg&#39;)
-            aligneds.append(np.array(img)) 
-        else:#原图截图
-            img_size = np.asarray(image.shape)[0:2]
-            margin=self.__computerMargin(boundingBoxes[i])
-            det = np.squeeze(boundingBoxes[i])
-            bb = np.zeros(4, dtype=np.int32)
-            bb[0] = np.maximum(det[0]-margin/2, 0)
-            bb[1] = np.maximum(det[1]-margin/2, 0)
-            bb[2] = np.minimum(det[2]+margin/2, img_size[1])
-            bb[3] = np.minimum(det[3]+margin/2, img_size[0])
-            cropped = image[bb[1]:bb[3],bb[0]:bb[2],:]
-            aligned = misc.imresize(cropped, (cropSize, cropSize), interp=&#39;bilinear&#39;)
-            aligneds.append(aligned)
-    return aligneds
+            <span class="c1">#计算旋转之后左眼坐标</span>
+            <span class="n">cosLeftEye</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">eyeDist</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">leftEyeNoseDist</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">rightEyeNoseDist</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eyeDist</span><span class="o">*</span><span class="n">leftEyeNoseDist</span><span class="p">))</span>
+            <span class="n">rotatedLfEye</span> <span class="o">=</span> <span class="p">((</span><span class="n">nosePoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">leftEyeNoseDist</span><span class="o">*</span><span class="n">cosLeftEye</span><span class="p">),</span> <span class="p">(</span><span class="n">nosePoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">leftEyeNoseDist</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">leftEyeNoseDist</span><span class="o">*</span><span class="n">cosLeftEye</span><span class="p">,</span><span class="mi">2</span><span class="p">))))</span>
+
+            <span class="c1">#截取正面脸部图像</span>
+            <span class="n">faceLen</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">])))</span><span class="o">/</span><span class="n">rate</span>
+            <span class="n">margin</span> <span class="o">=</span> <span class="p">((</span><span class="n">boxWidth</span><span class="o">+</span><span class="n">boxHeight</span><span class="p">)</span><span class="o">//</span><span class="mi">60</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+            <span class="n">finalLen</span> <span class="o">=</span> <span class="n">faceLen</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">margin</span>
+            <span class="n">upEyeHeight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getUpEyeHeight</span><span class="p">(</span><span class="n">eyeLeft</span><span class="p">,</span> <span class="n">eyeRight</span><span class="p">,</span> <span class="n">eyeDist</span><span class="p">,</span> <span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">left</span><span class="p">,</span><span class="n">upper</span> <span class="o">=</span> <span class="p">(</span><span class="n">rotatedLfEye</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">eyeDist</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">finalLen</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">rotatedLfEye</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">upEyeHeight</span><span class="o">-</span><span class="n">margin</span><span class="p">)</span>
+            <span class="n">right</span><span class="p">,</span><span class="n">lower</span> <span class="o">=</span> <span class="n">left</span><span class="o">+</span><span class="n">finalLen</span><span class="p">,</span> <span class="n">upper</span><span class="o">+</span><span class="n">finalLen</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="n">left</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">lower</span><span class="p">))</span>  
+            <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">cropSize</span><span class="p">,</span> <span class="n">cropSize</span><span class="p">),</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
+            <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;D:/test_data/face/duoren&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">)</span>
+            <span class="n">aligneds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">))</span> 
+        <span class="k">else</span><span class="p">:</span><span class="c1">#原图截图</span>
+            <span class="n">img_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">margin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__computerMargin</span><span class="p">(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">det</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">boundingBoxes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">bb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+            <span class="n">bb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">det</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">margin</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">bb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">det</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">margin</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">bb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">det</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">margin</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">img_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">bb</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">det</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">margin</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">img_size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">cropped</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">bb</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">bb</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">bb</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bb</span><span class="p">[</span><span class="mi">2</span><span class="p">],:]</span>
+            <span class="n">aligned</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">cropped</span><span class="p">,</span> <span class="p">(</span><span class="n">cropSize</span><span class="p">,</span> <span class="n">cropSize</span><span class="p">),</span> <span class="n">interp</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+            <span class="n">aligneds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aligned</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aligneds</span>
 </pre></div>
 
 
+<hr>
 <p>最后效果如下：</p>
 <p><strong>原图：</strong>
 <center><img src="/images/data-facealign/lixiaoliyuan.jpg" width="640"/></center></p>
