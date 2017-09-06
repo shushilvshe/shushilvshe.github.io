@@ -120,11 +120,11 @@
 
 <div id="category"></div>
 
-<h2>文件操作</h2>
+<h2>一、文件操作</h2>
 <hr>
 <ul>
 <li>
-<h3>os.path模块</h3>
+<h3>1.os.path模块</h3>
 <ul>
 <li><strong>1.os.path.abspath(path)</strong> </li>
 </ul>
@@ -292,7 +292,7 @@ False
 <hr>
 <ul>
 <li>
-<h3>Python获取指定文件夹下的文件名</h3>
+<h3>2.Python获取指定文件夹下的文件名</h3>
 <p>采用os.walk()和os.listdir()两种方法，获取指定文件夹下的文件名。</p>
 <ul>
 <li><strong>一、os.walk()</strong></li>
@@ -353,7 +353,7 @@ False
 </li>
 </ul>
 <hr>
-<h2>时间操作</h2>
+<h2>二、时间操作</h2>
 <ul>
 <li>
 <h3>python时间戳、时间数组、时间字符串相互转化</h3>
@@ -410,7 +410,7 @@ otherStyletime == &quot;2013-10-10 23:40:00&quot;
 
 <p>方法二:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
-<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>  <span class="o">-&gt;</span><span class="err">这是时间数组格式</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>  <span class="c1">#这是时间数组格式</span>
 <span class="n">otherStyleTime</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -443,6 +443,188 @@ otherStyletime == &quot;2013-10-10 23:40:00&quot;
 
 
 <p>参考5,可以转换为其他的任意格式了</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2>九、其他</h2>
+<ul>
+<li>
+<h3>1.python执行shell命令</h3>
+<ul>
+<li>
+<p><strong>1 os.system</strong></p>
+<p>可以返回运行shell命令状态，同时会在终端输出运行结果</p>
+<p>例如 ipython中运行如下命令，返回运行状态status</p>
+<div class="highlight"><pre><span></span>os.system(&#39;cat /etc/passwdqc.conf&#39;)
+min=disabled,24,11,8,7
+max=40
+passphrase=3
+match=4
+similar=deny
+random=47
+enforce=everyone
+retry=3
+Out[6]: 0
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>2 os.popen()</strong></p>
+<p>可以返回运行结果</p>
+<div class="highlight"><pre><span></span>popen(command [, mode=&#39;r&#39; [, bufsize]]) -&gt; pipe
+Open a pipe to/from a command returning a file object.
+</pre></div>
+
+
+<p>运行返回结果</p>
+<div class="highlight"><pre><span></span>In [20]: output = os.popen(&#39;cat /proc/cpuinfo&#39;)
+
+In [21]: lineLen = []
+
+In [22]: for line in output.readlines():
+    lineLen.append(len(line))
+   ....:
+
+In [23]: line
+line     lineLen
+
+In [23]: lineLen
+Out[23]: 
+[14,
+ 25,
+...
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>3 如何同时返回结果和运行状态，commands模块:</strong></p>
+<p>#String form: <module 'commands' from '/usr/lib64/python2.7/commands.pyc'>
+File: /usr/lib64/python2.7/commands.py
+Docstring:
+Execute shell commands via os.popen() and return status, output.</p>
+<p>Interface summary:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">commands</span>
+
+<span class="n">outtext</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">getoutput</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+<span class="p">(</span><span class="n">exitstatus</span><span class="p">,</span> <span class="n">outtext</span><span class="p">)</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">getstatusoutput</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+<span class="n">outtext</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">getstatus</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span> <span class="c1"># returns output of &quot;ls -ld file&quot;</span>
+
+<span class="n">A</span> <span class="n">trailing</span> <span class="n">newline</span> <span class="ow">is</span> <span class="n">removed</span> <span class="kn">from</span> <span class="nn">the</span> <span class="nn">output</span> <span class="nn">string.</span>
+
+<span class="n">Encapsulates</span> <span class="n">the</span> <span class="n">basic</span> <span class="n">operation</span><span class="p">:</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;{ &#39;</span> <span class="o">+</span> <span class="n">cmd</span> <span class="o">+</span> <span class="s1">&#39;; } 2&gt;&amp;1&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">sts</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+
+<p>commands示例如下:</p>
+<div class="highlight"><pre><span></span>In [24]: (status, output) = commands.getstatusoutput(&#39;cat /proc/cpuinfo&#39;)
+
+In [25]: status
+Out[25]: 0
+
+In [26]: len(output)
+Out[26]: 3859
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>4 使用模块subprocess</strong></p>
+<p>通常项目中经常使用方法为subporcess.Popen, 我们可以在Popen()建立子进程的时候改变标准输入、标准输出和标准错误，并可以利用subprocess.PIPE将多个子进程的输入和输出连接在一起，构成管道(pipe):</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">child1</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;ls&quot;</span><span class="p">,</span><span class="s2">&quot;-l&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="n">child2</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;wc&quot;</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">child1</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">child2</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+
+
+<p>在例如使用lsblk查看swap分区的uuid：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">child</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;lsblk&quot;</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="n">swap_uuid</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;swap&#39;</span><span class="p">):</span>
+            <span class="n">swap_uuid</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">swap_uuid</span><span class="p">)</span>
+</pre></div>
+
+
+<p>ipython 中运行"?subprocess"可以发现subprocess是python用来替换os.popen()等管道操作命令的新模块。</p>
+<p>A more real-world example would look like this:</p>
+<div class="highlight"><pre><span></span><span class="k">try</span><span class="o">:</span>
+    <span class="n">retcode</span> <span class="o">=</span> <span class="n">call</span><span class="o">(</span><span class="s2">&quot;mycmd&quot;</span> <span class="o">+</span> <span class="s2">&quot; myarg&quot;</span><span class="o">,</span> <span class="n">shell</span><span class="o">=</span><span class="n">True</span><span class="o">)</span>
+    <span class="k">if</span> <span class="n">retcode</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">:</span>
+        <span class="n">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="na">stderr</span><span class="o">,</span> <span class="s2">&quot;Child was terminated by signal&quot;</span><span class="o">,</span> <span class="o">-</span><span class="n">retcode</span>
+    <span class="k">else</span><span class="o">:</span>
+        <span class="n">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="na">stderr</span><span class="o">,</span> <span class="s2">&quot;Child returned&quot;</span><span class="o">,</span> <span class="n">retcode</span>
+<span class="n">except</span> <span class="n">OSError</span><span class="o">,</span> <span class="n">e</span><span class="o">:</span>
+    <span class="n">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="na">stderr</span><span class="o">,</span> <span class="s2">&quot;Execution failed:&quot;</span><span class="o">,</span> <span class="n">e</span>
+</pre></div>
+
+
+<p>相对于上面几种方式，subprocess便于控制和监控进程运行结果,subprocess提供多种函数便于应对父进程对子进程不同要求:</p>
+<ul>
+<li>4.1.1 subprocess.call()</li>
+</ul>
+<p>父进程父进程等待子进程完成，返回exit code</p>
+<ul>
+<li>
+<p>4.1.2 subprocess.check_call()</p>
+<p>父进程等待子进程完成,返回0，如果returncode不为0，则举出错误subprocess.CalledProcessError，该对象包含有returncode属性，可用try...except...来检查</p>
+</li>
+<li>
+<p>4.1.3 subprocess.check_output()</p>
+</li>
+</ul>
+<p>父进程等待子进程完成</p>
+<p>返回子进程向标准输出的输出结果</p>
+<p>检查退出信息，如果returncode不为0，则举出错误subprocess.CalledProcessError，该对象包含有returncode属性和output属性，output属性为标准输出的输出结果，可用try...except...来检查</p>
+<p>例如:</p>
+<div class="highlight"><pre><span></span>In [32]: out = subprocess.call(&quot;ls -l&quot;, shell=True)
+total 42244
+-rw-rw-r--.  1 *** ***     366 May 26 09:10 ChangeLog
+</pre></div>
+
+
+<ul>
+<li>4.2.1 </li>
+</ul>
+<p>上面三个函数都是源于Popen()函数的wapper(封装),如果需要更加个性化应用，那么就需要使用popen()函数</p>
+<p>Popen对象创建后，主程序不会自动等待子进程完成。我们必须调用对象的wait()方法，父进程才会等待 (也就是阻塞block)</p>
+<div class="highlight"><pre><span></span>[wenwt@localhost syntax]$ rm subprocess.pyc 
+[wenwt@localhost syntax]$ python process.py 
+parent process
+[wenwt@localhost syntax]$ PING www.google.com (173.194.219.99) 56(84) bytes of data.
+^C
+[wenwt@localhost syntax]$ 
+--- www.google.com ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 3999ms
+</pre></div>
+
+
+<p>加上wait方法:</p>
+<div class="highlight"><pre><span></span>[wenwt@localhost syntax]$ python process.py 
+PING www.google.com (173.194.219.103) 56(84) bytes of data.
+
+--- www.google.com ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 3999ms
+
+parent process
+</pre></div>
+
+
 </li>
 </ul>
 </li>
