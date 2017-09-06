@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="python常用功能总结" />
+<meta name="keywords" content="大数据, python">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="python常用功能总结"/>
+<meta property="og:description" content="python常用功能总结"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/data/python-base.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-09-06 10:09:29+08:00"/>
+<meta property="article:modified_time" content="2017-09-06 10:09:31+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="Data"/>
+<meta property="article:tag" content="大数据"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
+
+  <title>shushilvshe's Blog &ndash; python常用功能总结</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
+
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
+
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/">Photo</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="data/python-base">python常用功能总结</h1>
+    <p>
+          Posted on 2017-09-06(星期三) 10:09 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>目录</p>
+<p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+      $("h2,h3,h4,h5,h6").each(function(i,item){
+        var tag = $(item).get(0).localName;
+        $(item).attr("id","wow"+i);
+        $("#category").append('<a class="new'+tag+'" href="#wow'+i+'">'+$(this).text()+'</a></br>');
+        $(".newh2").css("margin-left",0);
+        $(".newh3").css("margin-left",20);
+        $(".newh4").css("margin-left",40);
+        $(".newh5").css("margin-left",60);
+        $(".newh6").css("margin-left",80);
+      });
+ });
+</script>
+
+<div id="category"></div>
+
+<ul>
+<li><strong>1.os.path.abspath(path)</strong> </li>
+</ul>
+<p>返回path规范化的绝对路径。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.abspath(&#39;test.csv&#39;) 
+&#39;C:\\Python25\\test.csv&#39;     
+&gt;&gt;&gt; os.path.abspath(&#39;c:\\test.csv&#39;) 
+&#39;c:\\test.csv&#39;   
+&gt;&gt;&gt; os.path.abspath(&#39;../csv\\test.csv&#39;) 
+&#39;C:\\csv\\test.csv&#39;
+</pre></div>
+
+
+<ul>
+<li><strong>2.os.path.split(path)</strong> </li>
+</ul>
+<p>将path分割成目录和文件名二元组返回。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.split(&#39;c:\\csv\\test.csv&#39;) 
+(&#39;c:\\csv&#39;, &#39;test.csv&#39;) 
+&gt;&gt;&gt; os.path.split(&#39;c:\\csv\\&#39;) 
+(&#39;c:\\csv&#39;, &#39;&#39;)
+</pre></div>
+
+
+<ul>
+<li><strong>3.os.path.dirname(path)</strong> </li>
+</ul>
+<p>返回path的目录。其实就是os.path.split(path)的第一个元素。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.dirname(&#39;c:\\csv\test.csv&#39;) 
+&#39;c:\\&#39; 
+&gt;&gt;&gt; os.path.dirname(&#39;c:\\csv&#39;) 
+&#39;c:\\&#39;
+</pre></div>
+
+
+<ul>
+<li><strong>4.os.path.basename(path)</strong> </li>
+</ul>
+<p>返回path最后的文件名。如何path以／或\结尾，那么就会返回空值。即os.path.split(path)的第二个元素。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.basename(&#39;c:\\test.csv&#39;) 
+&#39;test.csv&#39; 
+&gt;&gt;&gt; os.path.basename(&#39;c:\\csv&#39;) 
+&#39;csv&#39; （这里csv被当作文件名处理了） 
+&gt;&gt;&gt; os.path.basename(&#39;c:\\csv\\&#39;) 
+&#39;&#39;
+</pre></div>
+
+
+<ul>
+<li><strong>5.os.path.commonprefix(list)</strong> </li>
+</ul>
+<p>返回list中，所有path共有的最长的路径。 </p>
+<p>如： 
+    &gt;&gt;&gt; os.path.commonprefix(['/home/td','/home/td/ff','/home/td/fff']) 
+    '/home/td' </p>
+<ul>
+<li><strong>6.os.path.exists(path)</strong></li>
+</ul>
+<p>如果path存在，返回True；如果path不存在，返回False。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.exists(&#39;c:\\&#39;) 
+True 
+&gt;&gt;&gt; os.path.exists(&#39;c:\\csv\\test.csv&#39;) 
+False
+</pre></div>
+
+
+<ul>
+<li><strong>7.os.path.isabs(path)</strong> </li>
+</ul>
+<p>如果path是绝对路径，返回True。 </p>
+<ul>
+<li><strong>8.os.path.isfile(path)</strong> </li>
+</ul>
+<p>如果path是一个存在的文件，返回True。否则返回False。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.isfile(&#39;c:\\boot.ini&#39;) 
+True 
+&gt;&gt;&gt; os.path.isfile(&#39;c:\\csv\\test.csv&#39;) 
+False 
+&gt;&gt;&gt; os.path.isfile(&#39;c:\\csv\\&#39;) 
+False
+</pre></div>
+
+
+<ul>
+<li><strong>9.os.path.isdir(path)</strong> </li>
+</ul>
+<p>如果path是一个存在的目录，则返回True。否则返回False。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.isdir(&#39;c:\\&#39;) 
+True 
+&gt;&gt;&gt; os.path.isdir(&#39;c:\\csv\\&#39;) 
+False 
+&gt;&gt;&gt; os.path.isdir(&#39;c:\\windows\\test.csv&#39;) 
+False
+</pre></div>
+
+
+<ul>
+<li><strong>10.os.path.join(path1[, path2[, ...]])</strong> </li>
+</ul>
+<p>将多个路径组合后返回，第一个绝对路径之前的参数将被忽略。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.join(&#39;c:\\&#39;, &#39;csv&#39;, &#39;test.csv&#39;) 
+&#39;c:\\csv\\test.csv&#39; 
+&gt;&gt;&gt; os.path.join(&#39;windows\temp&#39;, &#39;c:\\&#39;, &#39;csv&#39;, &#39;test.csv&#39;) 
+&#39;c:\\csv\\test.csv&#39; 
+&gt;&gt;&gt; os.path.join(&#39;/home/aa&#39;,&#39;/home/aa/bb&#39;,&#39;/home/aa/bb/c&#39;) 
+&#39;/home/aa/bb/c&#39;
+</pre></div>
+
+
+<ul>
+<li><strong>11.os.path.normcase(path)</strong> </li>
+</ul>
+<p>在Linux和Mac平台上，该函数会原样返回path，在windows平台上会将路径中所有字符转换为小写，并将所有斜杠转换为饭斜杠。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.normcase(&#39;c:/windows\\system32\\&#39;) 
+&#39;c:\\windows\\system32\\&#39;
+</pre></div>
+
+
+<ul>
+<li><strong>12.os.path.normpath(path)</strong> </li>
+</ul>
+<p>规范化路径。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.normpath(&#39;c://windows\\System32\\../Temp/&#39;) 
+&#39;c:\\windows\\Temp&#39;
+</pre></div>
+
+
+<ul>
+<li><strong>13.os.path.splitdrive(path)</strong> </li>
+</ul>
+<p>返回（drivername，fpath）元组 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.splitdrive(&#39;c:\\windows&#39;) 
+(&#39;c:&#39;, &#39;\\windows&#39;)
+</pre></div>
+
+
+<ul>
+<li><strong>14.os.path.splitext(path)</strong> </li>
+</ul>
+<p>分离文件名与扩展名；默认返回(fname,fextension)元组，可做分片操作 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.splitext(&#39;c:\\csv\\test.csv&#39;) 
+(&#39;c:\\csv\\test&#39;, &#39;.csv&#39;)
+</pre></div>
+
+
+<ul>
+<li><strong>15.os.path.getsize(path)</strong> </li>
+</ul>
+<p>返回path的文件的大小（字节）。 </p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; os.path.getsize(&#39;c:\\boot.ini&#39;) 
+299L
+</pre></div>
+
+
+<ul>
+<li><strong>16.os.path.getatime(path)</strong> </li>
+</ul>
+<p>返回path所指向的文件或者目录的最后存取时间。 </p>
+<ul>
+<li><strong>17.os.path.getmtime(path)</strong> </li>
+</ul>
+<p>返回path所指向的文件或者目录的最后修改时间</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+      <a href="http://www.shushilvshe.com/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+    <div class="addthis_relatedposts_inline">
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/baya.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
