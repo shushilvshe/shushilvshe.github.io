@@ -95,7 +95,7 @@
 
 
   <div>
-    <p>目录</p>
+    <p><strong>目录：</strong></p>
 <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
@@ -120,8 +120,11 @@
 
 <div id="category"></div>
 
-<h1>python常用功能总结</h1>
-<h2>os.path</h2>
+<h2>文件操作</h2>
+<hr>
+<ul>
+<li>
+<h3>os.path模块</h3>
 <ul>
 <li><strong>1.os.path.abspath(path)</strong> </li>
 </ul>
@@ -284,6 +287,166 @@ False
 <li><strong>17.os.path.getmtime(path)</strong> </li>
 </ul>
 <p>返回path所指向的文件或者目录的最后修改时间</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<h3>Python获取指定文件夹下的文件名</h3>
+<p>采用os.walk()和os.listdir()两种方法，获取指定文件夹下的文件名。</p>
+<ul>
+<li><strong>一、os.walk()</strong></li>
+</ul>
+<p>模块os中的walk()函数可以遍历文件夹下所有的文件。</p>
+<div class="highlight"><pre><span></span>os.walk(top, topdown=Ture, onerror=None, followlinks=False)
+</pre></div>
+
+
+<p>该函数可以得到一个三元tupple(dirpath, dirnames, filenames).</p>
+<p>参数含义：
+- dirpath：string，代表目录的路径；
+- dirnames：list，包含了当前dirpath路径下所有的子目录名字（不包含目录路径）；
+- filenames：list，包含了当前dirpath路径下所有的非目录子文件的名字（不包含目录路径）。</p>
+<p>注意，<strong>dirnames和filenames均不包含路径信息</strong>，如需完整路径，可使用os.path.join(dirpath, dirnames)</p>
+<p>下面给出代码;</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">file_name</span><span class="p">(</span><span class="n">file_dir</span><span class="p">):</span> 
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">file_dir</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="c1">#当前目录路径</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">dirs</span><span class="p">)</span> <span class="c1">#当前路径下所有子目录</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="c1">#当前路径下所有非目录子文件</span>
+</pre></div>
+
+
+<p>当需要特定类型的文件时，代码如下：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">file_name</span><span class="p">(</span><span class="n">file_dir</span><span class="p">):</span> 
+    <span class="n">L</span><span class="o">=</span><span class="p">[]</span> 
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">file_dir</span><span class="p">):</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="nb">file</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">:</span>
+                <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">L</span>
+</pre></div>
+
+
+<p>其中os.path.splitext()函数将路径拆分为文件名+扩展名，例如os.path.splitext(“E:/lena.jpg”)将得到”E:/lena“+".jpg"。</p>
+<ul>
+<li><strong>二、os.listdir()</strong></li>
+</ul>
+<p>os.listdir()函数得到的是仅当前路径下的文件名，不包括子目录中的文件，所有需要使用递归的方法得到全部文件名。</p>
+<p>直接给出代码，函数将返回类型为‘.jpeg’个文件名：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">list_name</span><span class="p">):</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+            <span class="n">listdir</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">list_name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;.jpeg&#39;</span><span class="p">:</span>
+            <span class="n">list_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+
+
+</li>
+</ul>
+<hr>
+<h2>时间操作</h2>
+<ul>
+<li>
+<h3>python时间戳、时间数组、时间字符串相互转化</h3>
+<ul>
+<li>
+<p>1.将字符串的时间转换为时间戳</p>
+<p>方法:将其转换为时间数组，再转换为时间戳。例： a = "2013-10-10 23:40:00"</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">timeArray</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="n">timeStamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">timeArray</span><span class="p">))</span>
+<span class="n">timeStamp</span> <span class="o">==</span> <span class="mi">1381419600</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>2.字符串格式更改</p>
+<p>方法:先转换为时间数组,然后转换为其他格式。例： a = "2013-10-10 23:40:00", 改为 a = "2013/10/10 23:40:00"</p>
+<div class="highlight"><pre><span></span>timeArray = time.strptime(a, &quot;%Y-%m-%d %H:%M:%S&quot;)
+otherStyleTime = time.strftime(&quot;%Y/%m/%d %H:%M:%S&quot;, timeArray)
+</pre></div>
+
+
+</li>
+<li>
+<p>3.时间戳转换为指定格式日期:</p>
+<p>方法一: 利用localtime()转换为时间数组,然后格式化为需要的格式,如</p>
+<div class="highlight"><pre><span></span>timeStamp = 1381419600
+timeArray = time.localtime(timeStamp)
+otherStyleTime = time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, timeArray)
+otherStyletime == &quot;2013-10-10 23:40:00&quot;
+</pre></div>
+
+
+<p>方法二:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">timeStamp</span> <span class="o">=</span> <span class="mi">1381419600</span>
+<span class="n">dateArray</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="n">timeStamp</span><span class="p">)</span>
+<span class="n">otherStyleTime</span> <span class="o">=</span> <span class="n">dateArray</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="n">otherStyletime</span> <span class="o">==</span> <span class="s2">&quot;2013-10-10 23:40:00&quot;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>4.获取当前时间并转换为指定日期格式</p>
+<p>方法一:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>  <span class="c1">#这是时间戳</span>
+<span class="n">timeArray</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">timeStamp</span><span class="p">)</span>
+<span class="n">otherStyleTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">timeArray</span><span class="p">)</span>
+</pre></div>
+
+
+<p>方法二:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>  <span class="o">-&gt;</span><span class="err">这是时间数组格式</span>
+<span class="n">otherStyleTime</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>5.获得三天前的时间</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">threeDayAgo</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">3</span><span class="p">))</span>
+<span class="c1">#转换为时间戳:</span>
+<span class="n">timeStamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">threeDayAgo</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()))</span>
+<span class="c1">#转换为其他字符串格式:</span>
+<span class="n">otherStyleTime</span> <span class="o">=</span> <span class="n">threeDayAgo</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>注:timedelta()的参数有:days,hours,seconds,microseconds</p>
+</li>
+<li>
+<p>6.给定时间戳,计算该时间的几天前时间:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">timeStamp</span> <span class="o">=</span> <span class="mi">1381419600</span>
+<span class="c1">#先转换为datetime</span>
+<span class="n">dateArray</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="n">timeStamp</span><span class="p">)</span>
+<span class="n">threeDayAgo</span> <span class="o">=</span> <span class="n">dateArray</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+
+<p>参考5,可以转换为其他的任意格式了</p>
+</li>
+</ul>
+</li>
+</ul>
   </div>
   <div class="tag-cloud">
     <p>
