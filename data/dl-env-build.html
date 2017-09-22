@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="在一个由N多台普通的不能再普通的机器攒凑起来的机箱中，搭载了最强核心——NVIDIA GeForce GTX 1080 Ti。我们的深度学习环境搭建之旅，将从如何攒凑这款独一无二的机箱开始，一点一点完成从简单电脑维修装配到逼格爆棚的Deep Learning的华丽丽转身。" />
+<meta name="keywords" content="大数据, 深度学习, keras，NVIDIA">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="Centos集成GTX-1080Ti显卡搭建深度学习环境全过程"/>
+<meta property="og:description" content="在一个由N多台普通的不能再普通的机器攒凑起来的机箱中，搭载了最强核心——NVIDIA GeForce GTX 1080 Ti。我们的深度学习环境搭建之旅，将从如何攒凑这款独一无二的机箱开始，一点一点完成从简单电脑维修装配到逼格爆棚的Deep Learning的华丽丽转身。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/data/dl-env-build.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-09-22 16:25:26+08:00"/>
+<meta property="article:modified_time" content="2017-09-22 16:25:28+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="Data"/>
+<meta property="article:tag" content="大数据"/>
+<meta property="article:tag" content="深度学习"/>
+<meta property="article:tag" content="keras，NVIDIA"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
+
+  <title>shushilvshe's Blog &ndash; Centos集成GTX-1080Ti显卡搭建深度学习环境全过程</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
+
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
+
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/">Photo</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="data/dl-env-build">Centos集成GTX-1080Ti显卡搭建深度学习环境全过程</h1>
+    <p>
+          Posted on 2017-09-22(星期五) 16:25 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><strong>目录：</strong></p>
+<p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+      $("h2,h3,h4,h5,h6").each(function(i,item){
+        var tag = $(item).get(0).localName;
+        $(item).attr("id","wow"+i);
+        $("#category").append('<a class="new'+tag+'" href="#wow'+i+'">'+$(this).text()+'</a></br>');
+        $(".newh2").css("margin-left",0);
+        $(".newh3").css("margin-left",20);
+        $(".newh4").css("margin-left",40);
+        $(".newh5").css("margin-left",60);
+        $(".newh6").css("margin-left",80);
+      });
+ });
+</script>
+
+<div id="category"></div>
+
+<h2>一、安装系统 centos 7.3</h2>
+<p>使用 UltraISO 制作的U盘启动盘，镜像使用的是 <a href="https://mirrors.aliyun.com/centos/7.3.1611/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso">CentOS-7-x86_64-DVD-1611.iso</a></p>
+<p>安装过程略去。。。</p>
+<h2>二、准备显卡及相关驱动</h2>
+<h3>硬件准备</h3>
+<p>由于<strong>GeForce GTX-1080Ti</strong>需要两个8pin接口供电，且比较耗能，功率为280w，公司没有闲置的能满足需求的大功率电源，即使有的话，8pin的供电的接口一般都不够用（小主板一般为4pin）。最终方案是显卡单独供电，从几个不用的电源上攒出来包含两个8pin（<strong>此8pin接口实为3根黄线和3根黑线，另外两根黑线为黑线接口引线串联起来，见下图</strong>）接口的电源（额定功率为270w），另外一个给机箱主板供电的电源（额定功率270w）除去本身的24pin接口和硬盘供电接口外，再拼接一条8接口（<strong>此8pin实为4根黄线和4根黑线组成</strong>），以弥补供电不足（PS： 电源功率足够大的话阔以忽略以上折腾活儿）。</p>
+<p><center><strong>显卡8pin接口</strong></center></p>
+<p><center><img src="https://i.imgur.com/bHPRl16.jpg" width="800"/></center></p>
+<p><center><strong>主板辅助电源8pin接口</strong></center></p>
+<p><center><img src="https://i.imgur.com/TFJdKdS.jpg" width="800"/></center></p>
+<p><center><strong>最终机箱全貌</strong></center></p>
+<p><center><img src="https://i.imgur.com/soW95T1.jpg" width="800"/></center></p>
+<blockquote>
+<p>补充：目前主板供电的接口主要有24针与20针两种，在中高端的主板上，一般都采用24PIN的主板供电接口设计，低端的产品一般为20PIN。不论采用24PIN和20PIN，其插法都是一样的 。</p>
+</blockquote>
+<p><center><img src="https://i.imgur.com/mvKWU5Q.jpg" width="650"/></center></p>
+<p>另外随着CPU、显卡等功耗增大，主板上增加了 4pin或8pin 的辅助供电</p>
+<p><center><img src="https://i.imgur.com/WJiXcFO.jpg" width="650"/></center></p>
+<h3>软件准备</h3>
+<p>所需文件一览：</p>
+<div class="highlight"><pre><span></span>-rwxr-xr-x 1 root root   97546170 9月  20 10:24 cuda_8.0.61.2_linux-run            cuda补丁      
+-rwxr-xr-x 1 root root 1465528129 9月  20 10:27 cuda_8.0.61_375.26_linux-run       cuda8.0驱动  
+-rw-r--r-- 1 root root  201134139 9月  20 10:27 cudnn-8.0-linux-x64-v6.0.tgz       cudnn6.0（针对cuda8.0）
+-rwxr-xr-x 1 root root   80803084 9月  20 10:27 NVIDIA-Linux-x86_64-384.69.run     NVIDIA驱动
+</pre></div>
+
+
+<h4>1.安装前准备工作</h4>
+<ul>
+<li>
+<p><strong>更新系统（时间较长，耐心等待）</strong></p>
+<div class="highlight"><pre><span></span># yum update
+# reboot
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>安装kernel-devel Package</strong></p>
+<div class="highlight"><pre><span></span># yum install kernel-devel-$(uname -r) gcc
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>禁用 nouveau 驱动</strong></p>
+<blockquote>
+<p>首先说明下什么是Nouveau，为什么有些系统安装N卡驱动的时候会提示“ERROR: The Nouveau kernel driver is currently in use by your system. This Nouveau是由第三方为NVIDIA显卡开发的一个开源3D驱动，也没能得到NVIDIA的认可与支持。虽然Nouveau Gallium3D在游戏速度上还远远无法和NVIDIA官方私有驱动相提并论，不过确让Linux更容易的应对各种复杂的NVIDIA显卡环境，让用户安装完系统即可进入桌面并且有不错的显示效果，所以，很多Linux发行版默认集成了Nouveau驱动，在遇到NVIDIA显卡时默认安装。企业版的Linux更是如此，几乎所有支持图形界面的企业Linux发行版都将Nouveau收入其中。</p>
+</blockquote>
+<div class="highlight"><pre><span></span># echo &#39;blacklist nouveau&#39; &gt;&gt; /etc/modprobe.d/blacklist.conf
+</pre></div>
+
+
+<p>验证是否成功禁用nouveau，执行如下命令没有输出则没有启用nouveau。</p>
+<div class="highlight"><pre><span></span># lsmod | grep nouveau
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>备份 initramfs 文件（系统内核镜像文件）</strong></p>
+<p><strong>initramfs文件初探</strong></p>
+<blockquote>
+<p>Linux内核在初始化之后会执行init进程，而init进程会挂载我们的根文件系统，但由于init程序也是在根文件系统上的，所以这就有了悖论。Linux采用两步走的方法来解决这个问题。Linux2.6版以前的方法是：除了内核vmlinuz之外还有一个独立的initrd.img映像文件，其实它就是一个文件系统映像，linux内核在初始化后会mount initrd.img作为一个临时的根文件系统，而init进程就是在initrd.img里的，然后init进程会挂载真正的根文件系统，然后umount initrd.img。但Linux2.6内核的实现方式却不太一样，虽然完成的功能是一样的。Linux2.6采用initramfs。initramfs：init ram filesystem，它是一个cpio格式的内存文件系统，制作的方法有两个，一个是http://blog.csdn.net/htttw/article/details/7215858介绍的，但这样做出来的initramfs是和内核vmlinuz分开的，因此我们需要在grub里写上initramfs的路径。而另一种方法是把内核和initramfs制作在一起成为一个文件，方法是在linux源码make menuconfig，然后General setup--&gt;选择Initial RAM filesystem and RAM disk (initramfs/initrd) support，然后在Initramfs source file(s)里输入我们的initramfs目录，然后make bzImage。这种方法做出来的内核就只有一个文件，不需要指定initramfs了。</p>
+</blockquote>
+<div class="highlight"><pre><span></span># sudo mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>重建 initramfs 文件（更新系统kernel后正常重启会在/boot目录下自动生成新内核镜像）</strong></p>
+<div class="highlight"><pre><span></span># sudo dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>关闭图形界面(如果有VNC服务, 请先关闭vnc服务)，执行</strong></p>
+<div class="highlight"><pre><span></span># systemctl disable gdm
+# reboot
+</pre></div>
+
+
+</li>
+</ul>
+<h4>2.安装显卡驱动</h4>
+<blockquote>
+<p>下载对应型号的 NVidia 驱动，此处下载最新支持 <strong>GTX1080 Ti</strong> 的驱动 <code>NVIDIA-Linux-x86_64-384.69.run</code>。 点击 <a href="http://www.nvidia.com/object/linux-amd64-display-archive.html">官方下载</a>。</p>
+</blockquote>
+<p><strong>下载完后执行, 按提示选择进行安装：</strong></p>
+<div class="highlight"><pre><span></span># ./NVIDIA-Linux-x86_64-384.69.run
+</pre></div>
+
+
+<p><strong>配置X11</strong></p>
+<div class="highlight"><pre><span></span># nvidia-xconfig
+
+WARNING: Unable to locate/open X configuration file.
+
+New X configuration file written to &#39;/etc/X11/xorg.conf&#39;
+</pre></div>
+
+
+<p><strong>启动图形界面</strong></p>
+<div class="highlight"><pre><span></span># systemctl enable gdm
+Created symlink from /etc/systemd/system/display-manager.service to /usr/lib/systemd/system/gdm.service.
+# reboot
+</pre></div>
+
+
+<p><strong>验证</strong></p>
+<ul>
+<li>
+<p>执行命令查看显卡状态</p>
+<div class="highlight"><pre><span></span># nvidia-smi
+</pre></div>
+
+
+</li>
+<li>
+<p>在页面右上角的 <strong>应用程序-&gt; 其他 -&gt; Nvidia</strong> 选项中，有如下 <strong>GPU 0</strong> 选项，说明安装成功（<strong>找的样图，型号和驱动不同</strong>）</p>
+</li>
+</ul>
+<p><center><img src="https://i.imgur.com/OlHGtx6.png" width="800"/></center></p>
+<blockquote>
+<p>【注】： 如果中途有问题, 可以执行 <strong><code>./NVIDIA-Linux-x86_64-384.69.run --uninstall</code></strong> 进行卸载. </p>
+</blockquote>
+<h4>3.安装cuda</h4>
+<p>【<a href="https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run">cuda-8.0驱动下载</a>】  【<a href="https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2_linux-run">cuda-8.0补丁下载</a>】 【<a href="https://developer.nvidia.com/cuda-downloads">其他版本驱动下载</a>】</p>
+<p>科普下cuda，简单来说就是能使用GPU并行计算的平台和编程模型,能极大提升计算性能。</p>
+<blockquote>
+<p>Q: What is CUDA?<br>
+CUDA® is a parallel computing platform and programming model that enables dramatic increases in computing performance by harnessing the power of the graphics processing unit (GPU). <br>
+Since its introduction in 2006, CUDA has been widely deployed through thousands of applications and published research papers, and supported by an installed base of hundreds of millions of CUDA-enabled GPUs in notebooks, workstations, compute clusters and supercomputers.  Applications used in astronomy, biology, chemistry, physics, data mining, manufacturing, finance, and other computationally intense fields are increasing using CUDA to deliver the benefits of GPU acceleration.</p>
+</blockquote>
+<ul>
+<li>
+<p>再次进入text mode</p>
+<div class="highlight"><pre><span></span># init 3
+</pre></div>
+
+
+</li>
+<li>
+<p>安装依赖库：</p>
+<div class="highlight"><pre><span></span># yum -y install gcc-c++
+# yum -y install epel-release
+# yum -y install --enablerepo=epel dkms
+# yum -y install kernel-devel-$(uname -r) kernel-headers-$(uname -r)
+</pre></div>
+
+
+</li>
+<li>
+<p>安装cuda-8.0驱动（<strong>一定注意下图安装过程中的红框部分，跳过安装NVIDIA驱动的步骤（输入n）</strong>）：</p>
+<div class="highlight"><pre><span></span># ./cuda_8.0.61_375.26_linux-run
+</pre></div>
+
+
+<p><center><img src="https://i.imgur.com/jQ31WeT.png" width="1280"/></center></p>
+</li>
+<li>
+<p>安装cuda补丁</p>
+<div class="highlight"><pre><span></span># ./cuda_8.0.61.2_linux-run
+</pre></div>
+
+
+</li>
+<li>
+<p>设置环境变量</p>
+<div class="highlight"><pre><span></span># vim /etc/profile
+</pre></div>
+
+
+<p>最后一行添加</p>
+<div class="highlight"><pre><span></span><span class="x">export PATH=&quot;/usr/local/cuda-8.0/bin:</span><span class="p">$</span><span class="nv">PATH</span><span class="x">&quot;</span>
+<span class="x">export LD_LIBRARY_PATH=&quot;/usr/local/cuda-8.0/lib64&quot;</span>
+<span class="x">export CUDA_HOME=&quot;/usr/local/cuda&quot;</span>
+</pre></div>
+
+
+</li>
+</ul>
+<h4>4.安装cuDNN</h4>
+<p>科普下cudnn，简单点说cuDNN是NVIDIA深度学习中的深层神经网络库，并通过cuda，我们就可以直接利用Nvidia GPU的并行计算能力进行深度学习训练任务了。</p>
+<blockquote>
+<p>The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers. cuDNN is part of the NVIDIA Deep Learning SDK.</p>
+</blockquote>
+<ul>
+<li>
+<p>下载cudnn-8.0-linux-x64-v6.0.tgz</p>
+<p>下载cuDNN,需要创建一个NVIDIA账号，<a href="https://developer.nvidia.com/cudnn">cuDNN Home Page</a>.</p>
+<p>不想注册的话，可以通过如下方式获取</p>
+<div class="highlight"><pre><span></span>wget http://developer.download.nvidia.com/compute/redist/cudnn/v6.0/cudnn-8.0-linux-x64-v6.0.tgz
+</pre></div>
+
+
+</li>
+<li>
+<p>解压并拷贝相关文件，完成安装 </p>
+<div class="highlight"><pre><span></span># tar -xzvf cudnn-8.0-linux-x64-v6.0.tgz 
+# sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+# sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+# sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+</pre></div>
+
+
+</li>
+</ul>
+<h2>三、python 3.6.2编译安装及配置</h2>
+<h3>1.安装依赖库</h3>
+<div class="highlight"><pre><span></span>yum install gcc-c++ sqlite-devel gcc zlib zlib-devel bzip2-devel  openssl-devel ncurses-devel tcl tcl-devel tk tk-devel
+</pre></div>
+
+
+<h3>2.安装Python3</h3>
+<p>【<a href="https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz">python-3.6.2 源码下载</a>】</p>
+<p>将python 源码放置到一个无害的目录,执行命令：</p>
+<div class="highlight"><pre><span></span># sudo mkdir /usr/local/python3
+# tar -xzvf Python-3.6.2.tgz
+# cd Python-3.6.2 # 进入解压目录
+# sudo ./configure --prefix=/usr/local/python3  --enable-optimizations # 指定创建的目录
+</pre></div>
+
+
+<p>修改Setup文件</p>
+<div class="highlight"><pre><span></span>vim Modules/Setup
+</pre></div>
+
+
+<p>修改结果如下（将行开头的注释“#”去掉）：</p>
+<div class="highlight"><pre><span></span><span class="c"># Socket module helper for socket(2)</span>
+<span class="err">_socket</span> <span class="err">socketmodule.c</span>
+
+<span class="c"># Socket module helper for SSL support; you must comment out the other</span>
+<span class="c"># socket line above, and possibly edit the SSL variable:</span>
+<span class="c">#SSL=/usr/local/ssl</span>
+<span class="err">_ssl</span> <span class="err">_ssl.c</span> <span class="err">\</span>
+<span class="err">-DUSE_SSL</span> <span class="err">-I</span><span class="k">$(</span><span class="nv">SSL</span><span class="k">)</span><span class="err">/include</span> <span class="err">-I</span><span class="k">$(</span><span class="nv">SSL</span><span class="k">)</span><span class="err">/include/openssl</span> <span class="err">\</span>
+<span class="err">-L</span><span class="k">$(</span><span class="nv">SSL</span><span class="k">)</span><span class="err">/lib</span> <span class="err">-lssl</span> <span class="err">-lcrypto</span>
+</pre></div>
+
+
+<p>编译安装（时间较长，耐心等待）</p>
+<div class="highlight"><pre><span></span>sudo make
+sudo make install
+</pre></div>
+
+
+<h3>3.与Python 2.7.5 共存</h3>
+<p>创建链接python3，这样就可以通过 python 命令使用 Python 2，python3 来使用 Python 3。</p>
+<div class="highlight"><pre><span></span>sudo ln -s /usr/local/python3/bin/python3 /usr/bin/python3
+</pre></div>
+
+
+<p>安装 pip</p>
+<div class="highlight"><pre><span></span>sudo ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3
+</pre></div>
+
+
+<p>pip升级 </p>
+<div class="highlight"><pre><span></span>pip3 install --upgrade pip
+</pre></div>
+
+
+<h2>四、python机器学习和深度学习库安装</h2>
+<h3>1.安装机器学习相关库</h3>
+<div class="highlight"><pre><span></span>pip3 install -U wheel
+
+pip3 install -U numpy
+
+pip3 install -U scipy
+
+pip3 install -U matplotlib
+
+pip3 install -U pandas
+
+pip3 install -U scikit-learn
+
+pip3 install -U ipython jupyter notebook
+
+pip3 install -U spyder
+
+pip3 install -U dill
+</pre></div>
+
+
+<h3>2.安装深度学习相关库</h3>
+<div class="highlight"><pre><span></span>yum install -y python-numpy python-dev cmake zlib1g-dev libjpeg-dev xvfb libav-tools xorg-dev python-opengl libboost-all-dev libsdl2-dev swig
+
+pip3 install -U h5py
+
+pip3 install -U tensorflow-gpu
+
+pip3 install -U scikit-image
+
+pip3 install -U keras
+
+pip3 install -U keras-rl  # 强化学习(可选)
+
+pip3 install -U keras-vis # 可视化（可选）
+
+pip3 install -U gym[all] （可选，安装时稍微有些麻烦，暂时没用到，未安装）
+</pre></div>
+
+
+<h2>五、jupyter配置</h2>
+<h3>1.生成默认配置</h3>
+<div class="highlight"><pre><span></span># cd /usr/local/python3/bin
+# ./jupyter notebook --generate-config
+Writing default config to: /home/user/.jupyter/jupyter_notebook_config.py
+</pre></div>
+
+
+<h3>2.编辑配置文件</h3>
+<div class="highlight"><pre><span></span># vim /home/user/.jupyter/jupyter_notebook_config.py
+
+c.NotebookApp.ip = &#39;*&#39;               #所有绑定服务器的IP都能访问
+c.NotebookApp.port = 8899            #将端口设置为自己喜欢的吧，默认是8888
+c.NotebookApp.open_browser = False   #我们并不想在服务器上直接打开Jupyter Notebook，所以设置成False
+</pre></div>
+
+
+<h3>3. 设置Jupyter Notebook密码</h3>
+<p>在python控制台 ,输入</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">notebook.auth</span> <span class="kn">import</span> <span class="n">passwd</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">passwd</span><span class="p">()</span>
+
+<span class="n">Enter</span> <span class="n">password</span><span class="p">:</span> <span class="o">*******</span>
+<span class="n">Verify</span> <span class="n">password</span><span class="p">:</span><span class="o">*******</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="s1">&#39;sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed&#39;</span>   <span class="c1">#密码密文</span>
+</pre></div>
+
+
+<p>修改配置密码信息</p>
+<div class="highlight"><pre><span></span># vim /home/you/.jupyter/jupyter_notebook_config.py
+
+c.NotebookApp.password = u&#39;sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed&#39;  #注意前面的u
+</pre></div>
+
+
+<h3>4.启动</h3>
+<p>必须在用户目录下, 如/root目录下执行</p>
+<div class="highlight"><pre><span></span>nohup /usr/local/python3/bin/jupyter notebook --allow-root  &gt;/dev/null 2&gt;&amp;1 &amp;
+</pre></div>
+
+
+<p>设置为开机自启动服务</p>
+<div class="highlight"><pre><span></span># cd ~
+# mkdir services
+# vim jupyter.service
+</pre></div>
+
+
+<p>在 jupyter.service 中输入</p>
+<div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Jupyter notebook env</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">root</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64 #添加此环境变量，避免启动tensorFlow时找不到某些类库</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/python3/bin/jupyter notebook --allow-root</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+
+
+<p>保存退出</p>
+<div class="highlight"><pre><span></span># cp ./jupyter.service /usr/lib/systemd/system/jupyter.service
+# ln -s /usr/lib/systemd/system/jupyter.service jupyter.service  #同时修改此两个文件
+</pre></div>
+
+
+<p>开机自启动</p>
+<div class="highlight"><pre><span></span># systemctl enable jupyter.service
+</pre></div>
+
+
+<h2>六、测试下环境</h2>
+<p>至此，深度学习所用到的环境搭建完成，下面我们就拿训练人脸识别的模型做个测试吧。</p>
+<p><center><img src="https://i.imgur.com/UKw9IRt.jpg" width="1280"/></center></p>
+<p><strong>bingo，这一天的工作，值了。</strong></p>
+<h2>问题</h2>
+<h3>1.运行 init 3 报错</h3>
+<blockquote>
+<p>注意： 如果报如下错误，可能是因为/boot下空间不足了</p>
+</blockquote>
+<div class="highlight"><pre><span></span>[root@localhost GPU]# init 3
+
+Broadcast message from systemd-journald@localhost.localdomain (Wed 2017-09-20 11:26:40 CST):
+
+dracut[11820]: dracut: creation of /boot/initramfs-3.10.0-693.2.2.el7.x86_64kdump.img failed
+
+Message from syslogd@localhost at Sep 20 11:26:40 ...
+ dracut:dracut: creation of /boot/initramfs-3.10.0-693.2.2.el7.x86_64kdump.img failed
+</pre></div>
+
+
+<p>查看/boot 空间</p>
+<div class="highlight"><pre><span></span>[root@localhost boot]# df /boot
+文件系统        1K-块   已用  可用 已用% 挂载点
+/dev/sdb1      255724 253488  2236  100% /boot
+</pre></div>
+
+
+<p>查看老版本的内核版本</p>
+<div class="highlight"><pre><span></span>[root@localhost boot]# rpm -qa|grep kernel
+kernel-3.10.0-514.26.2.el7.x86_64
+kernel-tools-libs-3.10.0-693.2.2.el7.x86_64
+kernel-headers-3.10.0-693.2.2.el7.x86_64
+kernel-tools-3.10.0-693.2.2.el7.x86_64
+kernel-devel-3.10.0-693.2.2.el7.x86_64
+kernel-3.10.0-693.2.2.el7.x86_64
+kernel-3.10.0-514.el7.x86_64
+abrt-addon-kerneloops-2.1.11-48.el7.centos.x86_64
+</pre></div>
+
+
+<p>卸载老版本内核</p>
+<div class="highlight"><pre><span></span>[root@localhost boot]# rpm -e kernel-3.10.0-514.el7.x86_64 kernel-3.10.0-514.26.2.el7.x86_64
+</pre></div>
+
+
+<h2>参考</h2>
+<blockquote>
+<p>https://linuxconfig.org/nvidia-geforce-driver-installation-on-centos-7-linux-64-bit</p>
+<p>http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#redhat-installation</p>
+<p>http://www.pyimagesearch.com/2016/07/04/how-to-install-cuda-toolkit-and-cudnn-for-deep-learning</p>
+</blockquote>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+      <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>
+      <a href="http://www.shushilvshe.com/tag/kerasnvidia.html">keras，NVIDIA</a>
+    </p>
+  </div>
+
+
+
+    <div class="addthis_relatedposts_inline">
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/baya.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
