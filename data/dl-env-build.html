@@ -442,6 +442,7 @@ Writing default config to: /home/user/.jupyter/jupyter_notebook_config.py
 c.NotebookApp.ip = &#39;*&#39;               #所有绑定服务器的IP都能访问
 c.NotebookApp.port = 8899            #将端口设置为自己喜欢的吧，默认是8888
 c.NotebookApp.open_browser = False   #我们并不想在服务器上直接打开Jupyter Notebook，所以设置成False
+c.NotebookApp.notebook_dir = &#39;/data/bigdata/notebooks/&#39;   #设置notebook工作目录
 </pre></div>
 
 
@@ -464,11 +465,6 @@ c.NotebookApp.password = u&#39;sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771
 
 
 <h3>4.启动</h3>
-<p>必须在用户目录下, 如/root目录下执行</p>
-<div class="highlight"><pre><span></span>nohup /usr/local/python3/bin/jupyter notebook --allow-root  &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
 <p>设置为开机自启动服务</p>
 <div class="highlight"><pre><span></span># cd ~
 # mkdir services
@@ -499,6 +495,18 @@ c.NotebookApp.password = u&#39;sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771
 
 <p>开机自启动</p>
 <div class="highlight"><pre><span></span># systemctl enable jupyter.service
+</pre></div>
+
+
+<p>启动服务</p>
+<div class="highlight"><pre><span></span># systemctl start jupyter.service
+</pre></div>
+
+
+<blockquote>
+<p><strong>PS:单独启动一次可通过如下方式（必须在用户目录下, 如/root目录下执行）</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span>nohup /usr/local/python3/bin/jupyter notebook --allow-root  &gt;/dev/null 2&gt;&amp;1 &amp;
 </pre></div>
 
 
