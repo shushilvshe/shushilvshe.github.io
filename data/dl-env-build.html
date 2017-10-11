@@ -174,11 +174,55 @@
 </pre></div>
 
 
-<p>验证是否成功禁用nouveau，执行如下命令没有输出则没有启用nouveau。</p>
+<p>验证是否成功禁用nouveau，重启后执行如下命令没有输出则没有启用nouveau。</p>
 <div class="highlight"><pre><span></span># lsmod | grep nouveau
 </pre></div>
 
 
+<blockquote>
+<p><strong>以上方法如果行不通的话，可能的原因是因为系统启动方式不太一样，具体不是特别了解，可采用如下方式禁用 nouveau 驱动：</strong></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Disable X Windows</strong></p>
+<div class="highlight"><pre><span></span># sudo systemctl set-default multi-user.target
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>Remove Nouveau</strong></p>
+<div class="highlight"><pre><span></span># sudo rpm -e xorg-x11-drivers xorg-x11-drv-nouveau
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>Blacklist Nouveau</strong></p>
+<p><strong>a)</strong> edit /etc/modprobe.d/blacklist.conf and add line: <code>blacklist nouveau</code><br>
+<strong>b)</strong> edit /etc/default/grub and append to GRUB_CMDLINE_LINUX: <code>rdblacklist=nouveau</code> 
+(After step 5, if the nouveau driver is still running, try <strong><code>rd.driver.blacklist=nouveau</code></strong> here instead. Sometimes rdblacklist=nouveau fails.)<br>
+<strong>-If you have an encrypted root drive, remove "rhgb" from GRUB_CMDLINE_LINUX.</strong>This will allow you to interact with the encryption passphrase prompt, since Plymouth doesn't seem to run without a framebuffer friendly video driver loaded.<br>
+<strong>c)</strong> Two options for booting now days are BIOS and EFI (Make sure that /boot and/or /boot/efi are mounted before executing these commands.)<br>
+<strong>-If you chose BIOS boot run this command:</strong>
+grub2-mkconfig -o /boot/grub2/grub.cfg <br>
+<strong>-If EFI boot on CentOS:</strong> 
+grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg<br>
+<strong>-If EFI boot on RHEL/Scientific Linux:</strong>
+grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</p>
+</li>
+<li>
+<p><strong>Reboot and Install NVidia Driver</strong> (安装显卡驱动)</p>
+</li>
+<li>
+<p><strong>Enable X Windows (If Desired)</strong> （安装完显卡驱动后执行）</p>
+<div class="highlight"><pre><span></span># sudo systemctl set-default graphical.target
+# sudo reboot
+</pre></div>
+
+
+</li>
+</ul>
 </li>
 <li>
 <p><strong>备份 initramfs 文件（系统内核镜像文件）</strong></p>
@@ -192,7 +236,7 @@
 
 </li>
 <li>
-<p><strong>重建 initramfs 文件（更新系统kernel后正常重启会在/boot目录下自动生成新内核镜像）</strong></p>
+<p><strong>重建 initramfs 文件（更新系统kernel后正常重启会在/boot目录下自动生成新内核镜像，可选）</strong></p>
 <div class="highlight"><pre><span></span># sudo dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
 </pre></div>
 
@@ -200,8 +244,8 @@
 </li>
 <li>
 <p><strong>关闭图形界面(如果有VNC服务, 请先关闭vnc服务)，执行</strong></p>
-<div class="highlight"><pre><span></span># systemctl disable gdm
-# reboot
+<div class="highlight"><pre><span></span># sudo systemctl disable gdm
+# sudo reboot
 </pre></div>
 
 
@@ -216,7 +260,7 @@
 </pre></div>
 
 
-<p><strong>配置X11</strong></p>
+<p><strong>配置X11</strong> (在安装驱动的时候有自动执行 <code>nvidia-xconfig</code> 选项, 如果选yes可以确定跳过此步骤)</p>
 <div class="highlight"><pre><span></span># nvidia-xconfig
 
 WARNING: Unable to locate/open X configuration file.
@@ -300,6 +344,11 @@ Since its introduction in 2006, CUDA has been widely deployed through thousands 
 <div class="highlight"><pre><span></span><span class="x">export PATH=&quot;/usr/local/cuda-8.0/bin:</span><span class="p">$</span><span class="nv">PATH</span><span class="x">&quot;</span>
 <span class="x">export LD_LIBRARY_PATH=&quot;/usr/local/cuda-8.0/lib64&quot;</span>
 <span class="x">export CUDA_HOME=&quot;/usr/local/cuda&quot;</span>
+</pre></div>
+
+
+<p>使之生效</p>
+<div class="highlight"><pre><span></span># source /etc/profile
 </pre></div>
 
 
@@ -560,6 +609,7 @@ abrt-addon-kerneloops-2.1.11-48.el7.centos.x86_64
 <p>https://linuxconfig.org/nvidia-geforce-driver-installation-on-centos-7-linux-64-bit</p>
 <p>http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#redhat-installation</p>
 <p>http://www.pyimagesearch.com/2016/07/04/how-to-install-cuda-toolkit-and-cudnn-for-deep-learning</p>
+<p>https://www.linkedin.com/pulse/20140808222919-219659043-rhel-centos-7-and-nvidia-drivers</p>
 </blockquote>
   </div>
   <div class="tag-cloud">
