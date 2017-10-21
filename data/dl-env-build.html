@@ -27,7 +27,7 @@
 <meta name="keywords" content="大数据, 深度学习, keras，NVIDIA">
 
 <meta property="og:site_name" content="shushilvshe's Blog"/>
-<meta property="og:title" content="Centos集成GTX-1080Ti显卡搭建深度学习环境全过程"/>
+<meta property="og:title" content="搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)"/>
 <meta property="og:description" content="在一个由N多台普通的不能再普通的机器攒凑起来的机箱中，搭载了最强核心——NVIDIA GeForce GTX 1080 Ti。我们的深度学习环境搭建之旅，将从如何攒凑这款独一无二的机箱开始，一点一点完成从简单电脑维修装配到逼格爆棚的Deep Learning的华丽丽转身。"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="http://www.shushilvshe.com/data/dl-env-build.html"/>
@@ -41,7 +41,7 @@
 <meta property="article:tag" content="keras，NVIDIA"/>
 <meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
 
-  <title>shushilvshe's Blog &ndash; Centos集成GTX-1080Ti显卡搭建深度学习环境全过程</title>
+  <title>shushilvshe's Blog &ndash; 搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</title>
 
 </head>
 <body>
@@ -86,7 +86,7 @@
 <article class="single">
   <header>
       
-    <h1 id="data/dl-env-build">Centos集成GTX-1080Ti显卡搭建深度学习环境全过程</h1>
+    <h1 id="data/dl-env-build">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</h1>
     <p>
           Posted on 2017-09-22(星期五) 16:25 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
 
@@ -517,6 +517,7 @@ c.NotebookApp.password = u&#39;sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771
 <p>设置为开机自启动服务</p>
 <div class="highlight"><pre><span></span># cd ~
 # mkdir services
+# cd services
 # vim jupyter.service
 </pre></div>
 
