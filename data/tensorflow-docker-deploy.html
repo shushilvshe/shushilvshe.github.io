@@ -122,7 +122,6 @@
 <div id="category"></div>
 
 <h2>基本环境：</h2>
-<blockquote>
 <ul>
 <li>tensorflow-gpu 1.4.1</li>
 <li>cuda8</li>
@@ -133,16 +132,13 @@
 <li>harbor 1.1.2 （用于存储和分发Docker镜像的企业级Registry服务器）</li>
 <li>kubernetes 1.8.3 (企业级容器集群管理系统)</li>
 </ul>
-</blockquote>
 <h2>前置条件</h2>
-<blockquote>
 <ul>
-<li>安装docker （docker-ce 17.03 版本）, 过程参照 【占位符】</li>
-<li>安装kubernetes 1.8.3，过程参照 【占位符】</li>
-<li>安装portainer，过程参照 <a href="https://portainer.readthedocs.io/en/stable/deployment.html">Deployment</a></li>
-<li>安装Harbor， 过程参照  <a href="http://blog.csdn.net/a632189007/article/details/78777224">搭建docker私有仓库 -- Harbor</a></li>
+<li>安装docker （docker-ce 17.09 版本）, 过程参照 <a href="http://www.shushilvshe.com/data/docker.html#wow8">docker安装</a></li>
+<li>安装kubernetes 1.8.3，过程参照 <a href="http://blog.csdn.net/A632189007/article/details/78815807">[Docker Kubernetes1.8.3集群环境搭建（CentOS）]</a></li>
+<li>安装portainer，过程参照 <a href="https://portainer.readthedocs.io/en/stable/deployment.html">[Deployment]</a></li>
+<li>安装Harbor， 过程参照  <a href="http://blog.csdn.net/a632189007/article/details/78777224">[搭建docker私有仓库 -- Harbor]</a></li>
 </ul>
-</blockquote>
 <h2>制作tensorflow-gpu docker镜像</h2>
 <h3>拉取并启动基础镜像—— <code>nvidia/cuda:8.0-cudnn6-runtime-centos7</code></h3>
 <ul>
