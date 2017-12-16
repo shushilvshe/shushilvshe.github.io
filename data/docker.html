@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="容器技术已经发展的很成熟了，只不过因为工作需要才接触。纵观大趋势，系统应用部署能节约大量的人力物力和时间等企业重要成本，所以，掌握好容器技术，以及相关的集群集成管理工具的领头羊——Kubernetes，将成为丰富人生技术栈中重要的一环。" />
+<meta name="keywords" content="docker">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="始入Docker"/>
+<meta property="og:description" content="容器技术已经发展的很成熟了，只不过因为工作需要才接触。纵观大趋势，系统应用部署能节约大量的人力物力和时间等企业重要成本，所以，掌握好容器技术，以及相关的集群集成管理工具的领头羊——Kubernetes，将成为丰富人生技术栈中重要的一环。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/data/docker.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-12-09 21:18:43+08:00"/>
+<meta property="article:modified_time" content="2017-12-09 21:18:46+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="data"/>
+<meta property="article:tag" content="docker"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
+
+  <title>shushilvshe's Blog &ndash; 始入Docker</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
+
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
+
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/">Photo</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="data/docker">始入Docker</h1>
+    <p>
+          Posted on 2017-12-09(星期六) 21:18 in <a href="http://www.shushilvshe.com/category/data.html">data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+      $("h2,h3,h4,h5,h6").each(function(i,item){
+        var tag = $(item).get(0).localName;
+        $(item).attr("id","wow"+i);
+        $("#category").append('<a class="new'+tag+'" href="#wow'+i+'">'+$(this).text()+'</a></br>');
+        $(".newh2").css("margin-left",0);
+        $(".newh3").css("margin-left",20);
+        $(".newh4").css("margin-left",40);
+        $(".newh5").css("margin-left",60);
+        $(".newh6").css("margin-left",80);
+      });
+ });
+</script>
+
+<div id="category"></div>
+
+<h2>docker简介</h2>
+<p>Docker 最初是 dotCloud 公司创始人 Solomon Hykes 在法国期间发起的一个公司内部项目，它是基于 dotCloud 公司多年云服务技术的一次革新，并于 2013 年 3 月以 Apache 2.0 授权协议开源，主要项目代码在 GitHub 上进行维护。Docker 项目后来还加入了 Linux 基金会，并成立推动 开放容器联盟（OCI）。</p>
+<p>Docker 自开源后受到广泛的关注和讨论，至今其 GitHub 项目已经超过 4 万 6 千个星标和一万多个 fork。甚至由于 Docker 项目的火爆，在 2013 年底，dotCloud 公司决定改名为 Docker。Docker 最初是在 Ubuntu 12.04 上开发实现的；Red Hat 则从 RHEL 6.5 开始对 Docker 进行支持；Google 也在其 PaaS 产品中广泛应用 Docker。</p>
+<p>Docker 使用 Google 公司推出的 Go 语言 进行开发实现，基于 Linux 内核的 cgroup，namespace，以及 AUFS 类的 Union FS 等技术，对进程进行封装隔离，属于 操作系统层面的虚拟化技术。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。最初实现是基于 LXC，从 0.7 版本以后开始去除 LXC，转而使用自行开发的 libcontainer，从 1.11 开始，则进一步演进为使用 runC 和 containerd。</p>
+<p>Docker 在容器的基础上，进行了进一步的封装，从文件系统、网络互联到进程隔离等等，极大的简化了容器的创建和维护。使得 Docker 技术比虚拟机技术更为轻便、快捷。</p>
+<p>下面的图片比较了 Docker 和传统虚拟化方式的不同之处。传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</p>
+<p><center><img src="https://i.imgur.com/1Fm6bZS.png" width="800"/></center></p>
+<p><center>图一：传统虚拟化</center></p>
+<p><center><img src="https://i.imgur.com/Ior1jwo.png" width="800"/></center></p>
+<p><center>图二：Docker</center></p>
+<p><code>容器与虚拟机区别</code></p>
+<p>直观上来讲vm多了一层guest OS，同时Hypervisor会对硬件资源进行虚拟化，docker直接使用硬件资源，所以资源利用率相对docker低也是比较容易理解的。</p>
+<p><strong>虚拟机技术</strong>通过Hypervisor层抽象底层基础设施资源，提供相互隔离的虚拟机，通过统一配置、统一管理，计算资源的可运维性，以及资源利用率都能够得到有效的提升。同时，虚拟机提供客户机操作系统，客户机变化不会影响宿主机，能够提供可控的测试环境，更能够屏蔽底层硬件甚至基础软件的差异性，让应用做到的广泛兼容。然而，再牛逼的虚拟化技术，都不可避免地出现计算、IO、网络性能损失，毕竟多了一层软件，毕竟要运行一个完整的客户机操作系统。</p>
+<p><strong>容器技术</strong>严格来说并不是虚拟化，没有客户机操作系统，是共享内核的。容器可以视为软件供应链的集装箱，能够把应用需要的运行环境、缓存环境、数据库环境等等封装起来，以最简洁的方式支持应用运行，轻装上阵，当然是性能更佳。Docker镜像特性则让这种方式简单易行。当然，因为共享内核，容器隔离性也没有虚拟机那么好。</p>
+<p>总的来说，服务器虚拟化解决的核心问题是资源调配，而容器解决的核心问题是应用开发、测试和部署。虚拟机和容器被大家比较，主要是在于它们都提供隔离环境的相似性，但相似仅此而已，它们各有各的应用场景，如何选择还是要看根据具体的业务需求，包括业务成长预期。</p>
+<p>参考：https://www.zhihu.com/question/48174633</p>
+<h2>docker基本概念</h2>
+<h3>Docker 镜像</h3>
+<p>我们都知道，操作系统分为内核和用户空间。对于 Linux 而言，内核启动后，会挂载 root 文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 root 文件系统。比如官方镜像 ubuntu:16.04 就包含了完整的一套 Ubuntu 16.04 最小系统的 root 文件系统。</p>
+<p>Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。</p>
+<h4>分层存储</h4>
+<p>因为镜像包含操作系统完整的 root 文件系统，其体积往往是庞大的，因此在 Docker 设计时，就充分利用 Union FS 的技术，将其设计为分层存储的架构。所以严格来说，镜像并非是像一个 ISO 那样的打包文件，镜像只是一个虚拟的概念，其实际体现并非由一个文件组成，而是由一组文件系统组成，或者说，由多层文件系统联合组成。</p>
+<p>镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。</p>
+<p>分层存储的特征还使得镜像的复用、定制变的更为容易。甚至可以用之前构建好的镜像作为基础层，然后进一步添加新的层，以定制自己所需的内容，构建新的镜像。</p>
+<h3>Docker 容器</h3>
+<p>镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</p>
+<p>容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的 命名空间。因此容器可以拥有自己的 root 文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。这种特性使得容器封装的应用比直接在宿主运行更加安全。也因为这种隔离的特性，很多人初学 Docker 时常常会混淆容器和虚拟机。</p>
+<p>前面讲过镜像使用的是分层存储，容器也是如此。每一个容器运行时，是以镜像为基础层，在其上创建一个当前容器的存储层，我们可以称这个为容器运行时读写而准备的存储层为容器存储层。</p>
+<p>容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。</p>
+<p>按照 Docker 最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用 数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。</p>
+<p>数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。</p>
+<h3>Docker Registry</h3>
+<p>镜像构建完成后，可以很容易的在当前宿主机上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。</p>
+<p>一个 <strong>Docker Registry</strong> 中可以包含多个<strong>仓库</strong>（Repository）；每个仓库可以包含多个<strong>标签</strong>（Tag）；每个标签对应一个<strong>镜像</strong>。</p>
+<p>通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。我们可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 latest 作为默认标签。</p>
+<p>以 Ubuntu 镜像 为例，ubuntu 是仓库的名字，其内包含有不同的版本标签，如，14.04, 16.04。我们可以通过 ubuntu:14.04，或者 ubuntu:16.04 来具体指定所需哪个版本的镜像。如果忽略了标签，比如 ubuntu，那将视为 ubuntu:latest。</p>
+<p>仓库名经常以 两段式路径 形式出现，比如 jwilder/nginx-proxy，前者往往意味着 Docker Registry 多用户环境下的用户名，后者则往往是对应的软件名。但这并非绝对，取决于所使用的具体 Docker Registry 的软件或服务。</p>
+<h4>Docker Registry 公开服务</h4>
+<p>Docker Registry 公开服务是开放给用户使用、允许用户管理镜像的 Registry 服务。一般这类公开服务允许用户免费上传、下载公开的镜像，并可能提供收费服务供用户管理私有镜像。</p>
+<p>最常使用的 Registry 公开服务是官方的 <a href="https://hub.docker.com/">Docker Hub</a>，这也是默认的 Registry，并拥有大量的高质量的官方镜像。除此以外，还有 CoreOS 的 <a href="https://quay.io/repository/">Quay.io</a>，CoreOS 相关的镜像存储在这里；Google 的 <a href="https://cloud.google.com/container-registry/">Google Container Registry</a>，<a href="http://kubernetes.io/">Kubernetes</a> 的镜像使用的就是这个服务。</p>
+<p>由于某些原因，在国内访问这些服务可能会比较慢。国内的一些云服务商提供了针对 Docker Hub 的镜像服务（Registry Mirror），这些镜像服务被称为加速器。常见的有 <a href="https://cr.console.aliyun.com/#/accelerator">阿里云加速器</a>、<a href="https://www.daocloud.io/mirror#accelerator-doc">DaoCloud</a> 加速器 等。使用加速器会直接从国内的地址下载 Docker Hub 的镜像，比直接从 Docker Hub 下载速度会提高很多。在 安装 Dcoekr 一节中有详细的配置方法。</p>
+<p>国内也有一些云服务商提供类似于 Docker Hub 的公开服务。比如 <a href="https://hub.tenxcloud.com/">时速云镜像仓库</a>、<a href="https://c.163.com/hub#/m/library/">网易云镜像服务</a>、<a href="https://hub.daocloud.io/">DaoCloud 镜像市场</a>、<a href="https://cr.console.aliyun.com/">阿里云镜像库</a> 等。</p>
+<h4>私有 Docker Registry</h4>
+<p>除了使用公开服务外，用户还可以在本地搭建私有 Docker Registry。Docker 官方提供了 Docker Registry 镜像，可以直接使用做为私有 Registry 服务。</p>
+<p>开源的 Docker Registry 镜像只提供了 Docker Registry API 的服务端实现，足以支持 docker 命令，不影响使用。但不包含图形界面，以及镜像维护、用户管理、访问控制等高级功能。在官方的商业化版本 Docker Trusted Registry 中，提供了这些高级功能。</p>
+<p>除了官方的 Docker Registry 外，还有第三方软件实现了 Docker Registry API，甚至提供了用户界面以及一些高级功能。比如，VMWare Harbor 和 Sonatype Nexus。</p>
+<h2>docker安装 （CentOS 7、 docker-ce-17.09.0.ce-1.el7.centos.x86_64）</h2>
+<h3>准备工作</h3>
+<h4>系统要求</h4>
+<p>Docker CE 支持 64 位版本 CentOS 7，并且要求内核版本不低于 3.10。 CentOS 7 满足最低内核的要求，但由于内核版本比较低，部分功能（如 overlay2 存储层驱动）无法使用，并且部分功能可能不太稳定。</p>
+<h4>卸载旧版本</h4>
+<p>旧版本的 Docker 称为 docker 或者 docker-engine，使用以下命令卸载旧版本：</p>
+<div class="highlight"><pre><span></span>$ sudo yum remove docker <span class="se">\</span>
+       docker-common <span class="se">\</span>
+       docker-selinux <span class="se">\</span>
+       docker-engine
+</pre></div>
+
+
+<h3>使用 yum 源 安装</h3>
+<p>执行以下命令安装依赖包：</p>
+<div class="highlight"><pre><span></span>$ sudo yum install -y yum-utils <span class="se">\</span>
+       device-mapper-persistent-data <span class="se">\</span>
+       lvm2
+</pre></div>
+
+
+<p>鉴于国内网络问题，强烈建议使用国内源，下面先介绍国内源的使用。</p>
+<h4>国内源</h4>
+<p>执行下面的命令添加 yum 软件源：</p>
+<div class="highlight"><pre><span></span>$ sudo yum-config-manager <span class="se">\</span>
+    --add-repo <span class="se">\</span>
+    https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
+</pre></div>
+
+
+<blockquote>
+<p>以上命令会添加稳定版本的 Docker CE yum 源。从 Docker 17.06 开始，edge test 版本的 yum 源也会包含稳定版本的 Docker CE。</p>
+</blockquote>
+<h4>官方源</h4>
+<div class="highlight"><pre><span></span>$ sudo yum-config-manager <span class="se">\</span>
+    --add-repo <span class="se">\</span>
+    https://download.docker.com/linux/centos/docker-ce.repo
+</pre></div>
+
+
+<p>如果需要最新版本的 Docker CE 请使用以下命令：</p>
+<div class="highlight"><pre><span></span>$ sudo yum-config-manager --enable docker-ce-edge
+
+$ sudo yum-config-manager --enable docker-ce-test
+</pre></div>
+
+
+<h4>安装 Docker CE</h4>
+<p>更新 yum 软件源缓存，并安装 docker-ce。</p>
+<div class="highlight"><pre><span></span>$ sudo yum makecache fast
+$ sudo yum install docker-ce
+</pre></div>
+
+
+<h3>使用脚本自动安装</h3>
+<p>在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，CentOS 系统上可以使用这套脚本安装：</p>
+<div class="highlight"><pre><span></span>$ curl -fsSL get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh --mirror Aliyun
+</pre></div>
+
+
+<p>执行这个命令后，脚本就会自动的将一切准备工作做好，并且把 Docker CE 的 Edge 版本安装在系统中。</p>
+<h3>启动 Docker CE</h3>
+<div class="highlight"><pre><span></span>$ sudo systemctl <span class="nb">enable</span> docker
+$ sudo systemctl start docker
+</pre></div>
+
+
+<h3>建立 docker 用户组</h3>
+<p>默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。</p>
+<p>建立 docker 组：</p>
+<div class="highlight"><pre><span></span>$ sudo groupadd docker
+</pre></div>
+
+
+<p>将当前用户加入 docker 组：</p>
+<div class="highlight"><pre><span></span>$ sudo usermod -aG docker <span class="nv">$USER</span>
+</pre></div>
+
+
+<h3>测试 Docker 是否安装正确</h3>
+<div class="highlight"><pre><span></span>$ docker run hello-world
+
+Unable to find image <span class="s1">&#39;hello-world:latest&#39;</span> locally
+latest: Pulling from library/hello-world
+ca4f61b1923c: Pull <span class="nb">complete</span>
+Digest: sha256:be0cd392e45be79ffeffa6b05338b98ebb16c87b255f48e297ec7f98e123905c
+Status: Downloaded newer image <span class="k">for</span> hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the <span class="s2">&quot;hello-world&quot;</span> image from the Docker Hub.
+    <span class="o">(</span>amd64<span class="o">)</span>
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://cloud.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+</pre></div>
+
+
+<p>若能正常输出以上信息，则说明安装成功。</p>
+<blockquote>
+<p>PS：yum安装方式比较方便，不用考虑依赖关系，除了yum的安装，也可以下载rpm安装包进行安装。</p>
+</blockquote>
+<p><a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm">docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm下载</a></p>
+<div class="highlight"><pre><span></span>rpm -ivh  docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm
+</pre></div>
+
+
+<p>当然，用docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm 直接安装的时候可能会缺少类库，缺什么补什么即可。</p>
+<div class="highlight"><pre><span></span>[root@gpu188 tmp]# rpm -ivh docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm 
+警告：docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm: 头V4 RSA/SHA512 Signature, 密钥 ID 621e9f35: NOKEY
+错误：依赖检测失败：
+        container-selinux &gt;= 2.9 被 docker-ce-17.09.0.ce-1.el7.centos.x86_64 需要
+        libcgroup 被 docker-ce-17.09.0.ce-1.el7.centos.x86_64 需要
+        libltdl.so.7()(64bit) 被 docker-ce-17.09.0.ce-1.el7.centos.x86_64 需要
+</pre></div>
+
+
+<p>通过 <code>yum install -y python-urllib3, container-selinux</code> 安装即可。</p>
+<h2>docker基本命令</h2>
+<p>常用的命令做个简单的分类：</p>
+<ul>
+<li>容器生命周期管理 — docker [run|start|stop|restart|kill|rm|pause|unpause]</li>
+<li>容器操作运维 — docker [ps|inspect|top|attach|events|logs|wait|export|port]</li>
+<li>容器rootfs命令 — docker [commit|cp|diff]</li>
+<li>镜像仓库 — docker [login|pull|push|search]</li>
+<li>本地镜像管理 — docker [images|rmi|tag|build|history|save|import]</li>
+<li>其他命令 — docker [info|version]</li>
+</ul>
+<p><code>查看docker安装信息</code></p>
+<div class="highlight"><pre><span></span>docker info
+</pre></div>
+
+
+<p><code>获取docker镜像</code></p>
+<div class="highlight"><pre><span></span>docker pull azraelrabbit/monupw
+</pre></div>
+
+
+<p><code>创建docker容器(后台运行)</code></p>
+<div class="highlight"><pre><span></span>docker run --name monojexus -d -p 32022:22 -p 32080:80 -v /mydata:/data azraelrabbit/monupw
+</pre></div>
+
+
+<p><code>使用docker help 查看docker 常用命令</code></p>
+<div class="highlight"><pre><span></span>docker help
+</pre></div>
+
+
+<p><code>使用命令重启后台容器</code></p>
+<div class="highlight"><pre><span></span><span class="x">docker restart </span><span class="p">$</span><span class="nv">container_id</span><span class="x"></span>
+</pre></div>
+
+
+<p><code>停止并移除容器</code></p>
+<div class="highlight"><pre><span></span><span class="x">docker rm </span><span class="p">$</span><span class="nv">container_id</span><span class="x"></span>
+</pre></div>
+
+
+<p><code>将容器状态保存为镜像</code></p>
+<div class="highlight"><pre><span></span><span class="x">docker commit </span><span class="p">$</span><span class="nv">container_id</span><span class="x"> new_image</span>
+</pre></div>
+
+
+<p><code>查看本机已经有的镜像</code></p>
+<div class="highlight"><pre><span></span>docker images
+</pre></div>
+
+
+<p><code>镜像查找</code></p>
+<div class="highlight"><pre><span></span>docker search &lt;image-namge&gt;
+</pre></div>
+
+
+<p><code>查看镜像的历史版本</code></p>
+<div class="highlight"><pre><span></span>docker history &lt;image-name&gt;
+</pre></div>
+
+
+<p><code>将镜像推送到镜像仓库</code></p>
+<div class="highlight"><pre><span></span>docker push &lt;image-name&gt;
+</pre></div>
+
+
+<p><code>库名字的格式</code></p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;user&gt;</span>/<span class="nt">&lt;/image_name&gt;</span>
+</pre></div>
+
+
+<p><code>查看docker的版本号，包括客户端、服务端、依赖的Go等</code></p>
+<div class="highlight"><pre><span></span>docker version
+</pre></div>
+
+
+<p><code>默认显示正在运行中的container</code></p>
+<div class="highlight"><pre><span></span>docker ps
+</pre></div>
+
+
+<p><code>显示最后一次创建的container，包括未运行的</code></p>
+<div class="highlight"><pre><span></span>docker ps –l
+</pre></div>
+
+
+<p><code>显示所有的container，包括未运行的</code></p>
+<div class="highlight"><pre><span></span>docker ps –a
+</pre></div>
+
+
+<p><code>查看container的日志，也就是执行命令的一些输出</code></p>
+<div class="highlight"><pre><span></span>docker logs &lt;container&gt;
+</pre></div>
+
+
+<p><code>删除一个或多个container</code></p>
+<div class="highlight"><pre><span></span>docker rm &lt;container...&gt;
+</pre></div>
+
+
+<p><code>删除所有的container</code> </p>
+<div class="highlight"><pre><span></span>docker rm `docker ps -a -q`
+</pre></div>
+
+
+<p><code>删除所有的container</code></p>
+<div class="highlight"><pre><span></span>docker ps -a -q | xargs docker rm
+</pre></div>
+
+
+<p><code>删除一个或多个image</code></p>
+<div class="highlight"><pre><span></span>docker rmi &lt;image...&gt;
+</pre></div>
+
+
+<p><code>开启/停止/重启container</code></p>
+<div class="highlight"><pre><span></span>docker start/stop/restart &lt;container&gt;
+</pre></div>
+
+
+<p><code>启动一个container并进入交互模式</code></p>
+<div class="highlight"><pre><span></span>docker start -i &lt;container&gt;
+</pre></div>
+
+
+<p><code>attach一个运行中的container</code></p>
+<div class="highlight"><pre><span></span>docker attach &lt;container&gt;
+</pre></div>
+
+
+<p><code>使用image创建container并执行相应命令，然后停止</code></p>
+<div class="highlight"><pre><span></span>docker run &lt;image&gt; &lt;command&gt;
+</pre></div>
+
+
+<p><code>使用image创建container并进入交互模式, login shell是/bin/bash</code></p>
+<div class="highlight"><pre><span></span>docker run -i -t &lt;image&gt; /bin/bash
+</pre></div>
+
+
+<p><code>将container的端口映射到宿主机的端口</code></p>
+<div class="highlight"><pre><span></span>docker run -i -t -p &lt;host_port:contain_port&gt;
+</pre></div>
+
+
+<p><code>将一个container固化为一个新的image，后面的repo:tag可选</code></p>
+<div class="highlight"><pre><span></span>docker commit &lt;container&gt; [repo:tag]
+</pre></div>
+
+
+<p><code>寻找path路径下名为的Dockerfile的配置文件，使用此配置生成新的image</code></p>
+<div class="highlight"><pre><span></span>docker build &lt;path&gt;
+</pre></div>
+
+
+<p><code>同上，可以指定repo和可选的tag</code></p>
+<div class="highlight"><pre><span></span>docker build -t repo[:tag]
+</pre></div>
+
+
+<p><code>使用指定的dockerfile配置文件，docker以stdin方式获取内容，使用此配置生成新的image</code></p>
+<div class="highlight"><pre><span></span>docker build - &lt; &lt;dockerfile&gt;
+</pre></div>
+
+
+<p><code>查看本地哪个端口映射到container的指定端口，其实用docker ps 也可以看到</code></p>
+<div class="highlight"><pre><span></span>docker port &lt;container&gt; &lt;container port&gt;
+</pre></div>
+
+
+<p><code>更改主机名</code></p>
+<div class="highlight"><pre><span></span>docker run -it --hostname web jim/custom1 /bin/bash
+</pre></div>
+
+
+<h2>docker 数据管理</h2>
+<blockquote>
+<p><strong>卷(Volume)</strong><br>
+众所周知卷(Volume)是容器中的一个数据挂载点，卷可以绕过联合文件系统，从而为Docker 提供持久数据，所提供的数据还可以在宿主机-容器或多个容器之间共享。通过卷，我们可以可以使修改数据直接生效，而不必重新构建镜像。数据卷设计的初哀是提供持久化数据，而与容器的生命周期无关。因此，在<strong>删除容器时，Docker不会自动删除卷，直到没有容器再引用</strong>。</p>
+</blockquote>
+<p>容器中管理数据主要有两种方式：</p>
+<ul>
+<li>数据卷（Data Volumes）</li>
+<li>数据卷容器（Data Volumes Dontainers）</li>
+</ul>
+<h3>一、数据卷</h3>
+<p>可以在 <code>docker run</code> 命令创建容器时，通过-v参数为容器添加数据卷。-v参数参数可以多次使用，以添加多个数据卷。</p>
+<div class="highlight"><pre><span></span># docker run -t -i -v /tmp --name test aaron/test /bin/bash
+</pre></div>
+
+
+<p>或明确指定宿主机目录和容器目录：</p>
+<div class="highlight"><pre><span></span># docker run -t -i -v /tmp:/tmp --name test aaron/test /bin/bash
+</pre></div>
+
+
+<p>除了在创建容器时添加数据卷外，还可以通过Dockerfile文件中通过Volume指令添加，Volume可以多次使用以添加多个数据卷。</p>
+<div class="highlight"><pre><span></span><span class="err">#</span><span class="x"> Version: 0.0.3</span>
+<span class="x">FROM ubuntu:16.04</span>
+<span class="x">MAINTAINER aaron &quot;shushilvshe@gmail.com&quot;</span>
+<span class="x">RUN apt-get update</span>
+<span class="x">RUN apt-get install -y nginx</span>
+<span class="x">RUN echo &#39;Hello World, 我是个容器&#39; \ </span>
+<span class="x"> &gt; /var/www/html/index.html</span>
+<span class="x">RUN mkdir /home/aaron/</span>
+<span class="x">ENV AARON_PATH /home/aaron/</span>
+<span class="x">VOLUME [</span><span class="p">$</span><span class="nv">AARON_PATH</span><span class="x">]</span>
+<span class="x">EXPOSE 80</span>
+</pre></div>
+
+
+<p>添加卷后，可以通过 <code>docker inspect</code> 来查看数据卷在容器中的位置， <code>Source</code>为宿主机目录  <code>Destination</code>为挂载到的容器目录</p>
+<div class="highlight"><pre><span></span>&quot;Mounts&quot;: [
+        {
+            &quot;Name&quot;: &quot;f6a74ddf6361c110f743db01ffa2092c8bf41cb7e7a1ae58d7e9170a43d9d827&quot;,
+            &quot;Source&quot;: &quot;/var/lib/docker/volumes/f6a74ddf6361c110f743db01ffa2092c8bf41cb7e7a1ae58d7e9170a43d9d827/_data&quot;,
+            &quot;Destination&quot;: &quot;/tmp&quot;,
+            &quot;Driver&quot;: &quot;local&quot;,
+            &quot;Mode&quot;: &quot;&quot;,
+            &quot;RW&quot;: true,
+            &quot;Propagation&quot;: &quot;&quot;
+        }
+    ],
+</pre></div>
+
+
+<h3>二、数据卷容器</h3>
+<p>如果你有一些要在容器之间共享的持久性数据，或者希望在非持久容器中使用，那么最好创建一个命名的数据卷容器，然后从其挂载数据。
+接下来，我们创建一个新的命名的共享容器。这个容器不运行一个应用程序，它利用training/postgres镜像在所有的容器之间创建了一个共享层，以节省磁盘空间。(<strong>training/postgres</strong>是Docker 官方文档中提供的一个镜像)</p>
+<div class="highlight"><pre><span></span># sudo docker create -v /dbdata --name dbstore training/postgres /bin/true
+</pre></div>
+
+
+<blockquote>
+<p>使用数据卷容器</p>
+</blockquote>
+<p>创建数据卷容器后，我们可以通过 <code>--volumes-from</code> 选项，将一个数据容器挂载到其它容器：</p>
+<div class="highlight"><pre><span></span># sudo docker run -d --volumes-from dbstore --name db1 training/postgres
+</pre></div>
+
+
+<p>也可以在多个容器间共享。如，挂载到另一个容器：</p>
+<div class="highlight"><pre><span></span># sudo docker run -d --volumes-from dbstore --name db2 training/postgres
+</pre></div>
+
+
+<p>这时，会将dbstore容器卷 /dbdata挂载到启动的容器中，并会隐藏training/postgres镜像中/dbdata下的文件。最终只有dbstore容器中的文件可见。</p>
+<p>还可以扩展挂载链，从已经存在的dbstore容器（如：db1、db2）来挂载卷：</p>
+<div class="highlight"><pre><span></span># sudo docker run -d --name db3 --volumes-from db1 training/postgres
+</pre></div>
+
+
+<p>这种情况下，如果移除己挂载卷的容器，无论是最初的dbstore容器，还是其后的db1或db2容器，卷都不会被移除。要将卷从硬盘上移除，必须使用<code>docker rm -v</code> 命令删除最后一个引用了该卷的容器。</p>
+<h3>三、备份、恢复与迁移数据卷</h3>
+<h4>备份数据卷</h4>
+<p>在前面介绍数据卷容器时，我们创建了一个名为dbdata容器，并在容器中创建了一个 <code>/dbdata</code> 的数据卷。接下来，可以在创建容器使用 <code>--volumes-from</code> 参数来挂载这个数据卷，并对数据进行备份：</p>
+<div class="highlight"><pre><span></span># sudo docker run --volumes-from dbdata -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
+</pre></div>
+
+
+<p>在这个操作中，我们通过ubuntu镜像创建了一个容器，创建容器时通过 <code>--volumes-from</code> 参数共享了数据卷容器中的数据，并将当前目录($(pwd) )挂载到了数据卷中。容器运行后，使用tar命令对数据卷进行了备份。命令执行结束后，容器就会停止，之后就可以在本地当前操作目录下找到所备份的数据。</p>
+<h4>恢复数据卷</h4>
+<p>数据备份后，可以在创建容器恢复备份数据到容器内的数据卷中，从而实现数据的迁移。</p>
+<p>首先，创建并运行容器并添加一个数据卷：</p>
+<div class="highlight"><pre><span></span># sudo docker run -i -t -v /dbdata --name dbdata2 ubuntu /bin/bash
+</pre></div>
+
+
+<p>然后通过tar命令恢复备份数据：</p>
+<div class="highlight"><pre><span></span># sudo docker run --rm --volumes-from dbdata2 -v $(pwd):/backup ubuntu bash -c &quot;cd /dbdata &amp;&amp; tar xvf /backup/backup.tar --strip 1&quot;
+</pre></div>
+
+
+<p>这样，数据就被恢复到了容器dbdata2的/dbdata目录下，我们可以容器中操作和使用这些数据。</p>
+<h3>docker 镜像压缩方案</h3>
+<blockquote>
+<p>目标:</p>
+</blockquote>
+<ul>
+<li>更快的构建速度</li>
+<li>更小的Docker镜像大小</li>
+<li>更少的Docker镜像层</li>
+<li>充分利用镜像缓存</li>
+<li>增加Dockerfile可读性</li>
+<li>让Docker容器使用起来更简单</li>
+</ul>
+<blockquote>
+<p>方案：</p>
+</blockquote>
+<ul>
+<li>编写.dockerignore文件</li>
+<li>容器只运行单个应用</li>
+<li>将多个RUN指令合并为一个</li>
+<li>基础镜像的标签不要用latest</li>
+<li>每个RUN指令后删除多余文件</li>
+<li>选择合适的基础镜像(alpine版本最好)</li>
+<li>设置WORKDIR和CMD</li>
+<li>使用ENTRYPOINT (可选)</li>
+<li>在entrypoint脚本中使用exec</li>
+<li>COPY与ADD优先使用前者</li>
+<li>合理调整COPY与RUN的顺序</li>
+<li>设置默认的环境变量，映射端口和数据卷</li>
+<li>使用LABEL设置镜像元数据</li>
+<li>添加HEALTHCHECK</li>
+</ul>
+<p>参考： </p>
+<ul>
+<li><a href="https://rock-it.pl/how-to-write-excellent-dockerfiles/">how-to-write-excellent-dockerfiles</a></li>
+<li><a href="https://blog.fundebug.com/2017/05/15/write-excellent-dockerfile/">how-to-write-excellent-dockerfiles 中文译本</a></li>
+</ul>
+<h2>问题：</h2>
+<h3>1.CentOS7 容器 Failed to get D-Bus connection: Operation not permitted (启动sshd服务或jupyter服务时遇到)</h3>
+<div class="highlight"><pre><span></span>nvidia-docker run -d --privileged=true -v /data/share:/data/share \
+    -p 2222:22 -p 9999:8899 tensorflow-py2:1.3.0-gpu /usr/sbin/init
+</pre></div>
+
+
+<blockquote>
+<p>注意，需要在后台运行, run -it是不行的。</p>
+</blockquote>
+<h3>2.docker save 和export 区别</h3>
+<p>导出后再导入(exported-imported)的镜像会丢失所有的历史，而保存后再加载（saveed-loaded）的镜像没有丢失历史和层(layer)。这意味着使用导出后再导入的方式，你将无法回滚到之前的层(layer)，同时，使用保存后再加载的方式持久化整个镜像，就可以做到层回滚（可以执行docker tag &lt;LAYER ID&gt; &lt;IMAGE NAME&gt;来回滚之前的层）。</p>
+<h2>补充</h2>
+<h3>1.内核概念</h3>
+<p>“内核”指的是一个提供<strong>硬件抽象层、磁盘及文件系统控制、多任务等功能</strong>的系统软件。一个内核并不是一套完整的操作系统。有一套基于Linux内核的完整操作系统叫作Linux操作系统。</p>
+<p><strong>操作系统、内核、Shell</strong></p>
+<ul>
+<li>
+<p><strong>操作系统</strong></p>
+<p>包括<code>操作系统内核、shell、驱动、运行库、引导程序</code>等。对于Windows来说，大部分Windows目录下的东西都属于操作系统的一部分。对于Linux来说，/lib，/boot下的大多数东西都属于操作系统</p>
+</li>
+<li>
+<p><strong>内核</strong></p>
+<p><strong>操作系统最核心的部分</strong>，一般来说，内核特指某一个或者几个文件。对于Windows来说，内核文件是 <code>\Windows\system32\NTOSKRNL.EXE</code> 对于Linux来说，是<code>内核镜像</code>，一般在boot下面，具体是哪个要看配置情况。</p>
+</li>
+<li>
+<p><strong>Shell（外壳）</strong></p>
+<p>一般是指跟用户直接交互的界面，可以是命令行，也可以是窗口，用户通过shell访问并控制计算机。对于Windows来说，Shell应该是资源管理器（也就是我的电脑）。对于Linux来说，就是命令行。一个操作系统的Shell可以被替换，Linux也可以搞图形界面，Windows也可以自定义Shell（方法比较麻烦）。</p>
+</li>
+</ul>
+<p>所以Shell和内核都是操作系统的一部分，Shell是你能看见的部分，内核是最核心的部分（一般情况下也看不见），<strong>操作系统本身规模最大的应该是驱动和各种支撑库，Shell和内核只占一小部分</strong>。</p>
+<h3>2.nvidia-docker 和 docker 关系</h3>
+<p>nvidia-docker为Nvidia公司在docker的基础上封装了一层，使用方法和docker一样，nvidia-docker可以将显卡设备和显卡驱动加载到container里</p>
+<p>it takes care of functionality such as:</p>
+<p>creating a Docker volume with binaries such as nvidia-smi and shared libraries
+providing HTTP endpoints that monitoring tools can use to collect GPU metrics
+abstracting details such as /dev entry names for each device, as well as control ones like nvidiactl
+The nvidia-docker wrapper also verifies that the CUDA version required by a given image is supported by the host drivers, through inspection of well-known image labels, if present. We should try to provide equivalent checks, either for CUDA or OpenCL.</p>
+<p>This is current sample output from nvidia-docker-plugin, wrapped for readability:</p>
+<p>$ curl -s localhost:3476/docker/cli
+--device=/dev/nvidiactl --device=/dev/nvidia-uvm --device=/dev/nvidia0
+--volume-driver=nvidia-docker
+--volume=nvidia_driver_352.68:/usr/local/nvidia:ro</p>
+<h4>nvidia-docker对tensorflow gpu的支持</h4>
+<p>docker可以通过提供gpu设备到容器中。nvidia官方提供了<a href="https://github.com/NVIDIA/nvidia-docker">nvidia-docker</a>的一种方式，其用nvidia-docker的命令行代替了docker的命令行来使用GPU。</p>
+<div class="highlight"><pre><span></span>nvidia-docker run -it -p 8888:8888 gcr.io/tensorflow/tensorflow:latest-gpu
+</pre></div>
+
+
+<p>这种方式对于docker侵入较多，因此nvidia还提供了一种<a href="https://github.com/NVIDIA/nvidia-docker/blob/master/tools/src/nvidia-docker-plugin/main.go">nvidia-docker-plugin</a>的方式。其使用流程如下：</p>
+<p>首先在宿主机启动nvidia-docker-plugin：</p>
+<div class="highlight"><pre><span></span>[root@A01-R06-I184-22 nvidia-docker]# ./nvidia-docker-plugin 
+./nvidia-docker-plugin | 2016/10/10 00:01:12 Loading NVIDIA unified memory
+./nvidia-docker-plugin | 2016/10/10 00:01:12 Loading NVIDIA management library
+./nvidia-docker-plugin | 2016/10/10 00:01:17 Discovering GPU devices
+./nvidia-docker-plugin | 2016/10/10 00:01:18 Provisioning volumes at /var/lib/nvidia-docker/volumes
+./nvidia-docker-plugin | 2016/10/10 00:01:18 Serving plugin API at /run/docker/plugins
+./nvidia-docker-plugin | 2016/10/10 00:01:18 Serving remote API at localhost:3476
+</pre></div>
+
+
+<p>可以看到nvidia-docker-plugin监听了3486端口。然后在宿主机上运行 </p>
+<div class="highlight"><pre><span></span>docker run -ti curl -s http://localhost:3476/v1.0/docker/cli -p 8890:8888 gcr.io/tensorflow/tensorflow:latest-gpu /bin/bash
+</pre></div>
+
+
+<p>命令以创建tensorflow的GPU容器。并可以在容器中验证是否能正常import tensorflow。</p>
+<h2>参考</h2>
+<hr>
+<p><a href="https://github.com/NVIDIA/nvidia-docker/">nvidia-docker Github</a></p>
+<p><a href="https://superuser.com/questions/889472/docker-containers-have-their-own-kernel-or-not">Docker containers have their own kernel or not?</a></p>
+<p><a href="http://www.docker.org.cn/index.html">docker 中文网站</a></p>
+<p><a href="https://yeasy.gitbooks.io/docker_practice/content/">Docker —— 从入门到实践</a></p>
+<p><a href="https://github.com/NVIDIA/nvidia-docker?utm_source=tuicool&amp;utm_medium=referral">Nvidia-docker 安装（github）</a></p>
+<p><a href="http://www.jb51.net/article/106633.htm">Docker中容器数据卷(Data Volume)和数据管理详解</a></p>
+<p><a href="https://my.oschina.net/zjzhai/blog/225112">Docker的save和export命令的区别</a></p>
+<p><a href="http://blog.csdn.net/u011291159/article/details/66970202">Docker 安装 TensorFlow GPU 实战</a></p>
+<p><a href="https://my.oschina.net/zjzhai/blog/225112">Docker的save和export命令的区别</a></p>
+<p><a href="https://www.zhihu.com/question/37695460/answer/73125767">shell、操作系统、内核是一个东西吗？</a></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/docker.html">docker</a>
+    </p>
+  </div>
+
+
+
+    <div class="addthis_relatedposts_inline">
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/baya.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
