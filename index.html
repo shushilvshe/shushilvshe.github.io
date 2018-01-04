@@ -78,6 +78,46 @@
 
 <article>
   <header>
+    <h2><a href="http://www.shushilvshe.com/data/docker-ssh.html#data/docker-ssh">kubernetes集成网络组件calico小记</a></h2>
+    <p>
+          Posted on 2018-01-04(星期四) 18:09 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>,              <a href="http://www.shushilvshe.com/tag/ssh.html">ssh</a>,              <a href="http://www.shushilvshe.com/tag/docker.html">docker</a>
+    </p>
+  </header>
+  <div>
+      <p>基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）。</p>
+      <br>
+      <a class="btn" href="http://www.shushilvshe.com/data/docker-ssh.html#data/docker-ssh">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://www.shushilvshe.com/data/kubernete-calico.html#data/kubernete-calico">kubernetes（1.8.3）系列之calico集成</a></h2>
+    <p>
+          Posted on 2018-01-04(星期四) 14:50 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>,              <a href="http://www.shushilvshe.com/tag/calico.html">calico</a>,              <a href="http://www.shushilvshe.com/tag/docker.html">docker</a>,              <a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a>
+    </p>
+  </header>
+  <div>
+      <p>目前工作试错环境为 k8s（1.8.3）管理下的 <code>tensorflow-1.4.1-compile-py36</code> docker镜像深度学习集群，说是集群，但平时的工作任务依然是依靠单台跑脚本运行的，GPU的利用率比较低，经过研究，最后决定通过 <code>openmpi-2.1.2 + nccl2 + nccl_2.1.2-1+cuda8.0_x86_64</code> 的技术方案实现GPU的并行计算。但将环境部署到K8S集群时碰到一个问题——在同一个节点中启动的pod可以成功执行，但不同节点间的pods无法成功执行，报错如下：</p>
+      <br>
+      <a class="btn" href="http://www.shushilvshe.com/data/kubernete-calico.html#data/kubernete-calico">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="http://www.shushilvshe.com/data/kubernetes-overview.html#data/kubernetes-overview">Kubernetes（1.8.3）系列之GPU配置</a></h2>
     <p>
           Posted on 2017-12-20(星期三) 10:15 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
@@ -232,46 +272,6 @@
       <p>身为一个北方人，在北京待过一段时间不足为奇，而心之向往的，还是远方。与帝都南北相望的国际性大都市——魔都上海，自然是要去看看的。上海吸引我的地方，不是繁华的现代化城市的鳞次栉比，不是黄浦江夜景的灯红酒绿，而是那些回绕在老弄堂间的上海滩的故事。</p>
       <br>
       <a class="btn" href="http://www.shushilvshe.com/travel/shanghai.html#travel/shanghai">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="http://www.shushilvshe.com/travel/yangzhou.html#travel/yangzhou">清明南京扬州游记——扬州</a></h2>
-    <p>
-          Posted on 2017-10-04(星期三) 16:41 in <a href="http://www.shushilvshe.com/category/travel.html">travel</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a>,              <a href="http://www.shushilvshe.com/tag/yang-zhou.html">扬州</a>,              <a href="http://www.shushilvshe.com/tag/da-ming-si.html">大明寺</a>,              <a href="http://www.shushilvshe.com/tag/shou-xi-hu.html">瘦西湖</a>,              <a href="http://www.shushilvshe.com/tag/ge-yuan.html">个园</a>,              <a href="http://www.shushilvshe.com/tag/yi-ling-yuan.html">汉陵苑</a>,              <a href="http://www.shushilvshe.com/tag/dong-guan-jie.html">东关街</a>
-    </p>
-  </header>
-  <div>
-      <p>古诗有云：“故人西辞黄鹤楼，烟花三月下扬州”，正值清明时节，在南京游玩的空当，抽出来一天的时间来逛逛扬州城。看过《鹿鼎记》的都知道，韦小宝则出生在扬州城的烟花柳巷，所以，我的印象也就只停留在书中描写的那般花红柳绿纸醉金迷中了。</p>
-      <br>
-      <a class="btn" href="http://www.shushilvshe.com/travel/yangzhou.html#travel/yangzhou">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="http://www.shushilvshe.com/data/font-build.html#data/font-build">字体生成小记</a></h2>
-    <p>
-          Posted on 2017-09-29(星期五) 14:22 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>,              <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>,              <a href="http://www.shushilvshe.com/tag/zi-ti.html">字体</a>
-    </p>
-  </header>
-  <div>
-      <p>这个星期我们小组一直在研究根据一部分手写字体，来生成和其风格相符的其他字体，主要工作还是网络的搭建和训练，这不是本文的重点，我们接下来要说的是预测完新字后，如何将这些字的图片，生成字体文件，以供安装使用。</p>
-      <br>
-      <a class="btn" href="http://www.shushilvshe.com/data/font-build.html#data/font-build">    Continue reading
 </a>
   </div>
 </article>
