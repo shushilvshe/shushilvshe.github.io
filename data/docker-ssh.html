@@ -1,94 +1,47 @@
-<!doctype html>
-<html lang="zh_cn" itemscope itemtype="http://schema.org/Person">
+<!DOCTYPE html>
+<html lang="zh_cn">
 <head>
-            <meta charset="utf-8">
-        <!-- Site Meta Data -->
-        <title>制作ssh互信的docker镜像</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="ssls">
+          <title>shushilvshe's Blog</title>
+        <meta charset="utf-8" />
 
-        <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg">
 
-        <!-- schema.org -->
-        <meta itemprop="name" content="shushilvshe's Blog">
-        <meta itemprop="image" content="">
-        <meta itemprop="description" content="">
+    <meta name="tags" content="深度学习" />
+    <meta name="tags" content="ssh" />
+    <meta name="tags" content="docker" />
 
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-        <!-- Style Meta Data -->
-        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/style.css" type="text/css"/>
-        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygments.css" type="text/css"/>
-
-        <!-- Feed Meta Data -->
-
-        <!-- Twitter Feed -->
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="">
-        <meta name="twitter:image" content="">
-
-    <meta name="twitter:creator" content="">
-    <meta name="twitter:url" content="http://www.shushilvshe.com/data/docker-ssh.html">
-    <meta name="twitter:title" content="shushilvshe's Blog ~ 制作ssh互信的docker镜像">
-    <meta name="twitter:description" content="基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）。">
-
-    <!-- Facebook Meta Data -->
-    <meta property="og:title" content="shushilvshe's Blog ~ 制作ssh互信的docker镜像"/>
-    <meta property="og:description" content="基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）。"/>
-    <meta property="og:image" content=""/>
 </head>
 
-<body>
-<!-- Sidebar -->
-<aside>
-    <!--<center><a href="http://www.shushilvshe.com"><img id="avatar" src=""></a></center>-->
-    <h1>shushilvshe's Blog</h1>
-    <br>
-
-
-    <nav class="nav">
-        <ul class="list-bare">
-
-                <li><a class="nav__link" href="/category/data.html">Data</a></li>
-                <li><a class="nav__link" href="/category/food.html">Food</a></li>
-                <li><a class="nav__link" href="/category/travel.html">Travel</a></li>
-                <li><a class="nav__link" href="/">Photo</a></li>
-
-                <li><a class="nav__link" href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-
-        </ul>
-    </nav>
-
-    <p class="social">
-    </p>
-
-        <h2>Categories</h2>
-        <ul class="navbar">
-                <li class="active"><a
-                        href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-                <li><a
-                        href="http://www.shushilvshe.com/category/food.html">food</a></li>
-                <li><a
-                        href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-        </ul>
-
-        <h2 class="blog_roll_link"><br/>BLOGROLLS</h2>
-        <ul class="navbar">
-                <li><a href="/categories.html">Category</a></li>
-                <li><a href="/tags.html">Tags</a></li>
-                <li><a href="/archives.html">Archives</a></li>
-        </ul>
-
-</aside>
-
-<!-- Content -->
-<article>
-    <section id="content">
-        <article>
-            <h2 class="post_title post_detail"><a href="http://www.shushilvshe.com/data/docker-ssh.html" rel="bookmark"
-                                                  title="Permalink to 制作ssh互信的docker镜像">制作ssh互信的docker镜像</a></h2>
-            <div class="entry-content blog-post">
-                <p>基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）</p>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="/category/data.html">Data</a></li>
+            <li><a href="/category/food.html">Food</a></li>
+            <li><a href="/category/travel.html">Travel</a></li>
+            <li><a href="/">Photo</a></li>
+            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://www.shushilvshe.com/data/docker-ssh.html" rel="bookmark"
+         title="Permalink to 制作ssh互信的docker镜像">制作ssh互信的docker镜像</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-01-04T18:09:06+08:00">
+      2018-01-04(星期四) 18:09
+    </time>
+    <time class="modified" datetime="2018-01-04T18:09:09+08:00">
+      2018-01-04(星期四) 18:09
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
+    </address>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）</p>
 <p>首先，要用docker启用一个container</p>
 <div class="highlight"><pre><span></span>sudo docker run -it nvidia/cuda:8.0-cudnn6-runtime-centos7
 </pre></div>
@@ -119,64 +72,13 @@
 <p>然后，使用 <code>docker ps</code> 查看containerId，然后用 <code>container commit CONTAINER</code> 命令生成一个新镜像。 </p>
 <div class="highlight"><pre><span></span>sudo docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
 </pre></div>
-            </div>
-            <div class="post_list">
-                <span>By </span>
-                <a href="http://www.shushilvshe.com/author/ssls.html">@ssls</a>
-                <span> in </span>
-                <span class="post_category"><a href="http://www.shushilvshe.com/category/data.html" rel="bookmark"
-                                               title="Permalink to Data">[ Data ]</a></span>
-                <span class="post_date">2018-01-04(星期四) 18:09</span>
-                <div><span>Tags : </span>
-                            <span><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">#深度学习, </a></span>
-                            <span><a href="http://www.shushilvshe.com/tag/ssh.html">#ssh, </a></span>
-                            <span><a href="http://www.shushilvshe.com/tag/docker.html">#docker, </a></span>
-                </div>
-
-                <div class="entry-social">
-                    <span class="twitter"><a target="_blank" rel="nofollow"
-                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
-                                             title="Twitter"
-                                             href="https://twitter.com/share?url=http://www.shushilvshe.com/data/docker-ssh.html&text=制作ssh互信的docker镜像&via="><img
-                            src="http://www.shushilvshe.com/theme/images/icons/twitter-s.png"></a></span>
-
-                    <span class="gplus"><a target="_blank" title="Google +"
-                                           href="https://plus.google.com/share?url=http://www.shushilvshe.com/data/docker-ssh.html&hl=fr"
-                                           rel="nofollow"
-                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
-                            src="http://www.shushilvshe.com/theme/images/icons/google-s.png"></a></span>
-
-                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
-                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
-                                              href="https://www.facebook.com/sharer.php?u=http://www.shushilvshe.com/data/docker-ssh.html&t=制作ssh互信的docker镜像"><img
-                            src="http://www.shushilvshe.com/theme/images/icons/facebook-s.png"></a></span>
-
-                    <a target="_blank" title="Linkedin"
-                       href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.shushilvshe.com/data/docker-ssh.html&title=制作ssh互信的docker镜像"
-                       rel="nofollow"
-                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
-                            src="http://www.shushilvshe.com/theme/images/icons/linkedin-s.png"></a>
-
-                    <span class="mail"><a
-                            href="mailto:?subject=制作ssh互信的docker镜像&amp;body=Viens découvrir un article à propos de [制作ssh互信的docker镜像] sur le site de ssls. http://www.shushilvshe.com/data/docker-ssh.html"
-                            title="Share by Email" target="_blank"><img
-                            src="http://www.shushilvshe.com/theme/images/icons/mail-s.png"></a></span>
-                </div>
-            </div>
-        </article>
-    </section>
-</article>
-
-<!-- Footer -->
-    <footer>
-        <p>
-            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a href="http://python.org">Python</a>.
-            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
-                href="https://parbhatpuri.com/">@parbhat</a>.
-        </p>
-    </footer>
-
-
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>
