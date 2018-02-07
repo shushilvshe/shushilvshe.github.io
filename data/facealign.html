@@ -1,60 +1,94 @@
-<!DOCTYPE html>
-<html lang="zh_cn">
+<!doctype html>
+<html lang="zh_cn" itemscope itemtype="http://schema.org/Person">
 <head>
-	<meta charset="utf-8">
-	<title>人脸识别——对齐算法 — shushilvshe's Blog</title>
-	<meta name="description" content="Title: 人脸识别——对齐算法; Date: 2017-09-05; Author: ssls">
-	<meta name="author" content="ssls">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-		<script src="http://www.shushilvshe.com/theme/html5.js"></script>
-		<![endif]-->
-	<link href="http://www.shushilvshe.com/theme/css/ipython.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
-	<link href="http://www.shushilvshe.com/theme/css/local.css" rel="stylesheet">
-	<link href="http://www.shushilvshe.com/theme/css/pygments.css" rel="stylesheet">
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>人脸识别——对齐算法</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ssls">
+
+        <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="shushilvshe's Blog">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="http://www.shushilvshe.com/data/facealign.html">
+    <meta name="twitter:title" content="shushilvshe's Blog ~ 人脸识别——对齐算法">
+    <meta name="twitter:description" content="使用facenet框架，可以识别出一张图片中的人脸头像，并返回每张人脸的边界和五官坐标，但图片中有的头像是有倾斜角度的，我们将倾斜度数小于指定阈值的进行校正，其余的按原形截取图片。">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="shushilvshe's Blog ~ 人脸识别——对齐算法"/>
+    <meta property="og:description" content="使用facenet框架，可以识别出一张图片中的人脸头像，并返回每张人脸的边界和五官坐标，但图片中有的头像是有倾斜角度的，我们将倾斜度数小于指定阈值的进行校正，其余的按原形截取图片。"/>
+    <meta property="og:image" content=""/>
 </head>
+
 <body>
-<div class="container">
-	<div class="page-header">
-		<h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog</a>
-			<br><small>Data Developer</small></h1>	</div>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">人脸识别——对齐算法</h1>
-		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
-			<h4 itemprop="name">ssls</h4>
-		</span>
-		<time datetime="2017-09-05T22:24:46+08:00" itemprop="datePublished">2017-09-05(星期二) 22:24</time>
-	</div>
-	<div>
-		Category:
-		<span itemprop="articleSection">
-			<a href="http://www.shushilvshe.com/category/data.html" rel="category">Data</a>
-		</span>
-	</div>
- 
-	<div>
-		Tags:
-		<span itemprop="keywords">
-			<a href="http://www.shushilvshe.com/tag/da-shu-ju.html" rel="tag">大数据</a>
-		</span>
-		<span itemprop="keywords">
-			<a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html" rel="tag">机器学习</a>
-		</span>
-		<span itemprop="keywords">
-			<a href="http://www.shushilvshe.com/tag/ren-lian-shi-bie.html" rel="tag">人脸识别</a>
-		</span>
-		<span itemprop="keywords">
-			<a href="http://www.shushilvshe.com/tag/ren-lian-dui-qi.html" rel="tag">人脸对齐</a>
-		</span>
-	</div>
-	<div itemprop="articleBody" class="article-body"><p><strong>基本思路：</strong></p>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href="http://www.shushilvshe.com"><img id="avatar" src=""></a></center>-->
+    <h1>shushilvshe's Blog</h1>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="/category/data.html">Data</a></li>
+                <li><a class="nav__link" href="/category/food.html">Food</a></li>
+                <li><a class="nav__link" href="/category/travel.html">Travel</a></li>
+                <li><a class="nav__link" href="/">Photo</a></li>
+
+                <li><a class="nav__link" href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+
+        </ul>
+    </nav>
+
+    <p class="social">
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li class="active"><a
+                        href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                <li><a
+                        href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                <li><a
+                        href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+        </ul>
+
+        <h2 class="blog_roll_link"><br/>BLOGROLLS</h2>
+        <ul class="navbar">
+                <li><a href="/categories.html">Category</a></li>
+                <li><a href="/tags.html">Tags</a></li>
+                <li><a href="/archives.html">Archives</a></li>
+        </ul>
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="http://www.shushilvshe.com/data/facealign.html" rel="bookmark"
+                                                  title="Permalink to 人脸识别——对齐算法">人脸识别——对齐算法</a></h2>
+            <div class="entry-content blog-post">
+                <p><strong>基本思路：</strong></p>
 <p>使用facenet框架，可以识别出一张图片中的人脸头像，并返回每张人脸的边界和五官坐标，但图片中有的头像是有倾斜角度的，我们将倾斜度数小于指定阈值的进行校正，其余的按原形截取图片。</p>
 <ul>
 <li>倾斜度数根据两只眼睛的坐标加以计算；</li>
@@ -162,78 +196,66 @@
 <ul>
 <li>随着斜率增大，图片下方，也就是下巴下部空闲部分会多一些；</li>
 <li>脸旁两部分无用数据较多，如果是贴脸照片会多出干扰信息，这个也可根据人脸边界进行改进修正。</li>
-</ul></div>
-	<hr>
-	<h2>Comments</h2>
-</div>
-		</div>
-	</div> 	<!-- <hr> -->
-</div> <!-- /container -->
-<footer class="aw-footer bg-danger">
-	<div class="container"> <!-- footer -->
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="row">
-					<div class="col-md-3">
-						<h4>Navigation</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></li>
-							<li><a href="http://www.shushilvshe.com//category/data.html"><i class="fa fa-Data "></i> Data</a></li>
-							<li><a href="http://www.shushilvshe.com//category/food.html"><i class="fa fa-Food "></i> Food</a></li>
-							<li><a href="http://www.shushilvshe.com//category/travel.html"><i class="fa fa-Travel "></i> Travel</a></li>
-							<li><a href="http://www.shushilvshe.com//"><i class="fa fa-Photo "></i> Photo</a></li>
-							<li><a href="http://www.shushilvshe.com/pages/about.html"><i class="fa fa-About ME "></i> About ME</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Author</h4>
-						<ul class="list-unstyled my-list-style">
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Categories</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://www.shushilvshe.com/category/data.html">Data (22)</a></li>
-							<li><a href="http://www.shushilvshe.com/category/food.html">food (1)</a></li>
-							<li><a href="http://www.shushilvshe.com/category/travel.html">travel (11)</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Links</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="/categories.html">Category</a></li>
-							<li><a href="/tags.html">Tags</a></li>
-							<li><a href="/archives.html">Archives</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 text-center center-block aw-bottom">
-			<p>&copy; ssls 2016</p>
-			<p>Powered by Pelican</p>
-		</div>
-	</div>
-</div>
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-	$("div.collapseheader").click(function () {
-		$header = $(this).children("span").first();
-		$codearea = $(this).children(".input_area");
-		$codearea.slideToggle(500, function () {
-			$header.text(function () {
-				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
-			});
-		});
-	});
-});
-</script>
+</ul>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="http://www.shushilvshe.com/author/ssls.html">@ssls</a>
+                <span> in </span>
+                <span class="post_category"><a href="http://www.shushilvshe.com/category/data.html" rel="bookmark"
+                                               title="Permalink to Data">[ Data ]</a></span>
+                <span class="post_date">2017-09-05(星期二) 22:24</span>
+                <div><span>Tags : </span>
+                            <span><a href="http://www.shushilvshe.com/tag/da-shu-ju.html">#大数据, </a></span>
+                            <span><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">#机器学习, </a></span>
+                            <span><a href="http://www.shushilvshe.com/tag/ren-lian-shi-bie.html">#人脸识别, </a></span>
+                            <span><a href="http://www.shushilvshe.com/tag/ren-lian-dui-qi.html">#人脸对齐, </a></span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=http://www.shushilvshe.com/data/facealign.html&text=人脸识别——对齐算法&via="><img
+                            src="http://www.shushilvshe.com/theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=http://www.shushilvshe.com/data/facealign.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="http://www.shushilvshe.com/theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=http://www.shushilvshe.com/data/facealign.html&t=人脸识别——对齐算法"><img
+                            src="http://www.shushilvshe.com/theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.shushilvshe.com/data/facealign.html&title=人脸识别——对齐算法"
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="http://www.shushilvshe.com/theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=人脸识别——对齐算法&amp;body=Viens découvrir un article à propos de [人脸识别——对齐算法] sur le site de ssls. http://www.shushilvshe.com/data/facealign.html"
+                            title="Share by Email" target="_blank"><img
+                            src="http://www.shushilvshe.com/theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a href="http://python.org">Python</a>.
+            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
+                href="https://parbhatpuri.com/">@parbhat</a>.
+        </p>
+    </footer>
+
+
 </body>
 </html>
