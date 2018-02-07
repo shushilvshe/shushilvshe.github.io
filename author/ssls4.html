@@ -1,76 +1,231 @@
 <!DOCTYPE html>
 <html lang="zh_cn">
 <head>
+
         <title>shushilvshe's Blog - Articles by ssls</title>
         <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygment.css" />
+
+        <script src="http://www.shushilvshe.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
 </head>
 
 <body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="/category/data.html">Data</a></li>
-            <li><a href="/category/food.html">Food</a></li>
-            <li><a href="/category/travel.html">Travel</a></li>
-            <li><a href="/">Photo</a></li>
-            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-        </ul></nav><!-- /#menu -->
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://www.shushilvshe.com/">Home</a></li>
+
+                <li><a href="/category/data.html">Data</a></li>
+                <li><a href="/category/food.html">Food</a></li>
+                <li><a href="/category/travel.html">Travel</a></li>
+                <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+
+              </ul>
+            </div>
+
 <section id="content">
 <h2>Articles by ssls</h2>
 
-<ol id="post-list">
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/ml/data-proprecess.html" rel="bookmark" title="Permalink to 数据处理中的数值初步转换">数据处理中的数值初步转换</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-07-26T16:04:56+08:00"> 2017-07-26(星期三) 16:04 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>我们使用scikit learn进行建模预测， 而SK中的模型都只能处理数值型的数据，需要将原始的字符串类型的数据转为数值型数据。所有数据通常可以分成两种类型：<strong><code>定量</code></strong>与<strong><code>定性</code></strong>。定量的属性（数值属性）通常蕴涵着可排序性，比如在泰坦尼克号数据集中，年龄就是一个定量属性。定性属性（标称 序数 二元属性）的值是一些符号或事务的名称，每个值代表某种类别编码或状态，不是可测量量，是不具有排序意义的，比如Embarked(登船地点)。</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html" rel="bookmark" title="Permalink to Python科学计算核心工具包一览">Python科学计算核心工具包一览</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-07-25T13:57:00+08:00"> 2017-07-25(星期二) 13:57 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>python用于科学计算已经相当成熟，现在主要用的库如下所列，详细请参看官方网址。</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/bigdata/cdh-update.html" rel="bookmark" title="Permalink to CDH升级（5.11.0 -> 5.12.0）">CDH升级（5.11.0 -> 5.12.0）</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-07-24T21:46:00+08:00"> 2017-07-24(星期一) 21:46 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>CDH升级（5.11.0 -&gt; 5.12.0）, 大版本升级，CM和CDH详细更新过程。  版本升级更新特性参考： https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_rn_new_in_cdh_512.html#cdh_rn_new_in_cdh_512</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/travel/dengfeng.html" rel="bookmark" title="Permalink to 登封洛阳游记——登封篇">登封洛阳游记——登封篇</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-07-21T23:59:00+08:00"> 2017-07-21(星期五) 23:59 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>终于有了写游记的全部条件了，<em>时间</em>：<strong>周末</strong> <em>工具</em>：<strong>wp+md</strong>，还有<strong>记忆</strong>，赶紧把之前的出游的四次旅行记录下吧 年龄大了，真是什么都可能忘记哈。4到6月份温度适中，春游最合适不过了，继南京扬州之行后，喜欢上了旅游的感觉——自由 静逸 就是那种感觉。回津之后，立马着手安排下一次旅行......</p> </div><!-- /.entry-content -->
-        </article></li>
-</ol><!-- /#posts-list -->
+
+   <div class="row">
+
+
+        <div class="eleven columns">
+                 <ol id="post-list">
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/ml/data-proprecess.html" rel="bookmark" title="Permalink to 数据处理中的数值初步转换">数据处理中的数值初步转换</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2017-07-26T16:04:56+08:00"> 2017-07-26(星期三) 16:04 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html"> ssls</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <p>我们使用scikit learn进行建模预测， 而SK中的模型都只能处理数值型的数据，需要将原始的字符串类型的数据转为数值型数据。所有数据通常可以分成两种类型：<strong><code>定量</code></strong>与<strong><code>定性</code></strong>。定量的属性（数值属性）通常蕴涵着可排序性，比如在泰坦尼克号数据集中，年龄就是一个定量属性。定性属性（标称 序数 二元属性）的值是一些符号或事务的名称，每个值代表某种类别编码或状态，不是可测量量，是不具有排序意义的，比如Embarked(登船地点)。</p> </div><!-- /.entry-content -->
+
+                                <div class="medium primary btn"><a href="http://www.shushilvshe.com/ml/data-proprecess.html" rel="bookmark" title="Permalink to 数据处理中的数值初步转换">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+                                <div class="row tag-row">
+                                        <span>Tagged as : </span>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
+                                </div>
+
+
+
+                        </article></li>
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html" rel="bookmark" title="Permalink to Python科学计算核心工具包一览">Python科学计算核心工具包一览</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2017-07-25T13:57:00+08:00"> 2017-07-25(星期二) 13:57 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html"> ssls</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <p>python用于科学计算已经相当成熟，现在主要用的库如下所列，详细请参看官方网址。</p> </div><!-- /.entry-content -->
+
+                                <div class="medium primary btn"><a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html" rel="bookmark" title="Permalink to Python科学计算核心工具包一览">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+                                <div class="row tag-row">
+                                        <span>Tagged as : </span>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/python.html">python</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
+                                </div>
+
+
+
+                        </article></li>
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/bigdata/cdh-update.html" rel="bookmark" title="Permalink to CDH升级（5.11.0 -> 5.12.0）">CDH升级（5.11.0 -> 5.12.0）</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2017-07-24T21:46:00+08:00"> 2017-07-24(星期一) 21:46 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html"> ssls</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <p>CDH升级（5.11.0 -&gt; 5.12.0）, 大版本升级，CM和CDH详细更新过程。  版本升级更新特性参考： https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_rn_new_in_cdh_512.html#cdh_rn_new_in_cdh_512</p> </div><!-- /.entry-content -->
+
+                                <div class="medium primary btn"><a href="http://www.shushilvshe.com/bigdata/cdh-update.html" rel="bookmark" title="Permalink to CDH升级（5.11.0 -> 5.12.0）">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+                                <div class="row tag-row">
+                                        <span>Tagged as : </span>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/cdh.html">CDH</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/bigdata.html">bigdata</a>
+                                </div>
+
+
+
+                        </article></li>
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/travel/dengfeng.html" rel="bookmark" title="Permalink to 登封洛阳游记——登封篇">登封洛阳游记——登封篇</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2017-07-21T23:59:00+08:00"> 2017-07-21(星期五) 23:59 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html"> ssls</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <p>终于有了写游记的全部条件了，<em>时间</em>：<strong>周末</strong> <em>工具</em>：<strong>wp+md</strong>，还有<strong>记忆</strong>，赶紧把之前的出游的四次旅行记录下吧 年龄大了，真是什么都可能忘记哈。4到6月份温度适中，春游最合适不过了，继南京扬州之行后，喜欢上了旅游的感觉——自由 静逸 就是那种感觉。回津之后，立马着手安排下一次旅行......</p> </div><!-- /.entry-content -->
+
+                                <div class="medium primary btn"><a href="http://www.shushilvshe.com/travel/dengfeng.html" rel="bookmark" title="Permalink to 登封洛阳游记——登封篇">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+                                <div class="row tag-row">
+                                        <span>Tagged as : </span>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/deng-feng.html">登封</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/shao-lin-si.html">少林寺</a>
+                                            <a class="danger label" href="http://www.shushilvshe.com/tag/song-shan.html">嵩山</a>
+                                </div>
+
+
+
+                        </article></li>
+                </ol><!-- /#posts-list -->
+
+        </div><!-- /.eleven.columns -->
+        
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="/category/data.html">Data</a></li>
+      <li><a href="/category/food.html">Food</a></li>
+      <li><a href="/category/travel.html">Travel</a></li>
+      <li><a href="/">Photo</a></li>
+      <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+		<li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+		<li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+
+</div> </div><!-- /.row -->
+
 <p class="paginator">
-        <a href="http://www.shushilvshe.com/author/ssls3.html">&laquo;</a>
+            <a href="http://www.shushilvshe.com/author/ssls3.html"><i class="icon-arrow-left"></i></a>
     Page 4 / 4
 </p>
 </section><!-- /#content -->
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://www.shushilvshe.com/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://www.shushilvshe.com/theme/js/libs/gumby.min.js"></script>
+  <script src="http://www.shushilvshe.com/theme/js/plugins.js"></script>
 </body>
 </html>

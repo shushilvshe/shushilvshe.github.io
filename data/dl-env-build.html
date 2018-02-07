@@ -1,47 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh_cn">
 <head>
-          <title>shushilvshe's Blog</title>
+
+        <title>搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</title>
         <meta charset="utf-8" />
 
 
-    <meta name="tags" content="大数据" />
-    <meta name="tags" content="深度学习" />
-    <meta name="tags" content="keras，NVIDIA" />
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygment.css" />
+
+        <script src="http://www.shushilvshe.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
 
 </head>
 
 <body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="/category/data.html">Data</a></li>
-            <li><a href="/category/food.html">Food</a></li>
-            <li><a href="/category/travel.html">Travel</a></li>
-            <li><a href="/">Photo</a></li>
-            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-        </ul></nav><!-- /#menu -->
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://www.shushilvshe.com/">Home</a></li>
+
+                <li><a href="/category/data.html">Data</a></li>
+                <li><a href="/category/food.html">Food</a></li>
+                <li><a href="/category/travel.html">Travel</a></li>
+                <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+
+              </ul>
+            </div>
+
 <section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://www.shushilvshe.com/data/dl-env-build.html" rel="bookmark"
-         title="Permalink to 搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2017-09-22T16:25:26+08:00">
-      2017-09-22(星期五) 16:25
-    </time>
-    <time class="modified" datetime="2017-09-22T16:25:28+08:00">
-      2017-09-22(星期五) 16:25
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <p><strong>目录：</strong></p>
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://www.shushilvshe.com/data/dl-env-build.html" rel="bookmark"
+                   title="Permalink to 搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-09-22T16:25:26+08:00">
+                2017-09-22(星期五) 16:25
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html"> ssls</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>目录：</strong></p>
 <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
@@ -557,13 +583,79 @@ abrt-addon-kerneloops-2.1.11-48.el7.centos.x86_64
 <p>http://www.pyimagesearch.com/2016/07/04/how-to-install-cuda-toolkit-and-cudnn-for-deep-learning</p>
 <p>https://www.linkedin.com/pulse/20140808222919-219659043-rhel-centos-7-and-nvidia-drivers</p>
 </blockquote>
-  </div><!-- /.entry-content -->
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="/category/data.html">Data</a></li>
+      <li><a href="/category/food.html">Food</a></li>
+      <li><a href="/category/travel.html">Travel</a></li>
+      <li><a href="/">Photo</a></li>
+      <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+		<li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+		<li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+
+</div> </div><!-- /.row -->
+
+
 </section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://www.shushilvshe.com/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://www.shushilvshe.com/theme/js/libs/gumby.min.js"></script>
+  <script src="http://www.shushilvshe.com/theme/js/plugins.js"></script>
 </body>
 </html>
