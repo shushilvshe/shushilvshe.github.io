@@ -1,34 +1,101 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>人脸识别——对齐算法 - shushilvshe's Blog</title>
+<html lang="zh_cn">
+<head>
+          <title>shushilvshe's Blog</title>
         <meta charset="utf-8" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="http://www.shushilvshe.com/theme/static/css/style.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    </head>
 
-    <body id="index" class="archive">
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class=""><a href="http://www.shushilvshe.com">Home</a></li>
-                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-                    <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
-                </ul>
-                <h3 class="text-muted"><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></h3>
-				<h2 class="text-muted">Data Developer</h2>
-             </div>
-<section id="content" class="article content">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://www.shushilvshe.com/data/facealign.html" rel="bookmark"
-         title="Permalink to 人脸识别——对齐算法">人脸识别——对齐算法</a></h2>
- 
-  </header>
-  
-     
-  <div class="entry-content">
+
+    <meta name="tags" content="大数据" />
+    <meta name="tags" content="机器学习" />
+    <meta name="tags" content="人脸识别" />
+    <meta name="tags" content="人脸对齐" />
+
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="/theme/js/ie/html5shiv.js"></script><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="/theme/css/ie8.css" /><![endif]-->
+</head>
+
+<body>
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
+        </header><!-- /#banner -->
+<!-- Sidebar -->
+            <div id="sidebar">
+
+                <!-- Logo -->
+                    <h1 id="logo"><a href="/">shushilvshe's Blog</a></h1>
+                    <!-- Text -->
+                    <section class="box text-style1">
+                        <div class="inner">
+                            <p>
+                                <strong>Ut scelerisque nec sapien ut sollicitudin:</strong><br />Data Developer
+                            </p>
+                        </div>
+                    </section>
+                <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
+                            
+                            <li><a href="#">Nam euismod dui</a></li>
+                            <li><a href="#">Integer eget eros</a></li>
+                            <li><a href="#">Proin vehicula tortor</a></li>
+                            <li><a href="#">Vestibulum consectetur tellus</a></li>
+                        </ul>
+                    </nav>
+
+                <!-- Search -->
+                    <!-- <section class="box search">
+                        <form method="post" action="#">
+                            <input type="text" class="text" name="search" placeholder="Search" />
+                        </form>
+                    </section> -->
+
+                
+
+                <!-- Recent Posts -->
+                    <section class="box recent-posts">
+                        <header>
+                            <h2>Contact Me</h2>
+                        </header>
+                        <ul>
+                            <li><a class="icon fa-envelope" href="#"> eMail</a></li>
+                            <li><a class="icon fa-twitter" href="#"> Twitter</a></li>
+                            <li><a class="icon fa-facebook" href="#"> Facebook</a></li>
+                            <li><a class="icon fa-github" href="#"> Github</a></li>
+                            
+                        </ul>
+                    </section>
+
+
+
+                <!-- Copyright -->
+                    <ul id="copyright">
+                        <li>Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.</li>
+                        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                        <li>Modified under a <a href="https://creativecommons.org/licenses/by/3.0/">CC:BY</a> license.</li>
+                    </ul>
+
+            </div><!-- /#menu -->
+<div id="content">
+<div class="inner">
+        <article class="box post post-excerpt">
+                <header> 
+                <h2><a href="http://www.shushilvshe.com/data/facealign.html" rel="bookmark" title="Permalink to 人脸识别——对齐算法">人脸识别——对齐算法</a></h2> 
+                <p></p>
+                </header>
+                <div class="info">
+                    <span class="date" datetime="2017-09-05T22:24:46+08:00"><span class="month"> 9月</span> <span class="day">05</span> <span class="month"> 2017</span></span>
+                    <ul class="stats">
+                                    <li><a href="mailto:?Subject=人脸识别——对齐算法&Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://www.shushilvshe.com/data/facealign.html" class="icon fa-envelope">&nbsp;</a></li>
+                                    <li><a href="http://reddit.com/submit?url=http://www.shushilvshe.com/data/facealign.html&title=#人脸识别——对齐算法"" class="icon fa-reddit">&nbsp;</a></li>
+                                    <li><a href="https://twitter.com/share?url=http://www.shushilvshe.com/data/facealign.html&text=&hashtags=GnotC" class="icon fa-twitter">&nbsp;</a></li>
+                                    <li><a href="https://www.facebook.com/sharer.php?u=http://www.shushilvshe.com/data/facealign.html" class="icon fa-facebook">&nbsp;</a></li>
+                                </ul>
+                </div><!-- /.post-info -->
+                <div class="entry-content"> &nbsp; </div><!-- /.entry-content -->
+        </article>
     <p><strong>基本思路：</strong></p>
 <p>使用facenet框架，可以识别出一张图片中的人脸头像，并返回每张人脸的边界和五官坐标，但图片中有的头像是有倾斜角度的，我们将倾斜度数小于指定阈值的进行校正，其余的按原形截取图片。</p>
 <ul>
@@ -139,22 +206,12 @@
 <li>脸旁两部分无用数据较多，如果是贴脸照片会多出干扰信息，这个也可根据人脸边界进行改进修正。</li>
 </ul>
   </div><!-- /.entry-content -->
-   <footer class="post-info text-muted">
-    Posted on <abbr class="published" title="2017-09-05T22:24:46+08:00">
-      2017-09-05(星期二) 22:24
-    </abbr>
-    <address class="vcard author">
-      by <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-    </address> in <a href="http://www.shushilvshe.com/category/data.html">Data</a> Tagged <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据 </a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习 </a><a href="http://www.shushilvshe.com/tag/ren-lian-shi-bie.html">人脸识别 </a><a href="http://www.shushilvshe.com/tag/ren-lian-dui-qi.html">人脸对齐 </a>  </footer><!-- /.post-info -->
-</section>
-            <footer id="contentinfo" class="footer">
-                    <nav class="pull-right bottom-nav">
-                        <a href="http://www.shushilvshe.com/None">RSS</a>
-                    </nav>
-                    <address id="about" class="vcard body">
-                    &copy; <a href="http://www.shushilvshe.com">shushilvshe's Blog</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
-                    </address><!-- /#about -->
-            </footer><!-- /#contentinfo -->
-        </div><!-- container -->
-    </body>
+  <!-- Pagination -->
+            <div class="pagination">
+            </div>
+ 
+</div>
+</div>
+<!-- /#contentinfo -->
+</body>
 </html>

@@ -1,34 +1,101 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>卷积神经网络（CNN） - shushilvshe's Blog</title>
+<html lang="zh_cn">
+<head>
+          <title>shushilvshe's Blog</title>
         <meta charset="utf-8" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="http://www.shushilvshe.com/theme/static/css/style.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    </head>
 
-    <body id="index" class="archive">
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class=""><a href="http://www.shushilvshe.com">Home</a></li>
-                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-                    <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
-                </ul>
-                <h3 class="text-muted"><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></h3>
-				<h2 class="text-muted">Data Developer</h2>
-             </div>
-<section id="content" class="article content">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://www.shushilvshe.com/data/cnn.html" rel="bookmark"
-         title="Permalink to 卷积神经网络（CNN）">卷积神经网络（CNN）</a></h2>
- 
-  </header>
-  
-     
-  <div class="entry-content">
+
+    <meta name="tags" content="大数据" />
+    <meta name="tags" content="深度学习" />
+    <meta name="tags" content="卷积" />
+    <meta name="tags" content="CNN" />
+
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="/theme/js/ie/html5shiv.js"></script><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="/theme/css/ie8.css" /><![endif]-->
+</head>
+
+<body>
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
+        </header><!-- /#banner -->
+<!-- Sidebar -->
+            <div id="sidebar">
+
+                <!-- Logo -->
+                    <h1 id="logo"><a href="/">shushilvshe's Blog</a></h1>
+                    <!-- Text -->
+                    <section class="box text-style1">
+                        <div class="inner">
+                            <p>
+                                <strong>Ut scelerisque nec sapien ut sollicitudin:</strong><br />Data Developer
+                            </p>
+                        </div>
+                    </section>
+                <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
+                            
+                            <li><a href="#">Nam euismod dui</a></li>
+                            <li><a href="#">Integer eget eros</a></li>
+                            <li><a href="#">Proin vehicula tortor</a></li>
+                            <li><a href="#">Vestibulum consectetur tellus</a></li>
+                        </ul>
+                    </nav>
+
+                <!-- Search -->
+                    <!-- <section class="box search">
+                        <form method="post" action="#">
+                            <input type="text" class="text" name="search" placeholder="Search" />
+                        </form>
+                    </section> -->
+
+                
+
+                <!-- Recent Posts -->
+                    <section class="box recent-posts">
+                        <header>
+                            <h2>Contact Me</h2>
+                        </header>
+                        <ul>
+                            <li><a class="icon fa-envelope" href="#"> eMail</a></li>
+                            <li><a class="icon fa-twitter" href="#"> Twitter</a></li>
+                            <li><a class="icon fa-facebook" href="#"> Facebook</a></li>
+                            <li><a class="icon fa-github" href="#"> Github</a></li>
+                            
+                        </ul>
+                    </section>
+
+
+
+                <!-- Copyright -->
+                    <ul id="copyright">
+                        <li>Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.</li>
+                        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                        <li>Modified under a <a href="https://creativecommons.org/licenses/by/3.0/">CC:BY</a> license.</li>
+                    </ul>
+
+            </div><!-- /#menu -->
+<div id="content">
+<div class="inner">
+        <article class="box post post-excerpt">
+                <header> 
+                <h2><a href="http://www.shushilvshe.com/data/cnn.html" rel="bookmark" title="Permalink to 卷积神经网络（CNN）">卷积神经网络（CNN）</a></h2> 
+                <p></p>
+                </header>
+                <div class="info">
+                    <span class="date" datetime="2017-09-13T13:59:15+08:00"><span class="month"> 9月</span> <span class="day">13</span> <span class="month"> 2017</span></span>
+                    <ul class="stats">
+                                    <li><a href="mailto:?Subject=卷积神经网络（CNN）&Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://www.shushilvshe.com/data/cnn.html" class="icon fa-envelope">&nbsp;</a></li>
+                                    <li><a href="http://reddit.com/submit?url=http://www.shushilvshe.com/data/cnn.html&title=#卷积神经网络（CNN）"" class="icon fa-reddit">&nbsp;</a></li>
+                                    <li><a href="https://twitter.com/share?url=http://www.shushilvshe.com/data/cnn.html&text=&hashtags=GnotC" class="icon fa-twitter">&nbsp;</a></li>
+                                    <li><a href="https://www.facebook.com/sharer.php?u=http://www.shushilvshe.com/data/cnn.html" class="icon fa-facebook">&nbsp;</a></li>
+                                </ul>
+                </div><!-- /.post-info -->
+                <div class="entry-content"> &nbsp; </div><!-- /.entry-content -->
+        </article>
     <h3>概述</h3>
 <p><strong>卷积神经网络(Convolutional Neural Network, CNN)</strong>是深度学习技术中极具代表的网络结构之一，在图像处理领域取得了很大的成功，在国际标准的ImageNet数据集上，许多成功的模型都是基于CNN的。CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
 <p>图像处理中，往往会将图像看成是一个或多个的二维向量，如之前博文中提到的MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是RGB表示的彩色图片则有三个颜色通道，可表示为三张二维向量）。传统的神经网络都是采用全连接的方式，即输入层到隐藏层的神经元都是全部连接的，这样做将导致参数量巨大，使得网络训练耗时甚至难以训练，而CNN则通过局部连接、权值共享等方法避免这一困难，有趣的是，这些方法都是受到现代生物神经网络相关研究的启发（感兴趣可阅读以下部分）。</p>
@@ -108,22 +175,12 @@
 </ul>
 <p><center><img src="http://i.imgur.com/kJtbaEz.png" width="800"/></center></p>
   </div><!-- /.entry-content -->
-   <footer class="post-info text-muted">
-    Posted on <abbr class="published" title="2017-09-13T13:59:15+08:00">
-      2017-09-13(星期三) 13:59
-    </abbr>
-    <address class="vcard author">
-      by <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-    </address> in <a href="http://www.shushilvshe.com/category/data.html">Data</a> Tagged <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据 </a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习 </a><a href="http://www.shushilvshe.com/tag/juan-ji.html">卷积 </a><a href="http://www.shushilvshe.com/tag/cnn.html">CNN </a>  </footer><!-- /.post-info -->
-</section>
-            <footer id="contentinfo" class="footer">
-                    <nav class="pull-right bottom-nav">
-                        <a href="http://www.shushilvshe.com/None">RSS</a>
-                    </nav>
-                    <address id="about" class="vcard body">
-                    &copy; <a href="http://www.shushilvshe.com">shushilvshe's Blog</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
-                    </address><!-- /#about -->
-            </footer><!-- /#contentinfo -->
-        </div><!-- container -->
-    </body>
+  <!-- Pagination -->
+            <div class="pagination">
+            </div>
+ 
+</div>
+</div>
+<!-- /#contentinfo -->
+</body>
 </html>
