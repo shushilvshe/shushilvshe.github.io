@@ -1,80 +1,60 @@
-<!doctype html>
-<html class="no-js" lang="en">
-    <head>
-        <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" />
-
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="author" content="ssls" />
-        <title>kubernetes（1.8.3）系列之calico集成</title>
-        
-<meta name="description" content="&lt;p&gt;目前工作试错环境为 k8s（1.8.3）管理下的 &lt;code&gt;tensorflow-1.4.1-compile-py36&lt;/code&gt; docker镜像深度学习集群，说是集群，但平时的工作任务依然是依靠单台跑脚本运行的，GPU的利用率比较低，经过研究，最后决定通过 &lt;code&gt;openmpi-2.1.2 + nccl2 + nccl_2.1.2-1+cuda8.0_x86_64&lt;/code&gt; 的技术方案实现GPU的并行计算。但将环境部署到K8S集群时碰到一个问题——在同一个节点中启动的pod可以成功执行，但不同节点间的pods无法成功执行，报错如下：&lt;/p&gt;" />
-<meta name="keywords" content=" 深度学习 calico docker kubernetes  "/>
-
-        <!--[if !IE 7]>
-        <style type="text/css">
-            #main-content {display:table;height:100%}
-        </style>
-        <![endif]-->
-        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/backdrop.css" />
-        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygments.css" />
-        <script src="http://www.shushilvshe.com/theme/js/modernizr.js"></script>
-
-
-    </head>
-      
-
-    <body>
-        <div class="master-row">
-
-            <div class="content-pane main-content">
-                <nav class="top-bar" data-topbar role="navigation">
-                    <ul class="title-area">
-                        <li class="name"><!-- Leave this empty --></li>
-                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-                    </ul>
-                    <section class="top-bar-section">
-                        <ul class="left">
-                            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-                        </ul>
-                        <ul class="right">
-                            <li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-                            <li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-                            <li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-                        </ul>
-                    </section>
-                </nav>
-
-                <div class="row title-bar">
-                    <div class="small-12 columns">
-                        <h1><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></h1><h2> <small>Data Developer</small></h2>
-                        <hr>
-                    </div>
-                </div>
-            
-                <div id="contents">
-<div class="row">
-    <div class="small-12 columns article">
-        <h2>kubernetes（1.8.3）系列之calico集成</h2>
-        <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
-    <div class="small-12 columns">
-        <ul class="inline-list">
-            <li><span><i class="fa fa-calendar"></i>&nbsp; 2018-01-04(星期四) 14:50</span></li>
-            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="http://www.shushilvshe.com/category/data.html">Data</a></span></li>
-            <li>
-                <span>
-                    <i class="fa fa-tags"></i>&nbsp;
-                    <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html"><span class="label">深度学习</span></a>
-                    <a href="http://www.shushilvshe.com/tag/calico.html"><span class="label">calico</span></a>
-                    <a href="http://www.shushilvshe.com/tag/docker.html"><span class="label">docker</span></a>
-                    <a href="http://www.shushilvshe.com/tag/kubernetes.html"><span class="label">kubernetes</span></a>
-                </span>
-            </li>
-        </ul>
-    </div>
-</div>
-        <section class="article">
-            <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+	<meta charset="utf-8">
+	<title>kubernetes（1.8.3）系列之calico集成 — shushilvshe's Blog</title>
+	<meta name="description" content="Title: kubernetes（1.8.3）系列之calico集成; Date: 2018-01-04; Author: ssls">
+	<meta name="author" content="ssls">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="http://www.shushilvshe.com/theme/html5.js"></script>
+		<![endif]-->
+	<link href="http://www.shushilvshe.com/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="http://www.shushilvshe.com/theme/css/local.css" rel="stylesheet">
+	<link href="http://www.shushilvshe.com/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog</a>
+			<br><small>Data Developer</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">kubernetes（1.8.3）系列之calico集成</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">ssls</h4>
+		</span>
+		<time datetime="2018-01-04T14:50:01+08:00" itemprop="datePublished">2018-01-04(星期四) 14:50</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="http://www.shushilvshe.com/category/data.html" rel="category">Data</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html" rel="tag">深度学习</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="http://www.shushilvshe.com/tag/calico.html" rel="tag">calico</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="http://www.shushilvshe.com/tag/docker.html" rel="tag">docker</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="http://www.shushilvshe.com/tag/kubernetes.html" rel="tag">kubernetes</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
 <script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
@@ -704,114 +684,78 @@ There must not be iptables rules, or any kind of firewall, preventing communicat
 <p><a href="http://blog.csdn.net/A632189007/article/details/78815807#t27">Kubernetes1.8.3 集群环境搭建（CentOS）</a></p>
 <p><a href="https://jicki.me/2017/11/17/kubernetes-1.8.3/#kubernetes-183">小炒肉 kubernetes 1.8.3 安装过程</a></p>
 <p><a href="http://www.lijiaocn.com/%E9%A1%B9%E7%9B%AE/2017/04/11/calico-usage.html#安装felix">Calico网络的原理、组网方式与使用</a></p>
-<p><strong>《Kubernetes权威指南-从Docker到Kubernetes实践全接触纪念版》 page345 - page363</strong></p>    
-        </section>
-    </div>
+<p><strong>《Kubernetes权威指南-从Docker到Kubernetes实践全接触纪念版》 page345 - page363</strong></p></div>
+	<hr>
+	<h2>Comments</h2>
 </div>
-                </div>
-
-                <footer class="show-for-large-up">
-<div class="row">
-    <div class="small-6 medium-3 columns">
-        <ul class="left-nav">
-            <li><a href="http://www.shushilvshe.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
-            <li><a href="http://www.shushilvshe.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
-        </ul>
-    </div>
-    <div class="small-6 medium-3 medium-push-6 columns">
-        <ul class="right-nav">
-            <li><a href="http://www.shushilvshe.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
-        </ul>
-    </div>
-    <div class="small-12 medium-6 medium-pull-3 columns text-center">
-        <p class="tag-cloud">
-            <a href="http://www.shushilvshe.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
-            &nbsp;&hellip;
-        </p>
-    </div>
-    <div class="small-12 columns sub-footer">
-        <hr>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-left">
-                &copy;  ssls 
-                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
-            </p>
-        </div>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-right">
-                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="https://www.python.org/">Python</a>.
-            </p>
-        </div>
-    </div>
-</div>                </footer>
-            </div>
-            
-            <div class="image-pane main-content" style="background: url(''); background-size:cover; background-position: right;">
-                <div class="row">
-                    <div class="small-12 medium-4 large-12 columns">
-                    </div>
-
-                    <div class="small-12 medium-4  large-12 columns link-list">
-                        <h5 class='text-center'>Links</h5>
-                        <ul class="inline-center">
-                            <li><a href="/categories.html">Category</a></li>
-                            <li><a href="/tags.html">Tags</a></li>
-                            <li><a href="/archives.html">Archives</a></li>
-                        </ul>
-                    </div>
-
-<!--
-                    <div class="small-12 medium-3 large-12 columns">
-                    </div>
--->
-               </div>
-            </div>
-        </div>
-        
-        
-        <div class="row">
-            <footer class="hide-for-large-up">
-<div class="row">
-    <div class="small-6 medium-3 columns">
-        <ul class="left-nav">
-            <li><a href="http://www.shushilvshe.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
-            <li><a href="http://www.shushilvshe.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
-        </ul>
-    </div>
-    <div class="small-6 medium-3 medium-push-6 columns">
-        <ul class="right-nav">
-            <li><a href="http://www.shushilvshe.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
-        </ul>
-    </div>
-    <div class="small-12 medium-6 medium-pull-3 columns text-center">
-        <p class="tag-cloud">
-            <a href="http://www.shushilvshe.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
-            &nbsp;&hellip;
-        </p>
-    </div>
-    <div class="small-12 columns sub-footer">
-        <hr>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-left">
-                &copy;  ssls 
-                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
-            </p>
-        </div>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-right">
-                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="https://www.python.org/">Python</a>.
-            </p>
-        </div>
-    </div>
-</div>            </footer>
-        </div>
-        
-        
-        <script src="http://www.shushilvshe.com/theme/js/jquery.min.js"></script>
-        <script src="http://www.shushilvshe.com/theme/js/foundation.min.js"></script>
-        <script src="http://www.shushilvshe.com/theme/js/app.js"></script>
-    </body>
-  
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></li>
+							<li><a href="http://www.shushilvshe.com//category/data.html"><i class="fa fa-Data "></i> Data</a></li>
+							<li><a href="http://www.shushilvshe.com//category/food.html"><i class="fa fa-Food "></i> Food</a></li>
+							<li><a href="http://www.shushilvshe.com//category/travel.html"><i class="fa fa-Travel "></i> Travel</a></li>
+							<li><a href="http://www.shushilvshe.com//"><i class="fa fa-Photo "></i> Photo</a></li>
+							<li><a href="http://www.shushilvshe.com/pages/about.html"><i class="fa fa-About ME "></i> About ME</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.shushilvshe.com/category/data.html">Data (22)</a></li>
+							<li><a href="http://www.shushilvshe.com/category/food.html">food (1)</a></li>
+							<li><a href="http://www.shushilvshe.com/category/travel.html">travel (11)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/categories.html">Category</a></li>
+							<li><a href="/tags.html">Tags</a></li>
+							<li><a href="/archives.html">Archives</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; ssls 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
 </html>
