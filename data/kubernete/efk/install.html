@@ -235,11 +235,7 @@ kibana-logging          ClusterIP   10.254.103.74    &lt;none&gt;        5601/TC
 
 <h2>访问 kibana</h2>
 <ul>
-<li>
-<ol>
-<li>通过 kube-apiserver 访问：</li>
-</ol>
-</li>
+<li><strong>通过 kube-apiserver 访问：</strong></li>
 </ul>
 <p>获取 Kibana 服务 URL。</p>
 <div class="highlight"><pre><span></span>[root@kube_master184 efk]# kubectl cluster-info
@@ -257,11 +253,7 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 
 <p>浏览器访问 URL： https://192.168.1.184:6443/api/v1/proxy/namespaces/kube-system/services/kibana-logging</p>
 <ul>
-<li>
-<ol>
-<li>通过 kubectl proxy 访问：</li>
-</ol>
-</li>
+<li><strong>通过 kubectl proxy 访问：</strong></li>
 </ul>
 <p>创建代理</p>
 <div class="highlight"><pre><span></span> $ kubectl proxy --address=&#39;192.168.1.184&#39; --port=9999 --accept-hosts=&#39;^*$&#39;
@@ -289,7 +281,7 @@ lrwxrwxrwx 1 root root 161 Feb  5 15:26 fluentd-es_0.log -&gt; /opt/docker/conta
 <p>还有一种可能是因为docker的log-driver的设置，需要是json-file格式的，docker默认就是这种格式，如果以前修改过，需要改成json-file, 具体修改方法参考 <a href="https://docs.docker.com/engine/admin/logging/overview/#examples">docker logging</a></p>
 </blockquote>
 <h3>2. 修改elasticsearch日志文件存储位置</h3>
-<p>下载的es-statefulset.yaml配置文件中，默认是把elasticsearch的日志存储放在了pod的empty volumns里了，真正的运行环境应该存储到node具体路径或ceph等持久化的存储介质中。</p>
+<p>下载的es-statefulset.yaml配置文件中，默认是把elasticsearch的日志存储放在了pod的empty volumns里了，因此官方的部署参考仅可用于试验，实际部署到生产环境时需要使用Persistent Volume。如存储到node具体路径或ceph等。</p>
 <h2>参考文档</h2>
 <p><a href="https://docs.docker.com/config/containers/logging/configure/">Docker Configure logging drivers</a></p>
 <p><a href="https://www.fluentd.org/plugins/all#input-output">Fluentd Plugins</a></p>
