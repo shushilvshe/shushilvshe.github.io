@@ -1,105 +1,113 @@
 <!doctype html>
-<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="zh_cn" itemscope itemtype="http://schema.org/Person">
+<head>
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>pandas基本操作</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="ssls">
 
-		<title>shushilvshe's Blog</title>
-		<meta name="description" content="">
-		<meta name="author" content="ssls">
+  <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg">
 
-		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/foundation.css" />
-		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygment/monokai.css" />
-		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/custom.css" />
+  <!-- schema.org -->
+  <meta itemprop="name" content="shushilvshe's Blog">
+  <meta itemprop="image" content="">
+  <meta itemprop="description" content="">
 
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/milligram.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/custom.css" type="text/css" />
 
-		<script src="http://www.shushilvshe.com/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
 
-		<!-- Feeds -->
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="">
 
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://www.shushilvshe.com/ml/pandas/baseoperation.html">
+<meta name="twitter:title" content="shushilvshe's Blog ~ pandas基本操作">
+<meta name="twitter:description" content="在pandas中有两类非常重要的数据结构，即序列Series和数据框DataFrame。Series类似于numpy中的一维数组，除了通吃一维数组可用的函数或方法，而且其可通过索引标签的方式获取数据，还具有索引的自动对齐功能；DataFrame类似于numpy中的二维数组，同样可以通用numpy数组的函数和方法，而且还具有其他灵活应用，后续会介绍到。">
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
-		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	</head>
-	<body>
-		<div class="off-canvas-wrap">
-			<div class="inner-wrap">
-				<!-- mobile top bar to activate nav -->
-				<nav class="tab-bar show-for-small">
-					<section class="left-small">
-						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
-					</section>
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="shushilvshe's Blog ~ pandas基本操作" />
+<meta property="og:description" content="在pandas中有两类非常重要的数据结构，即序列Series和数据框DataFrame。Series类似于numpy中的一维数组，除了通吃一维数组可用的函数或方法，而且其可通过索引标签的方式获取数据，还具有索引的自动对齐功能；DataFrame类似于numpy中的二维数组，同样可以通用numpy数组的函数和方法，而且还具有其他灵活应用，后续会介绍到。" />
+<meta property="og:image" content="" />
+</head>
 
-					<section class="middle tab-bar-section">
-						<h1 class="title">shushilvshe's&nbsp;Blog</h1>
-					</section>
-				</nav>
+<body>
+    <div class="container">
 
-				<!-- mobile side bar nav -->
-				<aside class="left-off-canvas-menu">
-					<ul class="off-canvas-list">
-						<li><a href="http://www.shushilvshe.com">Home</a></li>
-						<li><label>Categories</label></li>
-							<li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-							<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-							<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+    <!-- Navbar -->
+      <div class="navbar">
+        <ul>
+            <div>
+                <li>
+                    <a href="http://www.shushilvshe.com"><h3>shushilvshe's Blog</h3></a>
+                </li>
+                <li>
+                        <em><h6>shushilvshe's Thoughts and Writings</h6></em>
+                </li>
+            </div>
+        </ul>
+      </div>
 
-						<li><label>Links</label></li>
-							<li><a href="/categories.html">Category</a></li>
-							<li><a href="/tags.html">Tags</a></li>
-							<li><a href="/archives.html">Archives</a></li>
+  <!-- Sidebar -->
+    <sidebar>
+        <ul class="static-item">
+                <li><a href="/category/data.html">Data</a></li>
+                <li><a href="/category/food.html">Food</a></li>
+                <li><a href="/category/travel.html">Travel</a></li>
+                <li><a href="/">Photo</a></li>
 
+                <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+        </ul>        
 
+        <ul>
+                <div class="cat-border">
+                <li style="color: #F2F1EF; background-color: #6C7A89;">Categories</li>
+                    <li><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                    <li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                    <li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                </div>
+        </ul>
 
-						<li><label>Social</label></li>
-					</ul>	
-				</aside>
+            <h2><br/>BLOGROLLS</h2>
+            <ul>
+                    <li><a href="/categories.html">Category</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                    <li><a href="/archives.html">Archives</a></li>
+            </ul> 
+   
+        <p> 
+        </p>
+        <p>
+        </p>
+        <p>
+        </p>
+    </sidebar>
+    
+    <maincontent>
+<h2>
+    <a href="http://www.shushilvshe.com/ml/pandas/baseoperation.html" rel="bookmark" title="Permalink to pandas基本操作">pandas基本操作</a>
+</h2>
 
-				<!-- top bar nav -->
-				<nav class="top-bar hide-for-small-only" data-topbar>
-					<ul class="title-area">
-						<li class="name">
-							<h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog</a></h1>
-						</li>
-					</ul>
+<div>
+    <b>By: </b><a href="http://www.shushilvshe.com/author/ssls.html">ssls</a><b>    On: </b>2017-08-08(星期二) 17:17<br />
+    <b>In: </b><a href="http://www.shushilvshe.com/category/data.html" rel="bookmark" title="Permalink to Data">Data</a><br />
+    <em><b>Tags: </b>
+                <span><a href="http://www.shushilvshe.com/tag/da-shu-ju.html">#大数据 </a></span>
+                <span><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">#机器学习 </a></span>
+                <span><a href="http://www.shushilvshe.com/tag/pandas.html">#pandas </a></span>
+    </em>
+    <hr>
+</div>
 
-					<section class="top-bar-section">
-						<ul class="left">
-								<li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-								<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-								<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-						</ul>
-                        <ul class="right">                                                                                                                                           
-                                                                                                          
-····                                                                                                                                       
-                                     <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>                                    
-                                                                                                                                          
-                                                                                                                                             
-                        </ul>  
-					</section>
-				</nav>
-
-				<!-- Main Page Content and Sidebar -->
-				<section class="main-section">
-					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-<article>
-	<h2>pandas基本操作</h2>
-	<h2>1.数据结构介绍</h2>
+<div>
+    <mainarticle>
+    <h2>1.数据结构介绍</h2>
 <p>在pandas中有两类非常重要的数据结构，即序列<strong><code>Series</code></strong>和数据框<strong><code>DataFrame</code></strong>。Series类似于numpy中的一维数组，除了通吃一维数组可用的函数或方法，而且其可通过索引标签的方式获取数据，还具有索引的自动对齐功能；DataFrame类似于numpy中的二维数组，同样可以通用numpy数组的函数和方法，而且还具有其他灵活应用，后续会介绍到。</p>
 <ul>
 <li><strong>Series的创建</strong></li>
@@ -1111,57 +1119,27 @@ max       3.000000     2.653656     3.000000     3.000000
 </blockquote>
 </li>
 </ul>
-	<hr/>
-	<h6>Written by <a href="http://www.shushilvshe.com/author/ssls.html">ssls</a> in <a href="http://www.shushilvshe.com/category/data.html">Data</a> on 2017-08-08(星期二) 17:17. Tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>, <a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>, <a href="http://www.shushilvshe.com/tag/pandas.html">pandas</a>, </h6>
-</article>
+    </mainarticle>
+</div>
+<hr>
+        
+<div>
+        <i>If you found the article helpful, please share or cite the article, and spread the word:</i>
+            <p style="margin-top: 2%;">
+                <span><a target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;" title="Twitter" href="https://twitter.com/share?url=http://www.shushilvshe.com/ml/pandas/baseoperation.html&text=pandas基本操作&via="><img class="social-icons-a" src="http://www.shushilvshe.com/theme/images/icons/twitter.png"></a></span>
+                <span><a target="_blank" title="Facebook" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;" href="https://www.facebook.com/sharer.php?u=http://www.shushilvshe.com/ml/pandas/baseoperation.html&t=pandas基本操作"><img class="social-icons-a" src="http://www.shushilvshe.com/theme/images/icons/facebook.png"></a></span>
 
-<hr/>
-						</div>
-						<!-- End Main Content -->
-						<!-- Sidebar -->
-						<aside class="medium-3 hide-for-small-only columns">
-							<div class="panel">
-								<h5>Links</h5>
-								<ul class="side-nav">
-									<li><a href="/categories.html">Category</a></li>
-									<li><a href="/tags.html">Tags</a></li>
-									<li><a href="/archives.html">Archives</a></li>
-								</ul>
-							</div>
+                <a  target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.shushilvshe.com/ml/pandas/baseoperation.html&title=pandas基本操作" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img class="social-icons-a" src="http://www.shushilvshe.com/theme/images/icons/linkedin.png"></a>
+            </p>
+</div>
+<hr>
+    <p><i>For any feedback or corrections, please write in to: </i><b> ssls </b></p>
+        
+    </maincontent>
 
-							<div class="panel">
-								<h5>Tags</h5>
-								<ul class="tag-cloud">
-								</ul>
-							</div>
+  <!-- Analytics -->
 
+  </div>
+</body>
 
-							<div class="panel">
-								<h5>Social</h5>
-								<ul class="side-nav">
-								</ul>
-							</div>
-						</aside>
-						<!-- End Sidebar -->
-					</div>
-
-					<!-- Footer -->
-					<footer class="row">
-						<div class="medium-9 small-12">
-							<hr/>
-							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
-						</div>
-					</footer>
-					<!-- End Footer -->
-				</section>
-				<a class="exit-off-canvas"></a>
-			</div><!--off-canvas inner-->
-		</div><!--off-canvas wrap-->
-
-		<script src="http://www.shushilvshe.com/theme/js/jquery.js"></script>
-		<script src="http://www.shushilvshe.com/theme/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
-	</body>
 </html>

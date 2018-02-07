@@ -1,163 +1,121 @@
 <!doctype html>
-<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="zh_cn" itemscope itemtype="http://schema.org/Person">
+<head>
+      <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>shushilvshe's Blog - kibana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="ssls">
 
-		<title>shushilvshe's Blog</title>
-		<meta name="description" content="">
-		<meta name="author" content="ssls">
+  <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg">
 
-		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/foundation.css" />
-		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygment/monokai.css" />
-		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/custom.css" />
+  <!-- schema.org -->
+  <meta itemprop="name" content="shushilvshe's Blog">
+  <meta itemprop="image" content="">
+  <meta itemprop="description" content="">
 
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/milligram.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/custom.css" type="text/css" />
 
-		<script src="http://www.shushilvshe.com/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
 
-		<!-- Feeds -->
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="">
 
+  <meta name="twitter:creator" content="">
+  <meta name="twitter:url" content="http://www.shushilvshe.com">
+  <meta name="twitter:title" content="shushilvshe's Blog">
+  <meta name="twitter:description" content="shushilvshe's Thoughts and Writings">
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
-		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	</head>
-	<body>
-		<div class="off-canvas-wrap">
-			<div class="inner-wrap">
-				<!-- mobile top bar to activate nav -->
-				<nav class="tab-bar show-for-small">
-					<section class="left-small">
-						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
-					</section>
+  <!-- Facebook Meta Data -->
+  <meta property="og:title" content="shushilvshe's Blog" />
+  <meta property="og:description" content="shushilvshe's Thoughts and Writings" />
+  <meta property="og:image" content="" />
 
-					<section class="middle tab-bar-section">
-						<h1 class="title">shushilvshe's&nbsp;Blog</h1>
-					</section>
-				</nav>
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="http://www.shushilvshe.com/tag/kibana.html">
+    <meta name="twitter:title" content="shushilvshe's Blog || kibana">
+    <meta name="twitter:description" content="Articles with the tag 'kibana'">
 
-				<!-- mobile side bar nav -->
-				<aside class="left-off-canvas-menu">
-					<ul class="off-canvas-list">
-						<li><a href="http://www.shushilvshe.com">Home</a></li>
-						<li><label>Categories</label></li>
-							<li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-							<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-							<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="shushilvshe's Blog || kibana"/>
+    <meta property="og:description" content="Articles with the tag 'kibana'"/>
+    <meta property="og:image" content=""/>
+</head>
 
-						<li><label>Links</label></li>
-							<li><a href="/categories.html">Category</a></li>
-							<li><a href="/tags.html">Tags</a></li>
-							<li><a href="/archives.html">Archives</a></li>
+<body>
+    <div class="container">
 
+    <!-- Navbar -->
+      <div class="navbar">
+        <ul>
+            <div>
+                <li>
+                    <a href="http://www.shushilvshe.com"><h3>shushilvshe's Blog</h3></a>
+                </li>
+                <li>
+                        <em><h6>shushilvshe's Thoughts and Writings</h6></em>
+                </li>
+            </div>
+        </ul>
+      </div>
 
+  <!-- Sidebar -->
+    <sidebar>
+        <ul class="static-item">
+                <li><a href="/category/data.html">Data</a></li>
+                <li><a href="/category/food.html">Food</a></li>
+                <li><a href="/category/travel.html">Travel</a></li>
+                <li><a href="/">Photo</a></li>
 
-						<li><label>Social</label></li>
-					</ul>	
-				</aside>
+                <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+        </ul>        
 
-				<!-- top bar nav -->
-				<nav class="top-bar hide-for-small-only" data-topbar>
-					<ul class="title-area">
-						<li class="name">
-							<h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog</a></h1>
-						</li>
-					</ul>
+        <ul>
+                <div class="cat-border">
+                <li style="color: #F2F1EF; background-color: #6C7A89;">Categories</li>
+                    <li><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                    <li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                    <li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                </div>
+        </ul>
 
-					<section class="top-bar-section">
-						<ul class="left">
-								<li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-								<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-								<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-						</ul>
-                        <ul class="right">                                                                                                                                           
-                                                                                                          
-····                                                                                                                                       
-                                     <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>                                    
-                                                                                                                                          
-                                                                                                                                             
-                        </ul>  
-					</section>
-				</nav>
+            <h2><br/>BLOGROLLS</h2>
+            <ul>
+                    <li><a href="/categories.html">Category</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                    <li><a href="/archives.html">Archives</a></li>
+            </ul> 
+   
+        <p> 
+        </p>
+        <p>
+        </p>
+        <p>
+        </p>
+    </sidebar>
+    
+    <maincontent>
 
-				<!-- Main Page Content and Sidebar -->
-				<section class="main-section">
-					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-							<div class="row">
-								<div class="small-12 columns">
-									<h2>Posts Tagged With 'kibana'</h2>
-								</div>
-							</div>
-
-<article>
-	<h3><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></h3>
-	<h6>Written by <a href="http://www.shushilvshe.com/author/ssls.html">ssls</a> in <a href="http://www.shushilvshe.com/category/data.html">Data</a> on 2018-02-07(星期三) 15:54. Tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>, <a href="http://www.shushilvshe.com/tag/rong-qi-bian-pai.html">容器编排</a>, <a href="http://www.shushilvshe.com/tag/efk.html">efk</a>, <a href="http://www.shushilvshe.com/tag/fluentd.html">Fluentd</a>, <a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a>, <a href="http://www.shushilvshe.com/tag/kibana.html">kibana</a>, </h6>
-	<p>docker会将stdout和stderr输出本机的一个目录下，一般是/var/lib/docker/contianers（也可能是/opt/docker/containers/，根据安装方式不同而不同）， kubernetes 默认会将容器的stdout和stderr录入node(minion)的/var/log/containers目录下（最后还是链接到docker的日志路径下）,而kubernetes 组件的日志默认放置在/var/log目录下。</p>
-		<p class="continue"><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-
-
-						</div>
-						<!-- End Main Content -->
-						<!-- Sidebar -->
-						<aside class="medium-3 hide-for-small-only columns">
-							<div class="panel">
-								<h5>Links</h5>
-								<ul class="side-nav">
-									<li><a href="/categories.html">Category</a></li>
-									<li><a href="/tags.html">Tags</a></li>
-									<li><a href="/archives.html">Archives</a></li>
-								</ul>
-							</div>
-
-							<div class="panel">
-								<h5>Tags</h5>
-								<ul class="tag-cloud">
-								</ul>
-							</div>
+    <ol>
+    <h2>Tag: kibana</h2>
+        <hr>
+        <li>
+            <h5><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html" rel="bookmark" title="Permalink to kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></h5>
+            By:<a href="http://www.shushilvshe.com/author/ssls.html">ssls</a><br />On:2018-02-07(星期三) 15:54<br />In:<a href="http://www.shushilvshe.com/category/data.html" rel="bookmark" title="Permalink to Data">Data</a>
+        </li>
+    </ol>
 
 
-							<div class="panel">
-								<h5>Social</h5>
-								<ul class="side-nav">
-								</ul>
-							</div>
-						</aside>
-						<!-- End Sidebar -->
-					</div>
+    </maincontent>
 
-					<!-- Footer -->
-					<footer class="row">
-						<div class="medium-9 small-12">
-							<hr/>
-							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
-						</div>
-					</footer>
-					<!-- End Footer -->
-				</section>
-				<a class="exit-off-canvas"></a>
-			</div><!--off-canvas inner-->
-		</div><!--off-canvas wrap-->
+  <!-- Analytics -->
 
-		<script src="http://www.shushilvshe.com/theme/js/jquery.js"></script>
-		<script src="http://www.shushilvshe.com/theme/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
-	</body>
+  </div>
+</body>
+
 </html>
