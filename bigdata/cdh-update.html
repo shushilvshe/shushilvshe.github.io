@@ -1,46 +1,30 @@
 <!DOCTYPE html>
-<html lang="zh_cn">
+<html lang="en">
 <head>
-          <title>shushilvshe's Blog</title>
+        <title>shushilvshe's Blog : CDH升级（5.11.0 -> 5.12.0）</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed" />
 
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-    <meta name="tags" content="大数据" />
-    <meta name="tags" content="CDH" />
-    <meta name="tags" content="bigdata" />
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie.css"/>
+                <script src="http://www.shushilvshe.com/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie6.css"/><![endif]-->
 
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="/category/data.html">Data</a></li>
-            <li><a href="/category/food.html">Food</a></li>
-            <li><a href="/category/travel.html">Travel</a></li>
-            <li><a href="/">Photo</a></li>
-            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://www.shushilvshe.com/bigdata/cdh-update.html" rel="bookmark"
-         title="Permalink to CDH升级（5.11.0 -> 5.12.0）">CDH升级（5.11.0 -> 5.12.0）</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2017-07-24T21:46:00+08:00">
-      2017-07-24(星期一) 21:46
-    </time>
-    <time class="modified" datetime="2017-07-24T21:46:00+08:00">
-      2017-07-24(星期一) 21:46
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
+<body>
+        
+<header>
+    <h1><a href="http://www.shushilvshe.com/bigdata/cdh-update.html" id="page-title">CDH升级（5.11.0 -> 5.12.0）</a></h1>
+    <span id="sitename"><a href="http://www.shushilvshe.com" id="site-title">shushilvshe's Blog  <strong>Data Developer</strong></a> &sdot;</span>
+<time datetime="2017-07-24T21:46:00+08:00">2017-07-24(星期一) 21:46</time></header>
+<article>
     <h3>集群环境</h3>
 <table>
     <tr>
@@ -207,13 +191,18 @@ ps -ef | grep cloudera-scm-agent | grep -v grep
 <blockquote>
 <p><code>https://www.cloudera.com/documentation/enterprise/5-10-x/topics/cm_ag_backup_dbs.html#concept_tyh_rmq_bl</code></p>
 </blockquote>
-  </div><!-- /.entry-content -->
-</section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+</article>
+
+        <footer>
+            <nav>
+                <ul>
+                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                    <li>:: <a href="http://www.shushilvshe.com/categories.html">Categories</a></li>
+                    <li>:: <a href="http://www.shushilvshe.com/tags.html">Tags</a></li>
+                </ul>
+            </nav>
+                <p id="theme-credit">Proudly powered by <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a></p>
+        </footer>
+
 </body>
 </html>

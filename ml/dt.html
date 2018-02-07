@@ -1,46 +1,30 @@
 <!DOCTYPE html>
-<html lang="zh_cn">
+<html lang="en">
 <head>
-          <title>shushilvshe's Blog</title>
+        <title>shushilvshe's Blog : 决策树原理</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed" />
 
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-    <meta name="tags" content="大数据" />
-    <meta name="tags" content="机器学习" />
-    <meta name="tags" content="决策树" />
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie.css"/>
+                <script src="http://www.shushilvshe.com/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie6.css"/><![endif]-->
 
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="/category/data.html">Data</a></li>
-            <li><a href="/category/food.html">Food</a></li>
-            <li><a href="/category/travel.html">Travel</a></li>
-            <li><a href="/">Photo</a></li>
-            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://www.shushilvshe.com/ml/dt.html" rel="bookmark"
-         title="Permalink to 决策树原理">决策树原理</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2017-07-28T14:03:27+08:00">
-      2017-07-28(星期五) 14:03
-    </time>
-    <time class="modified" datetime="2017-07-28T14:03:27+08:00">
-      2017-07-28(星期五) 14:03
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
+<body>
+        
+<header>
+    <h1><a href="http://www.shushilvshe.com/ml/dt.html" id="page-title">决策树原理</a></h1>
+    <span id="sitename"><a href="http://www.shushilvshe.com" id="site-title">shushilvshe's Blog  <strong>Data Developer</strong></a> &sdot;</span>
+<time datetime="2017-07-28T14:03:27+08:00">2017-07-28(星期五) 14:03</time></header>
+<article>
     <hr>
 <h2><strong>决策树简介</strong></h2>
 <p>决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
@@ -121,13 +105,18 @@
 <p>在我们的例子中, 决策树的规模并不重要, 因为我们可以获取所有节点。但是, 在现实应用中, 决策树的规模被修剪以及其他技术限制。而决策树经过修剪后的不同形状会产生不同的效果。实际上, 由信息增益和基尼不纯度启发式方法计算出的局部最优决策通常都会生成一个可行的决策树。</p>
 <h2><strong>总结</strong></h2>
 <p>本章我们介绍了一个非线性模型——决策树, 用来解决分类和回归问题。就像猜猜看游戏一样, 决策树也是由一些了问题构成一个测试实例。决策树的一个分支在遇到显示响应变量值的叶子节点时停止。我们介绍了ID3算法，用来训练决策树通过递归分割训练集，形成子集以减低响应变量的不确定性。</p>
-  </div><!-- /.entry-content -->
-</section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+</article>
+
+        <footer>
+            <nav>
+                <ul>
+                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                    <li>:: <a href="http://www.shushilvshe.com/categories.html">Categories</a></li>
+                    <li>:: <a href="http://www.shushilvshe.com/tags.html">Tags</a></li>
+                </ul>
+            </nav>
+                <p id="theme-credit">Proudly powered by <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a></p>
+        </footer>
+
 </body>
 </html>
