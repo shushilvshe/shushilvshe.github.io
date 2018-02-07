@@ -78,6 +78,26 @@
 
 <article>
   <header>
+    <h2><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html#data/kubernete/efk/install">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></h2>
+    <p>
+          Posted on 2018-02-07(星期三) 15:54 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>,              <a href="http://www.shushilvshe.com/tag/rong-qi-bian-pai.html">容器编排</a>,              <a href="http://www.shushilvshe.com/tag/efk.html">efk</a>,              <a href="http://www.shushilvshe.com/tag/fluentd.html">Fluentd</a>,              <a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a>,              <a href="http://www.shushilvshe.com/tag/kibana.html">kibana</a>
+    </p>
+  </header>
+  <div>
+      <p>docker会将stdout和stderr输出本机的一个目录下，一般是/var/lib/docker/contianers（也可能是/opt/docker/containers/，根据安装方式不同而不同）， kubernetes 默认会将容器的stdout和stderr录入node(minion)的/var/log/containers目录下（最后还是链接到docker的日志路径下）,而kubernetes 组件的日志默认放置在/var/log目录下。</p>
+      <br>
+      <a class="btn" href="http://www.shushilvshe.com/data/kubernete/efk/install.html#data/kubernete/efk/install">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="http://www.shushilvshe.com/data/kubernete-installation.html#data/kubernete-installation">kubernetes（1.8.3）系列之安装</a></h2>
     <p>
           Posted on 2018-01-23(星期二) 20:06 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
@@ -252,26 +272,6 @@
       <p>python2.7安装matplotlib失败解决方法</p>
       <br>
       <a class="btn" href="http://www.shushilvshe.com/data/matplotlib_wrong_setup.html#data/matplotlib_wrong_setup">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="http://www.shushilvshe.com/data/VOD.html#data/VOD">搭建视频点播(VOD)服务（live555 + ffmpeg）</a></h2>
-    <p>
-          Posted on 2017-11-01(星期三) 19:12 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="http://www.shushilvshe.com/tag/shi-pin-dian-bo.html">视频点播</a>,              <a href="http://www.shushilvshe.com/tag/live555.html">live555</a>,              <a href="http://www.shushilvshe.com/tag/ffmpeg.html">ffmpeg</a>
-    </p>
-  </header>
-  <div>
-      <p>前两三个月在整人脸考勤的项目，大体上分实时视频和点播两大块，实时视频使用的是ffserver流媒体服务器，负责从海康威视摄像头接收实时视频流，转而可实时查看原始视频流，同时进行人脸检测识别，最后可将原始视频流或经ai处理的视频流通过ffmpeg录制。将ffmpeg录制的视频后缀修改为live555规定的格式后即可通过rtsp流就行点播。</p>
-      <br>
-      <a class="btn" href="http://www.shushilvshe.com/data/VOD.html#data/VOD">    Continue reading
 </a>
   </div>
 </article>

@@ -79,6 +79,26 @@
 
 <article>
   <header>
+    <h2><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html#data/kubernete/efk/install">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></h2>
+    <p>
+          Posted on 2018-02-07(星期三) 15:54 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>,              <a href="http://www.shushilvshe.com/tag/rong-qi-bian-pai.html">容器编排</a>,              <a href="http://www.shushilvshe.com/tag/efk.html">efk</a>,              <a href="http://www.shushilvshe.com/tag/fluentd.html">Fluentd</a>,              <a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a>,              <a href="http://www.shushilvshe.com/tag/kibana.html">kibana</a>
+    </p>
+  </header>
+  <div>
+      <p>docker会将stdout和stderr输出本机的一个目录下，一般是/var/lib/docker/contianers（也可能是/opt/docker/containers/，根据安装方式不同而不同）， kubernetes 默认会将容器的stdout和stderr录入node(minion)的/var/log/containers目录下（最后还是链接到docker的日志路径下）,而kubernetes 组件的日志默认放置在/var/log目录下。</p>
+      <br>
+      <a class="btn" href="http://www.shushilvshe.com/data/kubernete/efk/install.html#data/kubernete/efk/install">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="http://www.shushilvshe.com/data/kubernete-installation.html#data/kubernete-installation">kubernetes（1.8.3）系列之安装</a></h2>
     <p>
           Posted on 2018-01-23(星期二) 20:06 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
@@ -253,26 +273,6 @@
       <p>决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
       <br>
       <a class="btn" href="http://www.shushilvshe.com/ml/dt.html#ml/dt">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="http://www.shushilvshe.com/ml/data-proprecess.html#ml/data-proprecess">数据处理中的数值初步转换</a></h2>
-    <p>
-          Posted on 2017-07-26(星期三) 16:04 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>,              <a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
-    </p>
-  </header>
-  <div>
-      <p>我们使用scikit learn进行建模预测， 而SK中的模型都只能处理数值型的数据，需要将原始的字符串类型的数据转为数值型数据。所有数据通常可以分成两种类型：<strong><code>定量</code></strong>与<strong><code>定性</code></strong>。定量的属性（数值属性）通常蕴涵着可排序性，比如在泰坦尼克号数据集中，年龄就是一个定量属性。定性属性（标称 序数 二元属性）的值是一些符号或事务的名称，每个值代表某种类别编码或状态，不是可测量量，是不具有排序意义的，比如Embarked(登船地点)。</p>
-      <br>
-      <a class="btn" href="http://www.shushilvshe.com/ml/data-proprecess.html#ml/data-proprecess">    Continue reading
 </a>
   </div>
 </article>
