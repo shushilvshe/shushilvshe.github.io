@@ -1,46 +1,62 @@
 <!DOCTYPE html>
-<html lang="zh_cn">
-<head>
-          <title>shushilvshe's Blog</title>
-        <meta charset="utf-8" />
+<html lang="zh_cn" prefix="og: http://ogp.me/ns#">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
+		<!-- Metadata -->
+	<meta name="description" content="">
+	<meta property="og:description" content="">
+	<meta property="og:title" content="数据处理中的数值初步转换" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="http://www.shushilvshe.com/ml/data-proprecess.html" />
+		<meta property="og:image" content="http://www.shushilvshe.com/images/" />
 
-    <meta name="tags" content="大数据" />
-    <meta name="tags" content="机器学习" />
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-</head>
+		<title>shushilvshe's Blog - Data Developer</title>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="/category/data.html">Data</a></li>
-            <li><a href="/category/food.html">Food</a></li>
-            <li><a href="/category/travel.html">Travel</a></li>
-            <li><a href="/">Photo</a></li>
-            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://www.shushilvshe.com/ml/data-proprecess.html" rel="bookmark"
-         title="Permalink to 数据处理中的数值初步转换">数据处理中的数值初步转换</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2017-07-26T16:04:56+08:00">
-      2017-07-26(星期三) 16:04
-    </time>
-    <time class="modified" datetime="2017-07-26T16:04:59+08:00">
-      2017-07-26(星期三) 16:04
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <hr>
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/poole.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/hyde.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
+
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
+
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="http://www.shushilvshe.com/images/">
+					shushilvshe's Blog
+				</a>
+			</h1>
+			<p class="lead"></p>
+			<p class="lead"> </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+<div class="post">
+	<h1 class="post-title">数据处理中的数值初步转换</h1>
+	<span class="post-date">2017-07-26(星期三) 16:04</span>
+	<hr>
 <blockquote>
 <p>分析基于kaggle-Titanic数据集</p>
 </blockquote>
@@ -134,13 +150,7 @@ df[&#39;Fare_bin_id_scaled&#39;] = scaler.fit_transform(df.Fare_bin_id)
 <blockquote>
 <p>https://www.kaggle.com/c/titanic/data</p>
 </blockquote>
-  </div><!-- /.entry-content -->
-</section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
-</body>
+</div>
+		</div>
+	</body>
 </html>
