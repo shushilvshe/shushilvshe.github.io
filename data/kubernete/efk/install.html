@@ -265,7 +265,7 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 <p><strong>初始化 kibana</strong></p>
 <p>在 Management -&gt; Index Patterns 页面创建一个 index（相当于 mysql 中的一个 database），<code>Index name or pattern</code> 使用默认的 logstash-*，<code>Time Filter field name</code> 下拉选中@timestamp, 点击 Create, 过一会儿就可以在 Discover页面查询日志了;</p>
 <p><center><img src="https://i.imgur.com/cEzP8rK.jpg" width="1280"/></center></p>
-<p>最后， 日志收集部分，除了Fluentd和Logstash，还可以使用Filebeat来收集日志，使用方法可以参考<a href="http://rootsongjc.github.io/blogs/kubernetes-filebeat/">使用Filebeat收集Kubernetes中的应用日志</a>。</p>
+<p>最后， 日志收集部分，除了Fluentd和Logstash，还可以使用Filebeat来收集日志，使用方法可以参考<a href="https://jimmysong.io/posts/kubernetes-filebeat/">使用Filebeat收集Kubernetes中的应用日志</a>。</p>
 <h2>遇到问题</h2>
 <h3>1. unable to fetch mapping. do you have indices matching the pattern kibana.</h3>
 <p>如果你在这里发现最下方并没有变成Create按钮且出现如下错误，说明fluent并没有向elasticsearch中写入数据，所以，分别检查fluent、elasticsearch的配置和日志，一定是两者之间通信出现问题了。</p>
