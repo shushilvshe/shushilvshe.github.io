@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>shushilvshe's Blog : 人脸识别——对齐算法</title>
+        <title>人脸识别——对齐算法</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
-        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog Flux ATOM" />
+
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -18,14 +19,35 @@
 
 </head>
 
-<body>
-        
-<header>
-    <h1><a href="http://www.shushilvshe.com/data/facealign.html" id="page-title">人脸识别——对齐算法</a></h1>
-    <span id="sitename"><a href="http://www.shushilvshe.com" id="site-title">shushilvshe's Blog  <strong>Data Developer</strong></a> &sdot;</span>
-<time datetime="2017-09-05T22:24:46+08:00">2017-09-05(星期二) 22:24</time></header>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/index.html">shushilvshe's Blog  <strong>Data Developer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/category/data.html">Data</a></li>
+                    <li><a href="/category/food.html">Food</a></li>
+                    <li><a href="/category/travel.html">Travel</a></li>
+                    <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/index.html">Accueil</a></li>
+                <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                    <li ><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+<section id="content" class="body">
 <article>
-    <p><strong>基本思路：</strong></p>
+        <header> <h1 class="entry-title"><a href="data/facealign.html"
+        rel="bookmark" title="Permalink to 人脸识别——对齐算法">人脸识别——对齐算法</a></h1>  </header>
+        <div class="entry-content">
+        <footer class="post-info">
+                <abbr class="published" title="2017-09-05T22:24:46+08:00">
+                    Publié le 星期二 05 九月 2017 &agrave; 22:24
+                </abbr>
+                <address class="vcard author">
+                        Par <a class="url fn" href="#">ssls</a>
+                </address>
+                <p>Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a>.
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a><a href="http://www.shushilvshe.com/tag/ren-lian-shi-bie.html">人脸识别</a><a href="http://www.shushilvshe.com/tag/ren-lian-dui-qi.html">人脸对齐</a></p></p>        </footer><!-- /.post-info -->
+        <p><strong>基本思路：</strong></p>
 <p>使用facenet框架，可以识别出一张图片中的人脸头像，并返回每张人脸的边界和五官坐标，但图片中有的头像是有倾斜角度的，我们将倾斜度数小于指定阈值的进行校正，其余的按原形截取图片。</p>
 <ul>
 <li>倾斜度数根据两只眼睛的坐标加以计算；</li>
@@ -134,18 +156,37 @@
 <li>随着斜率增大，图片下方，也就是下巴下部空闲部分会多一些；</li>
 <li>脸旁两部分无用数据较多，如果是贴脸照片会多出干扰信息，这个也可根据人脸边界进行改进修正。</li>
 </ul>
-</article>
+        </div><!-- /.entry-content -->
 
-        <footer>
-            <nav>
-                <ul>
-                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/categories.html">Categories</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit">Proudly powered by <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a></p>
-        </footer>
+</article>
+</section>
+
+        <aside id="sidebar">
+                <div class="widget">
+                        <h2>Catégories</h2>
+                        <ul>
+                           <li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                </div>
+                <div class="widget blogroll">
+                        <h2>Liens</h2>
+                        <ul>
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </aside><!-- /#sidebar -->
+
+        <footer id="footer" class="body">
+                <address id="about" class="vcard body">
+                Ce site est généré par <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>, un CMS réalisé en <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>Le thème utilisé est «NotMyIdea-CMS», une version modifiée de «NotMyIdea», le thème par défaut.</p>
+        </footer><!-- /#footer -->
 
 </body>
 </html>

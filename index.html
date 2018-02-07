@@ -1,136 +1,1044 @@
 <!DOCTYPE html>
-<html lang="zh_cn">
+<html lang="en">
 <head>
         <title>shushilvshe's Blog</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog Flux ATOM" />
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie.css"/>
+                <script src="http://www.shushilvshe.com/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie6.css"/><![endif]-->
+
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
+                <h1><a href="http://www.shushilvshe.com/index.html">shushilvshe's Blog  <strong>Data Developer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/category/data.html">Data</a></li>
+                    <li><a href="/category/food.html">Food</a></li>
+                    <li><a href="/category/travel.html">Travel</a></li>
+                    <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/index.html">Accueil</a></li>
+                <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                    <li ><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                </ul></nav>
         </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="/category/data.html">Data</a></li>
-            <li><a href="/category/food.html">Food</a></li>
-            <li><a href="/category/travel.html">Travel</a></li>
-            <li><a href="/">Photo</a></li>
-            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content">
-<h2>All articles</h2>
 
-<ol id="post-list">
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html" rel="bookmark" title="Permalink to kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></h2> </header>
+        
+        
+     <section id="content" class="body">
+        <aside id="featured"><article>
+                <h1 class="entry-title"><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></h1> 
                 <footer class="post-info">
-                    <time class="published" datetime="2018-02-07T15:54:43+08:00"> 2018-02-07(星期三) 15:54 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2018-02-07T15:54:43+08:00">
+                                Publié le 07/02/2018 &agrave; 15:54
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                <p>Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a>. </p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/rong-qi-bian-pai.html">容器编排</a><a href="http://www.shushilvshe.com/tag/efk.html">efk</a><a href="http://www.shushilvshe.com/tag/fluentd.html">Fluentd</a><a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a><a href="http://www.shushilvshe.com/tag/kibana.html">kibana</a></p></p>                </footer><!-- /.post-info -->
+                <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<p><script type="text/javascript">
+ $(document).ready(function(){
+      $("h2,h3,h4,h5,h6").each(function(i,item){
+        var tag = $(item).get(0).localName;
+        $(item).attr("id","wow"+i);
+        $("#category").append('<a class="new'+tag+'" href="#wow'+i+'">'+$(this).text()+'</a></br>');
+        $(".newh2").css("margin-left",0);
+        $(".newh3").css("margin-left",30);
+        $(".newh4").css("margin-left",60);
+        $(".newh5").css("margin-left",90);
+        $(".newh6").css("margin-left",120);
+      });
+ });
+</script>
+<div id="category"></div></p>
+<p>docker会将stdout和stderr输出本机的一个目录下，一般是/var/lib/docker/contianers（也可能是/opt/docker/containers/，根据安装方式不同而不同）， kubernetes 默认会将容器的stdout和stderr录入node(minion)的/var/log/containers目录下（最后还是链接到docker的日志路径下）,而kubernetes 组件的日志默认放置在/var/log目录下。</p>
+<p>EFK搭建使用的日志架构：</p>
+<p><center><img src="https://i.imgur.com/clLKVgA.jpg" width="600"/></center></p>
+<h2>EFK安装</h2>
+<h3>EFK介绍</h3>
+<ul>
+<li>Fluentd 2.0.1：负责收集日志（或者用Logstash，相对比较耗内存）</li>
+<li>Elasticsearch 5.5.1：存储日志并提供搜索</li>
+<li>Kibana 5.5.1：负责日志查询和展示</li>
+</ul>
+<blockquote>
+<p>官方地址： https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch</p>
+</blockquote>
+<h3>安装EFK插件</h3>
+<p>通过在每台node上部署一个以DaemonSet方式运行的fluentd来收集每台node上的日志。Fluentd将docker日志目录/var/lib/docker/containers 和 /var/log 目录挂载到Pod中，然后Pod会在node节点的 /var/log/pods 目录中创建新的目录，可以区别不同的容器日志输出，该目录下有一个日志文件链接到/var/lib/docker/contianers目录下的容器日志输出。</p>
+<blockquote>
+<p>docker的日志目录可能因为安装方式不同而不同，也可能在 /opt/docker/containers/ 下。</p>
+</blockquote>
+<p>从官方地址下载所需要的配置文件，默认Fluentd中是监控/var/lib/docker/containers目录的，如果不一样，修改fluentd-es-ds.yaml文件中的挂载路径即可，否则最后不会接收到日志，kibana无法创建初始化的索引模式，这个最后说明。</p>
+<div class="highlight"><pre><span></span>-rw-r--r-- 1 root root   382 11月  8 10:26 es-service.yaml
+-rw-r--r-- 1 root root  2841 11月  8 10:26 es-statefulset.yaml
+-rw-r--r-- 1 root root 13462 11月  8 10:26 fluentd-es-configmap.yaml
+-rw-r--r-- 1 root root  2822 2月   5 18:18 fluentd-es-ds.yaml
+-rw-r--r-- 1 root root  1111 11月  8 10:26 kibana-deployment.yaml
+-rw-r--r-- 1 root root   354 11月  8 10:26 kibana-service.yaml
+</pre></div>
+
+
+<h3>给 Node 设置标签</h3>
+<p>定义 DaemonSet fluentd-es-v2.0.1 时设置了 <code>nodeSelector beta.kubernetes.io/fluentd-ds-ready=true</code> ，所以需要在期望运行 fluentd 的 Node 上设置该标签；</p>
+<div class="highlight"><pre><span></span>[root@kube_master184 efk]# kubectl get nodes
+NAME        STATUS    AGE       VERSION
+192.168.1.185   Ready     1d        v1.6.0
+
+[root@kube_master184 efk]# kubectl label nodes 192.168.1.185 beta.kubernetes.io/fluentd-ds-ready=true
+node &quot;192.168.1.185&quot; labeled
+</pre></div>
+
+
+<p>给其他几台node打上同样的标签。</p>
+<h3>执行定义文件</h3>
+<p>在下载好的配置路径下， 此处是 /etc/kubernetes/efk, 执行</p>
+<div class="highlight"><pre><span></span>[root@kube_master184 efk]# kubectl create -f .
+service &quot;elasticsearch-logging&quot; created
+serviceaccount &quot;elasticsearch-logging&quot; created
+clusterrole &quot;elasticsearch-logging&quot; created
+clusterrolebinding &quot;elasticsearch-logging&quot; created
+statefulset &quot;elasticsearch-logging&quot; created
+configmap &quot;fluentd-es-config-v0.1.0&quot; created
+serviceaccount &quot;fluentd-es&quot; created
+clusterrole &quot;fluentd-es&quot; created
+clusterrolebinding &quot;fluentd-es&quot; created
+daemonset &quot;fluentd-es-v2.0.1&quot; created
+deployment &quot;kibana-logging&quot; created
+service &quot;kibana-logging&quot; created
+</pre></div>
+
+
+<h3>检查执行结果</h3>
+<div class="highlight"><pre><span></span>[root@kube_master184 efk]# kubectl get deployment -n kube-system|grep kibana
+kibana-logging             1         1         1            1           1d
+
+[root@kube_master184 efk]# kubectl get pods -n kube-system|grep -E &#39;elasticsearch|fluentd|kibana&#39;
+elasticsearch-logging-0                    1/1       Running   4          1d
+elasticsearch-logging-1                    1/1       Running   0          1d
+fluentd-es-v2.0.1-8d67k                    1/1       Running   0          1d
+fluentd-es-v2.0.1-hzjfw                    1/1       Running   0          1d
+fluentd-es-v2.0.1-tkbbn                    1/1       Running   0          1d
+fluentd-es-v2.0.1-vmhhf                    1/1       Running   0          1d
+fluentd-es-v2.0.1-vzkwz                    1/1       Running   0          1d
+kibana-logging-5d7cbc6b5d-fbd4r            1/1       Running   0          1d
+
+[root@kube_master184 efk]# kubectl get service  -n kube-system|grep -E &#39;elasticsearch|kibana&#39;  
+elasticsearch-logging   ClusterIP   10.254.45.109    &lt;none&gt;        9200/TCP            1d
+kibana-logging          ClusterIP   10.254.103.74    &lt;none&gt;        5601/TCP            1d
+</pre></div>
+
+
+<p>kibana Pod 第一次启动时会用较长时间(10-20分钟)来优化和 Cache 状态页面，可以 tailf 该 Pod 的日志观察进度：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">kube_master184</span> <span class="n">efk</span><span class="p">]</span><span class="err">#</span> <span class="n">kubectl</span> <span class="n">logs</span> <span class="n">kibana</span><span class="o">-</span><span class="n">logging</span><span class="o">-</span><span class="mi">5</span><span class="n">d7cbc6b5d</span><span class="o">-</span><span class="n">fbd4r</span> <span class="o">-</span><span class="n">n</span> <span class="n">kube</span><span class="o">-</span><span class="n">system</span> <span class="o">-</span><span class="n">f</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:14:14Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;info&quot;</span><span class="p">,</span><span class="s">&quot;optimize&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Optimizing and caching bundles for graph, ml, kibana, stateSessionStorageRedirect, timelion and status_page. This may take a few minutes&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:01Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;info&quot;</span><span class="p">,</span><span class="s">&quot;optimize&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Optimization of bundles for graph, ml, kibana, stateSessionStorageRedirect, timelion and status_page complete in 106.41 seconds&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:01Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:kibana@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:01Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:elasticsearch@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to yellow - Waiting for Elasticsearch&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:01Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:xpack_main@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to yellow - Waiting for Elasticsearch&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:01Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:graph@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to yellow - Waiting for Elasticsearch&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:01Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;reporting&quot;</span><span class="p">,</span><span class="s">&quot;warning&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Generating a random key for xpack.reporting.encryptionKey. To prevent pending reports from failing on restart, please set xpack.reporting.encryptionKey in kibana.yml&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:01Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:reporting@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to yellow - Waiting for Elasticsearch&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:07Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:xpack_main@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to yellow - No existing Kibana index found&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;Waiting for Elasticsearch&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:07Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:graph@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to yellow - No existing Kibana index found&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;Waiting for Elasticsearch&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:07Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:reporting@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to yellow - No existing Kibana index found&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;Waiting for Elasticsearch&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:07Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:elasticsearch@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to yellow - No existing Kibana index found&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;Waiting for Elasticsearch&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:08Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:elasticsearch@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to green - Kibana index ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;No existing Kibana index found&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:08Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;license&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">,</span><span class="s">&quot;xpack&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Imported license information from Elasticsearch for [data] cluster: mode: trial | status: active | expiry date: 2018-03-07T10:15:05+00:00&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:08Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:xpack_main@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;No existing Kibana index found&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:08Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:graph@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;No existing Kibana index found&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:08Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:reporting@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;No existing Kibana index found&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:searchprofiler@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:ml@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:ml@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from green to yellow - Waiting for Elasticsearch&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;Ready&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:ml@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from yellow to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;Waiting for Elasticsearch&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:tilemap@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:watcher@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:grokdebugger@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:console@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:metrics@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;plugin:timelion@5.5.1&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;listening&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Server running at http://0:5601&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="s">&quot;log&quot;</span><span class="p">,</span><span class="s">&quot;@timestamp&quot;</span><span class="o">:</span><span class="s">&quot;2018-02-05T10:16:12Z&quot;</span><span class="p">,</span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="s">&quot;ui settings&quot;</span><span class="p">,</span><span class="s">&quot;info&quot;</span><span class="p">],</span><span class="s">&quot;pid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;state&quot;</span><span class="o">:</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="o">:</span><span class="s">&quot;Status changed from uninitialized to green - Ready&quot;</span><span class="p">,</span><span class="s">&quot;prevState&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">,</span><span class="s">&quot;prevMsg&quot;</span><span class="o">:</span><span class="s">&quot;uninitialized&quot;</span><span class="p">}</span>
+</pre></div>
+
+
+<h2>访问 kibana</h2>
+<ul>
+<li><strong>通过 kube-apiserver 访问：</strong></li>
+</ul>
+<p>获取 Kibana 服务 URL。</p>
+<div class="highlight"><pre><span></span>[root@kube_master184 efk]# kubectl cluster-info
+Kubernetes master is running at https://127.0.0.1:6443
+Elasticsearch is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/elasticsearch-logging/proxy
+Heapster is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/heapster/proxy
+Kibana is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/kibana-logging/proxy
+KubeDNS is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/kube-dns/proxy
+kubernetes-dashboard is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy
+monitoring-grafana is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy
+
+To further debug and diagnose cluster problems, use &#39;kubectl cluster-info dump&#39;.
+</pre></div>
+
+
+<p>浏览器访问 URL： https://192.168.1.184:6443/api/v1/proxy/namespaces/kube-system/services/kibana-logging</p>
+<ul>
+<li>
+<p><strong>通过 kubectl proxy 访问：</strong></p>
+<p>创建代理</p>
+<div class="highlight"><pre><span></span> $ kubectl proxy --address=&#39;192.168.1.184&#39; --port=9999 --accept-hosts=&#39;^*$&#39;
+ Starting to serve on 192.168.1.184:9999
+</pre></div>
+
+
+<p>浏览器访问 URL：http://192.168.1.184:9999/api/v1/proxy/namespaces/kube-system/services/kibana-logging</p>
+</li>
+</ul>
+<p><strong>初始化 kibana</strong></p>
+<div class="highlight"><pre><span></span>在 Management -&gt; Index Patterns 页面创建一个 index（相当于 mysql 中的一个 database），`Index name or pattern` 使用默认的 logstash-*，`Time Filter field name` 下拉选中@timestamp, 点击 Create, 过一会儿就可以在 Discover页面查询日志了;
+
+<span class="nt">&lt;center&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;https://i.imgur.com/cEzP8rK.jpg&quot;</span> <span class="na">width=</span><span class="s">&quot;1280&quot;</span><span class="nt">/&gt;&lt;/center&gt;</span>
+
+最后， 日志收集部分，除了Fluentd和Logstash，还可以使用Filebeat来收集日志，使用方法可以参考[使用Filebeat收集Kubernetes中的应用日志](https://jimmysong.io/posts/kubernetes-filebeat/)。
+</pre></div>
+
+
+<h2>遇到问题</h2>
+<h3>1. unable to fetch mapping. do you have indices matching the pattern kibana.</h3>
+<p>如果你在这里发现最下方并没有变成Create按钮且出现如下错误，说明fluent并没有向elasticsearch中写入数据，所以，分别检查fluent、elasticsearch的配置和日志，一定是两者之间通信出现问题了。</p>
+<p><center><img src="https://i.imgur.com/q9K9QWj.jpg" width="1280"/></center></p>
+<p>本次错误是因为docker写的日志并不在fluentd-es-ds.yaml配置文件中默认配置的/var/lib/docker/containers路径下，而在/opt/docker/containers下，所以并没有找到对应的日志文件（在不经意间查看/var/log/pods/下的文件时，发现链接的是/opt/docker/containers/路径下的文件，解决的办法就简单了，删掉原来的deamon-set, 修改挂载路径重新启动fluent即可了）</p>
+<div class="highlight"><pre><span></span>[root@gpu185 ea29c93b-0a45-11e8-af3c-d4bed9a7f66c]# ll
+total 0
+lrwxrwxrwx 1 root root 161 Feb  5 15:26 fluentd-es_0.log -&gt; /opt/docker/containers/866f239a95f8530de148e5f2a178c55e0bdc4e5a918ed762e134ab94b134981d/866f239a95f8530de148e5f2a178c55e0bdc4e5a918ed762e134ab94b134981d-json.log
+</pre></div>
+
+
+<blockquote>
+<p>还有一种可能是因为docker的log-driver的设置，需要是json-file格式的，docker默认就是这种格式，如果以前修改过，需要改成json-file, 具体修改方法参考 <a href="https://docs.docker.com/engine/admin/logging/overview/#examples">docker logging</a></p>
+</blockquote>
+<h3>2. 修改elasticsearch日志文件存储位置</h3>
+<p>下载的es-statefulset.yaml配置文件中，默认是把elasticsearch的日志存储放在了pod的empty volumns里了，因此官方的部署参考仅可用于试验，实际部署到生产环境时需要使用Persistent Volume。如存储到node具体路径或ceph等。</p>
+<h2>参考文档</h2>
+<p><a href="https://docs.docker.com/config/containers/logging/configure/">Docker Configure logging drivers</a></p>
+<p><a href="https://www.fluentd.org/plugins/all#input-output">Fluentd Plugins</a></p>
+<p><a href="https://kubernetes.io/docs/concepts/cluster-administration/logging/">Kubernetes Logging Architecture</a></p>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/foreword_id.html">Elasticsearch: 权威指南</a></p>
+<p><a href="https://jimmysong.io/kubernetes-handbook/practice/efk-addon-installation.html">安装EFK插件</a></p>
+<p><a href="http://cwiki.apachecn.org/pages/viewpage.action?pageId=8159377">Kibana 5.2 中文文档</a></p>
+<p><a href="http://docs.saas.hand-china.com/docs/hitoa/zh_CN/latest/user-guide/log-aggregation-analysis/td-agent-config-file-syntax.html">fluentd配置文件语法</a></p>
+<p><a href="https://www.centos.bz/2017/06/collect-log-file-realtime-with-fluentd/">使用fluentd实现实时收集日志文件</a></p>
+        </article></aside><!-- /#featured -->
+                <h1>Autres articles</h1>
+                <hr />
+                    <ol id="posts-list" class="hfeed">
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/kubernete-installation.html" rel="bookmark" title="Permalien vers «kubernetes（1.8.3）系列之安装»">kubernetes（1.8.3）系列之安装</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2018-01-23T20:06:33+08:00">
+                                Publié le 23/01/2018 &agrave; 20:06
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a><a href="http://www.shushilvshe.com/tag/jue-ce-shu.html">决策树</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>docker会将stdout和stderr输出本机的一个目录下，一般是/var/lib/docker/contianers（也可能是/opt/docker/containers/，根据安装方式不同而不同）， kubernetes 默认会将容器的stdout和stderr录入node(minion)的/var/log/containers目录下（最后还是链接到docker的日志路径下）,而kubernetes 组件的日志默认放置在/var/log目录下。</p> </div><!-- /.entry-content -->
+                <p>此次部署<code>kubernetes1.8.3</code>版本使用两台机器进行操作，一台做为<code>Master</code>节点，一台作为<code>Node</code>节点。部署流程及配置与正式环境下是一致的。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/kubernete-installation.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/kubernete-installation.html" rel="bookmark" title="Permalink to kubernetes（1.8.3）系列之安装">kubernetes（1.8.3）系列之安装</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/haerbin.html" rel="bookmark" title="Permalien vers «2017年终收官行——缤纷雪国»">2017年终收官行——缤纷雪国</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2018-01-23T20:06:33+08:00"> 2018-01-23(星期二) 20:06 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2018-01-06T16:23:38+08:00">
+                                Publié le 06/01/2018 &agrave; 16:23
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/ha-er-bin.html">哈尔滨</a><a href="http://www.shushilvshe.com/tag/suo-fei-ya.html">索菲亚</a><a href="http://www.shushilvshe.com/tag/zhong-yang-da-jie.html">中央大街</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>此次部署<code>kubernetes1.8.3</code>版本使用两台机器进行操作，一台做为<code>Master</code>节点，一台作为<code>Node</code>节点。部署流程及配置与正式环境下是一致的。</p> </div><!-- /.entry-content -->
+                <p>须臾一瞬间，鸡年马上就要过去了。每个人在这一年里都有很多的经历，我这一年也像过山车一般，时而高空旋转，时而顺坡疾驰而下，人生该品尝的滋味依次接踵而至。马上2017年就要过去了，而年初清明时节在南京旅游一时兴起定下的目标——2017年去十个未去过的城市，还未完成。不过还好，前半年已经依次去过<code>南京</code> <code>扬州</code> <code>开封</code> <code>洛阳</code> <code>昆明</code> <code>杭州</code> <code>上海</code> <code>苏州</code> <code>西安</code>，九个城市，而后半年发生了很多事情，旅行没在计划之中，所以一直到年终，看看差不多有时间了，就开始着手计划完成最后一个任务。虽然只是去一座城市，但也不是随便找个地方就可以的，想来现已正值寒风凛冽的冬季，南方似乎玩的不太多，而且也比较远，但北国风光在冬季却倍显妖娆，于是就将目标锁定在哈尔滨这个具有异国风情的城市。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/haerbin.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/travel/haerbin.html" rel="bookmark" title="Permalink to 2017年终收官行——缤纷雪国">2017年终收官行——缤纷雪国</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/docker-ssh.html" rel="bookmark" title="Permalien vers «制作ssh互信的docker镜像»">制作ssh互信的docker镜像</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2018-01-06T16:23:38+08:00"> 2018-01-06(星期六) 16:23 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2018-01-04T18:09:06+08:00">
+                                Publié le 04/01/2018 &agrave; 18:09
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/ssh.html">ssh</a><a href="http://www.shushilvshe.com/tag/docker.html">docker</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>须臾一瞬间，鸡年马上就要过去了。每个人在这一年里都有很多的经历，我这一年也像过山车一般，时而高空旋转，时而顺坡疾驰而下，人生该品尝的滋味依次接踵而至。马上2017年就要过去了，而年初清明时节在南京旅游一时兴起定下的目标——2017年去十个未去过的城市，还未完成。不过还好，前半年已经依次去过<code>南京</code> <code>扬州</code> <code>开封</code> <code>洛阳</code> <code>昆明</code> <code>杭州</code> <code>上海</code> <code>苏州</code> <code>西安</code>，九个城市，而后半年发生了很多事情，旅行没在计划之中，所以一直到年终，看看差不多有时间了，就开始着手计划完成最后一个任务。虽然只是去一座城市，但也不是随便找个地方就可以的，想来现已正值寒风凛冽的冬季，南方似乎玩的不太多，而且也比较远，但北国风光在冬季却倍显妖娆，于是就将目标锁定在哈尔滨这个具有异国风情的城市。</p> </div><!-- /.entry-content -->
+                <p>基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/docker-ssh.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/docker-ssh.html" rel="bookmark" title="Permalink to 制作ssh互信的docker镜像">制作ssh互信的docker镜像</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/kubernete-calico.html" rel="bookmark" title="Permalien vers «kubernetes（1.8.3）系列之calico集成»">kubernetes（1.8.3）系列之calico集成</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2018-01-04T18:09:06+08:00"> 2018-01-04(星期四) 18:09 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2018-01-04T14:50:01+08:00">
+                                Publié le 04/01/2018 &agrave; 14:50
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/calico.html">calico</a><a href="http://www.shushilvshe.com/tag/docker.html">docker</a><a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）。</p> </div><!-- /.entry-content -->
+                <p>目前工作试错环境为 k8s（1.8.3）管理下的 <code>tensorflow-1.4.1-compile-py36</code> docker镜像深度学习集群，说是集群，但平时的工作任务依然是依靠单台跑脚本运行的，GPU的利用率比较低，经过研究，最后决定通过 <code>openmpi-2.1.2 + nccl2 + nccl_2.1.2-1+cuda8.0_x86_64</code> 的技术方案实现GPU的并行计算。但将环境部署到K8S集群时碰到一个问题——在同一个节点中启动的pod可以成功执行，但不同节点间的pods无法成功执行，报错如下：</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/kubernete-calico.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/kubernete-calico.html" rel="bookmark" title="Permalink to kubernetes（1.8.3）系列之calico集成">kubernetes（1.8.3）系列之calico集成</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/kubernetes-overview.html" rel="bookmark" title="Permalien vers «Kubernetes（1.8.3）系列之GPU配置»">Kubernetes（1.8.3）系列之GPU配置</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2018-01-04T14:50:01+08:00"> 2018-01-04(星期四) 14:50 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2017-12-20T10:15:52+08:00">
+                                Publié le 20/12/2017 &agrave; 10:15
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/docker.html">docker</a><a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>目前工作试错环境为 k8s（1.8.3）管理下的 <code>tensorflow-1.4.1-compile-py36</code> docker镜像深度学习集群，说是集群，但平时的工作任务依然是依靠单台跑脚本运行的，GPU的利用率比较低，经过研究，最后决定通过 <code>openmpi-2.1.2 + nccl2 + nccl_2.1.2-1+cuda8.0_x86_64</code> 的技术方案实现GPU的并行计算。但将环境部署到K8S集群时碰到一个问题——在同一个节点中启动的pod可以成功执行，但不同节点间的pods无法成功执行，报错如下：</p> </div><!-- /.entry-content -->
+                
+                <a class="readmore" href="http://www.shushilvshe.com/data/kubernetes-overview.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/kubernetes-overview.html" rel="bookmark" title="Permalink to Kubernetes（1.8.3）系列之GPU配置">Kubernetes（1.8.3）系列之GPU配置</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html" rel="bookmark" title="Permalien vers «tensorflow-gpu-docker镜像安装及部署文档»">tensorflow-gpu-docker镜像安装及部署文档</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2017-12-20T10:15:52+08:00"> 2017-12-20(星期三) 10:15 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2017-12-15T18:01:03+08:00">
+                                Publié le 15/12/2017 &agrave; 18:01
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/docker.html">docker</a><a href="http://www.shushilvshe.com/tag/tensorflow.html">tensorflow</a><a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content">  </div><!-- /.entry-content -->
+                <p>制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html" rel="bookmark" title="Permalink to tensorflow-gpu-docker镜像安装及部署文档">tensorflow-gpu-docker镜像安装及部署文档</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/docker.html" rel="bookmark" title="Permalien vers «始入Docker»">始入Docker</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2017-12-15T18:01:03+08:00"> 2017-12-15(星期五) 18:01 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2017-12-09T21:18:43+08:00">
+                                Publié le 09/12/2017 &agrave; 21:18
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/docker.html">docker</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。</p> </div><!-- /.entry-content -->
+                <p>容器技术已经发展的很成熟了，只不过因为工作需要才接触。纵观大趋势，系统应用部署能节约大量的人力物力和时间等企业重要成本，所以，掌握好容器技术，以及相关的集群集成管理工具的领头羊——<code>Kubernetes</code>，将成为丰富人生技术栈中重要的一环。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/docker.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/docker.html" rel="bookmark" title="Permalink to 始入Docker">始入Docker</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/xian.html" rel="bookmark" title="Permalien vers «三秦大地体验游»">三秦大地体验游</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2017-12-09T21:18:43+08:00"> 2017-12-09(星期六) 21:18 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2017-11-12T14:42:49+08:00">
+                                Publié le 12/11/2017 &agrave; 14:42
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/xi-an.html">西安</a><a href="http://www.shushilvshe.com/tag/rou-jia-mo.html">肉夹馍</a><a href="http://www.shushilvshe.com/tag/shan-li-bo.html">陕历博</a><a href="http://www.shushilvshe.com/tag/bing-ma-yong.html">兵马俑</a><a href="http://www.shushilvshe.com/tag/hua-qing-chi.html">华清池</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>容器技术已经发展的很成熟了，只不过因为工作需要才接触。纵观大趋势，系统应用部署能节约大量的人力物力和时间等企业重要成本，所以，掌握好容器技术，以及相关的集群集成管理工具的领头羊——<code>Kubernetes</code>，将成为丰富人生技术栈中重要的一环。</p> </div><!-- /.entry-content -->
+                <p>2017年给自己定的旅行目标是十个城市，当然，以前去过的不算，这么掐指一算，从清明节第一次旅行（其实算不上旅行，充其量也就是旅游罢了）以来，已经去过八个城市了，这幸福来的太快了哈。鉴于上半年春夏交替这么个完美的季节，最后决定在放暑假前再出去一趟，那么下半年的任务就没那么重了。 经过慎重的选择，要人文有人文，要美食有美食的西安成了不二佳地。。。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/xian.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/travel/xian.html" rel="bookmark" title="Permalink to 三秦大地体验游">三秦大地体验游</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/matplotlib_wrong_setup.html" rel="bookmark" title="Permalien vers «python2.7安装matplotlib失败解决方法»">python2.7安装matplotlib失败解决方法</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2017-11-12T14:42:49+08:00"> 2017-11-12(星期日) 14:42 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2017-11-10T15:27:00+08:00">
+                                Publié le 10/11/2017 &agrave; 15:27
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/matplotlib.html">matplotlib</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>2017年给自己定的旅行目标是十个城市，当然，以前去过的不算，这么掐指一算，从清明节第一次旅行（其实算不上旅行，充其量也就是旅游罢了）以来，已经去过八个城市了，这幸福来的太快了哈。鉴于上半年春夏交替这么个完美的季节，最后决定在放暑假前再出去一趟，那么下半年的任务就没那么重了。 经过慎重的选择，要人文有人文，要美食有美食的西安成了不二佳地。。。</p> </div><!-- /.entry-content -->
+                <p>python2.7安装matplotlib失败解决方法</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/matplotlib_wrong_setup.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/matplotlib_wrong_setup.html" rel="bookmark" title="Permalink to python2.7安装matplotlib失败解决方法">python2.7安装matplotlib失败解决方法</a></h2> </header>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/VOD.html" rel="bookmark" title="Permalien vers «搭建视频点播(VOD)服务（live555 + ffmpeg）»">搭建视频点播(VOD)服务（live555 + ffmpeg）</a></h1>
+                </header>
+                
+                <div class="entry-content">
                 <footer class="post-info">
-                    <time class="published" datetime="2017-11-10T15:27:00+08:00"> 2017-11-10(星期五) 15:27 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
-                    </address>
+                        <abbr class="published" title="2017-11-01T19:12:31+08:00">
+                                Publié le 01/11/2017 &agrave; 19:12
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/shi-pin-dian-bo.html">视频点播</a><a href="http://www.shushilvshe.com/tag/live555.html">live555</a><a href="http://www.shushilvshe.com/tag/ffmpeg.html">ffmpeg</a></p></p>                    <p></p>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>python2.7安装matplotlib失败解决方法</p> </div><!-- /.entry-content -->
+                <p>前两三个月在整人脸考勤的项目，大体上分实时视频和点播两大块，实时视频使用的是ffserver流媒体服务器，负责从海康威视摄像头接收实时视频流，转而可实时查看原始视频流，同时进行人脸检测识别，最后可将原始视频流或经ai处理的视频流通过ffmpeg录制。将ffmpeg录制的视频后缀修改为live555规定的格式后即可通过rtsp流就行点播。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/VOD.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/suzhou.html" rel="bookmark" title="Permalien vers «端午沪苏杭游记——苏州»">端午沪苏杭游记——苏州</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-10-22T13:20:20+08:00">
+                                Publié le 22/10/2017 &agrave; 13:20
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/su-zhou.html">苏州</a><a href="http://www.shushilvshe.com/tag/han-shan-si.html">寒山寺</a><a href="http://www.shushilvshe.com/tag/shan-tang-jie.html">山塘街</a><a href="http://www.shushilvshe.com/tag/zhuo-zheng-yuan.html">拙政园</a><a href="http://www.shushilvshe.com/tag/hu-qiu.html">虎丘</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>从上海坐动车到苏州站时，已经十一点多了。本来定宾馆考虑的是离拙政园近点的，最后找到一个，而且离苏州火车站也就三四公里左右的，下了火车骑个单车就能到宾馆，第二天还能多睡会，感觉一切都在掌握之中。结果总是被现实无情的打脸，出了苏州站，外面黑漆漆的一片，火车站附近的道路上，昏暗的灯光似乎催着你现在是深夜时间，赶紧回家睡觉吧。掏出手机搜索单车的时候才发现，附近一辆也没有...</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/suzhou.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/shanghai.html" rel="bookmark" title="Permalien vers «端午沪苏杭游记——上海»">端午沪苏杭游记——上海</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-10-21T13:27:27+08:00">
+                                Publié le 21/10/2017 &agrave; 13:27
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/shang-hai.html">上海</a><a href="http://www.shushilvshe.com/tag/dong-fang-ming-zhu.html">东方明珠</a><a href="http://www.shushilvshe.com/tag/cheng-huang-miao.html">城隍庙</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>身为一个北方人，在北京待过一段时间不足为奇，而心之向往的，还是远方。与帝都南北相望的国际性大都市——魔都上海，自然是要去看看的。上海吸引我的地方，不是繁华的现代化城市的鳞次栉比，不是黄浦江夜景的灯红酒绿，而是那些回绕在老弄堂间的上海滩的故事。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/shanghai.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/yangzhou.html" rel="bookmark" title="Permalien vers «清明南京扬州游记——扬州»">清明南京扬州游记——扬州</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-10-04T16:41:47+08:00">
+                                Publié le 04/10/2017 &agrave; 16:41
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/yang-zhou.html">扬州</a><a href="http://www.shushilvshe.com/tag/da-ming-si.html">大明寺</a><a href="http://www.shushilvshe.com/tag/shou-xi-hu.html">瘦西湖</a><a href="http://www.shushilvshe.com/tag/ge-yuan.html">个园</a><a href="http://www.shushilvshe.com/tag/yi-ling-yuan.html">汉陵苑</a><a href="http://www.shushilvshe.com/tag/dong-guan-jie.html">东关街</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>古诗有云：“故人西辞黄鹤楼，烟花三月下扬州”，正值清明时节，在南京游玩的空当，抽出来一天的时间来逛逛扬州城。看过《鹿鼎记》的都知道，韦小宝则出生在扬州城的烟花柳巷，所以，我的印象也就只停留在书中描写的那般花红柳绿纸醉金迷中了。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/yangzhou.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/font-build.html" rel="bookmark" title="Permalien vers «字体生成小记»">字体生成小记</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-29T14:22:16+08:00">
+                                Publié le 29/09/2017 &agrave; 14:22
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/zi-ti.html">字体</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>这个星期我们小组一直在研究根据一部分手写字体，来生成和其风格相符的其他字体，主要工作还是网络的搭建和训练，这不是本文的重点，我们接下来要说的是预测完新字后，如何将这些字的图片，生成字体文件，以供安装使用。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/font-build.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/dl-env-build.html" rel="bookmark" title="Permalien vers «搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)»">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-22T16:25:26+08:00">
+                                Publié le 22/09/2017 &agrave; 16:25
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/kerasnvidia.html">keras，NVIDIA</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>在一个由N多台普通的不能再普通的机器攒凑起来的机箱中，搭载了最强核心——NVIDIA GeForce GTX 1080 Ti。我们的深度学习环境搭建之旅，将从如何攒凑这款独一无二的机箱开始，一点一点完成从简单电脑维修装配到逼格爆棚的Deep Learning的华丽丽转身。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/dl-env-build.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/hangzhou.html" rel="bookmark" title="Permalien vers «端午沪苏杭游记——杭州»">端午沪苏杭游记——杭州</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-17T15:57:08+08:00">
+                                Publié le 17/09/2017 &agrave; 15:57
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/hang-zhou.html">杭州</a><a href="http://www.shushilvshe.com/tag/xi-hu.html">西湖</a><a href="http://www.shushilvshe.com/tag/liu-he-ta.html">六和塔</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>端午节本来计划去爬黄山，但三天时间有点浪费，所以就增加了杭州这一站，先到杭州玩两天，然后再坐高铁去黄山，玩两天再从黄山回天津，无奈计划总是赶不上变化，从黄山回天津的票迟迟买不上，就动了换地的念头。常言道“上有天堂，下有苏杭”，苏州和杭州这么近，哪有只去杭州不去苏州的道理。搜了下车票，结果发现从杭州到苏州的高铁都需要经过上海，索性再去上海逛一圈吧，就这样，端午敲定了沪苏杭，先到杭州，再去上海，最后从苏州坐高铁回天津。从天津到杭州有夜车，Z9，而且几乎是名副其实的直达车了，一晚上只停一站——海宁，而且硬卧是我比较喜欢的半开放式的那种，行李架在内部，防盗，所以从刚起售的时候我就开始用智行抢票，直到走的前一天晚上才放票抢到，而我后面的酒店、景区门票都订好了，如果买抢到去时的票。。。啧啧啧，我真心大，还好我比较幸运。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/hangzhou.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/keras.html" rel="bookmark" title="Permalien vers «keras资源设置»">keras资源设置</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-13T14:00:36+08:00">
+                                Publié le 13/09/2017 &agrave; 14:00
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/keras.html">keras</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>keras资源设置</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/keras.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/cnn.html" rel="bookmark" title="Permalien vers «卷积神经网络（CNN）»">卷积神经网络（CNN）</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-13T13:59:15+08:00">
+                                Publié le 13/09/2017 &agrave; 13:59
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/juan-ji.html">卷积</a><a href="http://www.shushilvshe.com/tag/cnn.html">CNN</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p><strong>卷积神经网络(Convolutional Neural Network, CNN)</strong>是深度学习技术中极具代表的网络结构之一，在图像处理领域取得了很大的成功，在国际标准的ImageNet数据集上，许多成功的模型都是基于CNN的。CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/cnn.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/nanjing.html" rel="bookmark" title="Permalien vers «清明南京扬州游记——南京»">清明南京扬州游记——南京</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-09T20:39:21+08:00">
+                                Publié le 09/09/2017 &agrave; 20:39
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/nan-jing.html">南京</a><a href="http://www.shushilvshe.com/tag/zong-tong-fu.html">总统府</a><a href="http://www.shushilvshe.com/tag/zhong-shan-ling.html">中山陵</a><a href="http://www.shushilvshe.com/tag/ming-xiao-ling.html">明孝陵</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>2017年是我的人生转折点，突然间有了很多时间！想起曾经一直梦想的旅游，不经内心安定了好多。想想这些年一直折腾，从来都不是为自己，这种超脱的释然让我拥有了不曾奢望的自由。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/nanjing.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/python-base.html" rel="bookmark" title="Permalien vers «python常用功能总结»">python常用功能总结</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-06T10:09:29+08:00">
+                                Publié le 06/09/2017 &agrave; 10:09
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/python.html">python</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>python常用功能总结</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/python-base.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/data/facealign.html" rel="bookmark" title="Permalien vers «人脸识别——对齐算法»">人脸识别——对齐算法</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-05T22:24:46+08:00">
+                                Publié le 05/09/2017 &agrave; 22:24
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a><a href="http://www.shushilvshe.com/tag/ren-lian-shi-bie.html">人脸识别</a><a href="http://www.shushilvshe.com/tag/ren-lian-dui-qi.html">人脸对齐</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>使用facenet框架，可以识别出一张图片中的人脸头像，并返回每张人脸的边界和五官坐标，但图片中有的头像是有倾斜角度的，我们将倾斜度数小于指定阈值的进行校正，其余的按原形截取图片。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/data/facealign.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/python/peewee.html" rel="bookmark" title="Permalien vers «peewee 入门教程»">peewee 入门教程</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-31T20:04:38+08:00">
+                                Publié le 31/08/2017 &agrave; 20:04
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/python.html">python</a><a href="http://www.shushilvshe.com/tag/orm.html">ORM</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>peewee是一款轻量级、丰富的ORM（Object Relation Mapping，对象关系映射），支持 <strong><code>postgresql</code></strong>、<strong><code>mysql</code></strong> 和 <strong><code>sqlite</code></strong>。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/python/peewee.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/kunming.html" rel="bookmark" title="Permalien vers «周末昆明二日游»">周末昆明二日游</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-29T07:51:55+08:00">
+                                Publié le 29/08/2017 &agrave; 07:51
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/kun-ming.html">昆明</a><a href="http://www.shushilvshe.com/tag/shi-lin.html">石林</a><a href="http://www.shushilvshe.com/tag/jiu-xiang.html">九乡</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>恰逢全运会，天津又下雨了，又想起来了补游记了。平时工作笔记忙，没有时间出来旅游，老早前和小辜子约好出去玩，本来打算六月份出去的，计划终究赶不上变化，最后定在 2017.05.06 - 2017.05.07 周六日这两天了，地点本来是想找个离小辜子近点的，原本打算去重庆，觉得两天时间重庆不够用，且航班时间上不太合适，思来想去，云南是个不错的选择，由于时间比较短，所以只逛下昆明就够了，两天时间，足以。我出行喜欢定好计划，做好攻略，但小辜子是随性的，走哪算哪，所以，查查有哪些景点，定好酒店，剩下的具体行程到了再定。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/kunming.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html" rel="bookmark" title="Permalien vers «个人博客搭建过程(Pelican+Github)»">个人博客搭建过程(Pelican+Github)</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-12T18:44:57+08:00">
+                                Publié le 12/08/2017 &agrave; 18:44
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/pelican.html">Pelican</a><a href="http://www.shushilvshe.com/tag/python.html">python</a><a href="http://www.shushilvshe.com/tag/bo-ke-da-jian.html">博客搭建</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫。。。。。。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/beijingshidu.html" rel="bookmark" title="Permalien vers «逼格data社团十渡自驾游»">逼格data社团十渡自驾游</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-11T07:23:19+08:00">
+                                Publié le 11/08/2017 &agrave; 07:23
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/bei-jing.html">北京</a><a href="http://www.shushilvshe.com/tag/shi-du.html">十渡</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>自我们大数据组在老大帅锅欣哥的带领下，已然过了半载，虽不说大有成就，但也尽心尽力的为公司的发展贡献自己的热情。回想起这半年的日日夜夜，我们几个组员成长很快，整个团队凝聚力很强，学习氛围很浓，每个人都有自己的特长，行成了良性的生态循环。当然，能在这样的团队中，万分荣幸，感谢各位兄弟。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/beijingshidu.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/images/food/yingtaoguantou.html" rel="bookmark" title="Permalien vers «樱桃罐头制作方法»">樱桃罐头制作方法</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-08T21:46:59+08:00">
+                                Publié le 08/08/2017 &agrave; 21:46
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/food.html">food</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/ying-tao.html">樱桃</a><a href="http://www.shushilvshe.com/tag/guan-tou.html">罐头</a><a href="http://www.shushilvshe.com/tag/mei-shi.html">美食</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>端午节从沪苏杭回来的最大收获就是认识了一个大宝宝——小百仙儿，至于为啥子叫小百仙呢，因为她会“掐指一算”，至于算出来啥呢，只有她知道。 六月份正值烟台大樱桃收获的季节，贴心的宝宝满足了作为一个初级吃货的愿望，给我寄来一大箱的大美早。盼星星盼月亮，比盼媳妇儿还要着急，&gt;-&lt;,终于盼到了快递小哥的电话，收到后没敢拆箱，生怕拆箱后整坏喽。晚上下班把箱子放摩拜前面的框子里，一手扶着车把，一手扶着箱子，我滴宝贝啊。。。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/images/food/yingtaoguantou.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/ml/pandas/baseoperation.html" rel="bookmark" title="Permalien vers «pandas基本操作»">pandas基本操作</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-08T17:17:19+08:00">
+                                Publié le 08/08/2017 &agrave; 17:17
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a><a href="http://www.shushilvshe.com/tag/pandas.html">pandas</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>在pandas中有两类非常重要的数据结构，即序列<strong><code>Series</code></strong>和数据框<strong><code>DataFrame</code></strong>。Series类似于numpy中的一维数组，除了通吃一维数组可用的函数或方法，而且其可通过索引标签的方式获取数据，还具有索引的自动对齐功能；DataFrame类似于numpy中的二维数组，同样可以通用numpy数组的函数和方法，而且还具有其他灵活应用，后续会介绍到。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/ml/pandas/baseoperation.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/luoyang.html" rel="bookmark" title="Permalien vers «登封洛阳游记——洛阳篇»">登封洛阳游记——洛阳篇</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-05T08:12:40+08:00">
+                                Publié le 05/08/2017 &agrave; 08:12
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/luo-yang.html">洛阳</a><a href="http://www.shushilvshe.com/tag/mu-dan.html">牡丹</a><a href="http://www.shushilvshe.com/tag/long-men-shi-ku.html">龙门石窟</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>一晃快四个月过去了，期间发生了好多事，写游记的事情也就都搁置了，这周末清闲下来了，博客系统也移植成功了,那么，还等什么，我们开始洛阳之旅吧。（<a href="http://www.shushilvshe.com/travel/dengfeng.html">登封篇</a>）</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/luoyang.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/ml/dt.html" rel="bookmark" title="Permalien vers «决策树原理»">决策树原理</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-07-28T14:03:27+08:00">
+                                Publié le 28/07/2017 &agrave; 14:03
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a><a href="http://www.shushilvshe.com/tag/jue-ce-shu.html">决策树</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/ml/dt.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/ml/data-proprecess.html" rel="bookmark" title="Permalien vers «数据处理中的数值初步转换»">数据处理中的数值初步转换</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-07-26T16:04:56+08:00">
+                                Publié le 26/07/2017 &agrave; 16:04
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>我们使用scikit learn进行建模预测， 而SK中的模型都只能处理数值型的数据，需要将原始的字符串类型的数据转为数值型数据。所有数据通常可以分成两种类型：<strong><code>定量</code></strong>与<strong><code>定性</code></strong>。定量的属性（数值属性）通常蕴涵着可排序性，比如在泰坦尼克号数据集中，年龄就是一个定量属性。定性属性（标称 序数 二元属性）的值是一些符号或事务的名称，每个值代表某种类别编码或状态，不是可测量量，是不具有排序意义的，比如Embarked(登船地点)。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/ml/data-proprecess.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html" rel="bookmark" title="Permalien vers «Python科学计算核心工具包一览»">Python科学计算核心工具包一览</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-07-25T13:57:00+08:00">
+                                Publié le 25/07/2017 &agrave; 13:57
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/python.html">python</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>python用于科学计算已经相当成熟，现在主要用的库如下所列，详细请参看官方网址。</p>
+                <a class="readmore" href="http://www.shushilvshe.com/bigdata/python/sciencelib.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/bigdata/cdh-update.html" rel="bookmark" title="Permalien vers «CDH升级（5.11.0 -> 5.12.0）»">CDH升级（5.11.0 -> 5.12.0）</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-07-24T21:46:00+08:00">
+                                Publié le 24/07/2017 &agrave; 21:46
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/cdh.html">CDH</a><a href="http://www.shushilvshe.com/tag/bigdata.html">bigdata</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>CDH升级（5.11.0 -&gt; 5.12.0）, 大版本升级，CM和CDH详细更新过程。  版本升级更新特性参考： https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_rn_new_in_cdh_512.html#cdh_rn_new_in_cdh_512</p>
+                <a class="readmore" href="http://www.shushilvshe.com/bigdata/cdh-update.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+        
+ 
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="http://www.shushilvshe.com/travel/dengfeng.html" rel="bookmark" title="Permalien vers «登封洛阳游记——登封篇»">登封洛阳游记——登封篇</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2017-07-21T23:59:00+08:00">
+                                Publié le 21/07/2017 &agrave; 23:59
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                        <p> Dans <a href="http://www.shushilvshe.com/category/travel.html">travel</a></p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/lu-you.html">旅游</a><a href="http://www.shushilvshe.com/tag/deng-feng.html">登封</a><a href="http://www.shushilvshe.com/tag/shao-lin-si.html">少林寺</a><a href="http://www.shushilvshe.com/tag/song-shan.html">嵩山</a></p></p>                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>终于有了写游记的全部条件了，<em>时间</em>：<strong>周末</strong> <em>工具</em>：<strong>wp+md</strong>，还有<strong>记忆</strong>，赶紧把之前的出游的四次旅行记录下吧 年龄大了，真是什么都可能忘记哈。4到6月份温度适中，春游最合适不过了，继南京扬州之行后，喜欢上了旅游的感觉——自由 静逸 就是那种感觉。回津之后，立马着手安排下一次旅行......</p>
+                <a class="readmore" href="http://www.shushilvshe.com/travel/dengfeng.html">Lire la suite...</a>
+                </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 4
-        <a href="http://www.shushilvshe.com/index2.html">&raquo;</a>
-</p>
 </section><!-- /#content -->
-        <footer id="contentinfo" class="body">
+
+        <aside id="sidebar">
+                <div class="widget">
+                        <h2>Catégories</h2>
+                        <ul>
+                           <li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                </div>
+                <div class="widget blogroll">
+                        <h2>Liens</h2>
+                        <ul>
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </aside><!-- /#sidebar -->
+
+        <footer id="footer" class="body">
                 <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
+                Ce site est généré par <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>, un CMS réalisé en <a href="http://python.org">Python</a>.
                 </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+
+                <p>Le thème utilisé est «NotMyIdea-CMS», une version modifiée de «NotMyIdea», le thème par défaut.</p>
+        </footer><!-- /#footer -->
+
 </body>
 </html>

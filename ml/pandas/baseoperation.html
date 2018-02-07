@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>shushilvshe's Blog : pandas基本操作</title>
+        <title>pandas基本操作</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
-        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog Flux ATOM" />
+
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -18,14 +19,35 @@
 
 </head>
 
-<body>
-        
-<header>
-    <h1><a href="http://www.shushilvshe.com/ml/pandas/baseoperation.html" id="page-title">pandas基本操作</a></h1>
-    <span id="sitename"><a href="http://www.shushilvshe.com" id="site-title">shushilvshe's Blog  <strong>Data Developer</strong></a> &sdot;</span>
-<time datetime="2017-08-08T17:17:19+08:00">2017-08-08(星期二) 17:17</time></header>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/index.html">shushilvshe's Blog  <strong>Data Developer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/category/data.html">Data</a></li>
+                    <li><a href="/category/food.html">Food</a></li>
+                    <li><a href="/category/travel.html">Travel</a></li>
+                    <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/index.html">Accueil</a></li>
+                <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                    <li ><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+<section id="content" class="body">
 <article>
-    <h2>1.数据结构介绍</h2>
+        <header> <h1 class="entry-title"><a href="ml/pandas/baseoperation.html"
+        rel="bookmark" title="Permalink to pandas基本操作">pandas基本操作</a></h1>  </header>
+        <div class="entry-content">
+        <footer class="post-info">
+                <abbr class="published" title="2017-08-08T17:17:19+08:00">
+                    Publié le 星期二 08 八月 2017 &agrave; 17:17
+                </abbr>
+                <address class="vcard author">
+                        Par <a class="url fn" href="#">ssls</a>
+                </address>
+                <p>Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a>.
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a><a href="http://www.shushilvshe.com/tag/pandas.html">pandas</a></p></p>        </footer><!-- /.post-info -->
+        <h2>1.数据结构介绍</h2>
 <p>在pandas中有两类非常重要的数据结构，即序列<strong><code>Series</code></strong>和数据框<strong><code>DataFrame</code></strong>。Series类似于numpy中的一维数组，除了通吃一维数组可用的函数或方法，而且其可通过索引标签的方式获取数据，还具有索引的自动对齐功能；DataFrame类似于numpy中的二维数组，同样可以通用numpy数组的函数和方法，而且还具有其他灵活应用，后续会介绍到。</p>
 <ul>
 <li><strong>Series的创建</strong></li>
@@ -1037,18 +1059,37 @@ max       3.000000     2.653656     3.000000     3.000000
 </blockquote>
 </li>
 </ul>
-</article>
+        </div><!-- /.entry-content -->
 
-        <footer>
-            <nav>
-                <ul>
-                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/categories.html">Categories</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit">Proudly powered by <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a></p>
-        </footer>
+</article>
+</section>
+
+        <aside id="sidebar">
+                <div class="widget">
+                        <h2>Catégories</h2>
+                        <ul>
+                           <li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                </div>
+                <div class="widget blogroll">
+                        <h2>Liens</h2>
+                        <ul>
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </aside><!-- /#sidebar -->
+
+        <footer id="footer" class="body">
+                <address id="about" class="vcard body">
+                Ce site est généré par <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>, un CMS réalisé en <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>Le thème utilisé est «NotMyIdea-CMS», une version modifiée de «NotMyIdea», le thème par défaut.</p>
+        </footer><!-- /#footer -->
 
 </body>
 </html>

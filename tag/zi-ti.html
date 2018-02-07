@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>shushilvshe's Blog - 字体</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog Flux ATOM" />
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie.css"/>
+                <script src="http://www.shushilvshe.com/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/index.html">shushilvshe's Blog  <strong>Data Developer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/category/data.html">Data</a></li>
+                    <li><a href="/category/food.html">Food</a></li>
+                    <li><a href="/category/travel.html">Travel</a></li>
+                    <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/index.html">Accueil</a></li>
+                <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                    <li ><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+        
+        
+     <section id="content" class="body">
+        <aside id="featured"><article>
+                <h1 class="entry-title"><a href="http://www.shushilvshe.com/data/font-build.html">字体生成小记</a></h1> 
+                <footer class="post-info">
+                        <abbr class="published" title="2017-09-29T14:22:16+08:00">
+                                Publié le 29/09/2017 &agrave; 14:22
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                <p>Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a>. </p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/zi-ti.html">字体</a></p></p>                </footer><!-- /.post-info -->
+                <p><strong>目录：</strong></p>
+<p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+      $("h2,h3,h4,h5,h6").each(function(i,item){
+        var tag = $(item).get(0).localName;
+        $(item).attr("id","wow"+i);
+        $("#category").append('<a class="new'+tag+'" href="#wow'+i+'">'+$(this).text()+'</a></br>');
+        $(".newh2").css("margin-left",0);
+        $(".newh3").css("margin-left",20);
+        $(".newh4").css("margin-left",40);
+        $(".newh5").css("margin-left",60);
+        $(".newh6").css("margin-left",80);
+      });
+ });
+</script>
+
+<div id="category"></div>
+
+<h2>字体生成方案：</h2>
+<ul>
+<li>1.给定一部分手写字体，由深度学习网络训练之后生成该字形所对应的所有常用字（基于GB2312， 共6763字）;</li>
+<li>2.根据生成的位图格式（bitmap），转成矢量图格式svg，这部分由 <code>potrace</code> 完成；</li>
+<li>3.通过 <code>FontForge</code> 创建字体，并将所对应的svg添加到对应unicode编码的字模中，完成手写字体的生成。</li>
+</ul>
+<h2>方案涉及到的工具和脚本</h2>
+<h3>1.字体预备知识:点阵字体（位图字体或光栅字体）和矢量字体</h3>
+<ul>
+<li>
+<p><strong>点阵字体</strong></p>
+<p>点阵字体是把每一个 字符都分成16×16或24×24个点，然后用每个点的虚实来表示字符的轮廓。点阵字体也叫 位图字体，其中每个字形都以一组 二维像素信息表示。</p>
+<ul>
+<li>
+<p>字体结构</p>
+<p>点阵字体也叫位图字体，其中每个字形都以一组 二维像素信息表示。这种文字显示方式于较早前的电脑系统（例如未有图形接口时的 DOS 操作系统）被普遍采用。由于位图的缘故，点阵字体很难进行缩放，特定的点阵字体只能清晰地显示在相应的字号下，否则文字只被强行放大而失真字形，产生成马赛克式的锯齿边缘。但对于字号 8-14px 的尺寸较小的汉字字体（即现今操作系统大多采用的默认字号）现今亦仍然被使用于荧幕显示上，能够提供更高的显示效果；不过现今该种点阵字体主要只作为“辅助”的部分，当使用者设定的字体尺寸并没有拥有位图像时，字体便会以向量图象方式显示；而当打印时，印有字体无论大小亦会使用向量字型打印。</p>
+</li>
+<li>
+<p>字体特点</p>
+<p>点阵字体优点是显示速度快，不像 矢量字体需要计算；其最大的缺点是不能放大，一旦放大后就会发现文字边缘的锯齿。</p>
+</li>
+<li>
+<p>光栅字体 (<a href="https://baike.baidu.com/item/%E5%85%89%E6%A0%85%E5%AD%97%E4%BD%93?fr=aladdin">摘自百度</a>)</p>
+<p>存储为位图的字体。光栅字体是为特定打印机设计的，有特定的大小和分辨率，而且不能缩放或旋转。如果打印机不支持光栅字体，就不会打印这些字体。五种光栅字体分别为 Courier、MS Sans Serif、MS Serif、Small 和 Symbol。光栅字体也被称为位图字体。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>矢量字体</strong></p>
+<p>矢量字体(Vector font)中每一个字形是通过 数学曲线来描述的，它包含了字形边界上的关键点，连线的 导数信息等，字体的渲染引擎通过读取这些数学矢量，然后进行一定的数学运算来进行渲染。这类字体的优点是字体实际尺寸可以任意缩放而不变形、变色。矢量字体主要包括 <code>Type1</code> 、<code>TrueType</code>、<code>OpenType</code>等几类。矢量字体也叫Outline font，通常使用<code>贝塞尔曲线</code>，<code>绘图指令</code>和<code>数学公式</code>进行绘制。这样可以在对字体进行任意缩放的时候保持字体边缘依然光滑，字体色素不会丢失。</p>
+<ul>
+<li>
+<p>矢量字体分类</p>
+<p>目前主流的 矢量字体格式有3种：Type1， TrueType和 OpenType，这三种格式都是与平台无关的。</p>
+<p>Type1全称PostScript Type1，是1985年由Adobe公司提出的一套矢量字体标准，由于这个标准是基于PostScript Description Language(PDL)，而PDL又是 高端打印机首选的打印描述语言，所以Type1迅速流行起来。但是Type1是非开放字体，Adobe对使用Type1的公司征收高额的使用费。</p>
+<p>TrueType是1991年由Apple公司与 Microsoft公司联合提出另一套矢量字标准。</p>
+<p>Type1使用三次 贝塞尔曲线来描述字形，TrueType则使用二次贝塞尔曲线来描述字形。所以Type1的字体比 TrueType字体更加精确美观。一个误解是，Type1字体比TrueType字体占用空间多。这是因为同样描述一个圆形，二次贝塞尔曲线只需要8个关键点和7段 二次曲线；而三次贝塞尔曲线则需要12个关键点和11段三次曲线。然而实际情况是一般来说 Type1比TrueType要小10%左右。这是因为对于稍微复杂的字形，为了保持平滑，TrueType必须使用更多的关键点。由于现代大部分打印机都是使用PDL作为打印描述语言，所以Type1字体打印的时候不会产生形变，速度快；而 TrueType则需要翻译成PDL，由于曲线方程的变化，还会产生一定的形变，不如Type1美观。</p>
+</li>
+<li>
+<p>矢量字体优势比较</p>
+<p>这么说来，Type1应该比 TrueType更具有优势，为什么如今的计算机上TrueType反而比Type1使用更广泛呢？</p>
+<p>这是因为第一：Type1由于字体方程的复杂，所以在屏幕上渲染的时候，花费的时间多，解决方案是大部分Type1字体嵌入了 点阵字体，这样渲染快，但是边缘不光滑，比较难看。很多ps文档和ps转换的pdf文档都是这样，在计算机上浏览的时候字体很难看，但是打印出来很美观。TrueType则渲染比较快，可以平滑的显示在屏幕上，看上去很美观。</p>
+<p>第二个原因是Type1的高额使用费，使得Type1没有被所有的操作系统所支持。Windows家族只有OS/2和windows 2000及之后的版本从操作系统级别开始支持Type1。由于这个问题，Adobe只好在其所有的产品中嵌入Adobe Type Manager(ATM)作为渲染引擎。</p>
+<p>OpenType则是Type1与 TrueType之争的最终产物。1995年，Adobe公司和 Microsoft公司开始联手开发一种兼容Type1和TrueType，并且真正支持 Unicode的字体，后来在发布的时候，正式命名为OpenType。OpenType可以嵌入Type1和TrueType，这样就兼有了二者的特点，无论是在屏幕上察看还是打印，质量都非常优秀。可以说 OpenType是一个三赢的结局，无论是Adobe、Microsoft还是最终用户，都从OpenType中得到了好处。Windows家族从Windows 2000开始，正式支持OpenType。打开系统的字体目录（一般是C:\Windows\ Fonts\或C:\ Winnt\Fonts），可以看到： 一个红色A的图标的是点阵字体，两个重叠的T的图标是TrueType字体，一个O的图标就是OpenType字体。win7开始就基本都是OpenType和少数几个TrueType和“光栅”类型的自体了，图标规则也消失了。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>点阵字库与矢量字库区别：</strong>
+点阵 字库常用来作为显示字库使用，这类点阵字库汉字最大的缺点是不能放大，一旦放大后就会发现文字边缘的锯齿。
+矢量字库保存的是对每一个汉字的描述信息，比如一个笔划的起始、终止坐标，半径、弧度等等。在显示、打印这一类字库时，要经过一系列的数学运算才能输出结果，但是这一类字库保存的汉字理论上可以被无限地放大，笔划轮廓仍然能保持圆滑，打印时使用的字库均为此类字库。Windows使用的字库也为以上两类，在FONTS目录下，如果字体扩展名为FON，表示该文件为点阵字库，扩展名为TTF则表示矢量字库！</p>
+<h3>2.potrace <a href="https://github.com/skyrpex/potrace">源码</a>  <a href="http://potrace.sourceforge.net/">文档</a></h3>
+<p><strong>Usage</strong></p>
+<div class="highlight"><pre><span></span>potrace 1.15. Transforms bitmaps into vector graphics.
+
+Usage: potrace [options] [filename...]
+General options:
+ -h, --help                 - print this help message and exit
+ -v, --version              - print version info and exit
+ -l, --license              - print license info and exit
+File selection:
+ filename                   - an input file
+ -o, --output filename      - write all output to this file
+ --                         - end of options; 0 or more input filenames follow
+Backend selection:
+ -b, --backend name         - select backend by name
+ -b svg, -s, --svg          - SVG backend (scalable vector graphics)
+ -b pdf                     - PDF backend (portable document format)
+ -b pdfpage                 - fixed page-size PDF backend
+ -b eps, -e, --eps          - EPS backend (encapsulated PostScript) (default)
+ -b ps, -p, --postscript    - PostScript backend
+ -b pgm, -g, --pgm          - PGM backend (portable greymap)
+ -b dxf                     - DXF backend (drawing interchange format)
+ -b geojson                 - GeoJSON backend
+ -b gimppath                - Gimppath backend (GNU Gimp)
+ -b xfig                    - XFig backend
+Algorithm options:
+ -z, --turnpolicy policy    - how to resolve ambiguities in path decomposition
+ -t, --turdsize n           - suppress speckles of up to this size (default 2)
+ -a, --alphamax n           - corner threshold parameter (default 1)
+ -n, --longcurve            - turn off curve optimization
+ -O, --opttolerance n       - curve optimization tolerance (default 0.2)
+ -u, --unit n               - quantize output to 1/unit pixels (default 10)
+ -d, --debug n              - produce debugging output of type n (n=1,2,3)
+Scaling and placement options:
+ -P, --pagesize format      - page size (default is letter)
+ -W, --width dim            - width of output image
+ -H, --height dim           - height of output image
+ -r, --resolution n[xn]     - resolution (in dpi) (dimension-based backends)
+ -x, --scale n[xn]          - scaling factor (pixel-based backends)
+ -S, --stretch n            - yresolution/xresolution
+ -A, --rotate angle         - rotate counterclockwise by angle
+ -M, --margin dim           - margin
+ -L, --leftmargin dim       - left margin
+ -R, --rightmargin dim      - right margin
+ -T, --topmargin dim        - top margin
+ -B, --bottommargin dim     - bottom margin
+ --tight                    - remove whitespace around the input image
+Color options, supported by some backends:
+ -C, --color #rrggbb        - set foreground color (default black)
+ --fillcolor #rrggbb        - set fill color (default transparent)
+ --opaque                   - make white shapes opaque
+SVG options:
+ --group                    - group related paths together
+ --flat                     - whole image as a single path
+Postscript/EPS/PDF options:
+ -c, --cleartext            - do not compress the output
+ -2, --level2               - use postscript level 2 compression (default)
+ -3, --level3               - use postscript level 3 compression
+ -q, --longcoding           - do not optimize for file size
+PGM options:
+ -G, --gamma n              - gamma value for anti-aliasing (default 2.2)
+Frontend options:
+ -k, --blacklevel n         - black/white cutoff in input file (default 0.5)
+ -i, --invert               - invert bitmap
+Progress bar options:
+ --progress                 - show progress bar
+ --tty mode                 - progress bar rendering: vt100 or dumb
+
+Dimensions can have optional units, e.g. 6.5in, 15cm, 100pt.
+Default is inches (or pixels for pgm, dxf, and gimppath backends).
+Possible input file formats are: pnm (pbm, pgm, ppm), bmp.
+Backends are: svg, pdf, pdfpage, eps, postscript, ps, dxf, geojson, pgm, 
+gimppath, xfig.
+</pre></div>
+
+
+<h3>3.FontForge</h3>
+<p><a href="https://fontforge.github.io/en-US/">官方网站</a></p>
+<p><a href="https://github.com/fontforge/fontforge">FontForge源码</a></p>
+<p><a href="https://fontforge.github.io/python.html">FontForge python脚本参考文档</a></p>
+<blockquote>
+<p>本次案例是FontForge和FontCreator（不支持批量导入图片）配合使用，FontForge支持python脚本批量将svg格式的图片添加到字体文件中。另外FontForge的windows版功能也很强大，但暂时用不到，留给专门做字体的宝宝们吧。在windows界面操作上，不如FontCreator使用的顺手，所以，我是用FontForge生成字体，再用FontCreator查看并测试字体。</p>
+</blockquote>
+<h3>4.完整脚本</h3>
+<div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">FUNCTION:</span>
+<span class="sd">    generate a font file(ttf format) with bitmaps    </span>
+<span class="sd">DETAILS:</span>
+<span class="sd">    first step  : turn the bmp image into svg format(vector image)</span>
+<span class="sd">   second step  : create a glyph with unicode point and svg</span>
+<span class="sd">     last step  : generate the font file  </span>
+<span class="sd">DATE:</span>
+<span class="sd">    2017-09-28</span>
+<span class="sd">AUTHOR:</span>
+<span class="sd">    Aaron</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">fontforge</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">BMP_PATH</span> <span class="o">=</span> <span class="s1">&#39;/tmp/fonts/huawenkaiti/bmp/&#39;</span>
+<span class="n">SVG_PATH</span> <span class="o">=</span> <span class="s1">&#39;/tmp/fonts/huawenkaiti/svg/&#39;</span>
+<span class="n">FONT_PATH</span><span class="o">=</span> <span class="s1">&#39;/tmp/fonts/font.ttf&#39;</span>
+
+<span class="n">font</span> <span class="o">=</span> <span class="n">fontforge</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>
+<span class="n">font</span><span class="o">.</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;GB2312&#39;</span>  <span class="c1">#default is &#39;ISO8859-1&#39;</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;bmp transform to svg...&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">BMP_PATH</span><span class="p">):</span>
+    <span class="n">bmp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BMP_PATH</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="n">command</span><span class="o">=</span><span class="s1">&#39;potrace &#39;</span> <span class="o">+</span> <span class="n">bmp</span> <span class="o">+</span> <span class="s1">&#39; -s &#39;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;bmp transform to svg finished, move svg image to ../svg&#39;</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;mkdir -p &#39;</span><span class="o">+</span><span class="n">SVG_PATH</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;mv &#39;</span><span class="o">+</span><span class="n">BMP_PATH</span><span class="o">+</span><span class="s1">&#39;*.svg &#39;</span><span class="o">+</span><span class="n">SVG_PATH</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;generate fonts...&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">SVG_PATH</span><span class="p">):</span>
+    <span class="n">svg</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SVG_PATH</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1">#image filename example: &quot;U_004E3A.svg&quot;</span>
+        <span class="n">glyph</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">createChar</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="o">+</span><span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">4</span><span class="p">:],</span> <span class="mi">16</span><span class="p">)</span> <span class="p">,</span><span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> 
+        <span class="n">glyph</span><span class="o">.</span><span class="n">importOutlines</span><span class="p">(</span><span class="n">svg</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+<span class="n">font</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">FONT_PATH</span><span class="p">)</span>
+<span class="n">font</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;generate fonts finished&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>TODO：</h2>
+<ul>
+<li>1.生成的字体文件在txt中可以起作用，但在word中不起作用，可能是因为字体文件中缺少对应表的原因；</li>
+<li>2.极个别生成的svg格式添加到FontForge的时候，会报非法指针错误，如下:（该问题暂时解决办法：将用FontForge添加失败的svg在生成ttf文件后再由FontCreator手动添加上去）<div class="highlight"><pre><span></span>*** Error in `python&#39;: free(): invalid next size (fast): 0x000000000432c7b0 ***
+======= Backtrace: =========
+/lib64/libc.so.6(+0x7c503)[0x7fa0e1943503]
+/lib64/libxml2.so.2(xmlFreeParserCtxt+0x85)[0x7fa0d9dffbc5]
+/lib64/libxml2.so.2(xmlSAXParseFileWithData+0xbe)[0x7fa0d9e15e0e]
+/usr/lib64/libfontforge.so.1(EntityInterpretSVG+0x33)[0x7fa0d8087303]
+/usr/lib64/libfontforge.so.1(SplinePointListInterpretSVG+0x1d)[0x7fa0d80874cd]
+/usr/lib64/libfontforge.so.1(SCImportSVG+0x3f)[0x7fa0d7e9e62f]
+/usr/lib64/libfontforge.so.1(+0x1adabe)[0x7fa0d7f99abe]
+/lib64/libpython2.7.so.1.0(PyEval_EvalFrameEx+0x6df0)[0x7fa0e2691af0]
+/lib64/libpython2.7.so.1.0(PyEval_EvalCodeEx+0x7ed)[0x7fa0e2693e3d]
+/lib64/libpython2.7.so.1.0(PyEval_EvalCode+0x32)[0x7fa0e2693f42]
+/lib64/libpython2.7.so.1.0(+0x10037f)[0x7fa0e26ad37f]
+/lib64/libpython2.7.so.1.0(PyRun_FileExFlags+0x7e)[0x7fa0e26ae53e]
+/lib64/libpython2.7.so.1.0(PyRun_SimpleFileExFlags+0xe9)[0x7fa0e26af7c9]
+/lib64/libpython2.7.so.1.0(Py_Main+0xc9f)[0x7fa0e26c091f]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa0e18e8b35]
+python[0x40071e]
+======= Memory map: ========
+00400000-00401000 r-xp 00000000 08:02 805311337                          /usr/bin/python2.7
+00600000-00601000 r--p 00000000 08:02 805311337                          /usr/bin/python2.7
+00601000-00602000 rw-p 00001000 08:02 805311337                          /usr/bin/python2.7
+009ca000-04d35000 rw-p 00000000 00:00 0                                  [heap]
+7fa0d0000000-7fa0d0021000 rw-p 00000000 00:00 0 
+7fa0d0021000-7fa0d4000000 ---p 00000000 00:00 0 
+7fa0d6ef0000-7fa0d6f31000 rw-p 00000000 00:00 0 
+7fa0d6f31000-7fa0d6fa3000 r-xp 00000000 08:02 270119732                  /usr/lib64/gconv/libCNS.so
+7fa0d6fa3000-7fa0d71a2000 ---p 00072000 08:02 270119732                  /usr/lib64/gconv/libCNS.so
+7fa0d71a2000-7fa0d71a3000 r--p 00071000 08:02 270119732                  /usr/lib64/gconv/libCNS.so
+7fa0d71a3000-7fa0d71a4000 rw-p 00072000 08:02 270119732                  /usr/lib64/gconv/libCNS.so
+7fa0d71a4000-7fa0d71b4000 r-xp 00000000 08:02 270119733                  /usr/lib64/gconv/libGB.so
+7fa0d71b4000-7fa0d73b3000 ---p 00010000 08:02 270119733                  /usr/lib64/gconv/libGB.so
+7fa0d73b3000-7fa0d73b4000 r--p 0000f000 08:02 270119733                  /usr/lib64/gconv/libGB.so
+7fa0d73b4000-7fa0d73b5000 rw-p 00010000 08:02 270119733                  /usr/lib64/gconv/libGB.so
+7fa0d73b5000-7fa0d73bc000 r-xp 00000000 08:02 268445996                  /usr/lib64/gconv/ISO-2022-CN.so
+7fa0d73bc000-7fa0d75bb000 ---p 00007000 08:02 268445996                  /usr/lib64/gconv/ISO-2022-CN.so
+7fa0d75bb000-7fa0d75bc000 r--p 00006000 08:02 268445996                  /usr/lib64/gconv/ISO-2022-CN.so
+7fa0d75bc000-7fa0d75bd000 rw-p 00007000 08:02 268445996                  /usr/lib64/gconv/ISO-2022-CN.so
+7fa0d75bd000-7fa0d75c9000 r-xp 00000000 08:02 566702                     /usr/lib64/libnss_files-2.17.so
+7fa0d75c9000-7fa0d77c8000 ---p 0000c000 08:02 566702                     /usr/lib64/libnss_files-2.17.so
+7fa0d77c8000-7fa0d77c9000 r--p 0000b000 08:02 566702                     /usr/lib64/libnss_files-2.17.so
+7fa0d77c9000-7fa0d77ca000 rw-p 0000c000 08:02 566702                     /usr/lib64/libnss_files-2.17.so
+7fa0d77ca000-7fa0d77d0000 rw-p 00000000 00:00 0 
+7fa0d77d0000-7fa0d77d2000 r-xp 00000000 08:02 268446039                  /usr/lib64/gconv/MACINTOSH.so
+7fa0d77d2000-7fa0d79d1000 ---p 00002000 08:02 268446039                  /usr/lib64/gconv/MACINTOSH.so
+7fa0d79d1000-7fa0d79d2000 r--p 00001000 08:02 268446039                  /usr/lib64/gconv/MACINTOSH.so
+7fa0d79d2000-7fa0d79d3000 rw-p 00002000 08:02 268446039                  /usr/lib64/gconv/MACINTOSH.so
+7fa0d79d3000-7fa0d79d5000 r-xp 00000000 08:02 268446003                  /usr/lib64/gconv/ISO8859-1.so
+7fa0d79d5000-7fa0d7bd4000 ---p 00002000 08:02 268446003                  /usr/lib64/gconv/ISO8859-1.so
+7fa0d7bd4000-7fa0d7bd5000 r--p 00001000 08:02 268446003                  /usr/lib64/gconv/ISO8859-1.so
+7fa0d7bd5000-7fa0d7bd6000 rw-p 00002000 08:02 268446003                  /usr/lib64/gconv/ISO8859-1.so
+7fa0d7bd6000-7fa0d7beb000 r-xp 00000000 08:02 84                         /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7fa0d7beb000-7fa0d7dea000 ---p 00015000 08:02 84                         /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7fa0d7dea000-7fa0d7deb000 r--p 00014000 08:02 84                         /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7fa0d7deb000-7fa0d7dec000 rw-p 00015000 08:02 84                         /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7fa0d7dec000-7fa0d8168000 r-xp 00000000 08:02 17881457                   /usr/lib64/libfontforge.so.1.0.0
+7fa0d8168000-7fa0d8367000 ---p 0037c000 08:02 17881457                   /usr/lib64/libfontforge.so.1.0.0
+7fa0d8367000-7fa0d8382000 r--p 0037b000 08:02 17881457                   /usr/lib64/libfontforge.so.1.0.0
+7fa0d8382000-7fa0d83e8000 rw-p 00396000 08:02 17881457                   /usr/lib64/libfontforge.so.1.0.0
+7fa0d83e8000-7fa0d83ec000 rw-p 00000000 00:00 0 
+7fa0d83ec000-7fa0d83ee000 r-xp 00000000 08:02 5067917                    /usr/lib64/libXau.so.6.0.0
+7fa0d83ee000-7fa0d85ee000 ---p 00002000 08:02 5067917                    /usr/lib64/libXau.so.6.0.0
+7fa0d85ee000-7fa0d85ef000 r--p 00002000 08:02 5067917                    /usr/lib64/libXau.so.6.0.0
+7fa0d85ef000-7fa0d85f0000 rw-p 00003000 08:02 5067917                    /usr/lib64/libXau.so.6.0.0
+7fa0d85f0000-7fa0d8611000 r-xp 00000000 08:02 5071346                    /usr/lib64/libxcb.so.1.1.0
+7fa0d8611000-7fa0d8810000 ---p 00021000 08:02 5071346                    /usr/lib64/libxcb.so.1.1.0
+7fa0d8810000-7fa0d8811000 r--p 00020000 08:02 5071346                    /usr/lib64/libxcb.so.1.1.0
+7fa0d8811000-7fa0d8812000 rw-p 00021000 08:02 5071346                    /usr/lib64/libxcb.so.1.1.0
+7fa0d8812000-7fa0d8816000 r-xp 00000000 08:02 1353                       /usr/lib64/libuuid.so.1.3.0
+7fa0d8816000-7fa0d8a15000 ---p 00004000 08:02 1353                       /usr/lib64/libuuid.so.1.3.0
+7fa0d8a15000-7fa0d8a16000 r--p 00003000 08:02 1353                       /usr/lib64/libuuid.so.1.3.0
+7fa0d8a16000-7fa0d8a17000 rw-p 00004000 08:02 1353                       /usr/lib64/libuuid.so.1.3.0
+7fa0d8a17000-7fa0d8a3c000 r-xp 00000000 08:02 1268                       /usr/lib64/liblzma.so.5.2.2
+7fa0d8a3c000-7fa0d8c3b000 ---p 00025000 08:02 1268                       /usr/lib64/liblzma.so.5.2.2
+7fa0d8c3b000-7fa0d8c3c000 r--p 00024000 08:02 1268                       /usr/lib64/liblzma.so.5.2.2
+7fa0d8c3c000-7fa0d8c3d000 rw-p 00025000 08:02 1268                       /usr/lib64/liblzma.so.5.2.2
+7fa0d8c3d000-7fa0d8c52000 r-xp 00000000 08:02 1321                       /usr/lib64/libz.so.1.2.7
+7fa0d8c52000-7fa0d8e51000 ---p 00015000 08:02 1321                       /usr/lib64/libz.so.1.2.7
+7fa0d8e51000-7fa0d8e52000 r--p 00014000 08:02 1321                       /usr/lib64/libz.so.1.2.7
+7fa0d8e52000-7fa0d8e53000 rw-p 00015000 08:02 1321                       /usr/lib64/libz.so.1.2.7
+7fa0d8e53000-7fa0d8e5c000 r-xp 00000000 08:02 11242172                   /usr/lib64/libjbig.so.2.0
+7fa0d8e5c000-7fa0d905b000 ---p 00009000 08:02 11242172                   /usr/lib64/libjbig.so.2.0
+7fa0d905b000-7fa0d905c000 r--p 00008000 08:02 11242172                   /usr/lib64/libjbig.so.2.0
+7fa0d905c000-7fa0d905f000 rw-p 00009000 08:02 11242172                   /usr/lib64/libjbig.so.2.0
+7fa0d905f000-7fa0d9197000 r-xp 00000000 08:02 5071350                    /usr/lib64/libX11.so.6.3.0
+7fa0d9197000-7fa0d9397000 ---p 00138000 08:02 5071350                    /usr/lib64/libX11.so.6.3.0
+7fa0d9397000-7fa0d9398000 r--p 00138000 08:02 5071350                    /usr/lib64/libX11.so.6.3.0
+7fa0d9398000-7fa0d939d000 rw-p 00139000 08:02 5071350                    /usr/lib64/libX11.so.6.3.0
+7fa0d939d000-7fa0d93b4000 r-xp 00000000 08:02 5058029                    /usr/lib64/libICE.so.6.3.0
+7fa0d93b4000-7fa0d95b3000 ---p 00017000 08:02 5058029                    /usr/lib64/libICE.so.6.3.0
+7fa0d95b3000-7fa0d95b4000 r--p 00016000 08:02 5058029                    /usr/lib64/libICE.so.6.3.0
+7fa0d95b4000-7fa0d95b5000 rw-p 00017000 08:02 5058029                    /usr/lib64/libICE.so.6.3.0
+7fa0d95b5000-7fa0d95b9000 rw-p 00000000 00:00 0 
+7fa0d95b9000-7fa0d95c0000 r-xp 00000000 08:02 5058042                    /usr/lib64/libSM.so.6.0.1
+7fa0d95c0000-7fa0d97bf000 ---p 00007000 08:02 5058042                    /usr/lib64/libSM.so.6.0.1
+7fa0d97bf000-7fa0d97c0000 r--p 00006000 08:02 5058042                    /usr/lib64/libSM.so.6.0.1
+7fa0d97c0000-7fa0d97c1000 rw-p 00007000 08:02 5058042                    /usr/lib64/libSM.so.6.0.1
+7fa0d97c1000-7fa0d994e000 r-xp 00000000 08:02 17856138                   /usr/lib64/libuninameslist.so.0.0.2
+7fa0d994e000-7fa0d9b4d000 ---p 0018d000 08:02 17856138                   /usr/lib64/libuninameslist.so.0.0.2
+7fa0d9b4d000-7fa0d9bc1000 r--p 0018c000 08:02 17856138                   /usr/lib64/libuninameslist.so.0.0.2
+7fa0d9bc1000-7fa0d9bc2000 rw-p 00200000 08:02 17856138                   /usr/lib64/libuninameslist.so.0.0.2
+7fa0d9bc2000-7fa0d9bc6000 r-xp 00000000 08:02 17855971                   /usr/lib64/libspiro.so.0.0.1
+7fa0d9bc6000-7fa0d9dc5000 ---p 00004000 08:02 17855971                   /usr/lib64/libspiro.so.0.0.1
+7fa0d9dc5000-7fa0d9dc6000 r--p 00003000 08:02 17855971                   /usr/lib64/libspiro.so.0.0.1
+7fa0d9dc6000-7fa0d9dc7000 rw-p 00004000 08:02 17855971                   /usr/lib64/libspiro.so.0.0.1
+7fa0d9dc7000-7fa0d9f26000 r-xp 00000000 08:02 1509                       /usr/lib64/libxml2.so.2.9.1
+7fa0d9f26000-7fa0da125000 ---p 0015f000 08:02 1509                       /usr/lib64/libxml2.so.2.9.1
+7fa0da125000-7fa0da12d000 r--p 0015e000 08:02 1509                       /usr/lib64/libxml2.so.2.9.1
+7fa0da12d000-7fa0da12f000 rw-p 00166000 08:02 1509                       /usr/lib64/libxml2.so.2.9.1
+7fa0da12f000-7fa0da131000 rw-p 00000000 00:00 0 
+7fa0da131000-7fa0da1d1000 r-xp 00000000 08:02 32914                      /usr/lib64/libfreetype.so.6.10.0
+7fa0da1d1000-7fa0da3d0000 ---p 000a0000 08:02 32914                      /usr/lib64/libfreetype.so.6.10.0
+7fa0da3d0000-7fa0da3d6000 r--p 0009f000 08:02 32914                      /usr/lib64/libfreetype.so.6.10.0
+7fa0da3d6000-7fa0da3d7000 rw-p 000a5000 08:02 32914                      /usr/lib64/libfreetype.so.6.10.0
+7fa0da3d7000-7fa0da41a000 r-xp 00000000 08:02 5953873                    /usr/lib64/libjpeg.so.62.1.0
+7fa0da41a000-7fa0da61a000 ---p 00043000 08:02 5953873                    /usr/lib64/libjpeg.so.62.1.0
+7fa0da61a000-7fa0da61b000 r--p 00043000 08:02 5953873                    /usr/lib64/libjpeg.so.62.1.0
+7fa0da61b000-7fa0da61c000 rw-p 00044000 08:02 5953873                    /usr/lib64/libjpeg.so.62.1.0
+7fa0da61c000-7fa0da62c000 rw-p 00000000 00:00 0 
+7fa0da62c000-7fa0da69b000 r-xp 00000000 08:02 11242183                   /usr/lib64/libtiff.so.5.2.0
+7fa0da69b000-7fa0da89b000 ---p 0006f000 08:02 11242183                   /usr/lib64/libtiff.so.5.2.0
+7fa0da89b000-7fa0da89c000 r--p 0006f000 08:02 11242183                   /usr/lib64/libtiff.so.5.2.0
+7fa0da89c000-7fa0da89f000 rw-p 00070000 08:02 11242183                   /usr/lib64/libtiff.so.5.2.0
+7fa0da89f000-7fa0da8a0000 rw-p 00000000 00:00 0 
+7fa0da8a0000-7fa0da8a9000 r-xp 00000000 08:02 17856143                   /usr/lib64/libgif.so.4.1.6
+7fa0da8a9000-7fa0daaa8000 ---p 00009000 08:02 17856143                   /usr/lib64/libgif.so.4.1.6
+7fa0daaa8000-7fa0daaa9000 r--p 00008000 08:02 17856143                   /usr/lib64/libgif.so.4.1.6
+7fa0daaa9000-7fa0daaaa000 rw-p 00009000 08:02 17856143                   /usr/lib64/libgif.so.4.1.6
+7fa0daaaa000-7fa0daabd000 r-xp 00000000 08:02 17881465                   /usr/lib64/libgutils.so.1.0.3
+7fa0daabd000-7fa0dacbd000 ---p 00013000 08:02 17881465                   /usr/lib64/libgutils.so.1.0.3
+7fa0dacbd000-7fa0dacbe000 r--p 00013000 08:02 17881465                   /usr/lib64/libgutils.so.1.0.3
+7fa0dacbe000-7fa0dacc0000 rw-p 00014000 08:02 17881465                   /usr/lib64/libgutils.so.1.0.3
+7fa0dacc0000-7fa0daf4d000 r-xp 00000000 08:02 17881463                   /usr/lib64/libgunicode.so.3.0.2
+7fa0daf4d000-7fa0db14c000 ---p 0028d000 08:02 17881463                   /usr/lib64/libgunicode.so.3.0.2
+7fa0db14c000-7fa0db16a000 r--p 0028c000 08:02 17881463                   /usr/lib64/libgunicode.so.3.0.2
+7fa0db16a000-7fa0db19c000 rw-p 002aa000 08:02 17881463                   /usr/lib64/libgunicode.so.3.0.2
+7fa0db19c000-7fa0db19d000 r-xp 00000000 08:02 17881467                   /usr/lib64/python2.7/site-packages/fontforge.so
+7fa0db19d000-7fa0db39c000 ---p 00001000 08:02 17881467                   /usr/lib64/python2.7/site-packages/fontforge.so
+7fa0db39c000-7fa0db39d000 r--p 00000000 08:02 17881467                   /usr/lib64/python2.7/site-packages/fontforge.so
+7fa0db39d000-7fa0db39e000 rw-p 00001000 08:02 17881467                   /usr/lib64/python2.7/site-packages/fontforge.so
+7fa0db39e000-7fa0e18c7000 r--p 00000000 08:02 805307857                  /usr/lib/locale/locale-archive
+7fa0e18c7000-7fa0e1a7e000 r-xp 00000000 08:02 1178                       /usr/lib64/libc-2.17.so
+7fa0e1a7e000-7fa0e1c7d000 ---p 001b7000 08:02 1178                       /usr/lib64/libc-2.17.so
+7fa0e1c7d000-7fa0e1c81000 r--p 001b6000 08:02 1178                       /usr/lib64/libc-2.17.so
+7fa0e1c81000-7fa0e1c83000 rw-p 001ba000 08:02 1178                       /usr/lib64/libc-2.17.so
+7fa0e1c83000-7fa0e1c88000 rw-p 00000000 00:00 0 
+7fa0e1c88000-7fa0e1d88000 r-xp 00000000 08:02 4177498                    /usr/lib64/libm-2.17.so
+7fa0e1d88000-7fa0e1f88000 ---p 00100000 08:02 4177498                    /usr/lib64/libm-2.17.so
+7fa0e1f88000-7fa0e1f89000 r--p 00100000 08:02 4177498                    /usr/lib64/libm-2.17.so
+7fa0e1f89000-7fa0e1f8a000 rw-p 00101000 08:02 4177498                    /usr/lib64/libm-2.17.so
+7fa0e1f8a000-7fa0e1f8c000 r-xp 00000000 08:02 566728                     /usr/lib64/libutil-2.17.so
+7fa0e1f8c000-7fa0e218b000 ---p 00002000 08:02 566728                     /usr/lib64/libutil-2.17.so
+7fa0e218b000-7fa0e218c000 r--p 00001000 08:02 566728                     /usr/lib64/libutil-2.17.so
+7fa0e218c000-7fa0e218d000 rw-p 00002000 08:02 566728                     /usr/lib64/libutil-2.17.so
+7fa0e218d000-7fa0e218f000 r-xp 00000000 08:02 1184                       /usr/lib64/libdl-2.17.so
+7fa0e218f000-7fa0e238f000 ---p 00002000 08:02 1184                       /usr/lib64/libdl-2.17.so
+7fa0e238f000-7fa0e2390000 r--p 00002000 08:02 1184                       /usr/lib64/libdl-2.17.so
+7fa0e2390000-7fa0e2391000 rw-p 00003000 08:02 1184                       /usr/lib64/libdl-2.17.so
+7fa0e2391000-7fa0e23a8000 r-xp 00000000 08:02 566718                     /usr/lib64/libpthread-2.17.so
+7fa0e23a8000-7fa0e25a7000 ---p 00017000 08:02 566718                     /usr/lib64/libpthread-2.17.so
+7fa0e25a7000-7fa0e25a8000 r--p 00016000 08:02 566718                     /usr/lib64/libpthread-2.17.so
+7fa0e25a8000-7fa0e25a9000 rw-p 00017000 08:02 566718                     /usr/lib64/libpthread-2.17.so
+7fa0e25a9000-7fa0e25ad000 rw-p 00000000 00:00 0 
+7fa0e25ad000-7fa0e272a000 r-xp 00000000 08:02 32993                      /usr/lib64/libpython2.7.so.1.0
+7fa0e272a000-7fa0e2929000 ---p 0017d000 08:02 32993                      /usr/lib64/libpython2.7.so.1.0
+7fa0e2929000-7fa0e292b000 r--p 0017c000 08:02 32993                      /usr/lib64/libpython2.7.so.1.0
+7fa0e292b000-7fa0e2969000 rw-p 0017e000 08:02 32993                      /usr/lib64/libpython2.7.so.1.0
+7fa0e2969000-7fa0e2978000 rw-p 00000000 00:00 0 
+7fa0e2978000-7fa0e2998000 r-xp 00000000 08:02 4177496                    /usr/lib64/ld-2.17.so
+7fa0e2a0e000-7fa0e2b89000 rw-p 00000000 00:00 0 
+7fa0e2b8e000-7fa0e2b90000 rw-p 00000000 00:00 0 
+7fa0e2b90000-7fa0e2b97000 r--s 00000000 08:02 270119739                  /usr/lib64/gconv/gconv-modules.cache
+7fa0e2b97000-7fa0e2b98000 rw-p 00000000 00:00 0 
+7fa0e2b98000-7fa0e2b99000 r--p 00020000 08:02 4177496                    /usr/lib64/ld-2.17.so
+7fa0e2b99000-7fa0e2b9a000 rw-p 00021000 08:02 4177496                    /usr/lib64/ld-2.17.so
+7fa0e2b9a000-7fa0e2b9b000 rw-p 00000000 00:00 0 
+7ffe566f9000-7ffe5681a000 rw-p 00000000 00:00 0                          [stack]
+7ffe569e0000-7ffe569e2000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+</pre></div>
+
+
+</li>
+</ul>
+<h2>研究过程中所接触到的概念和软件</h2>
+<h3>1.字体格式</h3>
+<ul>
+<li>
+<p><strong><a href="https://www.google.com.tw/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0ahUKEwj92ISivsnWAhXJnpQKHSnSDFUQFggtMAE&amp;url=https%3A%2F%2Fwww.microsoft.com%2Ftypography%2Ftt%2Fttf_spec%2Fttch02.doc&amp;usg=AFQjCNEEgED3fpjsiYBmvPwlHlNMHFtV3A">The TrueType Font File </a></strong></p>
+<p>在此了解的常用表：</p>
+<ul>
+<li>cmap ： 字形与unicode映射表</li>
+<li>head ： 整体描述表</li>
+<li>glyf ： 字形路径轨迹信息表</li>
+<li>hmtx ： 字形宽度描述表
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong><a href="https://www.microsoft.com/typography/otspec/otff.htm">The OpenType Font File</a></strong></p>
+</li>
+</ul>
+<h3>2.python-opencv 获取图片轮廓</h3>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;D:/test.bmp&#39;</span><span class="p">)</span>  
+<span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>  
+<span class="n">ret</span><span class="p">,</span> <span class="n">binary</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span><span class="mi">127</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span><span class="n">contours</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">binary</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">RETR_CCOMP</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>  
+<span class="k">print</span><span class="p">(</span><span class="n">contours</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">drawContours</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">contours</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>  
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>3.svg矢量图</h3>
+<p>SVG 意为可缩放矢量图形（Scalable Vector Graphics）。SVG 使用 XML 格式定义图像。</p>
+<p><strong><a href="http://www.w3school.com.cn/svg/">w3c svg教程</a></strong></p>
+<p><strong>实例：</strong> </p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot;?&gt;</span>
+<span class="cp">&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot; </span>
+<span class="cp">&quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;</span>
+
+<span class="nt">&lt;svg</span> <span class="na">width=</span><span class="s">&quot;100%&quot;</span> <span class="na">height=</span><span class="s">&quot;100%&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span>
+<span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/2000/svg&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">&quot;M250 150 L150 350 L350 350 Z&quot;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<h3>4.其他字体操作软件</h3>
+<h4>1&gt; FontLab Studio 字体编辑器（收费）</h4>
+<p>FontLab Studio 是一个Windows 平台上流行的字体设计软件，可直接导入AI文件或EPS矢量格式。它并且允许更加无缝的 Adobe Illustrator，你可以复制FontLab 字体形状，粘贴到AI里。它可以修改现有的字体，或完全重新设计所需字体作为所需。</p>
+<h4>2&gt; FontCreator 字体编辑器（收费）</h4>
+<ul>
+<li>字体的基本操作都有，除了不能批量导入图像外，别的功能都不错。</li>
+</ul>
+<h4>3&gt; fonteditor 百度字体在线编辑器（open source）</h4>
+<p><a href="https://github.com/ecomfe/fonteditor">源码地址</a> </p>
+<p>适用于编辑比较小的量的字体，且对设计字体功能要求不太高的情况。</p>
+<ul>
+<li>支持小批量导入svg格式（大批量，比如说几百以上，浏览器会卡死），但bmp不支持批量；</li>
+<li>操作比较简便，但由于是纯前端处理，所以导出字体时，字形个数最好保持在3000以内，否则会超时无法下载字体。</li>
+<li>可批量调节字形位置和大小信息，批量按unicode顺序按序编码</li>
+</ul>
+<h4>4&gt; BabelMap unicode字符查看器（free）</h4>
+<p><a href="http://www.babelstone.co.uk/Software/BabelMap.html">官方下载</a></p>
+<p>BabelMap 是一个支持 Unicode 标准的字符映射表，该软件可使用系统上安装的所有字体浏览 Unicode 7.0 标准中的十万个字符，还带有拼音及部首检字法，适合文献工作者输入中文古、难、僻字，输入少数民族文字等，同时也是一个有趣的字体浏览工具。</p>
+<blockquote>
+<p><strong>主要使用该软件将ttf字体文件中的字导出成一个个bitmap</strong>。操作方法：1.先把目标字体安装到系统。2.运行 BabelMap 菜单上选 Fonts &gt; Export Font Glyphs 项，设置输出的字体大小、图片大小、图片格式等就好了，此处设置font size：200，宽高均为300。</p>
+</blockquote>
+<h4>5&gt; vectorMagic 矢量图编辑器（收费）</h4>
+<blockquote>
+<p>支持批量转换矢量图，操作比较方便，但转换完的svg格式矢量图中，除了字体轮廓外，还会生成图片边框路径描述，可能是配置的问题吧。用potrace生成的就只有字体轮廓。</p>
+</blockquote>
+<h4>6&gt; Inkscape 0.92.2（free）</h4>
+<p><a href="https://inkscape.org/zh/download/">官方下载</a></p>
+<p>Inkscape是一款外国开发的开源矢量图形编辑软件，与Illustrator、Freehand、CorelDraw、Xara X 等其他软件相似。它使用 W3C 标准的 ScalableVector Graphics (SVG) 文件格式，支持包括形状、路径、文本、标记、克隆、alpha 混合、变换、渐变、图案、组合等 SVG特性。它也支持创作共用的元数据、节点编辑、图层、复杂的路径运算、位图描摹(根据点阵16进制色差复制绘制矢量图的算法)、文本绕路径、流动文本、直接编辑 XML 等。它可以导入JPEG、PNG、TIFF 等格式，并输出为 PNG 和多种位图格式。</p>
+<h4>7&gt; fonttools （open source）</h4>
+<p><a href="https://github.com/fonttools/fonttools">源码地址</a></p>
+<blockquote>
+<p>fontTools is a library for manipulating fonts, written in <strong>Python</strong>. The project includes the TTX tool, that can convert TrueType and OpenType fonts to and from an XML text format, which is also called TTX. It supports TrueType, OpenType, AFM and to an extent Type 1 and some Mac-specific formats. The project has a BSD-style open-source licence.Among other things this means you can use it free of charge.</p>
+</blockquote>
+<p>直接用pip安装即可， 使用ttx命令可方便的将字体文件和字体xml描述文件相互转换，还有一些别的工具可以使用，该工具对了解字体文件结构组成很有裨益。</p>
+<h2>参考</h2>
+<blockquote>
+<p>给我指明道路的BBS：http://bbs.themex.net/showthread.php?t=16905139&amp;goto=nextoldest</p>
+<p>整个流程骨架参考：https://stackoverflow.com/questions/12713444/inverted-glyph-bitmap-svg-via-autotrace-glyph-via-fontforge</p>
+<p>fontforge本地安装参考文件： 安装路径/fontforge-cygwin_2013_10_07/cygwin/usr/share/doc/fontforge/overview.html#Glyph-names</p>
+<p>14种最佳字体操作软件： https://superdevresources.com/create-your-own-font/</p>
+</blockquote>
+        </article></aside><!-- /#featured -->
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
+
+        <aside id="sidebar">
+                <div class="widget">
+                        <h2>Catégories</h2>
+                        <ul>
+                           <li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                </div>
+                <div class="widget blogroll">
+                        <h2>Liens</h2>
+                        <ul>
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </aside><!-- /#sidebar -->
+
+        <footer id="footer" class="body">
+                <address id="about" class="vcard body">
+                Ce site est généré par <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>, un CMS réalisé en <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>Le thème utilisé est «NotMyIdea-CMS», une version modifiée de «NotMyIdea», le thème par défaut.</p>
+        </footer><!-- /#footer -->
+
+</body>
+</html>

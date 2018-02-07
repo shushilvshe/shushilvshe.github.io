@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>shushilvshe's Blog : 搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</title>
+        <title>搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
-        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog Flux ATOM" />
+
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -18,14 +19,35 @@
 
 </head>
 
-<body>
-        
-<header>
-    <h1><a href="http://www.shushilvshe.com/data/dl-env-build.html" id="page-title">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</a></h1>
-    <span id="sitename"><a href="http://www.shushilvshe.com" id="site-title">shushilvshe's Blog  <strong>Data Developer</strong></a> &sdot;</span>
-<time datetime="2017-09-22T16:25:26+08:00">2017-09-22(星期五) 16:25</time></header>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/index.html">shushilvshe's Blog  <strong>Data Developer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/category/data.html">Data</a></li>
+                    <li><a href="/category/food.html">Food</a></li>
+                    <li><a href="/category/travel.html">Travel</a></li>
+                    <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/index.html">Accueil</a></li>
+                <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                    <li ><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+<section id="content" class="body">
 <article>
-    <p><strong>目录：</strong></p>
+        <header> <h1 class="entry-title"><a href="data/dl-env-build.html"
+        rel="bookmark" title="Permalink to 搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</a></h1>  </header>
+        <div class="entry-content">
+        <footer class="post-info">
+                <abbr class="published" title="2017-09-22T16:25:26+08:00">
+                    Publié le 星期五 22 九月 2017 &agrave; 16:25
+                </abbr>
+                <address class="vcard author">
+                        Par <a class="url fn" href="#">ssls</a>
+                </address>
+                <p>Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a>.
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/kerasnvidia.html">keras，NVIDIA</a></p></p>        </footer><!-- /.post-info -->
+        <p><strong>目录：</strong></p>
 <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
@@ -541,18 +563,37 @@ abrt-addon-kerneloops-2.1.11-48.el7.centos.x86_64
 <p>http://www.pyimagesearch.com/2016/07/04/how-to-install-cuda-toolkit-and-cudnn-for-deep-learning</p>
 <p>https://www.linkedin.com/pulse/20140808222919-219659043-rhel-centos-7-and-nvidia-drivers</p>
 </blockquote>
-</article>
+        </div><!-- /.entry-content -->
 
-        <footer>
-            <nav>
-                <ul>
-                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/categories.html">Categories</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit">Proudly powered by <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a></p>
-        </footer>
+</article>
+</section>
+
+        <aside id="sidebar">
+                <div class="widget">
+                        <h2>Catégories</h2>
+                        <ul>
+                           <li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                </div>
+                <div class="widget blogroll">
+                        <h2>Liens</h2>
+                        <ul>
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </aside><!-- /#sidebar -->
+
+        <footer id="footer" class="body">
+                <address id="about" class="vcard body">
+                Ce site est généré par <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>, un CMS réalisé en <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>Le thème utilisé est «NotMyIdea-CMS», une version modifiée de «NotMyIdea», le thème par défaut.</p>
+        </footer><!-- /#footer -->
 
 </body>
 </html>

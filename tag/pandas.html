@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>shushilvshe's Blog - pandas</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog Flux ATOM" />
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie.css"/>
+                <script src="http://www.shushilvshe.com/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://www.shushilvshe.com/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/index.html">shushilvshe's Blog  <strong>Data Developer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/category/data.html">Data</a></li>
+                    <li><a href="/category/food.html">Food</a></li>
+                    <li><a href="/category/travel.html">Travel</a></li>
+                    <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/index.html">Accueil</a></li>
+                <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                    <li ><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+        
+        
+     <section id="content" class="body">
+        <aside id="featured"><article>
+                <h1 class="entry-title"><a href="http://www.shushilvshe.com/ml/pandas/baseoperation.html">pandas基本操作</a></h1> 
+                <footer class="post-info">
+                        <abbr class="published" title="2017-08-08T17:17:19+08:00">
+                                Publié le 08/08/2017 &agrave; 17:17
+                        </abbr>
+
+                        <address class="vcard author">
+                                Par <a class="url fn" href="#">ssls</a>
+                        </address>
+                <p>Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a>. </p>
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a><a href="http://www.shushilvshe.com/tag/pandas.html">pandas</a></p></p>                </footer><!-- /.post-info -->
+                <h2>1.数据结构介绍</h2>
+<p>在pandas中有两类非常重要的数据结构，即序列<strong><code>Series</code></strong>和数据框<strong><code>DataFrame</code></strong>。Series类似于numpy中的一维数组，除了通吃一维数组可用的函数或方法，而且其可通过索引标签的方式获取数据，还具有索引的自动对齐功能；DataFrame类似于numpy中的二维数组，同样可以通用numpy数组的函数和方法，而且还具有其他灵活应用，后续会介绍到。</p>
+<ul>
+<li><strong>Series的创建</strong></li>
+</ul>
+<p>序列的创建主要有三种方式：</p>
+<p><strong>1、通过一维数组创建序列</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">arr1</span><span class="p">))</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">s1</span><span class="p">))</span>
+</pre></div>
+
+
+<p>显示：</p>
+<div class="highlight"><pre><span></span><span class="k">[0 1 2 3 4 5 6 7 8 9]</span>
+<span class="err">&lt;class</span> <span class="err">&#39;numpy.ndarray&#39;&gt;</span>
+<span class="err">0</span>    <span class="err">0</span>
+<span class="err">1</span>    <span class="err">1</span>
+<span class="err">2</span>    <span class="err">2</span>
+<span class="err">3</span>    <span class="err">3</span>
+<span class="err">4</span>    <span class="err">4</span>
+<span class="err">5</span>    <span class="err">5</span>
+<span class="err">6</span>    <span class="err">6</span>
+<span class="err">7</span>    <span class="err">7</span>
+<span class="err">8</span>    <span class="err">8</span>
+<span class="err">9</span>    <span class="err">9</span>
+<span class="err">dtype:</span> <span class="err">int32</span>
+<span class="err">&lt;class</span> <span class="err">&#39;pandas.core.series.Series&#39;&gt;</span>
+</pre></div>
+
+
+<p><strong>2、通过字典的方式创建序列</strong></p>
+<div class="highlight"><pre><span></span>dic1 = {&#39;a&#39;:10,&#39;b&#39;:20,&#39;c&#39;:30,&#39;d&#39;:40,&#39;e&#39;:50}
+print(dic1)
+print(type(dic1))
+s2 = pd.Series(dic1)
+print(s2)
+print(type(s2))
+</pre></div>
+
+
+<p>显示：</p>
+<div class="highlight"><pre><span></span>{&#39;a&#39;: 10, &#39;b&#39;: 20, &#39;c&#39;: 30, &#39;d&#39;: 40, &#39;e&#39;: 50}
+&lt;class &#39;dict&#39;&gt;
+a    10
+b    20
+c    30
+d    40
+e    50
+dtype: int64
+&lt;class &#39;pandas.core.series.Series&#39;&gt;
+</pre></div>
+
+
+<p><strong>3、通过DataFrame中的某一行或某一列创建序列</strong></p>
+<p>这部分内容我们放在后面讲，因为下面就开始将DataFrame的创建。</p>
+<hr>
+<ul>
+<li><strong>DataFrame的创建</strong></li>
+</ul>
+<p>数据框的创建主要有三种方式：</p>
+<p><strong>1、通过二维数组创建数据框</strong></p>
+<div class="highlight"><pre><span></span>arr2 = np.array(np.arange(12)).reshape(4,3)
+print(arr2)
+print(type(arr2))
+df1 = pd.DataFrame(arr2)
+print(df1)
+print(type(df1))
+</pre></div>
+
+
+<p>显示：</p>
+<div class="highlight"><pre><span></span><span class="k">[[ 0  1  2]</span>
+ <span class="k">[ 3  4  5]</span>
+ <span class="k">[ 6  7  8]</span>
+ <span class="k">[ 9 10 11]]</span>
+<span class="err">&lt;class</span> <span class="err">&#39;numpy.ndarray&#39;&gt;</span>
+   <span class="err">0</span>   <span class="err">1</span>   <span class="err">2</span>
+<span class="err">0</span>  <span class="err">0</span>   <span class="err">1</span>   <span class="err">2</span>
+<span class="err">1</span>  <span class="err">3</span>   <span class="err">4</span>   <span class="err">5</span>
+<span class="err">2</span>  <span class="err">6</span>   <span class="err">7</span>   <span class="err">8</span>
+<span class="err">3</span>  <span class="err">9</span>  <span class="err">10</span>  <span class="err">11</span>
+<span class="err">&lt;class</span> <span class="err">&#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+</pre></div>
+
+
+<p><strong>2、通过字典的方式创建数据框</strong></p>
+<p>以下以两种字典来创建数据框，一个是<strong><code>字典列表</code></strong>，一个是<strong><code>嵌套字典</code></strong>。</p>
+<div class="highlight"><pre><span></span>#字典列表
+dic2 = {&#39;a&#39;:[1,2,3,4],&#39;b&#39;:[5,6,7,8],&#39;c&#39;:[9,10,11,12],&#39;d&#39;:[13,14,15,16]}
+print(dic2)
+print(type(dic2))
+df2 = pd.DataFrame(dic2)
+print(df2)
+print(type(df2))
+#嵌套字典
+dic3 = {&#39;one&#39;:{&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4},&#39;two&#39;:{&#39;a&#39;:5,&#39;b&#39;:6,&#39;c&#39;:7,&#39;d&#39;:8},&#39;three&#39;:{&#39;a&#39;:9,&#39;b&#39;:10,&#39;c&#39;:11,&#39;d&#39;:12}}
+print(dic3)
+print(type(dic3))
+df3 = pd.DataFrame(dic3)
+print(df3)
+print(type(df3))
+</pre></div>
+
+
+<p>显示：</p>
+<div class="highlight"><pre><span></span>{&#39;a&#39;: [1, 2, 3, 4], &#39;b&#39;: [5, 6, 7, 8], &#39;c&#39;: [9, 10, 11, 12], &#39;d&#39;: [13, 14, 15, 16]}
+&lt;class &#39;dict&#39;&gt;
+   a  b   c   d
+0  1  5   9  13
+1  2  6  10  14
+2  3  7  11  15
+3  4  8  12  16
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+{&#39;one&#39;: {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3, &#39;d&#39;: 4}, &#39;two&#39;: {&#39;a&#39;: 5, &#39;b&#39;: 6, &#39;c&#39;: 7, &#39;d&#39;: 8}, &#39;three&#39;: {&#39;a&#39;: 9, &#39;b&#39;: 10, &#39;c&#39;: 11, &#39;d&#39;: 12}}
+&lt;class &#39;dict&#39;&gt;
+   one  three  two
+a    1      9    5
+b    2     10    6
+c    3     11    7
+d    4     12    8
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre></div>
+
+
+<p><strong>3、通过数据框的方式创建数据框</strong></p>
+<div class="highlight"><pre><span></span>df4 = df3[[&#39;one&#39;,&#39;three&#39;]]
+print(df4)
+print(type(df4))
+s3 = df3[&#39;one&#39;]
+print(s3)
+print(type(s3))
+</pre></div>
+
+
+<p>显示：</p>
+<div class="highlight"><pre><span></span>   one  three
+a    1      9
+b    2     10
+c    3     11
+d    4     12
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+a    1
+b    2
+c    3
+d    4
+Name: one, dtype: int64         #以上生成的Series显示不一样？
+&lt;class &#39;pandas.core.series.Series&#39;&gt;
+</pre></div>
+
+
+<h2>2.数据索引index</h2>
+<p>细致的朋友可能会发现一个现象，不论是序列也好，还是数据框也好，对象的最左边总有一个非原始数据对象，这个是什么呢？不错，就是我们接下来要介绍的索引。在我看来，序列或数据框的索引有两大用处，<strong>一个是通过索引值或索引标签获取目标数据，另一个是通过索引，可以使序列或数据框的计算、操作实现自动化对齐</strong>，下面我们就来看看这两个功能的应用。</p>
+<p><strong>1、通过索引值或索引标签获取数据</strong></p>
+<div class="highlight"><pre><span></span>#如果不给序列一个指定的索引值，则序列自动生成一个从0开始的自增索引。
+s4 = pd.Series(np.array([1,1,2,3,5,8]))
+print(s4)
+print(s4.index)
+
+#现在我们为序列设定一个自定义的索引值：
+s4.index = [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;]
+print(s4)
+
+#序列有了索引，就可以通过索引值或索引标签进行数据的获取：
+print(s4[3])
+print(s4[&#39;e&#39;])
+print(s4[[1,3,5]])
+print(s4[[&#39;a&#39;,&#39;b&#39;,&#39;d&#39;,&#39;f&#39;]])
+print(s4[:4])
+</pre></div>
+
+
+<p>显示：</p>
+<div class="highlight"><pre><span></span>0    1
+1    1
+2    2
+3    3
+4    5
+5    8
+dtype: int32
+RangeIndex(start=0, stop=6, step=1)
+a    1
+b    1
+c    2
+d    3
+e    5
+f    8
+dtype: int32
+3
+5
+b    1
+d    3
+f    8
+dtype: int32
+a    1
+b    1
+d    3
+f    8
+dtype: int32
+a    1
+b    1
+c    2
+d    3
+dtype: int32
+</pre></div>
+
+
+<p><strong>2、自动化对齐</strong></p>
+<p>如果有两个序列，需要对这两个序列进行算术运算，这时索引的存在就体现的它的价值了—自动化对齐.</p>
+<div class="highlight"><pre><span></span>s5 = pd.Series(np.array([10,15,20,30,55,80]),index = [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;])
+print(s5)
+s6 = pd.Series(np.array([12,11,13,15,14,16]),index = [&#39;a&#39;,&#39;c&#39;,&#39;g&#39;,&#39;b&#39;,&#39;d&#39;,&#39;f&#39;])
+print(s6)
+print(s5 + s6)
+print(s5/s6)
+</pre></div>
+
+
+<p>显示：</p>
+<div class="highlight"><pre><span></span>a    10
+b    15
+c    20
+d    30
+e    55
+f    80
+dtype: int32
+a    12
+c    11
+g    13
+b    15
+d    14
+f    16
+dtype: int32
+a    22.0
+b    30.0
+c    31.0
+d    44.0
+e     NaN
+f    96.0
+g     NaN
+dtype: float64
+a    0.833333
+b    1.000000
+c    1.818182
+d    2.142857
+e         NaN
+f    5.000000
+g         NaN
+dtype: float64
+</pre></div>
+
+
+<blockquote>
+<p>由于s5中没有对应的g索引，s6中没有对应的e索引，所以数据的运算会产生两个缺失值NaN。注意，这里的算术结果就实现了两个序列索引的自动对齐，而非简单的将两个序列加总或相除。对于数据框的对齐，<strong>不仅仅是行索引的自动对齐，同时也会自动对齐列索引（变量名）。</strong>数据框中同样有索引，而且数据框是二维数组的推广，所以其不仅有行索引，而且还存在列索引，关于数据框中的索引相比于序列的应用要强大的多，这部分内容将放在数据查询中讲解。</p>
+</blockquote>
+<h2>三、利用pandas查询数据</h2>
+<p>这里的查询数据通过布尔索引有针对的选取原数据的子集、指定行、指定列等。我们先导入一个数据集：</p>
+<div class="highlight"><pre><span></span><span class="nt">data</span> <span class="o">=</span> <span class="nt">pd</span><span class="nc">.read_csv</span><span class="o">(</span><span class="s1">&#39;D:/test_data/ml_data/decision_tree/bank-additional-train.csv&#39;</span><span class="o">,</span> <span class="nt">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
+</pre></div>
+
+
+<p>查询数据的前5行或末尾5行</p>
+<div class="highlight"><pre><span></span>data.head()
+data.tail()
+</pre></div>
+
+
+<p>查询指定的行</p>
+<div class="highlight"><pre><span></span>print(data.ix[[0,1,2,3,4,5]])  或者   print(data.ix[0：6])
+</pre></div>
+
+
+<p>查询指定的列</p>
+<div class="highlight"><pre><span></span>data[[&#39;age&#39;,&#39;job&#39;,&#39;education&#39;]].head() #如果多个列的话，必须使用双重中括号
+</pre></div>
+
+
+<p>也可以通过ix索引标签查询指定的列</p>
+<div class="highlight"><pre><span></span>data.ix[:,[&#39;age&#39;,&#39;job&#39;,&#39;education&#39;]].head()
+</pre></div>
+
+
+<p>查询指定的行和列</p>
+<div class="highlight"><pre><span></span>data.ix[[0,2,4,5,7],[&#39;age&#39;,&#39;job&#39;,&#39;education&#39;]].head()
+</pre></div>
+
+
+<p>以上是从行或列的角度查询数据的子集，现在我们来看看如何通过布尔索引实现数据的子集查询。
+查询所有年龄大于20乘客的总数</p>
+<div class="highlight"><pre><span></span>print(data[data[&#39;age&#39;] &gt; 20][&#39;y&#39;].count())
+</pre></div>
+
+
+<p>查询出所有25岁以上的单身人的总数</p>
+<div class="highlight"><pre><span></span>print(data[(data[&#39;age&#39;] &gt; 25) &amp; (data[&#39;marital&#39;] == &#39;single&#39;)][&#39;y&#39;].count())
+</pre></div>
+
+
+<p>上面的查询逻辑其实非常的简单，需要注意的是，<strong>如果是多个条件的查询，必须在&amp;（且）或者|（或）的两端条件用括号括起来。</strong></p>
+<h2>四、统计分析</h2>
+<p>pandas模块为我们提供了非常多的描述性统计分析的指标函数，如总和、均值、最小值、最大值等，</p>
+<p>我们来具体看看这些函数：首先随机生成三组数据</p>
+<div class="highlight"><pre><span></span>np.random.seed(1234)
+d1 = pd.Series(2*np.random.normal(size = 100)+3)
+print(d1.count()) #非空元素计算
+print(d1.min()) #最小值
+print(d1.max()) #最大值
+print(d1.idxmin()) #最小值的位置
+print(d1.idxmax()) #最大值的位置
+print(d1.quantile(0.1)) #10%分位数
+print(d1.sum()) #求和
+print(d1.mean()) #均值
+print(d1.median()) #中位数
+print(d1.mode()) #众数
+print(d1.var()) #方差
+print(d1.std()) #标准差
+print(d1.mad()) #平均绝对偏差
+print(d1.skew()) #偏度
+print(d1.kurt()) #峰度
+print(d1.describe()) #一次性输出多个描述性统计指标
+</pre></div>
+
+
+<p>显示索引,列,和底层numpy数据：</p>
+<ul>
+<li>df.index</li>
+<li>df.columns</li>
+<li>df.values</li>
+</ul>
+<h2>五、遍历</h2>
+<ul>
+<li>
+<p><strong>按行遍历</strong></p>
+<div class="highlight"><pre><span></span>for ix, row in df.iterrows():
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>按列遍历</strong></p>
+<div class="highlight"><pre><span></span>for ix, col in df.iteritems():
+</pre></div>
+
+
+</li>
+</ul>
+<h2>六、缺失值处理</h2>
+<p>现实生活中的数据是非常杂乱的，其中缺失值也是非常常见的，对于缺失值的存在可能会影响到后期的数据分析或挖掘工作，那么我们该如何处理这些缺失值呢？常用的有三大类方法，即<strong><code>删除法</code></strong>、<strong><code>填补法</code></strong>和<strong><code>插值法</code></strong>。</p>
+<blockquote>
+<p><strong>删除法</strong>：当数据中的某个变量大部分值都是缺失值，可以考虑删除该变量；当缺失值是随机分布的，且缺失的数量并不是很多时，也可以删除这些缺失的观测。<br>
+<strong>替补法</strong>：</p>
+</blockquote>
+<ul>
+<li>对于连续型变量，如果变量的分布近似或就是正态分布的话，可以用均值替代那些缺失值；</li>
+<li>如果变量是有偏的，可以使用中位数来代替那些缺失值？；</li>
+<li>对于离散型变量，我们一般用众数去替换那些存在缺失的观测。<br></li>
+</ul>
+<blockquote>
+<p><strong>插补法</strong>：插补法是基于蒙特卡洛模拟法，结合线性模型、广义线性模型、决策树等方法计算出来的预测值替换缺失值。</p>
+</blockquote>
+<p>我们这里就介绍简单的删除法和替补法：</p>
+<p><img alt="" src="http://i.imgur.com/u8eNtRG.jpg"></p>
+<p>这是一组含有缺失值的序列，我们可以结合sum函数和isnull函数来检测数据中含有多少缺失值：</p>
+<div class="highlight"><pre><span></span>sum(pd.isnull(s))
+9
+</pre></div>
+
+
+<p>直接删除缺失值</p>
+<p><img alt="" src="http://i.imgur.com/uXIxxmZ.jpg"></p>
+<p>默认情况下，dropna会删除任何含有缺失值的行，我们再构造一个数据框试试：</p>
+<p><img alt="" src="http://i.imgur.com/Z1BKunz.jpg"></p>
+<p>返回结果表明，数据中只要含有缺失值NaN,该数据行就会被删除，如果使用参数how=’all’，则表明只删除所有行为缺失值的观测。</p>
+<p><img alt="" src="http://i.imgur.com/g0Kiyet.jpg"></p>
+<p>使用一个常量来填补缺失值，可以使用fillna函数实现简单的填补工作：</p>
+<p><strong>1）用0填补所有缺失值</strong></p>
+<p><img alt="" src="http://i.imgur.com/KKUi9bO.jpg"></p>
+<p><strong>2)采用前项填充或后向填充</strong></p>
+<p><img alt="" src="http://i.imgur.com/Z6s1r7C.jpg"></p>
+<p><strong>3)使用常量填充不同的列</strong></p>
+<p><img alt="" src="http://i.imgur.com/nhECtdc.jpg"></p>
+<p><strong>4)用均值或中位数填充各自的列</strong></p>
+<p><img alt="" src="http://i.imgur.com/eqM2Znw.jpg"></p>
+<p>很显然，在使用填充法时，相对于常数填充或前项、后项填充，使用各列的众数、均值或中位数填充要更加合理一点，这也是工作中常用的一个快捷手段。</p>
+<p><strong>插补法</strong></p>
+<h2>七、排序</h2>
+<ul>
+<li><strong>1、对索引排序</strong></li>
+</ul>
+<p>对轴索引排序，Series用sort_index()按索引排序，sort()按值排序；DataFrame用sort_index()和sort()是一样的。</p>
+<div class="highlight"><pre><span></span>In[73]: obj = Series(range(4), index=[&#39;d&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;])
+In[74]: obj.sort_index()  
+Out[74]: 
+a    1
+b    2
+c    3
+d    0
+dtype: int64
+
+In[78]: frame = DataFrame(np.arange(8).reshape((2,4)),index=[&#39;three&#39;, &#39;one&#39;],columns=[&#39;d&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;])
+In[79]: frame
+Out[79]: 
+       d  a  b  c
+three  0  1  2  3
+one    4  5  6  7
+
+In[86]: frame.sort_index()
+Out[86]: 
+       d  a  b  c
+one    4  5  6  7
+three  0  1  2  3
+
+In[87]: frame.sort()
+Out[87]: 
+       d  a  b  c
+one    4  5  6  7
+three  0  1  2  3
+</pre></div>
+
+
+<ul>
+<li>
+<p><strong>2、按行排序</strong></p>
+<p>In[89]: frame.sort_index(axis=1, ascending=False)
+Out[89]: 
+       d  c  b  a
+three  0  3  2  1
+one    4  7  6  5</p>
+</li>
+<li>
+<p><strong>3、按列排序（只针对Series）</strong></p>
+<p>In[90]: obj.sort()
+In[91]: obj
+Out[91]: 
+d    0
+a    1
+b    2
+c    3
+dtype: int64</p>
+</li>
+<li>
+<p><strong>4、按值排序</strong></p>
+<ul>
+<li>Series:<div class="highlight"><pre><span></span>In[92]: obj = Series([4, 7, -3, 2])
+In[94]: obj.order()
+Out[94]: 
+2   -3
+3    2
+0    4
+1    7
+dtype: int64
+- DataFrame:
+
+In[95]: frame = DataFrame({&#39;b&#39;:[4, 7, -3, 2], &#39;a&#39;:[0, 1, 0, 1]})
+In[97]: frame.sort_index(by=&#39;b&#39;)
+Out[97]: 
+   a  b
+2  0 -3
+3  1  2
+0  0  4
+1  1  7
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h2>八、删除</h2>
+<ul>
+<li><strong>1、删除指定轴上的项</strong></li>
+</ul>
+<p>即删除 Series 的元素或 DataFrame 的某一行（列）的意思，通过对象的 .drop(labels, axis=0) 方法：</p>
+<p>删除Series的一个元素:</p>
+<div class="highlight"><pre><span></span>In[11]: ser = Series([4.5,7.2,-5.3,3.6], index=[&#39;d&#39;,&#39;b&#39;,&#39;a&#39;,&#39;c&#39;])
+In[13]: ser.drop(&#39;c&#39;)
+Out[13]: 
+d    4.5
+b    7.2
+a   -5.3
+dtype: float64
+</pre></div>
+
+
+<p>删除DataFrame的行或列：</p>
+<div class="highlight"><pre><span></span>In[17]: df = DataFrame(np.arange(9).reshape(3,3), index=[&#39;a&#39;,&#39;c&#39;,&#39;d&#39;], columns=[&#39;oh&#39;,&#39;te&#39;,&#39;ca&#39;])
+In[18]: df
+Out[18]: 
+   oh  te  ca
+a   0   1   2
+c   3   4   5
+d   6   7   8
+
+In[19]: df.drop(&#39;a&#39;)
+Out[19]: 
+   oh  te  ca
+c   3   4   5
+d   6   7   8
+
+In[20]: df.drop([&#39;oh&#39;,&#39;te&#39;],axis=1)
+Out[20]: 
+   ca
+a   2
+c   5
+d   8
+</pre></div>
+
+
+<p><strong>注： .drop() 返回的是一个新对象，元对象不会被改变。</strong></p>
+<h2>九、DataFrame连接</h2>
+<ul>
+<li><strong>1、算术运算（+，-，*，/）</strong></li>
+</ul>
+<p>是df中对应位置的元素的算术运算</p>
+<div class="highlight"><pre><span></span>    In[5]: df1 = DataFrame(np.arange(12.).reshape((3,4)),columns=list(&#39;abcd&#39;))
+    In[6]: df2 = DataFrame(np.arange(20.).reshape((4,5)),columns=list(&#39;abcde&#39;))
+    In[9]: df1+df2
+    Out[9]: 
+        a   b   c   d   e
+    0   0   2   4   6 NaN
+    1   9  11  13  15 NaN
+    2  18  20  22  24 NaN
+    3 NaN NaN NaN NaN NaN
+</pre></div>
+
+
+<p>传入填充值</p>
+<div class="highlight"><pre><span></span>    In[11]: df1.add(df2, fill_value=0)
+    Out[11]: 
+        a   b   c   d   e
+    0   0   2   4   6   4
+    1   9  11  13  15   9
+    2  18  20  22  24  14
+    3  15  16  17  18  19
+</pre></div>
+
+
+<ul>
+<li><strong>2、pandas.merge</strong></li>
+</ul>
+<p>pandas.merge可根据一个或多个键将不同DataFrame中的行连接起来。默认情况下，merge做的是“inner”连接，结果中的键是交集，其它方式还有“left”，“right”，“outer”。“outer”外连接求取的是键的并集，组合了左连接和右连接。  </p>
+<p><strong>内连接</strong></p>
+<div class="highlight"><pre><span></span>In[14]: df1 = DataFrame({&#39;key&#39;:[&#39;b&#39;,&#39;b&#39;,&#39;a&#39;,&#39;c&#39;,&#39;a&#39;,&#39;a&#39;,&#39;b&#39;],&#39;data1&#39;:range(7)})
+In[15]: df2 = DataFrame({&#39;key&#39;:[&#39;a&#39;,&#39;b&#39;,&#39;d&#39;],&#39;data2&#39;:range(3)})
+
+In[18]: pd.merge(df1, df2)  #或显式: pd.merge(df1, df2, on=&#39;key&#39;)
+Out[18]: 
+   data1 key  data2
+0      0   b      1
+1      1   b      1
+2      6   b      1
+3      2   a      0
+4      4   a      0
+5      5   a      0
+</pre></div>
+
+
+<p><strong>外连接</strong></p>
+<div class="highlight"><pre><span></span>In[19]: pd.merge(df1, df2, how=&#39;outer&#39;)
+Out[19]: 
+   data1 key  data2
+0      0   b      1
+1      1   b      1
+2      6   b      1
+3      2   a      0
+4      4   a      0
+5      5   a      0
+6      3   c    NaN
+7    NaN   d      2
+</pre></div>
+
+
+<p><strong>轴向连接</strong></p>
+<p>这种数据合并运算被称为连接（concatenation）、绑定（binding）或堆叠（stacking）。</p>
+<p>对于Series</p>
+<div class="highlight"><pre><span></span>In[23]: s1 = Series([0, 1], index=[&#39;a&#39;,&#39;b&#39;])
+In[24]: s2 = Series([2, 3, 4], index=[&#39;c&#39;,&#39;d&#39;,&#39;e&#39;])
+In[25]: s3 = Series([5, 6], index=[&#39;f&#39;,&#39;g&#39;])    
+In[26]: pd.concat([s1,s2,s3])
+Out[26]: 
+a    0
+b    1
+c    2
+d    3
+e    4
+f    5
+g    6
+dtype: int64
+</pre></div>
+
+
+<p>默认情况下，concat是在axis=0（行）上工作的，最终产生一个新的Series。如果传入axis=1（列），则变成一个DataFrame。</p>
+<div class="highlight"><pre><span></span>In[27]: pd.concat([s1,s2,s3], axis=1)
+Out[27]: 
+    0   1   2
+a   0 NaN NaN
+b   1 NaN NaN
+c NaN   2 NaN
+d NaN   3 NaN
+e NaN   4 NaN
+f NaN NaN   5
+g NaN NaN   6
+</pre></div>
+
+
+<h2>十、数据转换</h2>
+<p><strong>1、移除重复数据（去重 ）</strong></p>
+<p><strong>duplicated()</strong></p>
+<p>DataFrame的duplicated方法返回一个布尔型Series，表示各行是否是重复行：</p>
+<div class="highlight"><pre><span></span>In[12]: df = DataFrame({&#39;k1&#39;:[&#39;one&#39;]*3 + [&#39;two&#39;]*4, &#39;k2&#39;:[1,1,2,3,3,4,4]})
+In[13]: df
+Out[13]: 
+    k1  k2
+0  one   1
+1  one   1
+2  one   2
+3  two   3
+4  two   3
+5  two   4
+6  two   4
+
+In[14]: df.duplicated()
+Out[14]: 
+0    False
+1     True
+2    False
+3    False
+4     True
+5    False
+6     True
+dtype: bool
+</pre></div>
+
+
+<p><strong>drop_duplicates()</strong></p>
+<div class="highlight"><pre><span></span>In[15]: df.drop_duplicates()
+Out[15]: 
+    k1  k2
+0  one   1
+2  one   2
+3  two   3
+5  two   4
+</pre></div>
+
+
+<p><strong>2、利用函数或映射进行数据转换</strong></p>
+<p>对于数据:</p>
+<div class="highlight"><pre><span></span>In[16]: df = DataFrame({&#39;food&#39;:[&#39;bacon&#39;,&#39;pulled pork&#39;,&#39;bacon&#39;,&#39;Pastraml&#39;,&#39;corned beef&#39;, &#39;Bacon&#39;, &#39;pastraml&#39;,&#39;honey ham&#39;,&#39;nova lox&#39;],&#39;ounces&#39;:[4,3,12,6,7.5,8,3,5,6]})
+In[17]: df
+Out[17]: 
+          food  ounces
+0        bacon     4.0
+1  pulled pork     3.0
+2        bacon    12.0
+3     Pastraml     6.0
+4  corned beef     7.5
+5        Bacon     8.0
+6     pastraml     3.0
+7    honey ham     5.0
+8     nova lox     6.0
+</pre></div>
+
+
+<p>增加一列表示该肉类食物来源的动物类型，先编写一个肉类到动物的映射：</p>
+<div class="highlight"><pre><span></span>In[18]: meat_to_animal = {&#39;bacon&#39;:&#39;pig&#39;,
+&#39;pulled pork&#39;:&#39;pig&#39;,
+&#39;pastraml&#39;:&#39;cow&#39;,
+&#39;corned beef&#39;:&#39;cow&#39;,
+&#39;honey ham&#39;:&#39;pig&#39;,
+&#39;nova lox&#39;:&#39;salmon&#39;}
+</pre></div>
+
+
+<p><strong>map</strong></p>
+<p>Series的map方法可以接受一个函数或含有映射关系的字典型对象。</p>
+<div class="highlight"><pre><span></span>In[20]: df[&#39;animal&#39;] = df[&#39;food&#39;].map(str.lower).map(meat_to_animal)
+In[21]: df
+Out[21]: 
+          food  ounces  animal
+0        bacon     4.0     pig
+1  pulled pork     3.0     pig
+2        bacon    12.0     pig
+3     Pastraml     6.0     cow
+4  corned beef     7.5     cow
+5        Bacon     8.0     pig
+6     pastraml     3.0     cow
+7    honey ham     5.0     pig
+8     nova lox     6.0  salmon
+</pre></div>
+
+
+<p>也可传入一个函数，一次性处理：</p>
+<div class="highlight"><pre><span></span>In[22]: df[&#39;food&#39;].map(lambda x : meat_to_animal[x.lower()])
+Out[22]: 
+0       pig
+1       pig
+2       pig
+3       cow
+4       cow
+5       pig
+6       cow
+7       pig
+8    salmon
+Name: food, dtype: object
+</pre></div>
+
+
+<p><strong>apply 和 applymap</strong></p>
+<p>对于DataFrame：</p>
+<div class="highlight"><pre><span></span>In[21]: df = DataFrame(np.random.randn(4,3), columns=list(&#39;bde&#39;),index=[&#39;Utah&#39;,&#39;Ohio&#39;,&#39;Texas&#39;,&#39;Oregon&#39;])
+In[22]: df
+Out[22]: 
+               b         d         e
+Utah    1.654850  0.594738 -1.969539
+Ohio    2.178748  1.127218  0.451690
+Texas   1.209098 -0.604432 -1.178433
+Oregon  0.286382  0.042102 -0.345722
+</pre></div>
+
+
+<p>apply将函数应用到由各列或行所形成的一维数组上。</p>
+<p><em>作用到列：</em></p>
+<div class="highlight"><pre><span></span>In[24]: f = lambda x : x.max() - x.min()
+In[25]: df.apply(f)
+Out[25]: 
+b    1.892366
+d    1.731650
+e    2.421229
+dtype: float64
+</pre></div>
+
+
+<p><em>作用到行/轴：</em></p>
+<div class="highlight"><pre><span></span>In[26]: df.apply(f, axis=1)
+Out[26]: 
+Utah      3.624390
+Ohio      1.727058
+Texas     2.387531
+Oregon    0.632104
+dtype: float64
+</pre></div>
+
+
+<p><em>作用到每个元素：</em></p>
+<div class="highlight"><pre><span></span>In[70]: frame = DataFrame(np.random.randn(4,3), columns=list(&#39;bde&#39;),index=[&#39;Utah&#39;,&#39;Ohio&#39;,&#39;Texas&#39;,&#39;Oregon&#39;])
+In[72]: frame.applymap(lambda x : &#39;%.2f&#39; % x)
+Out[72]: 
+            b      d      e
+Utah     1.19   1.56  -1.13
+Ohio     0.10  -1.03  -0.04
+Texas   -0.22   0.77  -0.73
+Oregon   0.22  -2.06  -1.25
+</pre></div>
+
+
+<p><strong>numpy的ufuncs</strong></p>
+<p>Numpy的ufuncs（元素级数组方法）也可用于操作pandas对象。</p>
+<p>取绝对值操作</p>
+<div class="highlight"><pre><span></span>In[23]: np.abs(df)
+Out[23]: 
+               b         d         e
+Utah    1.654850  0.594738  1.969539
+Ohio    2.178748  1.127218  0.451690
+Texas   1.209098  0.604432  1.178433
+</pre></div>
+
+
+<p><strong>3、替换值</strong></p>
+<p>替换的几种形式</p>
+<div class="highlight"><pre><span></span>In[23]: se = Series([1, -999, 2, -999, -1000, 3])
+In[24]: se.replace(-999, np.nan)
+Out[24]: 
+0       1
+1     NaN
+2       2
+3     NaN
+4   -1000
+5       3
+dtype: float64
+
+In[25]: se.replace([-999, -1000], np.nan)
+Out[25]: 
+0     1
+1   NaN
+2     2
+3   NaN
+4   NaN
+5     3
+dtype: float64
+
+In[26]: se.replace([-999, -1000], [np.nan, 0])
+Out[26]: 
+0     1
+1   NaN
+2     2
+3   NaN
+4     0
+5     3
+dtype: float64
+
+# 字典
+In[27]: se.replace({-999:np.nan, -1000:0})
+Out[27]: 
+0     1
+1   NaN
+2     2
+3   NaN
+4     0
+5     3
+dtype: float64
+</pre></div>
+
+
+<p><strong>4、重命名轴索引、列名</strong></p>
+<p>对于数据:</p>
+<div class="highlight"><pre><span></span>In[28]: df = DataFrame(np.arange(12).reshape((3,4)), index = [&#39;Ohio&#39;, &#39;Colorado&#39;, &#39;New York&#39;], columns=[&#39;one&#39;,&#39;two&#39;,&#39;three&#39;, &#39;four&#39;])
+In[29]: df
+Out[29]: 
+          one  two  three  four
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+New York    8    9     10    11
+</pre></div>
+
+
+<p>就地修改轴索引：</p>
+<div class="highlight"><pre><span></span>In[30]: df.index = df.index.map(str.upper)
+In[31]: df
+Out[31]: 
+          one  two  three  four
+OHIO        0    1      2     3
+COLORADO    4    5      6     7
+NEW YORK    8    9     10    11
+</pre></div>
+
+
+<p>如果要创建数据集的转换版（而不是修改原始数据），比较实用的方法是rename：</p>
+<div class="highlight"><pre><span></span>In[32]: df.rename(index=str.title, columns=str.upper)
+Out[32]: 
+          ONE  TWO  THREE  FOUR
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+New York    8    9     10    11
+</pre></div>
+
+
+<p>特别说明一下，rename可以结合字典型对象实现对部分轴标签的更新：</p>
+<div class="highlight"><pre><span></span>In[33]: df.rename(index={&#39;OHIO&#39;:&#39;INDIANA&#39;}, columns={&#39;three&#39;:&#39;peekaboo&#39;})
+Out[33]: 
+          one  two  peekaboo  four
+INDIANA     0    1         2     3
+COLORADO    4    5         6     7
+NEW YORK    8    9        10    11
+</pre></div>
+
+
+<p>如果希望就地修改某个数据集，传入inplace=True即可：</p>
+<div class="highlight"><pre><span></span>In[34]: _ = df.rename(index={&#39;OHIO&#39;:&#39;INDIANA&#39;}, inplace=True)
+In[35]: df
+Out[35]: 
+          one  two  three  four
+INDIANA     0    1      2     3
+COLORADO    4    5      6     7
+NEW YORK    8    9     10    11
+</pre></div>
+
+
+<p><strong>5、离散化和面元划分</strong></p>
+<p><strong>pd.cut</strong></p>
+<p>为了便于分析，连续数据常常离散化或拆分为“面元”（bin）。比如：</p>
+<div class="highlight"><pre><span></span>In [106]: ages = [20, 22,25,27,21,23,37,31,61,45,41,32]
+</pre></div>
+
+
+<p>需要将其划分为“18到25”, “26到35”，“36到60”以及“60以上”几个面元。要实现该功能，需要使用pandas的cut函数。</p>
+<div class="highlight"><pre><span></span>n[37]: bins = [18, 25, 35, 60, 100]
+In[38]: cats = pd.cut(ages, bins)
+In[39]: cats
+Out[39]: 
+[(18, 25], (18, 25], (18, 25], (25, 35], (18, 25], ..., (25, 35], (60, 100], (35, 60], (35, 60], (25, 35]]
+Length: 12
+Categories (4, object): [(18, 25] &lt; (25, 35] &lt; (35, 60] &lt; (60, 100]]
+</pre></div>
+
+
+<p>可以通过right=False指定哪端是开区间或闭区间。</p>
+<div class="highlight"><pre><span></span>In[41]: cats = pd.cut(ages, bins, right=False)
+In[42]: cats
+Out[42]: 
+[[18, 25), [18, 25), [25, 35), [25, 35), [18, 25), ..., [25, 35), [60, 100), [35, 60), [35, 60), [25, 35)]
+Length: 12
+Categories (4, object): [[18, 25) &lt; [25, 35) &lt; [35, 60) &lt; [60, 100)]
+</pre></div>
+
+
+<p>也可以指定面元的名称：</p>
+<div class="highlight"><pre><span></span>In[43]: group_name = [&#39;Youth&#39;, &#39;YoungAdult&#39;, &#39;MiddleAged&#39;, &#39;Senior&#39;]
+In[45]: cats = pd.cut(ages, bins, labels=group_name)
+In[47]: cats
+Out[47]: 
+[Youth, Youth, Youth, YoungAdult, Youth, ..., YoungAdult, Senior, MiddleAged, MiddleAged, YoungAdult]
+Length: 12
+Categories (4, object): [Youth &lt; YoungAdult &lt; MiddleAged &lt; Senior]
+
+In[46]: pd.value_counts(cats)
+Out[46]: 
+Youth         5
+MiddleAged    3
+YoungAdult    3
+Senior        1
+dtype: int64
+</pre></div>
+
+
+<p><strong>pd.qcut</strong></p>
+<p>qcut是一个非常类似cut的函数，它可以根据样本分位数对数据进行面元划分，根据数据的分布情况，cut可能无法使各个面元中含有相同数量的数据点，而qcut由于使用的是样本分位数，可以得到大小基本相等的面元。</p>
+<div class="highlight"><pre><span></span>In[48]: data = np.random.randn(1000)
+In[49]: cats = pd.qcut(data, 4)
+In[50]: cats
+Out[50]: 
+[(0.577, 3.564], (-0.729, -0.0341], (-0.729, -0.0341], (0.577, 3.564], (0.577, 3.564], ..., [-3.0316, -0.729], [-3.0316, -0.729], (-0.0341, 0.577], [-3.0316, -0.729], (-0.0341, 0.577]]
+
+Length: 1000
+
+Categories (4, object): [[-3.0316, -0.729] &lt; (-0.729, -0.0341] &lt; (-0.0341, 0.577] &lt; (0.577, 3.564]]
+
+
+In[51]: pd.value_counts(cats)
+Out[51]: 
+(0.577, 3.564]       250
+(-0.0341, 0.577]     250
+(-0.729, -0.0341]    250
+[-3.0316, -0.729]    250
+dtype: int64
+</pre></div>
+
+
+<p><strong>6、检测和过滤异常值</strong></p>
+<p>异常值（oulier）的过滤或变换运算在很大程度上其实就是数组运算。</p>
+<p>对于数据：</p>
+<div class="highlight"><pre><span></span>In[52]: np.random.seed(12345)
+In[53]: data = DataFrame(np.random.randn(1000,4))
+In[54]: data.describe()
+Out[54]: 
+                 0            1            2            3
+count  1000.000000  1000.000000  1000.000000  1000.000000
+mean     -0.067684     0.067924     0.025598    -0.002298
+std       0.998035     0.992106     1.006835     0.996794
+min      -3.428254    -3.548824    -3.184377    -3.745356
+25%      -0.774890    -0.591841    -0.641675    -0.644144
+50%      -0.116401     0.101143     0.002073    -0.013611
+75%       0.616366     0.780282     0.680391     0.654328
+max       3.366626     2.653656     3.260383     3.927528
+</pre></div>
+
+
+<p>找出某列绝对值大于3的值</p>
+<div class="highlight"><pre><span></span>In[55]: col = data[3]
+In[56]: col[np.abs(col) &gt; 3]
+Out[56]: 
+97     3.927528
+305   -3.399312
+400   -3.745356
+Name: 3, dtype: float64
+</pre></div>
+
+
+<p>要选出全部含有“超过3或-3的值”的行，可以利用布尔型DataFrame以及any方法：</p>
+<div class="highlight"><pre><span></span>In[60]: data[(np.abs(data)&gt;3).any(1)]
+Out[60]: 
+            0         1         2         3
+5   -0.539741  0.476985  3.248944 -1.021228
+97  -0.774363  0.552936  0.106061  3.927528
+102 -0.655054 -0.565230  3.176873  0.959533
+305 -2.315555  0.457246 -0.025907 -3.399312
+324  0.050188  1.951312  3.260383  0.963301
+400  0.146326  0.508391 -0.196713 -3.745356
+499 -0.293333 -0.242459 -3.056990  1.918403
+523 -3.428254 -0.296336 -0.439938 -0.867165
+586  0.275144  1.179227 -3.184377  1.369891
+808 -0.362528 -3.548824  1.553205 -2.186301
+900  3.366626 -2.372214  0.851010  1.332846
+</pre></div>
+
+
+<p>根据这些条件，可以轻松对值进行设置，下面代码将值限制在区间-3到3以内：</p>
+<div class="highlight"><pre><span></span>In[62]: data[np.abs(data)&gt;3] = np.sign(data)*3
+In[63]: data.describe()
+Out[63]: 
+                 0            1            2            3
+count  1000.000000  1000.000000  1000.000000  1000.000000
+mean     -0.067623     0.068473     0.025153    -0.002081
+std       0.995485     0.990253     1.003977     0.989736
+min      -3.000000    -3.000000    -3.000000    -3.000000
+25%      -0.774890    -0.591841    -0.641675    -0.644144
+50%      -0.116401     0.101143     0.002073    -0.013611
+75%       0.616366     0.780282     0.680391     0.654328
+max       3.000000     2.653656     3.000000     3.000000
+</pre></div>
+
+
+<h2>附录</h2>
+<ul>
+<li><strong>pandas docs：</strong><blockquote>
+<p>http://pandas.pydata.org/pandas-docs/stable/</p>
+</blockquote>
+</li>
+</ul>
+        </article></aside><!-- /#featured -->
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
+
+        <aside id="sidebar">
+                <div class="widget">
+                        <h2>Catégories</h2>
+                        <ul>
+                           <li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                </div>
+                <div class="widget blogroll">
+                        <h2>Liens</h2>
+                        <ul>
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </aside><!-- /#sidebar -->
+
+        <footer id="footer" class="body">
+                <address id="about" class="vcard body">
+                Ce site est généré par <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>, un CMS réalisé en <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>Le thème utilisé est «NotMyIdea-CMS», une version modifiée de «NotMyIdea», le thème par défaut.</p>
+        </footer><!-- /#footer -->
+
+</body>
+</html>

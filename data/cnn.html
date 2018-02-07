@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>shushilvshe's Blog : 卷积神经网络（CNN）</title>
+        <title>卷积神经网络（CNN）</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css" type="text/css" />
-        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed" />
+        <link href="http://www.shushilvshe.com/" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog Flux ATOM" />
+
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -18,14 +19,35 @@
 
 </head>
 
-<body>
-        
-<header>
-    <h1><a href="http://www.shushilvshe.com/data/cnn.html" id="page-title">卷积神经网络（CNN）</a></h1>
-    <span id="sitename"><a href="http://www.shushilvshe.com" id="site-title">shushilvshe's Blog  <strong>Data Developer</strong></a> &sdot;</span>
-<time datetime="2017-09-13T13:59:15+08:00">2017-09-13(星期三) 13:59</time></header>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.shushilvshe.com/index.html">shushilvshe's Blog  <strong>Data Developer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/category/data.html">Data</a></li>
+                    <li><a href="/category/food.html">Food</a></li>
+                    <li><a href="/category/travel.html">Travel</a></li>
+                    <li><a href="/">Photo</a></li>
+                <li><a href="http://www.shushilvshe.com/index.html">Accueil</a></li>
+                <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                    <li ><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+<section id="content" class="body">
 <article>
-    <h3>概述</h3>
+        <header> <h1 class="entry-title"><a href="data/cnn.html"
+        rel="bookmark" title="Permalink to 卷积神经网络（CNN）">卷积神经网络（CNN）</a></h1>  </header>
+        <div class="entry-content">
+        <footer class="post-info">
+                <abbr class="published" title="2017-09-13T13:59:15+08:00">
+                    Publié le 星期三 13 九月 2017 &agrave; 13:59
+                </abbr>
+                <address class="vcard author">
+                        Par <a class="url fn" href="#">ssls</a>
+                </address>
+                <p>Dans <a href="http://www.shushilvshe.com/category/data.html">Data</a>.
+<p>tags: <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a><a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a><a href="http://www.shushilvshe.com/tag/juan-ji.html">卷积</a><a href="http://www.shushilvshe.com/tag/cnn.html">CNN</a></p></p>        </footer><!-- /.post-info -->
+        <h3>概述</h3>
 <p><strong>卷积神经网络(Convolutional Neural Network, CNN)</strong>是深度学习技术中极具代表的网络结构之一，在图像处理领域取得了很大的成功，在国际标准的ImageNet数据集上，许多成功的模型都是基于CNN的。CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
 <p>图像处理中，往往会将图像看成是一个或多个的二维向量，如之前博文中提到的MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是RGB表示的彩色图片则有三个颜色通道，可表示为三张二维向量）。传统的神经网络都是采用全连接的方式，即输入层到隐藏层的神经元都是全部连接的，这样做将导致参数量巨大，使得网络训练耗时甚至难以训练，而CNN则通过局部连接、权值共享等方法避免这一困难，有趣的是，这些方法都是受到现代生物神经网络相关研究的启发（感兴趣可阅读以下部分）。</p>
 <p><center><img src="http://i.imgur.com/UK1cQOP.png" width="650"/></center></p>
@@ -103,18 +125,37 @@
 <li><strong>最后，输出层由欧式径向基函数（Euclidean Radial Basis Function）单元组成，每类一个单元，每个有84个输入。</strong></li>
 </ul>
 <p><center><img src="http://i.imgur.com/kJtbaEz.png" width="800"/></center></p>
-</article>
+        </div><!-- /.entry-content -->
 
-        <footer>
-            <nav>
-                <ul>
-                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/categories.html">Categories</a></li>
-                    <li>:: <a href="http://www.shushilvshe.com/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit">Proudly powered by <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a></p>
-        </footer>
+</article>
+</section>
+
+        <aside id="sidebar">
+                <div class="widget">
+                        <h2>Catégories</h2>
+                        <ul>
+                           <li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                           <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                </div>
+                <div class="widget blogroll">
+                        <h2>Liens</h2>
+                        <ul>
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </aside><!-- /#sidebar -->
+
+        <footer id="footer" class="body">
+                <address id="about" class="vcard body">
+                Ce site est généré par <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>, un CMS réalisé en <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>Le thème utilisé est «NotMyIdea-CMS», une version modifiée de «NotMyIdea», le thème par défaut.</p>
+        </footer><!-- /#footer -->
 
 </body>
 </html>
