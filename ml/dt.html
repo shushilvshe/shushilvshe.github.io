@@ -1,101 +1,34 @@
-
 <!DOCTYPE html>
-<html lang="zh_cn">
-<head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+<html>
+    <head>
+        <title>决策树原理 - shushilvshe's Blog</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://www.shushilvshe.com/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
 
-    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
-
-
-
-
-    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
-    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
-
-
-<meta name="author" content="ssls" />
-<meta name="description" content="决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。" />
-<meta name="keywords" content="大数据, 机器学习, 决策树">
-
-<meta property="og:site_name" content="shushilvshe's Blog"/>
-<meta property="og:title" content="决策树原理"/>
-<meta property="og:description" content="决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://www.shushilvshe.com/ml/dt.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2017-07-28 14:03:27+08:00"/>
-<meta property="article:modified_time" content="2017-07-28 14:03:27+08:00"/>
-<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
-<meta property="article:section" content="Data"/>
-<meta property="article:tag" content="大数据"/>
-<meta property="article:tag" content="机器学习"/>
-<meta property="article:tag" content="决策树"/>
-<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
-
-  <title>shushilvshe's Blog &ndash; 决策树原理</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href="http://www.shushilvshe.com">
-        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
-      </a>
-      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
-
-<p>Data Developer</p>
-      <nav>
-        <ul class="list">
-          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
-
-          <li><a href="/categories.html" target="_blank">Category</a></li>
-          <li><a href="/tags.html" target="_blank">Tags</a></li>
-          <li><a href="/archives.html" target="_blank">Archives</a></li>
-        </ul>
-      </nav>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href="http://www.shushilvshe.com">    Home
-</a>
-
-      <a href="/category/data.html">Data</a>
-      <a href="/category/food.html">Food</a>
-      <a href="/category/travel.html">Travel</a>
-      <a href="/">Photo</a>
-
-
-    </nav>
-
-<article class="single">
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://www.shushilvshe.com">Home</a></li>
+                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                    <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></h3>
+				<h2 class="text-muted">Data Developer</h2>
+             </div>
+<section id="content" class="article content">
   <header>
-      
-    <h1 id="ml/dt">决策树原理</h1>
-    <p>
-          Posted on 2017-07-28(星期五) 14:03 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
-
-
-    </p>
+    <h2 class="entry-title">
+      <a href="http://www.shushilvshe.com/ml/dt.html" rel="bookmark"
+         title="Permalink to 决策树原理">决策树原理</a></h2>
+ 
   </header>
-
-
-  <div>
+  
+     
+  <div class="entry-content">
     <hr>
 <h2><strong>决策树简介</strong></h2>
 <p>决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
@@ -176,42 +109,23 @@
 <p>在我们的例子中, 决策树的规模并不重要, 因为我们可以获取所有节点。但是, 在现实应用中, 决策树的规模被修剪以及其他技术限制。而决策树经过修剪后的不同形状会产生不同的效果。实际上, 由信息增益和基尼不纯度启发式方法计算出的局部最优决策通常都会生成一个可行的决策树。</p>
 <h2><strong>总结</strong></h2>
 <p>本章我们介绍了一个非线性模型——决策树, 用来解决分类和回归问题。就像猜猜看游戏一样, 决策树也是由一些了问题构成一个测试实例。决策树的一个分支在遇到显示响应变量值的叶子节点时停止。我们介绍了ID3算法，用来训练决策树通过递归分割训练集，形成子集以减低响应变量的不确定性。</p>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
-      <a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
-      <a href="http://www.shushilvshe.com/tag/jue-ce-shu.html">决策树</a>
-    </p>
-  </div>
-
-
-
-    <div class="addthis_relatedposts_inline">
-
-
-</article>
-
-    <footer>
-<p>&copy;  </p>
-<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
-</p>    </footer>
-  </main>
-
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " shushilvshe's Blog ",
-  "url" : "http://www.shushilvshe.com",
-  "image": "http://www.shushilvshe.com/images/baya.jpg",
-  "description": "shushilvshe's Thoughts and Writings"
-}
-</script>
-
-</body>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2017-07-28T14:03:27+08:00">
+      2017-07-28(星期五) 14:03
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
+    </address> in <a href="http://www.shushilvshe.com/category/data.html">Data</a> Tagged <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据 </a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习 </a><a href="http://www.shushilvshe.com/tag/jue-ce-shu.html">决策树 </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://www.shushilvshe.com/None">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://www.shushilvshe.com">shushilvshe's Blog</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
 </html>

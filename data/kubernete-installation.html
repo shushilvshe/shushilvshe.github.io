@@ -1,101 +1,34 @@
-
 <!DOCTYPE html>
-<html lang="zh_cn">
-<head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+<html>
+    <head>
+        <title>kubernetes（1.8.3）系列之安装 - shushilvshe's Blog</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://www.shushilvshe.com/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
 
-    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
-
-
-
-
-    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
-    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
-
-
-<meta name="author" content="ssls" />
-<meta name="description" content="此次部署kubernetes1.8.3版本使用两台机器进行操作，一台做为Master节点，一台作为Node节点。部署流程及配置与正式环境下是一致的。" />
-<meta name="keywords" content="大数据, 机器学习, 决策树">
-
-<meta property="og:site_name" content="shushilvshe's Blog"/>
-<meta property="og:title" content="kubernetes（1.8.3）系列之安装"/>
-<meta property="og:description" content="此次部署kubernetes1.8.3版本使用两台机器进行操作，一台做为Master节点，一台作为Node节点。部署流程及配置与正式环境下是一致的。"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://www.shushilvshe.com/data/kubernete-installation.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2018-01-23 20:06:33+08:00"/>
-<meta property="article:modified_time" content="2018-01-23 20:06:35+08:00"/>
-<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
-<meta property="article:section" content="Data"/>
-<meta property="article:tag" content="大数据"/>
-<meta property="article:tag" content="机器学习"/>
-<meta property="article:tag" content="决策树"/>
-<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
-
-  <title>shushilvshe's Blog &ndash; kubernetes（1.8.3）系列之安装</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href="http://www.shushilvshe.com">
-        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
-      </a>
-      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
-
-<p>Data Developer</p>
-      <nav>
-        <ul class="list">
-          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
-
-          <li><a href="/categories.html" target="_blank">Category</a></li>
-          <li><a href="/tags.html" target="_blank">Tags</a></li>
-          <li><a href="/archives.html" target="_blank">Archives</a></li>
-        </ul>
-      </nav>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href="http://www.shushilvshe.com">    Home
-</a>
-
-      <a href="/category/data.html">Data</a>
-      <a href="/category/food.html">Food</a>
-      <a href="/category/travel.html">Travel</a>
-      <a href="/">Photo</a>
-
-
-    </nav>
-
-<article class="single">
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://www.shushilvshe.com">Home</a></li>
+                    <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                    <li><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></h3>
+				<h2 class="text-muted">Data Developer</h2>
+             </div>
+<section id="content" class="article content">
   <header>
-      
-    <h1 id="data/kubernete-installation">kubernetes（1.8.3）系列之安装</h1>
-    <p>
-          Posted on 2018-01-23(星期二) 20:06 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
-
-
-    </p>
+    <h2 class="entry-title">
+      <a href="http://www.shushilvshe.com/data/kubernete-installation.html" rel="bookmark"
+         title="Permalink to kubernetes（1.8.3）系列之安装">kubernetes（1.8.3）系列之安装</a></h2>
+ 
   </header>
-
-
-  <div>
+  
+     
+  <div class="entry-content">
     <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
@@ -1570,42 +1503,23 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/check-nvidia-de
 <p>最后更新一下服务即可。</p>
 <div class="highlight"><pre><span></span>systemctl daemon-reload
 </pre></div>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
-      <a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
-      <a href="http://www.shushilvshe.com/tag/jue-ce-shu.html">决策树</a>
-    </p>
-  </div>
-
-
-
-    <div class="addthis_relatedposts_inline">
-
-
-</article>
-
-    <footer>
-<p>&copy;  </p>
-<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
-</p>    </footer>
-  </main>
-
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " shushilvshe's Blog ",
-  "url" : "http://www.shushilvshe.com",
-  "image": "http://www.shushilvshe.com/images/baya.jpg",
-  "description": "shushilvshe's Thoughts and Writings"
-}
-</script>
-
-</body>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2018-01-23T20:06:33+08:00">
+      2018-01-23(星期二) 20:06
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html">ssls</a>
+    </address> in <a href="http://www.shushilvshe.com/category/data.html">Data</a> Tagged <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据 </a><a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习 </a><a href="http://www.shushilvshe.com/tag/jue-ce-shu.html">决策树 </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://www.shushilvshe.com/None">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://www.shushilvshe.com">shushilvshe's Blog</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
 </html>
