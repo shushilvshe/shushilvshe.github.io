@@ -1,113 +1,79 @@
 <!doctype html>
-<html lang="zh_cn" itemscope itemtype="http://schema.org/Person">
-<head>
-  <meta charset="utf-8">
-  <!-- Site Meta Data -->
-  <title>个人博客搭建过程(Pelican+Github)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="ssls">
+<html class="no-js" lang="en">
+    <head>
+        <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" />
 
-  <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="ssls" />
+        <title>个人博客搭建过程(Pelican+Github)</title>
+        
+<meta name="description" content="&lt;p&gt;当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫。。。。。。&lt;/p&gt;" />
+<meta name="keywords" content=" Pelican python 博客搭建  "/>
 
-  <!-- schema.org -->
-  <meta itemprop="name" content="shushilvshe's Blog">
-  <meta itemprop="image" content="">
-  <meta itemprop="description" content="">
+        <!--[if !IE 7]>
+        <style type="text/css">
+            #main-content {display:table;height:100%}
+        </style>
+        <![endif]-->
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/backdrop.css" />
+        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygments.css" />
+        <script src="http://www.shushilvshe.com/theme/js/modernizr.js"></script>
 
-  <!-- Style Meta Data -->
-  <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/milligram.css" type="text/css" />
-  <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/custom.css" type="text/css" />
 
-  <!-- Feed Meta Data -->
+    </head>
+      
 
-  <!-- Twitter Feed -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="">
-  <meta name="twitter:image" content="">
+    <body>
+        <div class="master-row">
 
-<meta name="twitter:creator" content="">
-<meta name="twitter:url" content="http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html">
-<meta name="twitter:title" content="shushilvshe's Blog ~ 个人博客搭建过程(Pelican+Github)">
-<meta name="twitter:description" content="当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫。。。。。。">
+            <div class="content-pane main-content">
+                <nav class="top-bar" data-topbar role="navigation">
+                    <ul class="title-area">
+                        <li class="name"><!-- Leave this empty --></li>
+                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+                    </ul>
+                    <section class="top-bar-section">
+                        <ul class="left">
+                            <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
+                        </ul>
+                        <ul class="right">
+                            <li class="active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+                            <li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+                            <li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                        </ul>
+                    </section>
+                </nav>
 
-<!-- Facebook Meta Data -->
-<meta property="og:title" content="shushilvshe's Blog ~ 个人博客搭建过程(Pelican+Github)" />
-<meta property="og:description" content="当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫。。。。。。" />
-<meta property="og:image" content="" />
-</head>
-
-<body>
-    <div class="container">
-
-    <!-- Navbar -->
-      <div class="navbar">
-        <ul>
-            <div>
-                <li>
-                    <a href="http://www.shushilvshe.com"><h3>shushilvshe's Blog</h3></a>
-                </li>
-                <li>
-                        <em><h6>shushilvshe's Thoughts and Writings</h6></em>
-                </li>
-            </div>
-        </ul>
-      </div>
-
-  <!-- Sidebar -->
-    <sidebar>
-        <ul class="static-item">
-                <li><a href="/category/data.html">Data</a></li>
-                <li><a href="/category/food.html">Food</a></li>
-                <li><a href="/category/travel.html">Travel</a></li>
-                <li><a href="/">Photo</a></li>
-
-                <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-        </ul>        
-
-        <ul>
-                <div class="cat-border">
-                <li style="color: #F2F1EF; background-color: #6C7A89;">Categories</li>
-                    <li><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-                    <li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-                    <li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+                <div class="row title-bar">
+                    <div class="small-12 columns">
+                        <h1><a href="http://www.shushilvshe.com">shushilvshe's Blog</a></h1><h2> <small>Data Developer</small></h2>
+                        <hr>
+                    </div>
                 </div>
+            
+                <div id="contents">
+<div class="row">
+    <div class="small-12 columns article">
+        <h2>个人博客搭建过程(Pelican+Github)</h2>
+        <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
+    <div class="small-12 columns">
+        <ul class="inline-list">
+            <li><span><i class="fa fa-calendar"></i>&nbsp; 2017-08-12(星期六) 18:44</span></li>
+            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="http://www.shushilvshe.com/category/data.html">data</a></span></li>
+            <li>
+                <span>
+                    <i class="fa fa-tags"></i>&nbsp;
+                    <a href="http://www.shushilvshe.com/tag/pelican.html"><span class="label">Pelican</span></a>
+                    <a href="http://www.shushilvshe.com/tag/python.html"><span class="label">python</span></a>
+                    <a href="http://www.shushilvshe.com/tag/bo-ke-da-jian.html"><span class="label">博客搭建</span></a>
+                </span>
+            </li>
         </ul>
-
-            <h2><br/>BLOGROLLS</h2>
-            <ul>
-                    <li><a href="/categories.html">Category</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                    <li><a href="/archives.html">Archives</a></li>
-            </ul> 
-   
-        <p> 
-        </p>
-        <p>
-        </p>
-        <p>
-        </p>
-    </sidebar>
-    
-    <maincontent>
-<h2>
-    <a href="http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html" rel="bookmark" title="Permalink to 个人博客搭建过程(Pelican+Github)">个人博客搭建过程(Pelican+Github)</a>
-</h2>
-
-<div>
-    <b>By: </b><a href="http://www.shushilvshe.com/author/ssls.html">ssls</a><b>    On: </b>2017-08-12(星期六) 18:44<br />
-    <b>In: </b><a href="http://www.shushilvshe.com/category/data.html" rel="bookmark" title="Permalink to data">data</a><br />
-    <em><b>Tags: </b>
-                <span><a href="http://www.shushilvshe.com/tag/pelican.html">#Pelican </a></span>
-                <span><a href="http://www.shushilvshe.com/tag/python.html">#python </a></span>
-                <span><a href="http://www.shushilvshe.com/tag/bo-ke-da-jian.html">#博客搭建 </a></span>
-    </em>
-    <hr>
+    </div>
 </div>
-
-<div>
-    <mainarticle>
-    <hr>
+        <section class="article">
+            <hr>
 <h3>前言</h3>
 <p>当初整vps完全只是为了科学上网，但感觉一个服务器只运行一个vps服务有点太浪费了，为了让其发挥最大价值，于是就想在上面搭个博客，搞个备份，SVN啥的。所以就先尝试的搭个个人博客系统。一直都想拥有一个只属于自己的博客系统，记录一下生活工作的点点滴滴。尝试过网易、csdh等平台的博客，虽然方便点，但一直没能坚持下来，总觉得不是自己的地盘，一成不变的界面不是我想要的；也尝试过著名的PHP博客系统wordpress,但其对markdown语法支持不太好，再一个比较重要的原因就是我买的vps是最小版的，只有512M内存，养不起这只大猫，有一次只是加了一个图片管理的插件，导致内存爆满，正常的VPS服务都无法使用了，遂只能移情别恋了；告别了动态语言博客系统，一个简洁带有原始风味的静态博客系统进入我的视野——hexo，不过不太喜欢hexo的这种组织风格（PS：也许是我还没研究透彻），最终，我将目光锁定在基于python语言的Pelican博客系统上，原因如下：
 <br>
@@ -413,28 +379,114 @@ python -m http.server
 <li>
 <p><a href="http://namesilopro.com/77.html">Namesilo VS Godaddy域名注册的对比优势</a></p>
 </li>
-</ul>
-    </mainarticle>
+</ul>    
+        </section>
+    </div>
 </div>
-<hr>
-        
-<div>
-        <i>If you found the article helpful, please share or cite the article, and spread the word:</i>
-            <p style="margin-top: 2%;">
-                <span><a target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;" title="Twitter" href="https://twitter.com/share?url=http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html&text=个人博客搭建过程(Pelican+Github)&via="><img class="social-icons-a" src="http://www.shushilvshe.com/theme/images/icons/twitter.png"></a></span>
-                <span><a target="_blank" title="Facebook" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;" href="https://www.facebook.com/sharer.php?u=http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html&t=个人博客搭建过程(Pelican+Github)"><img class="social-icons-a" src="http://www.shushilvshe.com/theme/images/icons/facebook.png"></a></span>
+                </div>
 
-                <a  target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html&title=个人博客搭建过程(Pelican+Github)" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img class="social-icons-a" src="http://www.shushilvshe.com/theme/images/icons/linkedin.png"></a>
+                <footer class="show-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://www.shushilvshe.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://www.shushilvshe.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://www.shushilvshe.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://www.shushilvshe.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  ssls 
+                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
             </p>
-</div>
-<hr>
-    <p><i>For any feedback or corrections, please write in to: </i><b> ssls </b></p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>                </footer>
+            </div>
+            
+            <div class="image-pane main-content" style="background: url(''); background-size:cover; background-position: right;">
+                <div class="row">
+                    <div class="small-12 medium-4 large-12 columns">
+                    </div>
+
+                    <div class="small-12 medium-4  large-12 columns link-list">
+                        <h5 class='text-center'>Links</h5>
+                        <ul class="inline-center">
+                            <li><a href="/categories.html">Category</a></li>
+                            <li><a href="/tags.html">Tags</a></li>
+                            <li><a href="/archives.html">Archives</a></li>
+                        </ul>
+                    </div>
+
+<!--
+                    <div class="small-12 medium-3 large-12 columns">
+                    </div>
+-->
+               </div>
+            </div>
+        </div>
         
-    </maincontent>
-
-  <!-- Analytics -->
-
-  </div>
-</body>
-
+        
+        <div class="row">
+            <footer class="hide-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://www.shushilvshe.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://www.shushilvshe.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://www.shushilvshe.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://www.shushilvshe.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  ssls 
+                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>            </footer>
+        </div>
+        
+        
+        <script src="http://www.shushilvshe.com/theme/js/jquery.min.js"></script>
+        <script src="http://www.shushilvshe.com/theme/js/foundation.min.js"></script>
+        <script src="http://www.shushilvshe.com/theme/js/app.js"></script>
+    </body>
+  
 </html>
