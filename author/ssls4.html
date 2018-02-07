@@ -1,160 +1,106 @@
-<!doctype html>
-<html lang="zh_cn" itemscope itemtype="http://schema.org/Person">
-<head>
-                <meta charset="utf-8">
-        <!-- Site Meta Data -->
-        <title>shushilvshe's Blog - ssls</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="ssls">
+<!DOCTYPE html>
+<html lang="zh_cn" prefix="og: http://ogp.me/ns#">
+	<head>
+		<link href="http://gmpg.org/xfn/11" rel="profile">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-        <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg">
+		<!-- Metadata -->
+			<meta name="description" content="" />
+			<meta property="og:description" content="" />
+			<meta property="og:title" content="shushilvshe's Blog - Data Developer" />
+			<meta property="og:type" content="website" />
+			<meta property="og:url" content="http://www.shushilvshe.com" />
+		<meta property="og:image" content="http://www.shushilvshe.com/images/" />
 
-        <!-- schema.org -->
-        <meta itemprop="name" content="shushilvshe's Blog">
-        <meta itemprop="image" content="">
-        <meta itemprop="description" content="">
+		<!-- Enable responsiveness on mobile devices-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-        <!-- Style Meta Data -->
-        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/style.css" type="text/css"/>
-        <link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygments.css" type="text/css"/>
+		<title>shushilvshe's Blog - Articles by ssls - Data Developer</title>
 
-        <!-- Feed Meta Data -->
+		<!-- CSS -->
+		<link href="//fonts.googleapis.com/" rel="dns-prefetch">
+		<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Abril+Fatface|PT+Sans:400,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet">
 
-        <!-- Twitter Feed -->
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="">
-        <meta name="twitter:image" content="">
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/poole.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/hyde.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/syntax.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-    <meta name="twitter:creator" content="">
-    <meta name="twitter:url" content="http://www.shushilvshe.com">
-    <meta name="twitter:title" content="shushilvshe's Blog">
-    <meta name="twitter:description" content="">
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	</head>
 
-    <!-- Facebook Meta Data -->
-    <meta property="og:title" content="shushilvshe's Blog"/>
-    <meta property="og:description" content=""/>
-    <meta property="og:image" content=""/>
+	<body class="theme-base-0d">
+<div class="sidebar">
+	<div class="container sidebar-sticky">
+		<div class="sidebar-about">
 
-    <meta name="twitter:creator" content="">
-    <meta name="twitter:url" content="http://www.shushilvshe.com/author/ssls.html">
-    <meta name="twitter:title" content="shushilvshe's Blog ~ ssls">
-    <meta name="twitter:description" content="Articles de ssls">
+			<h1>
+				<a href="/">
+					<img class="profile-picture" src="http://www.shushilvshe.com/images/">
+					shushilvshe's Blog
+				</a>
+			</h1>
+			<p class="lead"></p>
+			<p class="lead"> </p>
+			<p></p>
+		</div>
+		<nav class="sidebar-nav">
+			<a class="sidebar-nav-item" href="">
+				<i class="fa fa-feed"></i>
+			</a>
+		</nav>
+	</div>
+</div>		<div class="content container">
+	<div class="posts">
+			<div class="post">
+				<h1 class="post-title" href="http://www.shushilvshe.com/ml/data-proprecess.html#ml/data-proprecess">
+					<a href="http://www.shushilvshe.com/ml/data-proprecess.html#ml/data-proprecess">数据处理中的数值初步转换</a>
+				</h1>
+				<span class="post-date">2017-07-26(星期三) 16:04</span>
+				<p>
+					<p>我们使用scikit learn进行建模预测， 而SK中的模型都只能处理数值型的数据，需要将原始的字符串类型的数据转为数值型数据。所有数据通常可以分成两种类型：<strong><code>定量</code></strong>与<strong><code>定性</code></strong>。定量的属性（数值属性）通常蕴涵着可排序性，比如在泰坦尼克号数据集中，年龄就是一个定量属性。定性属性（标称 序数 二元属性）的值是一些符号或事务的名称，每个值代表某种类别编码或状态，不是可测量量，是不具有排序意义的，比如Embarked(登船地点)。</p>
+				</p>
+				<a class="read-more" href="ml/data-proprecess.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="http://www.shushilvshe.com/bigdata/python/sciencelib.html#bigdata/python/sciencelib">
+					<a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html#bigdata/python/sciencelib">Python科学计算核心工具包一览</a>
+				</h1>
+				<span class="post-date">2017-07-25(星期二) 13:57</span>
+				<p>
+					<p>python用于科学计算已经相当成熟，现在主要用的库如下所列，详细请参看官方网址。</p>
+				</p>
+				<a class="read-more" href="bigdata/python/sciencelib.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="http://www.shushilvshe.com/bigdata/cdh-update.html#bigdata/cdh-update">
+					<a href="http://www.shushilvshe.com/bigdata/cdh-update.html#bigdata/cdh-update">CDH升级（5.11.0 -> 5.12.0）</a>
+				</h1>
+				<span class="post-date">2017-07-24(星期一) 21:46</span>
+				<p>
+					<p>CDH升级（5.11.0 -&gt; 5.12.0）, 大版本升级，CM和CDH详细更新过程。  版本升级更新特性参考： https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_rn_new_in_cdh_512.html#cdh_rn_new_in_cdh_512</p>
+				</p>
+				<a class="read-more" href="bigdata/cdh-update.html">Continue reading »</a>
+			</div>
+			<div class="post">
+				<h1 class="post-title" href="http://www.shushilvshe.com/travel/dengfeng.html#travel/dengfeng">
+					<a href="http://www.shushilvshe.com/travel/dengfeng.html#travel/dengfeng">登封洛阳游记——登封篇</a>
+				</h1>
+				<span class="post-date">2017-07-21(星期五) 23:59</span>
+				<p>
+					<p>终于有了写游记的全部条件了，<em>时间</em>：<strong>周末</strong> <em>工具</em>：<strong>wp+md</strong>，还有<strong>记忆</strong>，赶紧把之前的出游的四次旅行记录下吧 年龄大了，真是什么都可能忘记哈。4到6月份温度适中，春游最合适不过了，继南京扬州之行后，喜欢上了旅游的感觉——自由 静逸 就是那种感觉。回津之后，立马着手安排下一次旅行......</p>
+				</p>
+				<a class="read-more" href="travel/dengfeng.html">Continue reading »</a>
+			</div>
+	</div>
+	<div class="pagination">
 
-    <!-- Facebook Meta Data -->
-    <meta property="og:title" content="shushilvshe's Blog ~ ssls"/>
-    <meta property="og:description" content="Articles de ssls"/>
-    <meta property="og:image" content=""/>
-</head>
+		<span class="pagination-item older"><a href="http://www.shushilvshe.com/author/ssls3.html">Newer</a></span>
 
-<body>
-<!-- Sidebar -->
-<aside>
-    <!--<center><a href="http://www.shushilvshe.com"><img id="avatar" src=""></a></center>-->
-    <h1>shushilvshe's Blog</h1>
-    <br>
-
-
-    <nav class="nav">
-        <ul class="list-bare">
-
-                <li><a class="nav__link" href="/category/data.html">Data</a></li>
-                <li><a class="nav__link" href="/category/food.html">Food</a></li>
-                <li><a class="nav__link" href="/category/travel.html">Travel</a></li>
-                <li><a class="nav__link" href="/">Photo</a></li>
-
-                <li><a class="nav__link" href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-
-        </ul>
-    </nav>
-
-    <p class="social">
-    </p>
-
-        <h2>Categories</h2>
-        <ul class="navbar">
-                <li><a
-                        href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-                <li><a
-                        href="http://www.shushilvshe.com/category/food.html">food</a></li>
-                <li><a
-                        href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-        </ul>
-
-        <h2 class="blog_roll_link"><br/>BLOGROLLS</h2>
-        <ul class="navbar">
-                <li><a href="/categories.html">Category</a></li>
-                <li><a href="/tags.html">Tags</a></li>
-                <li><a href="/archives.html">Archives</a></li>
-        </ul>
-
-</aside>
-
-<!-- Content -->
-<article>
-    <h1 class="title">Hi, I'm ssls</h1>
-        <ol>
-    <h2 class="latest">Author: ssls</h2>
-                <li class="post_list"><p class="post_entry">
-                    <h2 class="post_title"><a href="http://www.shushilvshe.com/ml/data-proprecess.html" rel="bookmark"
-                                              title="Permalink to 数据处理中的数值初步转换">数据处理中的数值初步转换</a>
-                    </h2>
-                    <a href="http://www.shushilvshe.com/author/ssls.html">@ssls</a>
-                    <span> in </span>
-                    <span class="post_category"><a href="http://www.shushilvshe.com/category/data.html" rel="bookmark"
-                                                   title="Permalink to Data">[ Data ]</a></span>
-                    <span class="post_date">2017-07-26(星期三) 16:04</span>
-                </li>
-                <li class="post_list"><p class="post_entry">
-                    <h2 class="post_title"><a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html" rel="bookmark"
-                                              title="Permalink to Python科学计算核心工具包一览">Python科学计算核心工具包一览</a>
-                    </h2>
-                    <a href="http://www.shushilvshe.com/author/ssls.html">@ssls</a>
-                    <span> in </span>
-                    <span class="post_category"><a href="http://www.shushilvshe.com/category/data.html" rel="bookmark"
-                                                   title="Permalink to Data">[ Data ]</a></span>
-                    <span class="post_date">2017-07-25(星期二) 13:57</span>
-                </li>
-                <li class="post_list"><p class="post_entry">
-                    <h2 class="post_title"><a href="http://www.shushilvshe.com/bigdata/cdh-update.html" rel="bookmark"
-                                              title="Permalink to CDH升级（5.11.0 -> 5.12.0）">CDH升级（5.11.0 -> 5.12.0）</a>
-                    </h2>
-                    <a href="http://www.shushilvshe.com/author/ssls.html">@ssls</a>
-                    <span> in </span>
-                    <span class="post_category"><a href="http://www.shushilvshe.com/category/data.html" rel="bookmark"
-                                                   title="Permalink to Data">[ Data ]</a></span>
-                    <span class="post_date">2017-07-24(星期一) 21:46</span>
-                </li>
-                <li class="post_list"><p class="post_entry">
-                    <h2 class="post_title"><a href="http://www.shushilvshe.com/travel/dengfeng.html" rel="bookmark"
-                                              title="Permalink to 登封洛阳游记——登封篇">登封洛阳游记——登封篇</a>
-                    </h2>
-                    <a href="http://www.shushilvshe.com/author/ssls.html">@ssls</a>
-                    <span> in </span>
-                    <span class="post_category"><a href="http://www.shushilvshe.com/category/travel.html" rel="bookmark"
-                                                   title="Permalink to travel">[ travel ]</a></span>
-                    <span class="post_date">2017-07-21(星期五) 23:59</span>
-                </li>
-        </ol>
-
-    <p class="paginator">
-                <a href="http://www.shushilvshe.com/author/ssls3.html">~:)</a>
-        4 ~ 4
-    </p>
-
-</article>
-
-<!-- Footer -->
-    <footer>
-        <p>
-            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a href="http://python.org">Python</a>.
-            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
-                href="https://parbhatpuri.com/">@parbhat</a>.
-        </p>
-    </footer>
-
-
-</body>
+		<span class="pagination-item newer">Older</span>
+	</div>
+		</div>
+	</body>
 </html>
