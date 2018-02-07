@@ -1,159 +1,163 @@
-<!DOCTYPE html>
-<html lang="zh_cn">
-<head>
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>shushilvshe's Blog - calico</title>
-        <meta charset="utf-8" />
+		<title>shushilvshe's Blog</title>
+		<meta name="description" content="">
+		<meta name="author" content="ssls">
 
-
-        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
-
-        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/gumby.css" />
-        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/style.css" />
-        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygment.css" />
-
-        <script src="http://www.shushilvshe.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/foundation.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/custom.css" />
 
 
+		<script src="http://www.shushilvshe.com/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
 
 
-</head>
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
 
-<body id="index" class="home">
+					<section class="middle tab-bar-section">
+						<h1 class="title">shushilvshe's&nbsp;Blog</h1>
+					</section>
+				</nav>
 
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="http://www.shushilvshe.com">Home</a></li>
+						<li><label>Categories</label></li>
+							<li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+							<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+							<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
 
-    <div class="container">
-
-        <div class="row">
-
-          <header id="banner" class="body">
-                  <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
-          </header><!-- /#banner -->
-
-            <div id="navigation" class="navbar row">
-              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
-              <ul class="columns">
-                <li><a href="http://www.shushilvshe.com/">Home</a></li>
-
-                <li><a href="/category/data.html">Data</a></li>
-                <li><a href="/category/food.html">Food</a></li>
-                <li><a href="/category/travel.html">Travel</a></li>
-                <li><a href="/">Photo</a></li>
-                <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-
-              </ul>
-            </div>
-
-<section id="content">
-
-
-
-   <div class="row">
-
-
-        <div class="eleven columns">
-                 <ol id="post-list">
-                        <li><article class="hentry">
-                                <header> <h2 class="entry-title"><a href="http://www.shushilvshe.com/data/kubernete-calico.html" rel="bookmark" title="Permalink to kubernetes（1.8.3）系列之calico集成">kubernetes（1.8.3）系列之calico集成</a></h2> </header>
-                                <footer class="post-info">
-                                    <abbr class="published" title="2018-01-04T14:50:01+08:00"> 2018-01-04(星期四) 14:50 </abbr>
-                                    <address class="vcard author">By 
-                                    <a class="url fn" href="http://www.shushilvshe.com/author/ssls.html"> ssls</a>
-                                    </address>
-                                </footer><!-- /.post-info -->
-                                <div class="entry-content"> <p>目前工作试错环境为 k8s（1.8.3）管理下的 <code>tensorflow-1.4.1-compile-py36</code> docker镜像深度学习集群，说是集群，但平时的工作任务依然是依靠单台跑脚本运行的，GPU的利用率比较低，经过研究，最后决定通过 <code>openmpi-2.1.2 + nccl2 + nccl_2.1.2-1+cuda8.0_x86_64</code> 的技术方案实现GPU的并行计算。但将环境部署到K8S集群时碰到一个问题——在同一个节点中启动的pod可以成功执行，但不同节点间的pods无法成功执行，报错如下：</p> </div><!-- /.entry-content -->
-
-                                <div class="medium primary btn"><a href="http://www.shushilvshe.com/data/kubernete-calico.html" rel="bookmark" title="Permalink to kubernetes（1.8.3）系列之calico集成">Read more <i class="icon-arrow-right"></i></a></div>
+						<li><label>Links</label></li>
+							<li><a href="/categories.html">Category</a></li>
+							<li><a href="/tags.html">Tags</a></li>
+							<li><a href="/archives.html">Archives</a></li>
 
 
 
-                                <div class="row tag-row">
-                                        <span>Tagged as : </span>
-                                            <a class="danger label" href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>
-                                            <a class="danger label" href="http://www.shushilvshe.com/tag/calico.html">calico</a>
-                                            <a class="danger label" href="http://www.shushilvshe.com/tag/docker.html">docker</a>
-                                            <a class="danger label" href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a>
-                                </div>
+						<li><label>Social</label></li>
+					</ul>	
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+								<li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+								<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+								<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>                                    
+                                                                                                                                          
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Posts Tagged With 'calico'</h2>
+								</div>
+							</div>
+
+<article>
+	<h3><a href="http://www.shushilvshe.com/data/kubernete-calico.html">kubernetes（1.8.3）系列之calico集成</a></h3>
+	<h6>Written by <a href="http://www.shushilvshe.com/author/ssls.html">ssls</a> in <a href="http://www.shushilvshe.com/category/data.html">Data</a> on 2018-01-04(星期四) 14:50. Tags: <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>, <a href="http://www.shushilvshe.com/tag/calico.html">calico</a>, <a href="http://www.shushilvshe.com/tag/docker.html">docker</a>, <a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a>, </h6>
+	<p>目前工作试错环境为 k8s（1.8.3）管理下的 <code>tensorflow-1.4.1-compile-py36</code> docker镜像深度学习集群，说是集群，但平时的工作任务依然是依靠单台跑脚本运行的，GPU的利用率比较低，经过研究，最后决定通过 <code>openmpi-2.1.2 + nccl2 + nccl_2.1.2-1+cuda8.0_x86_64</code> 的技术方案实现GPU的并行计算。但将环境部署到K8S集群时碰到一个问题——在同一个节点中启动的pod可以成功执行，但不同节点间的pods无法成功执行，报错如下：</p>
+		<p class="continue"><a href="http://www.shushilvshe.com/data/kubernete-calico.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
 
 
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="/categories.html">Category</a></li>
+									<li><a href="/tags.html">Tags</a></li>
+									<li><a href="/archives.html">Archives</a></li>
+								</ul>
+							</div>
 
-                        </article></li>
-                </ol><!-- /#posts-list -->
-
-        </div><!-- /.eleven.columns -->
-        
-<div class="three columns">
-
-<h4>Pages</h4>
-
- <ul>
-      <li><a href="/category/data.html">Data</a></li>
-      <li><a href="/category/food.html">Food</a></li>
-      <li><a href="/category/travel.html">Travel</a></li>
-      <li><a href="/">Photo</a></li>
-      <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-  </ul>
-
-<h4>Categories</h4>
-<ul class="blank">
-		<li><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-		<li><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-		<li><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-</ul>
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
 
 
-<h4>Tags</h4>
-	<ul class="blank">
-</ul>
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
 
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
 
-
-</div> </div><!-- /.row -->
-
-<p class="paginator">
-    Page 1 / 1
-</p>
-</section><!-- /#content -->
-
-       </div><!-- /.row -->
-    </div><!-- /.container -->
-
-
-       <div class="container.nopad bg">
-
-    
-        <footer id="credits" class="row">
-          <div class="seven columns left-center">
-
-                   <address id="about" class="vcard body">
-                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a href="http://python.org">Python</a>.
-                    <br />
-                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
-                    </address>
-          </div>
-
-
-          <div class="seven columns">
-            <div class="row">
-              <ul class="socbtns">
-
-
-
-
-
-              </ul>
-            </div>
-          </div>
-        </footer>
-
-    </div>
-
-
-  <script src="http://www.shushilvshe.com/theme/js/libs/jquery-1.9.1.min.js"></script>
-  <script src="http://www.shushilvshe.com/theme/js/libs/gumby.min.js"></script>
-  <script src="http://www.shushilvshe.com/theme/js/plugins.js"></script>
-</body>
+		<script src="http://www.shushilvshe.com/theme/js/jquery.js"></script>
+		<script src="http://www.shushilvshe.com/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>

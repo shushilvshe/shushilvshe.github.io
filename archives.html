@@ -1,161 +1,439 @@
-<!DOCTYPE html>
-<html lang="zh_cn">
-<head>
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>shushilvshe's Blog</title>
-        <meta charset="utf-8" />
+		<title>shushilvshe's Blog</title>
+		<meta name="description" content="">
+		<meta name="author" content="ssls">
 
-
-        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
-
-        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/gumby.css" />
-        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/style.css" />
-        <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygment.css" />
-
-        <script src="http://www.shushilvshe.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/foundation.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/custom.css" />
 
 
+		<script src="http://www.shushilvshe.com/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
 
 
-</head>
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
 
-<body id="index" class="home">
+					<section class="middle tab-bar-section">
+						<h1 class="title">shushilvshe's&nbsp;Blog</h1>
+					</section>
+				</nav>
 
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="http://www.shushilvshe.com">Home</a></li>
+						<li><label>Categories</label></li>
+							<li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+							<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+							<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
 
-    <div class="container">
-
-        <div class="row">
-
-          <header id="banner" class="body">
-                  <h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog <strong>Data Developer</strong></a></h1>
-          </header><!-- /#banner -->
-
-            <div id="navigation" class="navbar row">
-              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
-              <ul class="columns">
-                <li><a href="http://www.shushilvshe.com/">Home</a></li>
-
-                <li><a href="/category/data.html">Data</a></li>
-                <li><a href="/category/food.html">Food</a></li>
-                <li><a href="/category/travel.html">Travel</a></li>
-                <li><a href="/">Photo</a></li>
-                <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>
-
-              </ul>
-            </div>
-
-<h1>Archives for shushilvshe's Blog</h1>
-
-<dl>
-    <dt>2018-02-07(星期三) 15:54</dt>
-    <dd><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></dd>
-    <dt>2018-01-23(星期二) 20:06</dt>
-    <dd><a href="http://www.shushilvshe.com/data/kubernete-installation.html">kubernetes（1.8.3）系列之安装</a></dd>
-    <dt>2018-01-06(星期六) 16:23</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/haerbin.html">2017年终收官行——缤纷雪国</a></dd>
-    <dt>2018-01-04(星期四) 18:09</dt>
-    <dd><a href="http://www.shushilvshe.com/data/docker-ssh.html">制作ssh互信的docker镜像</a></dd>
-    <dt>2018-01-04(星期四) 14:50</dt>
-    <dd><a href="http://www.shushilvshe.com/data/kubernete-calico.html">kubernetes（1.8.3）系列之calico集成</a></dd>
-    <dt>2017-12-20(星期三) 10:15</dt>
-    <dd><a href="http://www.shushilvshe.com/data/kubernetes-overview.html">Kubernetes（1.8.3）系列之GPU配置</a></dd>
-    <dt>2017-12-15(星期五) 18:01</dt>
-    <dd><a href="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html">tensorflow-gpu-docker镜像安装及部署文档</a></dd>
-    <dt>2017-12-09(星期六) 21:18</dt>
-    <dd><a href="http://www.shushilvshe.com/data/docker.html">始入Docker</a></dd>
-    <dt>2017-11-12(星期日) 14:42</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/xian.html">三秦大地体验游</a></dd>
-    <dt>2017-11-10(星期五) 15:27</dt>
-    <dd><a href="http://www.shushilvshe.com/data/matplotlib_wrong_setup.html">python2.7安装matplotlib失败解决方法</a></dd>
-    <dt>2017-11-01(星期三) 19:12</dt>
-    <dd><a href="http://www.shushilvshe.com/data/VOD.html">搭建视频点播(VOD)服务（live555 + ffmpeg）</a></dd>
-    <dt>2017-10-22(星期日) 13:20</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/suzhou.html">端午沪苏杭游记——苏州</a></dd>
-    <dt>2017-10-21(星期六) 13:27</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/shanghai.html">端午沪苏杭游记——上海</a></dd>
-    <dt>2017-10-04(星期三) 16:41</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/yangzhou.html">清明南京扬州游记——扬州</a></dd>
-    <dt>2017-09-29(星期五) 14:22</dt>
-    <dd><a href="http://www.shushilvshe.com/data/font-build.html">字体生成小记</a></dd>
-    <dt>2017-09-22(星期五) 16:25</dt>
-    <dd><a href="http://www.shushilvshe.com/data/dl-env-build.html">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</a></dd>
-    <dt>2017-09-17(星期日) 15:57</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/hangzhou.html">端午沪苏杭游记——杭州</a></dd>
-    <dt>2017-09-13(星期三) 14:00</dt>
-    <dd><a href="http://www.shushilvshe.com/data/keras.html">keras资源设置</a></dd>
-    <dt>2017-09-13(星期三) 13:59</dt>
-    <dd><a href="http://www.shushilvshe.com/data/cnn.html">卷积神经网络（CNN）</a></dd>
-    <dt>2017-09-09(星期六) 20:39</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/nanjing.html">清明南京扬州游记——南京</a></dd>
-    <dt>2017-09-06(星期三) 10:09</dt>
-    <dd><a href="http://www.shushilvshe.com/data/python-base.html">python常用功能总结</a></dd>
-    <dt>2017-09-05(星期二) 22:24</dt>
-    <dd><a href="http://www.shushilvshe.com/data/facealign.html">人脸识别——对齐算法</a></dd>
-    <dt>2017-08-31(星期四) 20:04</dt>
-    <dd><a href="http://www.shushilvshe.com/python/peewee.html">peewee 入门教程</a></dd>
-    <dt>2017-08-29(星期二) 07:51</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/kunming.html">周末昆明二日游</a></dd>
-    <dt>2017-08-12(星期六) 18:44</dt>
-    <dd><a href="http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html">个人博客搭建过程(Pelican+Github)</a></dd>
-    <dt>2017-08-11(星期五) 07:23</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/beijingshidu.html">逼格data社团十渡自驾游</a></dd>
-    <dt>2017-08-08(星期二) 21:46</dt>
-    <dd><a href="http://www.shushilvshe.com/images/food/yingtaoguantou.html">樱桃罐头制作方法</a></dd>
-    <dt>2017-08-08(星期二) 17:17</dt>
-    <dd><a href="http://www.shushilvshe.com/ml/pandas/baseoperation.html">pandas基本操作</a></dd>
-    <dt>2017-08-05(星期六) 08:12</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/luoyang.html">登封洛阳游记——洛阳篇</a></dd>
-    <dt>2017-07-28(星期五) 14:03</dt>
-    <dd><a href="http://www.shushilvshe.com/ml/dt.html">决策树原理</a></dd>
-    <dt>2017-07-26(星期三) 16:04</dt>
-    <dd><a href="http://www.shushilvshe.com/ml/data-proprecess.html">数据处理中的数值初步转换</a></dd>
-    <dt>2017-07-25(星期二) 13:57</dt>
-    <dd><a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html">Python科学计算核心工具包一览</a></dd>
-    <dt>2017-07-24(星期一) 21:46</dt>
-    <dd><a href="http://www.shushilvshe.com/bigdata/cdh-update.html">CDH升级（5.11.0 -> 5.12.0）</a></dd>
-    <dt>2017-07-21(星期五) 23:59</dt>
-    <dd><a href="http://www.shushilvshe.com/travel/dengfeng.html">登封洛阳游记——登封篇</a></dd>
-</dl>
-
-       </div><!-- /.row -->
-    </div><!-- /.container -->
-
-
-       <div class="container.nopad bg">
-
-    
-        <footer id="credits" class="row">
-          <div class="seven columns left-center">
-
-                   <address id="about" class="vcard body">
-                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a href="http://python.org">Python</a>.
-                    <br />
-                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
-                    </address>
-          </div>
-
-
-          <div class="seven columns">
-            <div class="row">
-              <ul class="socbtns">
+						<li><label>Links</label></li>
+							<li><a href="/categories.html">Category</a></li>
+							<li><a href="/tags.html">Tags</a></li>
+							<li><a href="/archives.html">Archives</a></li>
 
 
 
+						<li><label>Social</label></li>
+					</ul>	
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="http://www.shushilvshe.com/">shushilvshe's Blog</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+								<li ><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
+								<li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
+								<li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="http://www.shushilvshe.com/pages/about.html">About ME</a></li>                                    
+                                                                                                                                          
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Archives</h2>
+								</div>
+							</div>
+	<div class="row">
+		<div class="small-10 columns small-centered">
+				<div class="row archive-year">
+					<div class="small-2 columns text-right">
+						<h3>2018</h3>
+					</div>
+				</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 1月 23</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/kubernete-installation.html">kubernetes（1.8.3）系列之安装</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 1月 06</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/haerbin.html">2017年终收官行——缤纷雪国</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 1月 04</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/docker-ssh.html">制作ssh互信的docker镜像</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 1月 04</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/kubernete-calico.html">kubernetes（1.8.3）系列之calico集成</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 2月 07</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/kubernete/efk/install.html">kubernetes（1.8.3）系列之搭建EFK（Fluentd＋Elasticsearch＋Kibana）</a></h5>
+						</div>
+					</div>
+				<div class="row archive-year">
+					<div class="small-2 columns text-right">
+						<h3>2017</h3>
+					</div>
+				</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 7月 28</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/ml/dt.html">决策树原理</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 7月 26</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/ml/data-proprecess.html">数据处理中的数值初步转换</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 7月 25</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/bigdata/python/sciencelib.html">Python科学计算核心工具包一览</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 7月 24</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/bigdata/cdh-update.html">CDH升级（5.11.0 -> 5.12.0）</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 7月 21</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/dengfeng.html">登封洛阳游记——登封篇</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 8月 31</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/python/peewee.html">peewee 入门教程</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 8月 29</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/kunming.html">周末昆明二日游</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 8月 12</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/ge-ren-bo-ke-da-jian-guo-cheng-pelicangithub.html">个人博客搭建过程(Pelican+Github)</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 8月 11</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/beijingshidu.html">逼格data社团十渡自驾游</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 8月 08</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/images/food/yingtaoguantou.html">樱桃罐头制作方法</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 8月 08</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/ml/pandas/baseoperation.html">pandas基本操作</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 8月 05</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/luoyang.html">登封洛阳游记——洛阳篇</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 29</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/font-build.html">字体生成小记</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 22</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/dl-env-build.html">搭建深度学习环境详细过程(Centos7.3+GTX-1080Ti显卡)</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 17</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/hangzhou.html">端午沪苏杭游记——杭州</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 13</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/keras.html">keras资源设置</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 13</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/cnn.html">卷积神经网络（CNN）</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 09</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/nanjing.html">清明南京扬州游记——南京</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 06</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/python-base.html">python常用功能总结</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5> 9月 05</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/facealign.html">人脸识别——对齐算法</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>10月 22</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/suzhou.html">端午沪苏杭游记——苏州</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>10月 21</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/shanghai.html">端午沪苏杭游记——上海</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>10月 04</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/yangzhou.html">清明南京扬州游记——扬州</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>11月 12</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/travel/xian.html">三秦大地体验游</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>11月 10</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/matplotlib_wrong_setup.html">python2.7安装matplotlib失败解决方法</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>11月 01</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/VOD.html">搭建视频点播(VOD)服务（live555 + ffmpeg）</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>12月 20</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/kubernetes-overview.html">Kubernetes（1.8.3）系列之GPU配置</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>12月 15</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html">tensorflow-gpu-docker镜像安装及部署文档</a></h5>
+						</div>
+					</div>
+					<div class="row archive-entry">
+						<div class="small-2 columns text-right">
+							<h5>12月 09</h5>
+						</div>
+						<div class="small-10 columns">
+							<h5><a href="http://www.shushilvshe.com/data/docker.html">始入Docker</a></h5>
+						</div>
+					</div>
+		</div>
+	</div>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="/categories.html">Category</a></li>
+									<li><a href="/tags.html">Tags</a></li>
+									<li><a href="/archives.html">Archives</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
 
 
-              </ul>
-            </div>
-          </div>
-        </footer>
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
 
-    </div>
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
 
-
-  <script src="http://www.shushilvshe.com/theme/js/libs/jquery-1.9.1.min.js"></script>
-  <script src="http://www.shushilvshe.com/theme/js/libs/gumby.min.js"></script>
-  <script src="http://www.shushilvshe.com/theme/js/plugins.js"></script>
-</body>
+		<script src="http://www.shushilvshe.com/theme/js/jquery.js"></script>
+		<script src="http://www.shushilvshe.com/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>
