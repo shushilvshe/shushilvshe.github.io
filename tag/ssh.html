@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+
+
+    <meta name="author" content="ssls" />
+    <meta name="description" content="shushilvshe's Thoughts and Writings" />
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="shushilvshe's Blog"/>
+<meta property="og:description" content="shushilvshe's Thoughts and Writings"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
+
+  <title>shushilvshe's Blog &ndash;     Tag ssh
+</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
+
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
+
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/">Photo</a>
+
+
+    </nav>
+
+
+
+<article>
+  <header>
+    <h2><a href="http://www.shushilvshe.com/data/docker-ssh.html#data/docker-ssh">制作ssh互信的docker镜像</a></h2>
+    <p>
+          Posted on 2018-01-04(星期四) 18:09 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>,              <a href="http://www.shushilvshe.com/tag/ssh.html">ssh</a>,              <a href="http://www.shushilvshe.com/tag/docker.html">docker</a>
+    </p>
+  </header>
+  <div>
+      <p>基于nvidia/cuda的镜像（nvidia/cuda:8.0-cudnn6-runtime-centos7）生成了一个的tensorflow-gpu 1.4.1编译版本的镜像，通过kubernetes（1.8.3）容器编排工具进行容器间的管理。现有六个节点，一台部署kubernetes，无GPU，还有一个节点有4块GPU，余下四个节点均有一块GPU，所有的GPU均为NVIDIA Gefore 1080Ti。为提高工作工程中试错效率，需要将GPU集群资源合理的利用起来，也即需要自动调度和并发使用GPU。经研究，opmpi + nccl（nvidia的）可以实现，但mpi需要集群间的各容器是互信的，但实际运行的环境中所有容器均来源于同一镜像，所以目的就是达到能免密登陆自己就可以了（其实免密登陆本机和登陆别的机器操作基本一样）。</p>
+      <br>
+      <a class="btn" href="http://www.shushilvshe.com/data/docker-ssh.html#data/docker-ssh">    Continue reading
+</a>
+  </div>
+</article>
+
+  <div class="pagination">
+  </div>
+
+
+
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/baya.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

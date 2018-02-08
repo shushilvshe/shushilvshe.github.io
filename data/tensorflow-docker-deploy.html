@@ -1,86 +1,104 @@
+
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="zh_cn" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
-<!--[if IE 7]>         <html lang="zh_cn" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
-<!--[if IE 8]>         <html lang="zh_cn" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="zh_cn" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <!--<![endif]-->
+<html lang="zh_cn">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>tensorflow-gpu-docker镜像安装及部署文档</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。">
-<link rel="shortcut icon" href="http://www.shushilvshe.com/http://www.shushilvshe.com/images/lvcheng.jpg" type="">
-<meta name="author" content="ssls">
-<meta name="copyright" content="ssls">
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@" />
-<meta property="og:site_name" content="shushilvshe's Blog" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
 
-<meta property="og:title" content="Tensorflow-gpu-docker镜像安装及部署文档" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html" />
-<meta name="twitter:title" content="Tensorflow-gpu-docker镜像安装及部署文档" />
-<meta name="twitter:url" content="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html" />
-<meta itemprop="url" content="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html" />
-<meta property="og:description" content="制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。" />
-<meta name="twitter:description" content="制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。" />
-<meta property="og:article:published_time" content="2017-12-15" />
-<meta property="og:article:modified_time" content="2017-12-15">
-<meta itemprop="dateModified" content="2017-12-15" />
-<meta property="og:article:author" content="ssls" >
-<meta property="og:article:tag" content="深度学习">
-<meta property="og:article:tag" content="docker">
-<meta property="og:article:tag" content="tensorflow">
-<meta property="og:article:tag" content="kubernetes">
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
 
-<link href="http://www.shushilvshe.com/None" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed"/>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:800italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/css/uikit.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/css/components/search.min.css">
-<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/tipuesearch.css">
-<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/solarized.css">
-<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css">
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。" />
+<meta name="keywords" content="深度学习, docker, tensorflow, kubernetes">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="tensorflow-gpu-docker镜像安装及部署文档"/>
+<meta property="og:description" content="制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-12-15 18:01:03+08:00"/>
+<meta property="article:modified_time" content="2017-12-15 18:01:04+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="Data"/>
+<meta property="article:tag" content="深度学习"/>
+<meta property="article:tag" content="docker"/>
+<meta property="article:tag" content="tensorflow"/>
+<meta property="article:tag" content="kubernetes"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
+
+  <title>shushilvshe's Blog &ndash; tensorflow-gpu-docker镜像安装及部署文档</title>
+
 </head>
 <body>
-<!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
 
-<header class=" mg-header uk-navbar uk-navbar-attached">
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
 
-    <div class="uk-container uk-container-center">
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
 
-        <a class="mg-brand uk-navbar-brand uk-hidden-small" href="http://www.shushilvshe.com">shushilvshe's Blog</a>
-        <div class="mg-tagline uk-navbar-content uk-hidden-small">Data Developer</div>
-        <a class="uk-navbar-toggle uk-visible-small" href="#mg-offcanvas" data-uk-offcanvas></a>
-        <a class="mg-brand uk-navbar-brand uk-navbar-center uk-visible-small" href="http://www.shushilvshe.com">shushilvshe's Blog</a>
-
+      <ul class="social">
+      </ul>
     </div>
-</header>
-
-<main class="mg-main">
-
-<div class="uk-container uk-container-center">
-
-    <div class="uk-grid" data-uk-grid-margin>
-
-<div class="mg-container-social uk-width-medium-1-10 uk-hidden-small">
 
 
-</div>
+  </aside>
+  <main>
 
-<div class="uk-width-medium-7-10">
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
 
-    <article class="uk-article">
-        <h1 class="uk-heading-large uk-article-title" itemprop="name">tensorflow-gpu-docker镜像安装及部署文档</h1>
-        <p class="uk-article-meta"><time datetime="2017-12-15" itemprop="datePublished">2017-12-15(星期五) 18:01</time> in <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/">Photo</a>
 
 
-        <p class="uk-article-lead" itemprop="description">制作包含有nvidia cuda、cudnn环境的tensorflow-gpu镜像包，并通过portainer手动单点配置及kubernetes集群管理两种方式进行部署。</p>
-        <section itemprop="articleBody"><p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="data/tensorflow-docker-deploy">tensorflow-gpu-docker镜像安装及部署文档</h1>
+    <p>
+          Posted on 2017-12-15(星期五) 18:01 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css"></p>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
 <script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
@@ -265,103 +283,43 @@ CONTAINER ID        IMAGE                                                       
 </ul>
 <h2>参考</h2>
 <p><a href="https://www.kubernetes.org.cn/1738.html">Harbor用户机制、镜像同步和与Kubernetes的集成实践</a></p>
-<p><a href="https://hub.docker.com/r/nvidia/cuda/">CUDA docker镜像</a></p></section>
-        <hr class="uk-article-divider">
-    </article>
+<p><a href="https://hub.docker.com/r/nvidia/cuda/">CUDA docker镜像</a></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>
+      <a href="http://www.shushilvshe.com/tag/docker.html">docker</a>
+      <a href="http://www.shushilvshe.com/tag/tensorflow.html">tensorflow</a>
+      <a href="http://www.shushilvshe.com/tag/kubernetes.html">kubernetes</a>
+    </p>
+  </div>
 
 
-</div>
 
-        <div class="uk-width-medium-1-5 uk-hidden-small">
-
-            <div class="uk-panel uk-panel-box">
-                <form class="uk-search" action="search.html" data-uk-search>
-                    <input class="uk-search-field tipue_search" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
-                </form>
-            </div>
-
-            <div class="uk-panel uk-panel-box">
-                <ul class="uk-nav uk-nav-side">
-                    <li class="uk-nav-header">Categories</li>
-                    <li class="uk-active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-                    <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-                    <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-                    <li class="uk-nav-header">Pages</li>
-
-                    <li >
-                        <a href="http://www.shushilvshe.com/pages/about.html">About ME</a>
-                    </li>
+    <div class="addthis_relatedposts_inline">
 
 
-                    <li class="uk-nav-divider"></li>
-                    <li ><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
-                </ul>
-            </div>
+</article>
 
-            <div class="uk-panel uk-panel-box">
-                <h3 class="uk-panel-title">Receive Updates</h3>
-                <a rel="alternate" type="application/atom+xml" href="http://www.shushilvshe.com/None" class="mg-feed"><i class="uk-icon-rss uk-icon-medium"></i> ATOM</a>
-            </div>
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
 
 
-        </div>
-
-    </div>
-
-</div>
-
-</main>
-
-<footer class="mg-footer">
-    <div class="uk-container uk-container-center uk-text-center">
-
-        <div class="mg-icons-small uk-subnav uk-visible-small">
-            <li><a rel="alternate" type="application/atom+xml" href="http://www.shushilvshe.com/None" class="uk-icon-button uk-icon-rss"></a></li>
-        </div>
-
-        <div class="mg-author uk-panel">
-            <p></p>
-
-            <p>Powered by <a href="http://blog.getpelican.com">Pelican</a>.<br class="uk-visible-small"> Theme <a href="https://github.com/lucachr/pelican-mg">mg</a> by <a href="https://github.com/lucachr">Luca Chiricozzi</a>.</p>
-        </div>
-    </div>
-</footer>
-
-<div id="mg-offcanvas" class="uk-offcanvas">
-    <div class="uk-offcanvas-bar">
-
-        <form class="uk-search" action="search.html" data-uk-search>
-            <input class="uk-search-field" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
-        </form>
-
-        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
-            <li class="uk-nav-header">Categories</li>
-            <li class="uk-active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-            <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-            <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-            <li class="uk-nav-header">Pages</li>
-            <li >
-                <a href="http://www.shushilvshe.com/pages/about.html">About ME</a>
-            </li>
 
 
-            <li class="uk-nav-divider"></li>
-            <li><a href="http://www.shushilvshe.com/">Archives</a></li>
-        </ul>
-    </div>
-</div>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/js/uikit.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/js/components/search.min.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/tipuesearch_set.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/tipuesearch.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/jquery.sticky-kit.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/plugins.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/main-search.js"></script>
-
-
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/baya.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
 
 </body>
 </html>

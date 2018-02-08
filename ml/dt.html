@@ -1,85 +1,103 @@
+
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="zh_cn" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
-<!--[if IE 7]>         <html lang="zh_cn" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
-<!--[if IE 8]>         <html lang="zh_cn" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="zh_cn" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <!--<![endif]-->
+<html lang="zh_cn">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>决策树原理</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。">
-<link rel="shortcut icon" href="http://www.shushilvshe.com/http://www.shushilvshe.com/images/lvcheng.jpg" type="">
-<meta name="author" content="ssls">
-<meta name="copyright" content="ssls">
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@" />
-<meta property="og:site_name" content="shushilvshe's Blog" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
 
-<meta property="og:title" content="决策树原理" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.shushilvshe.com/ml/dt.html" />
-<meta name="twitter:title" content="决策树原理" />
-<meta name="twitter:url" content="http://www.shushilvshe.com/ml/dt.html" />
-<meta itemprop="url" content="http://www.shushilvshe.com/ml/dt.html" />
-<meta property="og:description" content="决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。" />
-<meta name="twitter:description" content="决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。" />
-<meta property="og:article:published_time" content="2017-07-28" />
-<meta property="og:article:modified_time" content="2017-07-28">
-<meta itemprop="dateModified" content="2017-07-28" />
-<meta property="og:article:author" content="ssls" >
-<meta property="og:article:tag" content="大数据">
-<meta property="og:article:tag" content="机器学习">
-<meta property="og:article:tag" content="决策树">
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
 
-<link href="http://www.shushilvshe.com/None" type="application/atom+xml" rel="alternate" title="shushilvshe's Blog ATOM Feed"/>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:800italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/css/uikit.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/css/components/search.min.css">
-<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/tipuesearch.css">
-<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/solarized.css">
-<link rel="stylesheet" href="http://www.shushilvshe.com/theme/css/main.css">
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。" />
+<meta name="keywords" content="大数据, 机器学习, 决策树">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="决策树原理"/>
+<meta property="og:description" content="决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/ml/dt.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-07-28 14:03:27+08:00"/>
+<meta property="article:modified_time" content="2017-07-28 14:03:27+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="Data"/>
+<meta property="article:tag" content="大数据"/>
+<meta property="article:tag" content="机器学习"/>
+<meta property="article:tag" content="决策树"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/baya.jpg">
+
+  <title>shushilvshe's Blog &ndash; 决策树原理</title>
+
 </head>
 <body>
-<!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/baya.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
 
-<header class=" mg-header uk-navbar uk-navbar-attached">
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
 
-    <div class="uk-container uk-container-center">
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
 
-        <a class="mg-brand uk-navbar-brand uk-hidden-small" href="http://www.shushilvshe.com">shushilvshe's Blog</a>
-        <div class="mg-tagline uk-navbar-content uk-hidden-small">Data Developer</div>
-        <a class="uk-navbar-toggle uk-visible-small" href="#mg-offcanvas" data-uk-offcanvas></a>
-        <a class="mg-brand uk-navbar-brand uk-navbar-center uk-visible-small" href="http://www.shushilvshe.com">shushilvshe's Blog</a>
-
+      <ul class="social">
+      </ul>
     </div>
-</header>
-
-<main class="mg-main">
-
-<div class="uk-container uk-container-center">
-
-    <div class="uk-grid" data-uk-grid-margin>
-
-<div class="mg-container-social uk-width-medium-1-10 uk-hidden-small">
 
 
-</div>
+  </aside>
+  <main>
 
-<div class="uk-width-medium-7-10">
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
 
-    <article class="uk-article">
-        <h1 class="uk-heading-large uk-article-title" itemprop="name">决策树原理</h1>
-        <p class="uk-article-meta"><time datetime="2017-07-28" itemprop="datePublished">2017-07-28(星期五) 14:03</time> in <a href="http://www.shushilvshe.com/category/data.html">Data</a></p>
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/">Photo</a>
 
 
-        <p class="uk-article-lead" itemprop="description">决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
-        <section itemprop="articleBody"><hr>
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="ml/dt">决策树原理</h1>
+    <p>
+          Posted on 2017-07-28(星期五) 14:03 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <hr>
 <h2><strong>决策树简介</strong></h2>
 <p>决策树就是做出一个树状决策,就像猜猜看(Twenty Questions)的游戏。一个玩家(先知)选择一种常见物品, 但是事先不能透露给其他玩家(提问者)。提问者最多问20个问题,而先知只能回答: 是, 否, 可能三种答案。提问者的提问会根据先知的回答越来越具体, 多个问题问完后, 提问者的决策就形成了一颗决策树。决策树的分支由可以猜出响应变量值的最短的解释变量序列构成。因此, 在猜猜看游戏中,提问者和先知对训练集的解释变量和响应变量都很了解, 但是只有先知知道测试集的响应变量值。</p>
 <p>决策树通常是重复的将训练集解释变量分割成子集的过程, 如下图所示。决策树的节点用方块表示, 用来测试解释变量。每个节点向下的边表示不同决策产生结果。训练集的样本由决策结果分成不同的子集。例如, 一个节点测试解释变量的值是否超过的限定值。如果没有超过, 则进入该节点的右侧子节点; 如果超过, 则进入左侧子节点。子节点的运行原理和前面的一样, 直到终止条件(stopping criterion)满足才停止。在分类任务中, 包含在叶子节点中的样本响应变量的值的平均值作为响应变量的估计值。决策树建立之后, 做决策的过程就是把测试样本放进决策树沿着边不断前进, 直到一个叶子被触及才停止前进。</p>
@@ -158,103 +176,42 @@
 <p>像ID3这样的决策树学习算法是贪婪的(greedy)。它们充分的学习有时会深陷于局部最优的美梦, 但是不能保证生成最优决策树。ID3通过选择解释变量序列进行测试。一个解释变量被选中是因为它比其他解释变量更大幅度的降低了不确定性。但是, 有可能全局最优的决策并非局部最优。</p>
 <p>在我们的例子中, 决策树的规模并不重要, 因为我们可以获取所有节点。但是, 在现实应用中, 决策树的规模被修剪以及其他技术限制。而决策树经过修剪后的不同形状会产生不同的效果。实际上, 由信息增益和基尼不纯度启发式方法计算出的局部最优决策通常都会生成一个可行的决策树。</p>
 <h2><strong>总结</strong></h2>
-<p>本章我们介绍了一个非线性模型——决策树, 用来解决分类和回归问题。就像猜猜看游戏一样, 决策树也是由一些了问题构成一个测试实例。决策树的一个分支在遇到显示响应变量值的叶子节点时停止。我们介绍了ID3算法，用来训练决策树通过递归分割训练集，形成子集以减低响应变量的不确定性。</p></section>
-        <hr class="uk-article-divider">
-    </article>
+<p>本章我们介绍了一个非线性模型——决策树, 用来解决分类和回归问题。就像猜猜看游戏一样, 决策树也是由一些了问题构成一个测试实例。决策树的一个分支在遇到显示响应变量值的叶子节点时停止。我们介绍了ID3算法，用来训练决策树通过递归分割训练集，形成子集以减低响应变量的不确定性。</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+      <a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://www.shushilvshe.com/tag/jue-ce-shu.html">决策树</a>
+    </p>
+  </div>
 
 
-</div>
 
-        <div class="uk-width-medium-1-5 uk-hidden-small">
-
-            <div class="uk-panel uk-panel-box">
-                <form class="uk-search" action="search.html" data-uk-search>
-                    <input class="uk-search-field tipue_search" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
-                </form>
-            </div>
-
-            <div class="uk-panel uk-panel-box">
-                <ul class="uk-nav uk-nav-side">
-                    <li class="uk-nav-header">Categories</li>
-                    <li class="uk-active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-                    <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-                    <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-                    <li class="uk-nav-header">Pages</li>
-
-                    <li >
-                        <a href="http://www.shushilvshe.com/pages/about.html">About ME</a>
-                    </li>
+    <div class="addthis_relatedposts_inline">
 
 
-                    <li class="uk-nav-divider"></li>
-                    <li ><a href="http://www.shushilvshe.com/archives.html">Archives</a></li>
-                </ul>
-            </div>
+</article>
 
-            <div class="uk-panel uk-panel-box">
-                <h3 class="uk-panel-title">Receive Updates</h3>
-                <a rel="alternate" type="application/atom+xml" href="http://www.shushilvshe.com/None" class="mg-feed"><i class="uk-icon-rss uk-icon-medium"></i> ATOM</a>
-            </div>
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
 
 
-        </div>
-
-    </div>
-
-</div>
-
-</main>
-
-<footer class="mg-footer">
-    <div class="uk-container uk-container-center uk-text-center">
-
-        <div class="mg-icons-small uk-subnav uk-visible-small">
-            <li><a rel="alternate" type="application/atom+xml" href="http://www.shushilvshe.com/None" class="uk-icon-button uk-icon-rss"></a></li>
-        </div>
-
-        <div class="mg-author uk-panel">
-            <p></p>
-
-            <p>Powered by <a href="http://blog.getpelican.com">Pelican</a>.<br class="uk-visible-small"> Theme <a href="https://github.com/lucachr/pelican-mg">mg</a> by <a href="https://github.com/lucachr">Luca Chiricozzi</a>.</p>
-        </div>
-    </div>
-</footer>
-
-<div id="mg-offcanvas" class="uk-offcanvas">
-    <div class="uk-offcanvas-bar">
-
-        <form class="uk-search" action="search.html" data-uk-search>
-            <input class="uk-search-field" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
-        </form>
-
-        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
-            <li class="uk-nav-header">Categories</li>
-            <li class="uk-active"><a href="http://www.shushilvshe.com/category/data.html">Data</a></li>
-            <li ><a href="http://www.shushilvshe.com/category/food.html">food</a></li>
-            <li ><a href="http://www.shushilvshe.com/category/travel.html">travel</a></li>
-            <li class="uk-nav-header">Pages</li>
-            <li >
-                <a href="http://www.shushilvshe.com/pages/about.html">About ME</a>
-            </li>
 
 
-            <li class="uk-nav-divider"></li>
-            <li><a href="http://www.shushilvshe.com/">Archives</a></li>
-        </ul>
-    </div>
-</div>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/js/uikit.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/js/components/search.min.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/tipuesearch_set.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/tipuesearch.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/jquery.sticky-kit.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/plugins.js"></script>
-<script src="http://www.shushilvshe.com/theme/js/main-search.js"></script>
-
-
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/baya.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
 
 </body>
 </html>
