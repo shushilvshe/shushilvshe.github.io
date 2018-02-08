@@ -24,12 +24,12 @@
 
 
 <meta name="author" content="ssls" />
-<meta name="description" content="fluentd.conf主要用于配置fluentd采集日志数据、处理数据、发送数据的整个生命周期规则：" />
+<meta name="description" content="fluentd.conf主要用于配置fluentd采集日志数据、处理数据、发送数据的整个生命周期规则：- source中配置数据源和匹配规则，并打上标识tag - filter中配置处理规则，对与匹配tag的数据进行过滤、处理 - match中配置数据存储目标，将符合tag的数据发送至指定目标存储，比如elasticsearch、mongodb等。" />
 <meta name="keywords" content="大数据, Fluentd">
 
 <meta property="og:site_name" content="shushilvshe's Blog"/>
 <meta property="og:title" content="Fluentd配置文件语法"/>
-<meta property="og:description" content="fluentd.conf主要用于配置fluentd采集日志数据、处理数据、发送数据的整个生命周期规则："/>
+<meta property="og:description" content="fluentd.conf主要用于配置fluentd采集日志数据、处理数据、发送数据的整个生命周期规则：- source中配置数据源和匹配规则，并打上标识tag - filter中配置处理规则，对与匹配tag的数据进行过滤、处理 - match中配置数据存储目标，将符合tag的数据发送至指定目标存储，比如elasticsearch、mongodb等。"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="http://www.shushilvshe.com/data/kubernete/efk/Fluentd.html"/>
 <meta property="og:type" content="article"/>
@@ -96,11 +96,10 @@
 
 
   <div>
-    <ul>
-<li>source中配置数据源和匹配规则，并打上标识tag</li>
-<li>filter中配置处理规则，对与匹配tag的数据进行过滤、处理</li>
-<li>match中配置数据存储目标，将符合tag的数据发送至指定目标存储，比如elasticsearch、mongodb等。</li>
-</ul>
+    <p>fluentd.conf主要用于配置fluentd采集日志数据、处理数据、发送数据的整个生命周期规则：
+- source中配置数据源和匹配规则，并打上标识tag
+- filter中配置处理规则，对与匹配tag的数据进行过滤、处理
+- match中配置数据存储目标，将符合tag的数据发送至指定目标存储，比如elasticsearch、mongodb等。</p>
 <h2>语法</h2>
 <h3>指令列表</h3>
 <p>fluentd.conf配置文件包括以下可用指令：</p>
