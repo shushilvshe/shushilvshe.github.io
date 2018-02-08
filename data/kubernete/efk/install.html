@@ -122,8 +122,8 @@
  });
 </script>
 <div id="category"></div></p>
-<p>docker会将stdout和stderr输出本机的一个目录下，一般是/var/lib/docker/contianers（也可能是/opt/docker/containers/，根据安装方式不同而不同）， kubernetes 默认会将容器的stdout和stderr录入node(minion)的/var/log/containers目录下（最后还是链接到docker的日志路径下）,而kubernetes 组件的日志默认放置在/var/log目录下。</p>
-<p>EFK搭建使用的日志架构：</p>
+<p>docker会将stdout和stderr输出到节点的一个目录下，一般是/var/lib/docker/contianers（也可能是/opt/docker/containers/，根据安装方式不同而不同）， kubernetes 默认会将容器的stdout和stderr录入node(minion)的/var/log/containers目录下（最后还是链接到docker的日志路径下）,而kubernetes 组件的日志默认放置在/var/log目录下。</p>
+<p><strong>EFK搭建使用的日志架构：</strong></p>
 <p><center><img src="https://i.imgur.com/clLKVgA.jpg" width="600"/></center></p>
 <h2>EFK安装</h2>
 <h3>EFK介绍</h3>
@@ -236,8 +236,8 @@ kibana-logging          ClusterIP   10.254.103.74    &lt;none&gt;        5601/TC
 
 <h2>访问 kibana</h2>
 <ul>
-<li><strong>通过 kube-apiserver 访问：</strong></li>
-</ul>
+<li>
+<p><strong>通过 kube-apiserver 访问：</strong></p>
 <p>获取 Kibana 服务 URL。</p>
 <div class="highlight"><pre><span></span>[root@kube_master184 efk]# kubectl cluster-info
 Kubernetes master is running at https://127.0.0.1:6443
@@ -253,7 +253,7 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 
 
 <p>浏览器访问 URL： https://192.168.1.184:6443/api/v1/proxy/namespaces/kube-system/services/kibana-logging</p>
-<ul>
+</li>
 <li>
 <p><strong>通过 kubectl proxy 访问：</strong></p>
 <p>创建代理</p>
@@ -266,14 +266,9 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 </li>
 </ul>
 <p><strong>初始化 kibana</strong></p>
-<div class="highlight"><pre><span></span>在 Management -&gt; Index Patterns 页面创建一个 index（相当于 mysql 中的一个 database），`Index name or pattern` 使用默认的 logstash-*，`Time Filter field name` 下拉选中@timestamp, 点击 Create, 过一会儿就可以在 Discover页面查询日志了;
-
-<span class="nt">&lt;center&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;https://i.imgur.com/cEzP8rK.jpg&quot;</span> <span class="na">width=</span><span class="s">&quot;1280&quot;</span><span class="nt">/&gt;&lt;/center&gt;</span>
-
-最后， 日志收集部分，除了Fluentd和Logstash，还可以使用Filebeat来收集日志，使用方法可以参考[使用Filebeat收集Kubernetes中的应用日志](https://jimmysong.io/posts/kubernetes-filebeat/)。
-</pre></div>
-
-
+<p>在 Management -&gt; Index Patterns 页面创建一个 index（相当于 mysql 中的一个 database），<code>Index name or pattern</code> 使用默认的 logstash-*，<code>Time Filter field name</code> 下拉选中@timestamp, 点击 Create, 过一会儿就可以在 Discover页面查询日志了;</p>
+<p><center><img src="https://i.imgur.com/cEzP8rK.jpg" width="1280"/></center></p>
+<p>最后， 日志收集部分，除了Fluentd和Logstash，还可以使用Filebeat来收集日志，使用方法可以参考<a href="https://jimmysong.io/posts/kubernetes-filebeat/">使用Filebeat收集Kubernetes中的应用日志</a>。</p>
 <h2>遇到问题</h2>
 <h3>1. unable to fetch mapping. do you have indices matching the pattern kibana.</h3>
 <p>如果你在这里发现最下方并没有变成Create按钮且出现如下错误，说明fluent并没有向elasticsearch中写入数据，所以，分别检查fluent、elasticsearch的配置和日志，一定是两者之间通信出现问题了。</p>
