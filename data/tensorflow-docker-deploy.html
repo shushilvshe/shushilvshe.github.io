@@ -34,7 +34,7 @@
 <meta property="og:url" content="http://www.shushilvshe.com/data/tensorflow-docker-deploy.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-12-15 18:01:03+08:00"/>
-<meta property="article:modified_time" content="2018-02-09 11:33:51+08:00"/>
+<meta property="article:modified_time" content="2018-02-22 14:08:17+08:00"/>
 <meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
 <meta property="article:section" content="Data"/>
 <meta property="article:tag" content="深度学习"/>
@@ -201,7 +201,7 @@ cp -r ./nccl_2.1.2-1 /usr/local
 
 
 <p>在 <strong>LD_LIBRARY_PATH</strong> 加入 <code>/usr/local/nccl_2.1.2-1/lib</code></p>
-<p><strong>很重要!!  在~/.bash下加入:</strong></p>
+<p><strong>很重要!!  在~/.bash下加入: (enp2s0修改为自己网卡的名称)</strong></p>
 <div class="highlight"><pre><span></span>export NCCL_SOCKET_IFNAME=enp2s0
 </pre></div>
 
@@ -217,7 +217,16 @@ cp -r ./nccl_2.1.2-1 /usr/local
 </pre></div>
 
 
-<h3>将新环境打成新镜像包</h3>
+<h3>5.拷贝库文件</h3>
+<p>原cuda环境没有libcuda.so和libnvidia-fatbinaryloader.so的库文件，将宿主机上的 <code>lib64</code> 或 <code>/usr/lib64</code> 文件夹下的如下文件拷贝到镜像中的 <code>/lib64</code>目录下即可。</p>
+<div class="highlight"><pre><span></span>lrwxrwxrwx 1 root root       12 Feb 22 10:03 libcuda.so -&gt; libcuda.so.1
+lrwxrwxrwx 1 root root       17 Feb 22 10:03 libcuda.so.1 -&gt; libcuda.so.384.69
+-rwxr-xr-x 1 root root 13030360 Feb 22 10:03 libcuda.so.384.69
+-rwxr-xr-x 1 root root   313832 Feb 22 10:06 libnvidia-fatbinaryloader.so.384.69
+</pre></div>
+
+
+<h3>6.将新环境打成新镜像包</h3>
 <h4>查询当前 CONTAINER ID</h4>
 <div class="highlight"><pre><span></span>[root@gpu187 ~]# docker ps 
 CONTAINER ID        IMAGE                                                        COMMAND                  CREATED             STATUS              PORTS               NAMES
@@ -330,6 +339,45 @@ CONTAINER ID        IMAGE                                                       
 
 </li>
 </ul>
+<h2>问题集锦</h2>
+<p>1.docker启动tensorflow session报错： <code>failed call to cuInit: CUDA_ERROR_UNKNOWN</code>, 如下：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@466ad9c0689b</span> <span class="n">python3</span><span class="p">]</span><span class="c1"># python3</span>
+<span class="n">Python</span> <span class="mf">3.6</span><span class="o">.</span><span class="mi">2</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Feb</span> <span class="mi">11</span> <span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mi">37</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">4.8</span><span class="o">.</span><span class="mi">5</span> <span class="mi">20150623</span> <span class="p">(</span><span class="n">Red</span> <span class="n">Hat</span> <span class="mf">4.8</span><span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="mi">16</span><span class="p">)]</span> <span class="n">on</span> <span class="n">linux</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">python3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">h5py</span><span class="o">/</span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span> <span class="ne">FutureWarning</span><span class="p">:</span> <span class="n">Conversion</span> <span class="n">of</span> <span class="n">the</span> <span class="n">second</span> <span class="n">argument</span> <span class="n">of</span> <span class="n">issubdtype</span> <span class="kn">from</span> <span class="sb">`float`</span> <span class="n">to</span> <span class="sb">`np.floating`</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">In</span> <span class="n">future</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">be</span> <span class="n">treated</span> <span class="k">as</span> <span class="sb">`np.float64 == np.dtype(float).type`</span><span class="o">.</span>
+  <span class="kn">from</span> <span class="nn">._conv</span> <span class="kn">import</span> <span class="n">register_converters</span> <span class="k">as</span> <span class="n">_register_converters</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">22</span> <span class="mo">04</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">12.427870</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">137</span><span class="p">]</span> <span class="n">Your</span> <span class="n">CPU</span> <span class="n">supports</span> <span class="n">instructions</span> <span class="n">that</span> <span class="n">this</span> <span class="n">TensorFlow</span> <span class="n">binary</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span><span class="p">:</span> <span class="n">SSE4</span><span class="o">.</span><span class="mi">1</span> <span class="n">SSE4</span><span class="o">.</span><span class="mi">2</span> <span class="n">AVX</span> <span class="n">AVX2</span> <span class="n">FMA</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">22</span> <span class="mo">04</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">12.430545</span><span class="p">:</span> <span class="n">E</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_driver</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">406</span><span class="p">]</span> <span class="n">failed</span> <span class="n">call</span> <span class="n">to</span> <span class="n">cuInit</span><span class="p">:</span> <span class="n">CUDA_ERROR_UNKNOWN</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">22</span> <span class="mo">04</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">12.430672</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_diagnostics</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">158</span><span class="p">]</span> <span class="n">retrieving</span> <span class="n">CUDA</span> <span class="n">diagnostic</span> <span class="n">information</span> <span class="k">for</span> <span class="n">host</span><span class="p">:</span> <span class="mi">466</span><span class="n">ad9c0689b</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">22</span> <span class="mo">04</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">12.430715</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_diagnostics</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">165</span><span class="p">]</span> <span class="n">hostname</span><span class="p">:</span> <span class="mi">466</span><span class="n">ad9c0689b</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">22</span> <span class="mo">04</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">12.430840</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_diagnostics</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">189</span><span class="p">]</span> <span class="n">libcuda</span> <span class="n">reported</span> <span class="n">version</span> <span class="ow">is</span><span class="p">:</span> <span class="n">Invalid</span> <span class="n">argument</span><span class="p">:</span> <span class="n">expected</span> <span class="o">%</span><span class="n">d</span><span class="o">.%</span><span class="n">d</span><span class="p">,</span> <span class="o">%</span><span class="n">d</span><span class="o">.%</span><span class="n">d</span><span class="o">.%</span><span class="n">d</span><span class="p">,</span> <span class="ow">or</span> <span class="o">%</span><span class="n">d</span><span class="o">.%</span><span class="n">d</span><span class="o">.%</span><span class="n">d</span><span class="o">.%</span><span class="n">d</span> <span class="n">form</span> <span class="k">for</span> <span class="n">driver</span> <span class="n">version</span><span class="p">;</span> <span class="n">got</span> <span class="s2">&quot;1&quot;</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">22</span> <span class="mo">04</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">12.431332</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_diagnostics</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">369</span><span class="p">]</span> <span class="n">driver</span> <span class="n">version</span> <span class="nb">file</span> <span class="n">contents</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;NVRM version: NVIDIA UNIX x86_64 Kernel Module  384.69  Wed Aug 16 19:34:54 PDT 2017</span>
+<span class="s2">GCC version:  gcc version 4.8.5 20150623 (Red Hat 4.8.5-11) (GCC)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">22</span> <span class="mo">04</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">12.431410</span><span class="p">:</span> <span class="n">I</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_diagnostics</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">193</span><span class="p">]</span> <span class="n">kernel</span> <span class="n">reported</span> <span class="n">version</span> <span class="ow">is</span><span class="p">:</span> <span class="mf">384.69</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+
+
+<p>原因比较明确，就是没有发现显卡设备，解决的方式就是挂载显卡的设备：</p>
+<div class="highlight"><pre><span></span>docker run --device /dev/nvidia0:/dev/nvidia0 --device /dev/nvidiactl:/dev/nvidiactl --device /dev/nvidia-uvm:/dev/nvidia-uvm -itd -v /sys/fs/cgroup:/sys/fs/cgroup {IMAGE-NAME}:{VERSION}
+</pre></div>
+
+
+<blockquote>
+<p>注： 这个问题不会在k8s中出现，原因在于我们申请显卡资源的时候，k8s替我们做了上述工作。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="n">resources</span><span class="o">:</span>
+  <span class="n">limits</span><span class="o">:</span>
+    <span class="n">alpha</span><span class="o">.</span><span class="na">kubernetes</span><span class="o">.</span><span class="na">io</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">gpu</span><span class="o">:</span> <span class="mi">1</span>
+</pre></div>
+
+
+<blockquote>
+<p>另外，nvidia官方提供的nvidia-docker也会帮我们挂载显卡设备。</p>
+</blockquote>
 <h2>参考文档</h2>
 <p><a href="https://www.kubernetes.org.cn/1738.html">Harbor用户机制、镜像同步和与Kubernetes的集成实践</a> <br>
 <a href="https://hub.docker.com/r/nvidia/cuda/">CUDA docker镜像</a> <br>
