@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="聚类算法总结" />
+<meta name="keywords" content="大数据, 机器学习, 人脸识别">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="聚类算法总结"/>
+<meta property="og:description" content="聚类算法总结"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/data/clustering_algorithms.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-09-09 16:46:24+08:00"/>
+<meta property="article:modified_time" content="2018-09-09 16:46:29+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="Data"/>
+<meta property="article:tag" content="大数据"/>
+<meta property="article:tag" content="机器学习"/>
+<meta property="article:tag" content="人脸识别"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/self.jpg">
+
+  <title>shushilvshe's Blog &ndash; 聚类算法总结</title>
+
+</head>
+<body>
+
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/self.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
+
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
+
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/category/photo.html">Photo</a>
+      <a href="/category/bytalk.html">ByTalk</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="data/clustering_algorithms">聚类算法总结</h1>
+    <p>
+          Posted on 2018-09-09(星期日) 16:46 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>基于划分聚类算法（partition clustering)</h2>
+<ul>
+<li><strong>k-means： 是一种典型的划分聚类算法，它用一个聚类的中心来代表一个簇，即在迭代过程中选择的聚点不一定是聚类中的一个点，该算法只能处理数值型数据</strong></li>
+<li>k-modes： K-Means算法的扩展，采用简单匹配方法来度量分类型数据的相似度</li>
+<li>k-prototypes： 结合了K-Means和K-Modes两种算法，能够处理混合型数据</li>
+<li>k-medoids： 在迭代过程中选择簇中的某点作为聚点，PAM是典型的k-medoids算法</li>
+<li>CLARA： CLARA算法在PAM的基础上采用了抽样技术，能够处理大规模数据</li>
+<li>CLARANS： CLARANS算法融合了PAM和CLARA两者的优点，是第一个用于空间数据库的聚类算法</li>
+<li>Focused CLARAN： 采用了空间索引技术提高了CLARANS算法的效率</li>
+<li>PCM： 模糊集合理论引入聚类分析中并提出了PCM模糊聚类算法</li>
+</ul>
+<h2>基于层次聚类算法：</h2>
+<ul>
+<li>CURE： 采用抽样技术先对数据集D随机抽取样本，再采用分区技术对样本进行分区，然后对每个分区局部聚类，最后对局部聚类进行全局聚类</li>
+<li>ROCK： 也采用了随机抽样技术，该算法在计算两个对象的相似度时，同时考虑了周围对象的影响</li>
+<li>CHEMALOEN（变色龙算法）： 首先由数据集构造成一个K-最近邻图Gk ,再通过一个图的划分算法将图Gk 划分成大量的子图,每个子图代表一个初始子簇,最后用一个凝聚的层次聚类算法反复合并子簇，找到真正的结果簇</li>
+<li>SBAC： SBAC算法则在计算对象间相似度时，考虑了属性特征对于体现对象本质的重要程度，对于更能体现对象本质的属性赋予较高的权值</li>
+<li>
+<p><strong>BIRCH： BIRCH算法利用树结构对数据集进行处理，叶结点存储一个聚类，用中心和半径表示，顺序处理每一个对象，并把它划分到距离最近的结点，该算法也可以作为其他聚类算法的预处理过程</strong></p>
+<ul>
+<li>Birch 在高维数据上表现不好。一条经验法则，如果 n_features 大于20，通常使用 MiniBatchKMeans 更好。</li>
+<li>如果需要减少数据实例的数量，或者如果需要大量的子聚类作为预处理步骤或者其他， Birch 比 MiniBatchKMeans 更有用。</li>
+</ul>
+</li>
+<li>
+<p>BUBBLE： BUBBLE算法则把BIRCH算法的中心和半径概念推广到普通的距离空间</p>
+</li>
+<li>BUBBLE-FM： BUBBLE-FM算法通过减少距离的计算次数，提高了BUBBLE算法的效率</li>
+</ul>
+<h2>基于密度聚类算法：</h2>
+<ul>
+<li>
+<p><strong>DBSCAN： DBSCAN算法是一种典型的基于密度的聚类算法，该算法采用空间索引技术来搜索对象的邻域，引入了“核心对象”和“密度可达”等概念，从核心对象出发，把所有密度可达的对象组成一个簇</strong></p>
+<p>DBSCAN 算法是具有确定性的，当以相同的顺序给出相同的数据时总是形成相同的聚类。 然而，当以不同的顺序提供数据时聚类的结果可能不相同。首先，即使核心样本总是被 分配给相同的聚类，这些集群的标签将取决于数据中遇到这些样本的顺序。第二个更重 要的是，非核心样本的聚类可能因数据顺序而有所不同。 当一个非核心样本距离两个核心样本的距离都小于 eps 时，就会发生这种情况。 通过三角不等式可知，这两个核心样本距离一定大于 eps 或者处于同一个聚类中。 非核心样本将被非配到首先查找到改样本的类别，因此结果将取决于数据的顺序。</p>
+</li>
+<li>
+<p>GDBSCAN： 算法通过泛化DBSCAN算法中邻域的概念，以适应空间对象的特点</p>
+</li>
+<li>OPTICS： OPTICS算法结合了聚类的自动性和交互性，先生成聚类的次序，可以对不同的聚类设置不同的参数，来得到用户满意的结果</li>
+<li>FDC： FDC算法通过构造k-d tree把整个数据空间划分成若干个矩形空间，当空间维数较少时可以大大提高DBSCAN的效率</li>
+</ul>
+<h2>基于网格的聚类算法：</h2>
+<ul>
+<li>STING： 利用网格单元保存数据统计信息，从而实现多分辨率的聚类</li>
+<li>WaveCluster： 在聚类分析中引入了小波变换的原理，主要应用于信号处理领域。（备注：小波算法在信号处理，图形图像，加密解密等领域有重要应用，是一种比较高深和牛逼的东西）</li>
+<li>CLIQUE： 是一种结合了网格和密度的聚类算法</li>
+</ul>
+<h2>基于神经网络的聚类算法：</h2>
+<ul>
+<li>自组织神经网络SOM： 该方法的基本思想是--由外界输入不同的样本到人工的自组织映射网络中，一开始时，输入样本引起输出兴奋细胞的位置各不相同，但自组织后会形成一些细胞群，它们分别代表了输入样本，反映了输入样本的特征</li>
+</ul>
+<h2>基于统计学的聚类算法：</h2>
+<ul>
+<li>COBWeb： COBWeb是一个通用的概念聚类方法，它用分类树的形式表现层次聚类</li>
+<li>AutoClass： 是以概率混合模型为基础，利用属性的概率分布来描述聚类，该方法能够处理混合型的数据，但要求各属性相互独立</li>
+</ul>
+<hr>
+<h3>facenet chinese whispers原理</h3>
+<ul>
+<li>
+<p>1、 构建无向图,将每个人脸做为无向图中的一个节点,人脸之间的相似度,作为节点之间的边,如果人脸之间的相似度小于上面设定的阈值,那么.这两个人脸对应的节点之间就没有边;</p>
+</li>
+<li>
+<p>2、 迭代开始时,将每个人脸都赋予一个id,该id作为该人脸的类别,也就是说初始化时,每个人脸都是一个类别</p>
+</li>
+<li>
+<p>3、 开始第一次迭代,随机选取某个节点,对该节点的所有邻居依次进行下面的处理:</p>
+<ul>
+<li>
+<p>3.1 如果是初始化的时候,由于每个节点都有自己所属的类别,就将所有邻居中权重最大的节点对应的类做为该节点的类别,完成对该节点的类别更新</p>
+</li>
+<li>
+<p>3.2 如果迭代到第2次,那么对某个节点,就可能会出现有两个邻居属于同一个类,那么就将同一个类下的邻居权重累加,最后,再看该节点下的所有邻居节点所属的类别的累加权重,取权重最大的类别作为当前节点的类别.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>4、 当所有的节点都完成后,就完成了一次迭代,重复2步骤,直到达到迭代次数.</p>
+</li>
+</ul>
+<hr>
+<h3>Affinity Propagation</h3>
+<p>AP聚类是通过在样本对之间发送消息直到收敛来创建聚类。然后使用少量示例样本作为聚类中心来描述数据集， 聚类中心是数据集中最能代表一类数据的样本。在样本对之间发送的消息表示一个样本作为另一个样本的示例样本的 适合程度，适合程度值在根据通信的反馈不断更新。更新迭代直到收敛，完成聚类中心的选取，因此也给出了最终聚类。</p>
+<p>AP聚类算法主要的缺点是算法的复杂度. AP聚类算法的时间复杂度是 O(N^2 T), 其中 N 是样本的个数 ，T 是收敛之前迭代的次数. 如果使用密集的相似性矩阵空间复杂度是 O(N^2) 如果使用稀疏的相似性矩阵空间复杂度可以降低。 这使得AP聚类最适合中小型数据集。</p>
+<hr>
+<h3>Mean Shift</h3>
+<p>MeanShift 算法旨在于发现一个样本密度平滑的 blobs 。 均值漂移算法是基于质心的算法，通过更新质心的候选位置为所选定区域的偏移均值。 然后，这些候选者在后处理阶段被过滤以消除近似重复，从而形成最终质心集合。</p>
+<p>算法自动设定聚类的数目，取代依赖参数 bandwidth（带宽）,带宽是决定搜索区域的size的参数。 这个参数可以手动设置，但是如果没有设置，可以使用提供的评估函数 estimate_bandwidth 进行评估。</p>
+<p>该算法不是高度可扩展的，因为在执行算法期间需要执行多个最近邻搜索。 该算法保证收敛，但是当 质心的变化较小时，算法将停止迭代。</p>
+<h2>参考</h2>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Chinese_Whispers_(clustering_method)">Chinese_Whispers</a></p>
+</li>
+<li>
+<p><a href="http://sklearn.apachecn.org/cn/0.19.0/modules/clustering.html">sklearn_clustering</a></p>
+</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+      <a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://www.shushilvshe.com/tag/ren-lian-shi-bie.html">人脸识别</a>
+    </p>
+  </div>
+
+
+
+    <div class="addthis_relatedposts_inline">
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/self.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
