@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.com/images/lvcheng.jpg" type="image/x-icon">
+
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="人脸识别的十个常用概念" />
+<meta name="keywords" content="大数据, 机器学习, 人脸识别">
+
+<meta property="og:site_name" content="shushilvshe's Blog"/>
+<meta property="og:title" content="人脸识别的十个概念"/>
+<meta property="og:description" content="人脸识别的十个常用概念"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/data/face_tech_concept.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-10-09 10:46:24+08:00"/>
+<meta property="article:modified_time" content="2018-10-09 10:46:29+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="Data"/>
+<meta property="article:tag" content="大数据"/>
+<meta property="article:tag" content="机器学习"/>
+<meta property="article:tag" content="人脸识别"/>
+<meta property="og:image" content="http://www.shushilvshe.com/images/self.jpg">
+
+  <title>shushilvshe's Blog &ndash; 人脸识别的十个概念</title>
+
+</head>
+<body>
+
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.com/images/self.jpg" alt="数食旅摄" title="数食旅摄">
+      </a>
+      <h1><a href="http://www.shushilvshe.com">数食旅摄</a></h1>
+
+<p>Data Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://www.shushilvshe.com/pages/about.html#about">About ME</a></li>
+
+          <li><a href="/categories.html" target="_blank">Category</a></li>
+          <li><a href="/tags.html" target="_blank">Tags</a></li>
+          <li><a href="/archives.html" target="_blank">Archives</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+      <a href="/category/data.html">Data</a>
+      <a href="/category/food.html">Food</a>
+      <a href="/category/travel.html">Travel</a>
+      <a href="/category/photo.html">Photo</a>
+      <a href="/category/bytalk.html">ByTalk</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="data/face_tech_concept">人脸识别的十个概念</h1>
+    <p>
+          Posted on 2018-10-09(星期二) 10:46 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>人脸技术基本概念介绍</h2>
+<h3>1. 人脸检测</h3>
+<p><strong>“人脸检测（Face Detection）”是检测出图像中人脸所在位置的一项技术。</strong></p>
+<p>人脸检测算法的输入是一张图片，输出是人脸框坐标序列（0个人脸框或1个人脸框或多个人脸框）。一般情况下，输出的人脸坐标框为正朝上的矩形，或者是带旋转方向的矩形。</p>
+<p>常见的人脸检测算法基本是一个“扫描”加“判别”的过程，即算法在图像范围内扫描，再逐个判定候选区域是否是人脸的过程。因此人脸检测算法的计算速度会跟图像尺寸、图像内容相关。开发过程中，我们可以通过设置“输入图像尺寸”、或“最小脸尺寸限制”、或“人脸数量上限”的方式来加速算法。</p>
+<h3>2. 人脸配准</h3>
+<p><strong>“人脸配准（Face Alignment）”是定位出人脸上五官关键点坐标的一项技术。</strong></p>
+<p>人脸配准算法的输入是“一张人脸图片”加“人脸坐标框”，输出五官关键点的坐标序列。五官关键点的数量是预先设定好的一个固定数值，可以根据不同的语义来定义（常见的有5点、68点、90点等等）。</p>
+<p>当前效果的较好的一些人脸配准技术，基本通过深度学习框架实现，这些方法都是基于人脸检测的坐标框，按某种事先设定规则将人脸区域扣取出来，缩放的固定尺寸，然后进行关键点位置的计算。因此，若不计入图像缩放过程的耗时，人脸配准算法是可以计算量固定的过程。另外，相对于人脸检测，或者是后面将提到的人脸提特征过程，人脸配准算法的计算耗时都要少很多。</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497929950395_4634_1497929950827.jpg" width="800"/></center></p>
+<p><center><strong>图2、人脸配准结果举例（右图中的绿色点位人脸配准结果）</strong></center></p>
+<h3>3. 人脸属性识别</h3>
+<p><strong>“人脸属性识别（Face Attribute）”是识别出人脸的性别、年龄、姿态、表情等属性值的一项技术。</strong></p>
+<p>一般的人脸属性识别算法的输入是“一张人脸图”和“人脸五官关键点坐标”，输出是人脸相应的属性值。人脸属性识别算法一般会根据人脸五官关键点坐标将人脸对齐（旋转、缩放、扣取等操作后，将人脸调整到预定的大小和形态），然后进行属性分析。</p>
+<p>常规的人脸属性识别算法识别每一个人脸属性时都是一个独立的过程，即人脸属性识别只是对一类算法的统称，性别识别、年龄估计、姿态估计、表情识别都是相互独立的算法。但最新的一些基于深度学习的人脸属性识别也具有一个算法同时输入性别、年龄、姿态等属性值的能力。</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497929993082_9382_1497929993544.jpg" width="800"/></center></p>
+<p><center><strong>图3、人脸属性识别过程（最右侧文字为属性识别结果）</strong></center></p>
+<h3>4. 人脸提特征</h3>
+<p><strong>“人脸提特征（Face Feature Extraction）”是将一张人脸图像转化为一串固定长度的数值的过程。这个数值串被称为“人脸特征（Face Feature）”，具有表征这个人脸特点的能力。</strong></p>
+<p>人脸提特征过程的输入也是 “一张人脸图”和“人脸五官关键点坐标”，输出是人脸相应的一个数值串（特征）。人脸提特征算法都会根据人脸五官关键点坐标将人脸对齐预定模式，然后计算特征。</p>
+<p>近几年来，深度学习方法基本统治了人脸提特征算法，这些算法都是固定时长的算法。早前的人脸提特征模型都较大，速度慢，仅使用于后台服务。但最新的一些研究，可以在基本保证算法效果的前提下，将模型大小和运算速度优化到移动端可用的状态。</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497929993082_9382_1497929993544.jpg" width="800"/></center></p>
+<p><center><strong>图4、人脸提特征过程（最右侧数值串为“人脸特征”）</strong></center></p>
+<h3>5. 人脸比对（人脸验证、人脸识别、人脸检索、人脸聚类）</h3>
+<p><strong>“人脸比对（Face Compare）”是衡量两个人脸之间相似度的算法</strong></p>
+<p>人脸比对算法的输入是两个人脸特征（注：人脸特征由前面的人脸提特征算法获得），输出是两个特征之间的相似度。人脸验证、人脸识别、人脸检索都是在人脸比对的基础上加一些策略来实现。相对人脸提特征过程，单次的人脸比对耗时极短，几乎可以忽略。</p>
+<p>基于人脸比对可衍生出人脸验证(Face Verification)、人脸识别(Face Recognition)、人脸检索(Face Retrieval)、人脸聚类（Face Cluster）等算法。</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497930148568_6631_1497930148822.jpg" width="600"/></center></p>
+<p><center><strong>图5、人脸对比过程（右侧的相似度为人脸比对输出的结果）</strong></center></p>
+<h3>6. 人脸验证</h3>
+<p><strong>“人脸验证（Face Verification）”是判定两个人脸图是否为同一人的算法。</strong></p>
+<p>它的输入是两个人脸特征，通过人脸比对获得两个人脸特征的相似度，通过与预设的阈值比较来验证这两个人脸特征是否属于同一人（即相似度大于阈值，为同一人；小于阈值为不同）。</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497930194217_9759_1497930194489.jpg" width="600"/></center></p>
+<p><center><strong>图6、人脸验证过程说明（最右侧“是同一人”为人脸验证的输出）</strong></center></p>
+<h3>7. 人脸识别</h3>
+<p><strong>“人脸识别(Face Recognition)”是识别出输入人脸图对应身份的算法。</strong></p>
+<p>它的输入一个人脸特征，通过和注册在库中N个身份对应的特征进行逐个比对，找出“一个”与输入特征相似度最高的特征。将这个最高相似度值和预设的阈值相比较，如果大于阈值，则返回该特征对应的身份，否则返回“不在库中”。</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497930275415_3788_1497930275622.jpg" width="800"/></center></p>
+<p><center><strong>图7、人脸识别过程（右侧身份“jason”为人脸识别结果）</strong></center></p>
+<h3>8. 人脸检索</h3>
+<p><strong>“人脸检索”是查找和输入人脸相似的人脸序列的算法。</strong></p>
+<p>人脸检索通过将输入的人脸和一个集合中的说有人脸进行比对，根据比对后的相似度对集合中的人脸进行排序。根据相似度从高到低排序的人脸序列即使人脸检索的结果。</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497930312211_2060_1497930312631.jpg" width="800"/></center></p>
+<p><center><strong>图8、人脸检索过程（右侧绿框内排序序列为检索结果）</strong></center></p>
+<h3>9. 人脸聚类</h3>
+<p><strong>“人脸聚类（Face Cluster）”是将一个集合内的人脸根据身份进行分组的算法。</strong></p>
+<p>人脸聚类也通过将集合内所有的人脸两两之间做人脸比对，再根据这些相似度值进行分析，将属于同一个身份的人划分到一个组里。</p>
+<p>在没有进行人工身份标注前，只知道分到一个组的人脸是属于同一个身份，但不知道确切身份。另外假设集合中有N个人脸，那么人脸聚类的算法复杂度为O(N2)</p>
+<p><center><img src="https://blog-10039692.file.myqcloud.com/1497939022220_3103_1497939022269.jpg" width="800"/></center></p>
+<p><center><strong>图9、人脸聚类过程（右侧绿框内按身份的分组结果为聚类结果）</strong></center></p>
+<h3>10. 人脸活体</h3>
+<p><strong>“人脸活体（FaceLiveness）”是判断人脸图像是来自真人还是来自攻击假体（照片、视频等）的方法。</strong></p>
+<p>和前面所提到的人脸技术相比，人脸活体不是一个单纯算法，而是一个问题的解法。这个解法将用户交互和算法紧密结合，不同的交互方式对应于完全不同的算法。鉴于方法的种类过于繁多，这里只介绍“人脸活体”的概念，不再展开。</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+      <a href="http://www.shushilvshe.com/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://www.shushilvshe.com/tag/ren-lian-shi-bie.html">人脸识别</a>
+    </p>
+  </div>
+
+
+
+    <div class="addthis_relatedposts_inline">
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe's Blog ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.com/images/self.jpg",
+  "description": "shushilvshe's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
