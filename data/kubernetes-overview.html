@@ -205,10 +205,10 @@ pod <span class="s2">&quot;gpu-pod&quot;</span> created
 <h3>多种型号的GPU</h3>
 <p>如果集群Node中安装了多种型号的GPU，则可以使用Node Affinity来调度Pod到指定GPU型号的Node上。</p>
 <p>首先，在集群初始化时，需要给Node打上GPU型号的标签：</p>
-<div class="highlight"><pre><span></span><span class="x">NVIDIA_GPU_NAME=</span><span class="p">$(</span><span class="err">nvidia-smi</span> <span class="err">--query-gpu=gpu_name</span> <span class="err">--format=csv</span><span class="p">,</span><span class="err">noheader</span> <span class="err">--id=</span><span class="m">0</span> <span class="err">|</span> <span class="err">sed</span> <span class="err">-e</span> <span class="s1">&#39;s/ /-/g&#39;</span><span class="p">)</span><span class="x"></span>
-<span class="x">source /etc/default/kubelet</span>
-<span class="x">KUBELET_OPTS=&quot;</span><span class="p">$</span><span class="nv">KUBELET_OPTS</span><span class="x"> --node-labels=&#39;alpha.kubernetes.io/nvidia-gpu-name=</span><span class="p">$</span><span class="nv">NVIDIA_GPU_NAME</span><span class="x">&#39;&quot;</span>
-<span class="x">echo &quot;KUBELET_OPTS=</span><span class="p">$</span><span class="nv">KUBELET_OPTS</span><span class="x">&quot; &gt; /etc/default/kubelet</span>
+<div class="highlight"><pre><span></span>NVIDIA_GPU_NAME=$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader --id=0 | sed -e &#39;s/ /-/g&#39;)
+source /etc/default/kubelet
+KUBELET_OPTS=&quot;$KUBELET_OPTS --node-labels=&#39;alpha.kubernetes.io/nvidia-gpu-name=$NVIDIA_GPU_NAME&#39;&quot;
+echo &quot;KUBELET_OPTS=$KUBELET_OPTS&quot; &gt; /etc/default/kubelet
 </pre></div>
 
 

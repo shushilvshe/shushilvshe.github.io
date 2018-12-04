@@ -259,12 +259,12 @@ Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
 To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the <span class="s2">&quot;hello-world&quot;</span> image from the Docker Hub.
+ <span class="m">1</span>. The Docker client contacted the Docker daemon.
+ <span class="m">2</span>. The Docker daemon pulled the <span class="s2">&quot;hello-world&quot;</span> image from the Docker Hub.
     <span class="o">(</span>amd64<span class="o">)</span>
- 3. The Docker daemon created a new container from that image which runs the
+ <span class="m">3</span>. The Docker daemon created a new container from that image which runs the
     executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
+ <span class="m">4</span>. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
 
 To try something more ambitious, you can run an Ubuntu container with:
@@ -329,17 +329,17 @@ For more examples and ideas, visit:
 
 
 <p><code>使用命令重启后台容器</code></p>
-<div class="highlight"><pre><span></span><span class="x">docker restart </span><span class="p">$</span><span class="nv">container_id</span><span class="x"></span>
+<div class="highlight"><pre><span></span>docker restart $container_id
 </pre></div>
 
 
 <p><code>停止并移除容器</code></p>
-<div class="highlight"><pre><span></span><span class="x">docker rm </span><span class="p">$</span><span class="nv">container_id</span><span class="x"></span>
+<div class="highlight"><pre><span></span>docker rm $container_id
 </pre></div>
 
 
 <p><code>将容器状态保存为镜像</code></p>
-<div class="highlight"><pre><span></span><span class="x">docker commit </span><span class="p">$</span><span class="nv">container_id</span><span class="x"> new_image</span>
+<div class="highlight"><pre><span></span>docker commit $container_id new_image
 </pre></div>
 
 
@@ -495,17 +495,17 @@ For more examples and ideas, visit:
 
 
 <p>除了在创建容器时添加数据卷外，还可以通过Dockerfile文件中通过Volume指令添加，Volume可以多次使用以添加多个数据卷。</p>
-<div class="highlight"><pre><span></span><span class="err">#</span><span class="x"> Version: 0.0.3</span>
-<span class="x">FROM ubuntu:16.04</span>
-<span class="x">MAINTAINER aaron &quot;shushilvshe@gmail.com&quot;</span>
-<span class="x">RUN apt-get update</span>
-<span class="x">RUN apt-get install -y nginx</span>
-<span class="x">RUN echo &#39;Hello World, 我是个容器&#39; \ </span>
-<span class="x"> &gt; /var/www/html/index.html</span>
-<span class="x">RUN mkdir /home/aaron/</span>
-<span class="x">ENV AARON_PATH /home/aaron/</span>
-<span class="x">VOLUME [</span><span class="p">$</span><span class="nv">AARON_PATH</span><span class="x">]</span>
-<span class="x">EXPOSE 80</span>
+<div class="highlight"><pre><span></span># Version: 0.0.3
+FROM ubuntu:16.04
+MAINTAINER aaron &quot;shushilvshe@gmail.com&quot;
+RUN apt-get update
+RUN apt-get install -y nginx
+RUN echo &#39;Hello World, 我是个容器&#39; \ 
+ &gt; /var/www/html/index.html
+RUN mkdir /home/aaron/
+ENV AARON_PATH /home/aaron/
+VOLUME [$AARON_PATH]
+EXPOSE 80
 </pre></div>
 
 

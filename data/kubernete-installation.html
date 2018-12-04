@@ -322,36 +322,36 @@ Server:
 
 <h3>更改docker配置</h3>
 <p>更改<code>/usr/lib/systemd/system/docker.service</code>启动文件</p>
-<div class="highlight"><pre><span></span><span class="x">[root@mimo222 ~]</span><span class="err">#</span><span class="x"> vi /usr/lib/systemd/system/docker.service</span>
+<div class="highlight"><pre><span></span>[root@mimo222 ~]# vi /usr/lib/systemd/system/docker.service
 
-<span class="x">[Unit]</span>
-<span class="x">Description=Docker Application Container Engine</span>
-<span class="x">Documentation=https://docs.docker.com</span>
-<span class="x">After=network-online.target firewalld.service</span>
-<span class="x">Wants=network-online.target</span>
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target firewalld.service
+Wants=network-online.target
 
-<span class="x">[Service]</span>
-<span class="x">Type=notify</span>
+[Service]
+Type=notify
 
-<span class="x">ExecStart=/usr/bin/dockerd </span><span class="p">$</span><span class="nv">DOCKER_NETWORK_OPTIONS</span><span class="x"> </span><span class="p">$</span><span class="nv">DOCKER_OPTS</span><span class="x"> </span><span class="p">$</span><span class="nv">DOCKER_DNS_OPTIONS</span><span class="x"></span>
+ExecStart=/usr/bin/dockerd $DOCKER_NETWORK_OPTIONS $DOCKER_OPTS $DOCKER_DNS_OPTIONS
 
-<span class="err">#</span><span class="x"> 添加这行操作，在每次重启docker之前都会设置iptables策略为ACCEPT</span>
-<span class="x">ExecStartPost=/sbin/iptables -I FORWARD -s 0.0.0.0/0 -j ACCEPT</span>
+# 添加这行操作，在每次重启docker之前都会设置iptables策略为ACCEPT
+ExecStartPost=/sbin/iptables -I FORWARD -s 0.0.0.0/0 -j ACCEPT
 
-<span class="x">ExecReload=/bin/kill -s HUP </span><span class="p">$</span><span class="nv">MAINPID</span><span class="x"></span>
+ExecReload=/bin/kill -s HUP $MAINPID
 
-<span class="x">LimitNOFILE=infinity</span>
-<span class="x">LimitNPROC=infinity</span>
-<span class="x">LimitCORE=infinity</span>
-<span class="x">TimeoutStartSec=0</span>
-<span class="x">Delegate=yes</span>
-<span class="x">KillMode=process</span>
-<span class="x">Restart=on-failure</span>
-<span class="x">StartLimitBurst=3</span>
-<span class="x">StartLimitInterval=60s</span>
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+TimeoutStartSec=0
+Delegate=yes
+KillMode=process
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
 
-<span class="x">[Install]</span>
-<span class="x">WantedBy=multi-user.target</span>
+[Install]
+WantedBy=multi-user.target
 </pre></div>
 
 
@@ -1517,15 +1517,15 @@ crw-rw-rw- 1 root root    244,   0 1月  19 15:59 nvidia-uvm
   <span class="nv">N3D</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$NVDEVS</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;3D controller&quot;</span> <span class="p">|</span> wc -l<span class="sb">`</span>
   <span class="nv">NVGA</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$NVDEVS</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller&quot;</span> <span class="p">|</span> wc -l<span class="sb">`</span>
 
-  <span class="nv">N</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$N3D</span> + <span class="nv">$NVGA</span> - 1<span class="sb">`</span>
+  <span class="nv">N</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$N3D</span> + <span class="nv">$NVGA</span> - <span class="m">1</span><span class="sb">`</span>
   <span class="k">for</span> i in <span class="sb">`</span>seq <span class="m">0</span> <span class="nv">$N</span><span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
     mknod -m <span class="m">666</span> /dev/nvidia<span class="nv">$i</span> c <span class="m">195</span> <span class="nv">$i</span>
   <span class="k">done</span>
 
-  mknod -m <span class="m">666</span> /dev/nvidiactl c <span class="m">195</span> 255
+  mknod -m <span class="m">666</span> /dev/nvidiactl c <span class="m">195</span> <span class="m">255</span>
 
 <span class="k">else</span>
-  <span class="nb">exit</span> 1
+  <span class="nb">exit</span> <span class="m">1</span>
 <span class="k">fi</span>
 
 /sbin/modprobe nvidia-uvm
@@ -1534,9 +1534,9 @@ crw-rw-rw- 1 root root    244,   0 1月  19 15:59 nvidia-uvm
   <span class="c1"># Find out the major device number used by the nvidia-uvm driver</span>
   <span class="nv">D</span><span class="o">=</span><span class="sb">`</span>grep nvidia-uvm /proc/devices <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
 
-  mknod -m <span class="m">666</span> /dev/nvidia-uvm c <span class="nv">$D</span> 0
+  mknod -m <span class="m">666</span> /dev/nvidia-uvm c <span class="nv">$D</span> <span class="m">0</span>
 <span class="k">else</span>
-  <span class="nb">exit</span> 1
+  <span class="nb">exit</span> <span class="m">1</span>
 <span class="k">fi</span>
 </pre></div>
 </td></tr></table>
