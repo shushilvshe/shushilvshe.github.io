@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/stylesheet/style.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://www.shushilvshe.com/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="http://www.shushilvshe.comtf.png" type="image/x-icon">
+    <link rel="icon" href="http://www.shushilvshe.comtf.png" type="image/x-icon">
+
+
+
+<meta name="author" content="ssls" />
+<meta name="description" content="keras资源设置" />
+<meta name="keywords" content="大数据, 深度学习, keras">
+
+
+<meta property="og:site_name" content="shushilvshe"/>
+<meta property="og:title" content="keras资源设置"/>
+<meta property="og:description" content="keras资源设置"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.shushilvshe.com/data/keras_resource_config.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-03-16 14:00:36+08:00"/>
+<meta property="article:modified_time" content="2020-03-16 14:00:39+08:00"/>
+<meta property="article:author" content="http://www.shushilvshe.com/author/ssls.html">
+<meta property="article:section" content="Data"/>
+<meta property="article:tag" content="大数据"/>
+<meta property="article:tag" content="深度学习"/>
+<meta property="article:tag" content="keras"/>
+<meta property="og:image" content="http://www.shushilvshe.comself.jpg">
+
+  <title>shushilvshe &ndash; keras资源设置</title>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-1466504632200234",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://www.shushilvshe.com">
+        <img src="http://www.shushilvshe.comself.jpg" alt="" title="">
+      </a>
+      <h1><a href="http://www.shushilvshe.com"></a></h1>
+
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="categories.html" >categories</a></li>
+            <li><a target="_blank" href="archives.html" >archives</a></li>
+            <li><a target="_blank" href="tags.html" >tags</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle ads-aside"
+           data-ad-client="ca-pub-1466504632200234"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://www.shushilvshe.com">    Home
+</a>
+
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="data/keras_resource_config">keras资源设置</h1>
+    <p>
+          Posted on 周一 16 三月 2020 in <a href="http://www.shushilvshe.com/category/data.html">Data</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <ul>
+<li>
+<p>1.关闭GPU，只使用CPU</p>
+<p>在import tensorflow之前，加上：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_DEVICE_ORDER&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PCI_BUS_ID&quot;</span>   <span class="c1"># see issue #152</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</code></pre></div>
+
+
+</li>
+<li>
+<p>2.设置keras占用GPU内存的比例：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">keras.backend.tensorflow_backend</span> <span class="kn">as</span> <span class="nn">K</span>
+
+<span class="k">def</span> <span class="nf">get_session</span><span class="p">(</span><span class="n">gpu_fraction</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Assume that you have 6GB of GPU memory and want to allocate ~2GB&#39;&#39;&#39;</span>
+
+    <span class="n">num_threads</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;OMP_NUM_THREADS&#39;</span><span class="p">)</span>
+    <span class="n">gpu_options</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GPUOptions</span><span class="p">(</span><span class="n">per_process_gpu_memory_fraction</span><span class="o">=</span><span class="n">gpu_fraction</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">num_threads</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span>
+            <span class="n">gpu_options</span><span class="o">=</span><span class="n">gpu_options</span><span class="p">,</span> <span class="n">intra_op_parallelism_threads</span><span class="o">=</span><span class="n">num_threads</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="n">gpu_options</span><span class="o">=</span><span class="n">gpu_options</span><span class="p">))</span>
+
+<span class="n">K</span><span class="o">.</span><span class="n">set_session</span><span class="p">(</span><span class="n">get_session</span><span class="p">())</span>
+</code></pre></div>
+
+
+<p><strong>两种限定GPU占用的方法：</strong></p>
+<p>(1)在tensorflow中定义session时作如下设置，该设置会启用最少的GPU显存来运行程序。</p>
+<div class="highlight"><pre><span></span><code><span class="err">config = tf.ConfigProto() </span>
+<span class="err">config.gpu_options.allow_growth = True </span>
+<span class="err">session = tf.Session(config=config)</span>
+</code></pre></div>
+
+
+<p>(2)在tensorflow中定义session时作如下设置，该设置会强制程序只占用指定比例的GPU显存。 </p>
+<div class="highlight"><pre><span></span><code><span class="err">config = tf.ConfigProto() </span>
+<span class="err">config.gpu_options.per_process_gpu_memory_fraction = 0.4 # 占用GPU40%的显存 </span>
+<span class="err">session = tf.Session(config=config)</span>
+</code></pre></div>
+
+
+</li>
+<li>
+<p>3 设置keras分配指定GPU：</p>
+<blockquote>
+<p>通过 <code>watch -n 1 nvidia-smi</code> 命令查看 GPU 信息</p>
+</blockquote>
+<p><center><img src="https://i.imgur.com/GRJxi59.png" width="650"/></center></p>
+<p>设置使用GPU序号为‘0’的GPU(在set_session之前)：</p>
+<div class="highlight"><pre><span></span><code><span class="err">os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] = &#39;0&#39;</span>
+</code></pre></div>
+
+
+</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://www.shushilvshe.com/tag/da-shu-ju.html">大数据</a>
+      <a href="http://www.shushilvshe.com/tag/shen-du-xue-xi.html">深度学习</a>
+      <a href="http://www.shushilvshe.com/tag/keras.html">keras</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-1466504632200234"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " shushilvshe ",
+  "url" : "http://www.shushilvshe.com",
+  "image": "http://www.shushilvshe.comself.jpg",
+  "description": ""
+}
+</script>
+
+
+</body>
+</html>
